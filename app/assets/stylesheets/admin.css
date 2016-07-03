@@ -1,0 +1,51 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.pure-menu {
+  font-size: 1.7em;
+  background-color: #2D9EE4;
+}
+
+.pure-menu-link {
+  color: #fff;
+}
+
+.pure-menu-heading {
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.pure-menu-link:hover {
+  color: #2D9EE4;
+}
+
+.l-box {
+  border: 1px solid #ccc;
+  padding: 1em;
+  text-align: center;
+}
+
+.count {
+  font-size: 3em;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.light {
+  font-weight: 100;
+}
+
+.medium {
+  font-weight: 400;
+}
+
+.flash {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+  margin: 10px;
+  padding:12px;
+  border-radius:.5em;
+}

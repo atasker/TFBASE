@@ -1,0 +1,30 @@
+<h1>Listing Players</h1>
+
+<%= link_to 'New player', new_admin_player_path, class: "pure-button" %>
+
+<br />
+<br />
+
+<table class="pure-table pure-table-striped pure-table-horizontal">
+  <tr>
+    <th>Name</th>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>ID</th>
+  </tr>
+
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= player.name %></td>
+      <td><%= Category.find(player.category_id).description %></td>
+      <td><%= link_to 'Show', admin_player_path(player) %></td>
+      <td><%= link_to 'Edit', edit_admin_player_path(player) %></td>
+      <td><%= link_to 'Destroy', admin_player_path(player),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+      <td><%= player.id %></td>
+    </tr>
+  <% end %>
+</table>

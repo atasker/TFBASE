@@ -1,0 +1,62 @@
+<%= form_for [:admin, @event] do |f| %>
+
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@event.errors.count, "error") %> prohibited
+        this event from being saved:
+      </h2>
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :start_time %><br>
+    <%= f.datetime_select :start_time %>
+  </p>
+
+  <p>
+    <%= f.label :venue_id %><br>
+    <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
+  </p>
+
+  <p>
+    <%= f.label :category_id %><br>
+    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+  </p>
+
+  <p>
+    <%= f.label :competition_id %><br>
+    <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
+  </p>
+
+  <p>
+    <%= f.label :sports, 'Is this event a sport?' %>
+    <%= f.check_box :sports %>
+  </p>
+
+  <p>
+    <%= f.label :priority, 'Do you want to prioritize this event?' %>
+    <%= f.check_box :priority %>
+  </p>
+
+  <!-- habtm addition -->
+
+  <p>
+    <%= f.label :players %>
+    <%= select_tag "event_players", options_from_collection_for_select(Player.all, 'id', 'name',@event.players.map{ |player| player.id }), :multiple => true %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

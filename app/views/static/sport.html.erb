@@ -1,0 +1,41 @@
+<div class="row">
+  <ul class="breadcrumbs">
+    <li><%= link_to 'Home', root_url %></li>
+    <li class="current">Sport</li>
+  </ul>
+</div>
+
+<div class="row">
+  <h3 class="gotham-regular">Sport</h3>
+</div>
+
+<section class="categories-bg-index">
+  <div class="row">
+    <% @categories.each do |category| %>
+      <div class="small-6 medium-6 large-3 columns tiles-index">
+        <div class="inner-tile">
+          <div class="row">
+             <div class="small-12 columns">&nbsp;</div>
+          </div>
+          <%= link_to category_path(category) do %>
+          <p class="change-icon hide-for-touch">
+            <% if has_icon?(category.description) != false %>
+              <span><%= embedded_svg("#{has_icon?(category.description)}Blue.svg") %></span>
+              <span><%= embedded_svg("#{has_icon?(category.description)}Grey.svg") %></span>
+            <% else %>
+              <h5 class="gotham-regular" style="color: #2D669A;"><%= category.description %></h5>
+            <% end %>
+          </p>
+          <p class="show-for-touch">
+            <% if has_icon?(category.description) != false %>
+              <span><%= embedded_svg("#{has_icon?(category.description)}Blue.svg") %></span>
+            <% else %>
+              <h5 class="gotham-regular" style="color: #2D669A;"><%= category.description %></h5>
+            <% end %>
+          </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

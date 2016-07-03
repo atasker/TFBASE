@@ -1,0 +1,81 @@
+#homepage-hero {
+    background: url("stadlo.jpg") repeat scroll 0 0 #2D669A;
+    /*background-color: #2D669A;*/
+    height: 520px;
+    padding: 180px 20px 0;
+    position: relative;
+    text-align: left;
+}
+#homepage-hero h1 {
+    color: #FFFFFF;
+    font-size: 4em;
+    font-weight: 500;
+    line-height: 100%;
+    margin-bottom: 0;
+}
+#homepage-hero h2 {
+    color: #FFFFFF;
+    font-size: 2em;
+    font-weight: 500;
+    line-height: 100%;
+    margin-bottom: 0;
+}
+.categories-bg {
+    background-color: #FFFFFF;
+    padding: 60px 30px 60px 30px;
+    position: relative;
+    text-align: center;
+}
+.categories-bg-index {
+    background-color: #FFFFFF;
+    padding: 0;
+    position: relative;
+    text-align: center;
+}
+.tiles {
+    border: 1px solid #D6D6D6;
+    background-color: #FFFFFF;
+    height: 180px;
+}
+.tiles-index {
+    /*border-bottom: 1px solid #D6D6D6;*/
+    background-color: #FFFFFF;
+    height: 180px;
+}
+.inner-tile {
+    padding: 10px;
+}
+.hero-input {
+    background-color: #FFFFFF !important;
+    border-left: none !important;
+    border-right: 1px solid #DCDCDC !important;
+    border-top: 1px solid #DCDCDC !important;
+    border-bottom: 1px solid #DCDCDC !important;
+}
+.custom-prefix {
+    border-right: none !important;
+    border-left: 1px solid #DCDCDC !important;
+    border-top: 1px solid #DCDCDC !important;
+    border-bottom: 1px solid #DCDCDC !important;
+}
+.hero-input::-webkit-input-placeholder {
+    text-align: left;
+    font-family: "gotham";
+}
+
+/* Fix overlapping borders based on screen size (homepage category grid)*/
+/* EXTREMELY HACKY, FIND PERMANENT SOLUTION */
+@media only screen {
+    .tiles:nth-child(1) { border-right: none; border-bottom: none; }
+    .tiles:nth-child(3) { border-right: none; }
+    .tiles:nth-child(2) { border-bottom: none; }
+}
+@media only screen and (min-width: 64.063em) {
+    .tiles:nth-child(1) { border-right: none; border-bottom: 1px solid #D6D6D6 !important; }
+    .tiles:nth-child(2) { border-right: none; border-bottom: 1px solid #D6D6D6 !important; }
+    .tiles:nth-child(3) { border-right: none; }
+}
+.event-tile {
+    padding: 10px;
+}
+

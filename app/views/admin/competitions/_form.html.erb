@@ -1,0 +1,43 @@
+<%= form_for [:admin, @competition] do |f| %>
+
+  <% if @competition.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@competition.errors.count, "error") %> prohibited
+        this competition from being saved:
+      </h2>
+      <ul>
+        <% @competition.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </p>
+
+  <p>
+    <%= f.label :category_id %><br>
+    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+  </p>
+
+  <!-- if image already exists for this competition, show image -->
+  <%= image_tag(@competition.avatar.grid_small.url) if @competition.avatar? %>
+
+  <p>
+    <%= f.label :avatar, "Image" %>
+    <%= f.file_field :avatar %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

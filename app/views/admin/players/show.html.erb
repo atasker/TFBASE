@@ -1,0 +1,21 @@
+<p>
+  <strong>Name:</strong>
+  <%= @player.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= Category.find(@player.category_id).description %>
+</p>
+
+<p>
+  <%= image_tag(@player.avatar.grid_small.url) %>
+</p>
+
+<p style="word-wrap: break-word;">
+  <strong>Text:</strong>
+  <%= @player.text %>
+</p>
+
+<%= link_to 'Edit', edit_admin_player_path(@player) %> |
+<%= link_to 'Back', admin_players_path %>

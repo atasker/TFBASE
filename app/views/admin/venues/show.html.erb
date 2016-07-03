@@ -1,0 +1,31 @@
+<p>
+  <strong>Name:</strong>
+  <%= @venue.name %>
+</p>
+
+<p>
+  <strong>Capacity:</strong>
+  <%= @venue.capacity %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @venue.city %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @venue.country %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @venue.address %>
+</p>
+
+<p>
+  <%= image_tag(@venue.avatar.venue_thumb.url) %>
+</p>
+
+<%= link_to 'Edit', edit_admin_venue_path(@venue) %> |
+<%= link_to 'Back', admin_venues_path %>

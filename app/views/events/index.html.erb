@@ -1,0 +1,58 @@
+  <div class="row gotham-regular">
+    <ul class="breadcrumbs">
+      <li><%= link_to 'Home', root_url %></li>
+      <li class="current">Search Results</li>
+    </ul>
+  </div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <h5 class="gotham-regular" style="color: #696969;">Found <%= pluralize @events.count, "Result" %></h5>
+  </div>
+</div>
+
+<% if @events.count > 0 %>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row table">
+    <div class="small-12 columns">
+      <% @sorted.each do |event| %>
+        <div class="row table-row">
+          <div class="small-3 columns table-one">
+            <h5 class="gotham-regular" style="font-size: 1rem;"><%= event.start_time.strftime("%a") %></h5>
+            <h5 class="gotham-light"><%= event.start_time.strftime("%d %b %Y") %></h5>
+            <h5 class="gotham-light" style="color: #A8A8A8;"><%= event.start_time.strftime("%H:%M") %></h5>
+          </div>
+          <div class="small-7 columns table-two">
+            <h5 class="gotham-regular" style="font-size: 1rem; color: #2D669A"><%= event.name %></h5>
+            <h5 class="gotham-light"><%= event.venue.name %></h5>
+            <h5 class="gotham-light" style="color: #A8A8A8;"><i class="fi-marker"></i><%= " #{event.venue.city}, #{event.venue.country}" %></h5>
+          </div>
+          <div class="small-2 columns table-three">
+            <%= link_to 'Show Event', event_path(event), data: { no_turbolink: true }, class: 'button tiny radius' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+<% else %>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="small-12 columns">
+        <p class="gotham-regular">Can't find what you’re looking for?</p>
+        <p class="gotham-light">Ticketfinders has been finding our clients sold out and hard to get tickets to events all around the World for over 40 years and we encourage you to send us a message if you can’t find what you’re looking for on our site.</p>
+        <p class="gotham-light">So please send us a quick message and we’ll get back to you as soon as we can.</p>
+        <%= link_to 'Contact Us', new_message_path, data: { no_turbolink: true }, class: "button" %>
+        </p>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+<% end %>

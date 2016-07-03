@@ -1,0 +1,75 @@
+.map-container {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+#map {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.map-text {
+  padding: 10px;
+}
+
+.overlay-background {
+  background-color: #2C9DDF;
+  color: #FFFFFF;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.event-show-list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.social-list-container {
+  list-style: none;
+  margin: 0; padding: 0;
+}
+
+.recommended-header {
+  color: #FFFFFF;
+  font-size: 1.4em;
+  background-color: #2C9DDF;
+}
+
+.recommended-link {
+  font-size: 1em !important;
+  color: #2D669A;
+}
+
+.recommended-link:hover {
+  text-decoration: underline;
+}
+
+.recommended-row {
+  padding-bottom: 15px;
+}
+
+.social-list-icon {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.tiny-pad {
+  padding-top: 8px;
+}
+
+.white-bg {
+  background-color: #FFFFFF;
+}
+
+.button {
+  background-color: #2C9DDF !important;
+}
+
+.event-link {
+  color: #2C9DDF;
+}

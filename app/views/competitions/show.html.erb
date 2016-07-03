@@ -1,0 +1,139 @@
+<% title @competition.name %>
+<% description @competition.name %>
+
+<div class="row gotham-regular">
+  <ul class="breadcrumbs">
+    <li><%= link_to 'Home', root_url %></li>
+    <li><%= link_to 'Categories', categories_path %></li>
+    <li><%= link_to @category.description, category_path(@category) %></li>
+    <li class="current"><%= @competition.name %></li>
+  </ul>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <h4 class="gotham-regular"><%= @competition.name %></h4>
+  </div>
+</div>
+
+<% if @competition.text && @competition.avatar? %>
+
+  <div class="row">
+    <div class="small-12 medium-3 columns">
+      <%= image_tag((@competition.avatar.grid_small.url)) %>
+    </div>
+  <br />
+
+  <div class="gotham-regular text-text">
+    <div class="small-12 medium-9 columns">
+      <% if @competition.text.length > 250 %>
+        <%= truncate(@competition.text, length: 250) %>
+        <%= link_to 'Read more', '', class: "read-more-#{@competition.id}" %>
+        <script>
+          $('.read-more-<%= @competition.id %>').on('click', function(e) {
+            e.preventDefault();
+            $(this).parent().html('<%= escape_javascript @competition.text %>');
+          });
+        </script>
+      <% else %>
+        <%= @competition.text %>
+      <% end %>
+    </div>
+  </div>
+  </div>
+  <br />
+
+<% elsif @competition.text %>
+
+  <div class="row gotham-regular text-text">
+    <div class="small-12 columns">
+      <% if @competition.text.length > 250 %>
+        <%= truncate(@competition.text, length: 250) %>
+        <%= link_to 'Read more', '', class: "read-more-#{@competition.id}" %>
+        <script>
+          $('.read-more-<%= @competition.id %>').on('click', function(e) {
+            e.preventDefault();
+            $(this).parent().html('<%= escape_javascript @competition.text %>');
+          });
+        </script>
+      <% else %>
+        <%= @competition.text %>
+      <% end %>
+    </div>
+  </div>
+  <br />
+
+<% elsif @competition.avatar? %>
+
+    <div class="row">
+      <div class="small-12 columns">
+        <%= image_tag((@competition.avatar.grid_small.url)) %>
+      </div>
+    </div>
+
+<% end %>
+
+<% if @players.count > 0 %>
+
+<div class="row">&nbsp;</div>
+
+<div class="row table">
+  <div class="small-12 columns">
+    <% @players.each do |player| %>
+      <div class="row mini-table-row">
+        <div class="small-10 columns mini-table-one">
+          <h5 class="gotham-regular" style="font-size: 1rem; color: #2D669A;"><%= player.name %></h5>
+        </div>
+        <%= link_to player_path(player, :comp => @competition) do %>
+          <div class="small-2 columns mini-table-two text-center">
+            <h5 class="gotham-regular table-link">View</h5>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">&nbsp;</div>
+
+<% elsif @events.count > 0 %>
+
+<div class="row">&nbsp;</div>
+
+<div class="row table">
+  <div class="small-12 columns">
+    <% @sorted.each do |event| %>
+      <div class="row table-row">
+        <div class="small-3 columns table-one">
+          <h5 class="gotham-regular" style="font-size: 1rem;"><%= event.start_time.strftime("%a") %></h5>
+          <h5 class="gotham-light"><%= event.start_time.strftime("%d %b %Y") %></h5>
+          <h5 class="gotham-light" style="color: #A8A8A8;"><%= event.start_time.strftime("%H:%M") %></h5>
+        </div>
+        <div class="small-7 columns table-two">
+          <h5 class="gotham-regular" style="font-size: 1rem; color: #2D669A"><%= event.name %></h5>
+          <h5 class="gotham-light"><%= event.venue.name %></h5>
+          <h5 class="gotham-light" style="color: #A8A8A8;"><i class="fi-marker"></i><%= " #{event.venue.city}, #{event.venue.country}" %></h5>
+        </div>
+        <div class="small-2 columns table-three">
+          <%= link_to "Show Event", event_path(event), data: { no_turbolink: true }, class: 'button tiny radius' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">&nbsp;</div>
+
+<% else %>
+
+  <div class="row">
+    <div class="small-12 columns">
+        <p class="gotham-regular">Can't find what you’re looking for?</p>
+        <p class="gotham-light">Ticketfinders has been finding our clients sold out and hard to get tickets to events all around the World for over 40 years and we encourage you to send us a message if you can’t find what you’re looking for on our site.</p>
+        <p class="gotham-light">So please send us a quick message and we’ll get back to you as soon as we can.</p>
+        <%= link_to 'Contact Us', new_message_path, data: { no_turbolink: true }, class: "button" %>
+        </p>
+    </div>
+  </div>
+
+<% end %>

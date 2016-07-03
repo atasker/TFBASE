@@ -1,0 +1,53 @@
+<%= form_for [:admin, @venue] do |f| %>
+
+  <% if @venue.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@venue.errors.count, "error") %> prohibited
+        this venue from being saved:
+      </h2>
+      <ul>
+        <% @venue.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :capacity %><br>
+    <%= f.text_area :capacity %>
+  </p>
+
+  <p>
+    <%= f.label :city %><br>
+    <%= f.text_area :city %>
+  </p>
+
+  <p>
+    <%= f.label :country %><br>
+    <%= f.text_area :country %>
+  </p>
+
+  <p>
+    <%= f.label :address %><br>
+    <%= f.text_area :address %>
+  </p>
+
+  <!-- if image already exists for this venue, show image -->
+  <%= image_tag(@venue.avatar.venue_thumb.url) if @venue.avatar? %>
+
+  <p>
+    <%= f.label :avatar, "Image" %>
+    <%= f.file_field :avatar %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

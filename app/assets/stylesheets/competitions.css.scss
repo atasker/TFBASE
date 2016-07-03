@@ -1,0 +1,27 @@
+.mini-table-one {
+  background-color: #FFFFFF;
+  border-right: 1px solid #E6E6E6;
+}
+
+.mini-table-two {
+  background-color: #F5F5F5;
+}
+
+.mini-table-row {
+  height: 50px;
+}
+
+.mini-table-one, .mini-table-two {
+  height: 100%;
+  border-bottom: 1px solid #E6E6E6;
+  padding-top: 15px;
+}
+
+.table-link {
+  color: #2C9DDF;
+  font-size: 1rem !important;
+}
+
+.mini-table-two:hover {
+  background-color: #DCDCDC;
+}

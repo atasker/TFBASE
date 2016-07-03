@@ -1,0 +1,30 @@
+<h1>Listing Competitions</h1>
+
+<%= link_to 'New competition', new_admin_competition_path, class: "pure-button" %>
+
+<br />
+<br />
+
+<table class="pure-table pure-table-striped pure-table-horizontal">
+  <tr>
+    <th>Name</th>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>ID</th>
+  </tr>
+
+  <% @competitions.each do |competition| %>
+    <tr>
+      <td><%= competition.name %></td>
+      <td><%= Category.find(competition.category_id).description %></td>
+      <td><%= link_to 'Show', admin_competition_path(competition) %></td>
+      <td><%= link_to 'Edit', edit_admin_competition_path(competition) %></td>
+      <td><%= link_to 'Destroy', admin_competition_path(competition),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+      <td><%= competition.id %></td>
+    </tr>
+  <% end %>
+</table>

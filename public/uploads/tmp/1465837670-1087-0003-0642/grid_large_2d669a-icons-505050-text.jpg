@@ -1,0 +1,1 @@
+{"1":{"str":"com.sun.jersey.api.MessageException: A message body writer for Java class com.odesk.agora.thrift.common.TError, and Java type class com.odesk.agora.thrift.common.TError, and MIME media type text/html was not found"}}

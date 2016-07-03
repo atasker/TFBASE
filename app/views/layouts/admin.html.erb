@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TF Admin</title>
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class="pure-menu pure-menu-horizontal">
+    <div class="pure-menu-heading"><span class="bold">Ticket</span><span class="light">Finders</span>
+    <span class="bold"> | </span><span class="light">Admin</span></div>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="/admin" class="pure-menu-link">Home</a></li>
+    </ul>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="flash flash-<%= key %>"><%= value %></div>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

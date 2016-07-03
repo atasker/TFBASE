@@ -1,0 +1,97 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require foundation_and_overrides
+ *= require_self
+ *= require_tree .
+
+ */
+
+ @import 'foundation-icons';
+ @font-face { font-family: 'gotham'; src: font-url('Gotham-Light.otf'); }
+ @font-face { font-family: 'gotham-light'; src: font-url('GothamExLight.otf'); }
+ @font-face { font-family: 'gotham-bold'; src: font-url('Gotham-Bold.otf'); }
+ .gotham-regular { font-family: 'gotham'; }
+ .gotham-light { font-family: 'gotham-light'; }
+ .gotham-bold { font-family: 'gotham-bold'; }
+ .top-bar .name a { color: #2D669A !important; }
+ /* Add more browser kits for these */
+ ::-webkit-input-placeholder {
+   font-weight: 100;
+   text-align: center;
+ }
+ :focus::-webkit-input-placeholder {
+   color: #BEBEBE;
+   text-align: left;
+ }
+ .greyed { background-color: #F5F5F5; }
+ .blued { background-color: #2D669A; }
+ .blue { color: #2D669A; /*border-bottom: 1px solid #C4C4C4;*/ }
+ .grey-bg {
+    background-color: #FFFFFF;
+    padding: 30px 0 30px 0;
+    position: relative;
+}
+/* SVG manipulation on hover */
+.change-icon > span:nth-child(2) {
+  display: none;
+}
+.change-icon:hover > span:nth-child(1) {
+  display: none;
+}
+.change-icon:hover > span:nth-child(2) {
+  display: inherit;
+}
+.text-text { font-size: 0.8em; margin-top: -10px; }
+/* Footer styling */
+.full-width { max-width: 1400px; }
+.footer {
+  background-color: #F5F5F5;
+  padding: 4rem 4rem 2rem 4rem;
+  text-align: center;
+}
+.footer .small-icon { font-size: 35px; }
+.footer .small-icon:hover { color: #2C9DDF; }
+.footer p, .footer a, .footer span {
+  font-weight: 300;
+  font-size: .8em;
+  color: #494949;
+}
+/* Uncomment to add vertical separators to footer sections */
+/*@media only screen and (min-width: 40.063em) {
+  .footer .columns:nth-child(n+2) {
+    border-left: 1px solid #b3b3b3;
+    min-height: 280px;
+  }
+}*/
+.terms-container { background-color: #FFFFFF; padding: 10px; }
+.terms-container * { font-size: .9em; }
+/* added as solution to sticky footer - also seems to have influenced (fixed) horizontal scroll
+   problem on homepage for mobile screens*/
+html, body {
+  height: 100%;
+}
+#wrap {
+  min-height: 100%;
+}
+#main {
+  overflow:auto;
+  padding-bottom:350px; /* this needs to be bigger than footer height*/
+}
+.footer {
+  position: relative;
+  margin-top: -350px; /* negative value of footer height */
+  height: 350px;
+  clear:both;
+  padding-bottom: 15px;
+}
+/* finish sticky footer solution */

@@ -1,0 +1,36 @@
+<h1>Listing Tickets</h1>
+
+<%= link_to 'New ticket', new_admin_ticket_path, class: "pure-button" %>
+
+<br />
+<br />
+
+<table class="pure-table pure-table-striped pure-table-horizontal">
+  <tr>
+    <th>Event ID</th>
+    <th>Event</th>
+    <th>Category</th>
+    <th>Currency</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @tickets.each do |ticket| %>
+    <tr>
+      <td><%= Event.find(ticket.event_id).id %></td>
+      <td><%= Event.find(ticket.event_id).name %></td>
+      <td><%= ticket.category %></td>
+      <td><%= ticket.currency %></td>
+      <td><%= ticket.price %></td>
+      <td><%= ticket.quantity %></td>
+      <td><%= link_to 'Show', admin_ticket_path(ticket) %></td>
+      <td><%= link_to 'Edit', edit_admin_ticket_path(ticket) %></td>
+      <td><%= link_to 'Destroy', admin_ticket_path(ticket),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

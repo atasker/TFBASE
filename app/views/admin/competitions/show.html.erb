@@ -1,0 +1,21 @@
+<p>
+  <strong>Name:</strong>
+  <%= @competition.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= Category.find(@competition.category_id).description %>
+</p>
+
+<p>
+  <%= image_tag(@competition.avatar.grid_small.url) %>
+</p>
+
+<p style="word-wrap: break-word;">
+  <strong>Text:</strong>
+  <%= @competition.text %>
+</p>
+
+<%= link_to 'Edit', edit_admin_competition_path(@competition) %> |
+<%= link_to 'Back', admin_competitions_path %>

@@ -1,0 +1,44 @@
+<%= form_for [:admin, @player] do |f| %>
+
+  <% if @player.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@player.errors.count, "error") %> prohibited
+        this player from being saved:
+      </h2>
+      <ul>
+        <% @player.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </p>
+
+  <p>
+    <%= f.label :category_id %><br>
+    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+  </p>
+
+  <!-- if image already exists for this player, show image -->
+  <%= image_tag(@player.avatar.grid_small.url) if @player.avatar? %>
+
+  <p>
+    <%= f.label :avatar, "Image" %>
+    <%= f.file_field :avatar %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
