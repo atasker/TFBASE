@@ -104,197 +104,378 @@
       <div class="grid">
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(6) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid item 1 open %>
+        <% if Competition.exists?(6) && Competition.find(1).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(6) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(5) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_small.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 1 close %>
+        <% # Grid item 2 open %>
+        <% if Competition.exists?(5) && Competition.find(5).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(5) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_small.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x300">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Player.find(1) %>
-        <%= link_to player_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 2 close %>
+        <% # Grid item 3 open %>
+        <% if Player.exists?(1) && Player.find(1).avatar.grid_large.url != nil %>
+          <% @grid_item = Player.find(1) %>
+          <%= link_to player_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(13) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 3 close %>
+        <% # Grid item 4 open %>
+        <% if Competition.exists?(13) && Competition.find(13).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(13) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(11) %>
-        <%= link_to player_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 4 close %>
+        <% # Grid item 5 open %>
+        <% if Competition.exists?(11) && Competition.find(11).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(11) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(7) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 5 close %>
+        <% # Grid item 6 open %>
+        <% if Competition.exists?(7) && Competition.find(7).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(7) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(8) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 6 close %>
+        <% # Grid item 7 open %>
+        <% if Competition.exists?(8) && Competition.find(8).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(8) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(3) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 7 close %>
+        <% # Grid item 8 open %>
+        <% if Competition.exists?(3) && Competition.find(3).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(3) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(9) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 8 close %>
+        <% # Grid item 9 open %>
+        <% if Competition.exists?(9) && Competition.find(9).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(9) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(12) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_large.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 9 close %>
+        <% # Grid item 10 open %>
+        <% if Competition.exists?(12) && Competition.find(12).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(12) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_large.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x450">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(14) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_small.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 10 close %>
+        <% # Grid item 11 open %>
+        <% if Competition.exists?(14) && Competition.find(14).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(14) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_small.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x300">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
         <% @grid_item = nil %>
-        <% # modify line below to change this grid item %>
-        <% @grid_item = Competition.find(17) %>
-        <%= link_to competition_path(@grid_item) do %>
-          <div class="grid-item">
-            <%= image_tag @grid_item.avatar.grid_small.url %>
-            <span class="image-overlay">
-              <span style="color: #2D669A;" class="gotham-regular">
-                <%= Category.find(@grid_item.category_id).description %> |
+        <% # Grid Item 11 close %>
+        <% # Grid item 12 open %>
+        <% if Competition.exists?(17) && Competition.find(17).avatar.grid_large.url != nil %>
+          <% @grid_item = Competition.find(17) %>
+          <%= link_to competition_path(@grid_item) do %>
+            <div class="grid-item">
+              <%= image_tag @grid_item.avatar.grid_small.url %>
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  <%= Category.find(@grid_item.category_id).description %> |
+                </span>
+                <span class="gotham-regular">
+                  <%= @grid_item.name %>
+                </span>
               </span>
-              <span class="gotham-regular">
-                <%= @grid_item.name %>
+            </div>
+          <% end %>
+        <% else %>
+            <div class="grid-item">
+              <img src="http://placehold.it/400x300">
+              <span class="image-overlay">
+                <span style="color: #2D669A;" class="gotham-regular">
+                  Sample Event/Competition |
+                </span>
+                <span class="gotham-regular">
+                  Name of event
+                </span>
               </span>
-            </span>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
+        <% @grid_item = nil %>
+        <% # Grid Item 12 close %>
       </div>
   </div>
 

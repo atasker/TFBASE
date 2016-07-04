@@ -1,6 +1,6 @@
 #################STAGE1##############################################
 
-categories = ['Music', 'Opera', 'Theater', 'Concerts']
+categories = ['Music', 'Opera', 'Theater', 'Concerts', 'Classical']
 sports =     ['American Football', 'Baseball', 'Basketball', 'Boxing', 'Cricket', 'Football',
               'Golf', 'Hockey', 'Horse Racing', 'MMA', 'Motorcycling', 'Motor Racing', 'Olympics', 'Rugby',
               'Special Events', 'Tennis']
