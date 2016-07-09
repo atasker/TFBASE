@@ -105,7 +105,7 @@
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
         <% # Grid item 1 open %>
-        <% if Competition.exists?(6) && Competition.find(1).avatar.grid_large.url != nil %>
+        <% if Competition.exists?(6) && Competition.find(6).avatar.grid_large.url != nil %>
           <% @grid_item = Competition.find(6) %>
           <%= link_to competition_path(@grid_item) do %>
             <div class="grid-item">
