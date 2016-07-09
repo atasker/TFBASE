@@ -24,6 +24,9 @@ gem 'gon'
 # Search
 gem 'pg_search'
 
+# Sitemap
+gem 'sitemap_generator'
+
 gem 'foundation-rails', '~> 5.5.3.2'
 gem 'jquery-rails'
 gem 'turbolinks'
