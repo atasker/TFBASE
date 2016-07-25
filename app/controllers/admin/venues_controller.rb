@@ -28,6 +28,7 @@ class Admin::VenuesController < AdminController
   end
 
   def update
+    binding.pry
     @venue = Venue.find(params[:id])
 
     if @venue.update(venue_params)
@@ -48,7 +49,9 @@ class Admin::VenuesController < AdminController
   private
 
   def venue_params
-    params.require(:venue).permit(:name, :capacity, :city, :country, :address, :latitude, :longitude, :avatar)
+    params.require(:venue).permit(:name, :capacity, :city, :country, :address, :latitude, :longitude, :avatar, events_attributes: [:name, :start_time, :venue_id,
+                                  :category_id, :competition_id,
+                                  :sports, :priority, player_ids: []])
   end
 
 end

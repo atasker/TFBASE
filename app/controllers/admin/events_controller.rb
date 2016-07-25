@@ -1,7 +1,12 @@
 class Admin::EventsController < AdminController
 
   def index
-    @events = Event.all
+    if params["venue_id"]
+      @venue = Venue.find(params[:venue_id])
+      @events = Event.where(venue_id: @venue.id)
+    else
+      @events = Event.all
+    end
   end
 
   def show
@@ -10,6 +15,14 @@ class Admin::EventsController < AdminController
 
   def new
     @event = Event.new
+    if params["venue_id"]
+      @venue = Venue.find(params[:venue_id])
+      2.times do
+        @venue.events.build
+      end
+    else
+      @event = Event.new
+    end
   end
 
   def edit
@@ -17,6 +30,7 @@ class Admin::EventsController < AdminController
   end
 
   def create
+    binding.pry
     @event = Event.new(event_params)
     if @event.save
       flash[:notice] = "Event successfully created"

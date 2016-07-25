@@ -1,0 +1,69 @@
+<%= simple_form_for [:admin, @venue] do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <% if @venue.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@venue.errors.count, "error") %> prohibited
+        this event from being saved:
+      </h2>
+      <ul>
+        <% @venue.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% 2.times do %>
+  <%= f.fields_for :events, @venue.events.build do |event| %>
+  <p>
+    <%= event.label :name %><br>
+    <%= event.text_field :name %>
+  </p>
+
+  <p>
+    <%= event.label :start_time %><br>
+    <%= event.datetime_select :start_time %>
+  </p>
+
+  <p>
+    <%= event.label :venue_id %><br>
+    <%= event.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
+  </p>
+
+  <p>
+    <%= event.label :category_id %><br>
+    <%= event.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+  </p>
+
+  <p>
+    <%= event.label :competition_id %><br>
+    <%= event.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
+  </p>
+
+  <p>
+    <%= event.label :sports, 'Is this event a sport?' %>
+    <%= event.check_box :sports %>
+  </p>
+
+  <p>
+    <%= event.label :priority, 'Do you want to prioritize this event?' %>
+    <%= event.check_box :priority %>
+  </p>
+
+  <!-- habtm addition -->
+
+  <p>
+    <%= event.label :players %>
+    <%= event.association :players, :multiple => true, label: false %>
+  </p>
+  <% end %>
+  <% end %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
