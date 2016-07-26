@@ -11,7 +11,7 @@ class Admin::EventsController < AdminController
 
   def show
     @event = Event.find(params[:id])
-    @tickets = @event.ticket
+    @tickets = @event.tickets
   end
 
   def new
