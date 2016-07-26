@@ -1,12 +1,17 @@
 class Admin::EventsController < AdminController
 
   def index
-    @events = Event.where('start_time > ?', DateTime.now)
+    if params[:search]
+      @events = Event.search(params[:search]).order(:start_time)
+    else
+      @events = Event.where('start_time > ?', DateTime.now).order(:start_time)
+    end
     @event = Event.new
   end
 
   def show
     @event = Event.find(params[:id])
+    @tickets = @event.ticket
   end
 
   def new
@@ -53,7 +58,7 @@ class Admin::EventsController < AdminController
   def event_params
     params.require(:event).permit(:name, :start_time, :venue_id,
                                   :category_id, :competition_id,
-                                  :sports, :priority, player_ids: [])
+                                  :sports, :priority, player_ids: [], tickets_attributes: [:id, :price, :category, :quantity, :currency, :text, :pairs_only, :_destroy])
   end
 
 end
