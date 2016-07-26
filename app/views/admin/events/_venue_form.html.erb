@@ -17,51 +17,60 @@
       </ul>
     </div>
   <% end %>
-  <% 2.times do %>
+  <table class="pure-table pure-table-striped pure-table-horizontal form-table">
+    <tr>
+      <th>Name</th>
+      <th>Start time</th>
+      <th>Venue</th>
+      <th>Category</th>
+      <th>Competition</th>
+      <th>Sports</th>
+      <th>Priority</th>
+      <th>Players</th>
+      <th></th>
+    </tr>
+
+    <tr class="events_attributes">
   <%= f.fields_for :events, @venue.events.build do |event| %>
-  <p>
-    <%= event.label :name %><br>
-    <%= event.text_field :name %>
-  </p>
+    <td>
+      <%= event.text_field :name %>
+    </td>
 
-  <p>
-    <%= event.label :start_time %><br>
-    <%= event.datetime_select :start_time %>
-  </p>
+    <td>
+      <%= event.datetime_select :start_time %>
+    </td>
 
-  <p>
-    <%= event.label :venue_id %><br>
-    <%= event.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
-  </p>
+    <td>
+      <%= event.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
+    </td>
 
-  <p>
-    <%= event.label :category_id %><br>
-    <%= event.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
-  </p>
+    <td>
+      <%= event.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+    </td>
 
-  <p>
-    <%= event.label :competition_id %><br>
-    <%= event.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
-  </p>
+    <td>
+      <%= event.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
+    </td>
 
-  <p>
-    <%= event.label :sports, 'Is this event a sport?' %>
-    <%= event.check_box :sports %>
-  </p>
+    <td class="center">
+      <%= event.check_box :sports %>
+    </td>
 
-  <p>
-    <%= event.label :priority, 'Do you want to prioritize this event?' %>
-    <%= event.check_box :priority %>
-  </p>
+    <td class="center">
+      <%= event.check_box :priority %>
+    </td>
 
-  <!-- habtm addition -->
+    <!-- habtm addition -->
 
-  <p>
-    <%= event.label :players %>
-    <%= event.association :players, :multiple => true, label: false %>
-  </p>
-  <% end %>
-  <% end %>
+    <td>
+      <%= event.association :players, :multiple => true, label: false %>
+    </td>
+    <% end %>
+  </tr>
+</table>
+  <button id="add_event">
+    Add Another Event
+  </button>
 
   <p>
     <%= f.submit %>

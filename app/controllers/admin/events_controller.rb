@@ -18,9 +18,6 @@ class Admin::EventsController < AdminController
     @event = Event.new
     if params["venue_id"]
       @venue = Venue.find(params[:venue_id])
-      2.times do
-        @venue.events.build
-      end
     else
       @event = Event.new
     end
