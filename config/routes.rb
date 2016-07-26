@@ -21,9 +21,7 @@ Rails.application.routes.draw do
     resources :events
     resources :players
     resources :tickets
-    resources :venues do
-      resources :events, shallow: true
-    end
+    resources :venues
   end
 
 end
