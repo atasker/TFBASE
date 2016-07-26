@@ -7,6 +7,8 @@ class Venue < ActiveRecord::Base
 
   has_many :events, dependent: :destroy
   accepts_nested_attributes_for :events, reject_if: :all_blank, allow_destroy: true
+  has_many :players, through: :events
+  accepts_nested_attributes_for :players
 
   validates :name, presence: true,
                    length: { maximum: 50 }

@@ -46,7 +46,15 @@
     <%= f.label :avatar, "Image" %>
     <%= f.file_field :avatar %>
   </p>
-
+  <h3> Events </h3>
+  <div id="events">
+    <%= f.simple_fields_for :events do |event| %>
+      <%= render 'event_fields', f: event %>
+    <% end %>
+    <div class="links"%>
+      <%= link_to_add_association 'add event', f, :events %>
+    </div>
+  </div>
   <p>
     <%= f.submit %>
   </p>
