@@ -27,5 +27,7 @@
   <%= image_tag(@venue.avatar.venue_thumb.url) %>
 </p>
 
-<%= link_to 'Edit', edit_admin_venue_path(@venue) %> |
+<%= link_to 'Edit/Add Events for this Venue', edit_admin_venue_path(@venue) %> |
 <%= link_to 'Back', admin_venues_path %>
+
+<%= render 'admin/events/events', events: @events %>

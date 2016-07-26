@@ -55,6 +55,17 @@
     <%= f.label :players %>
     <%= f.association :players, :multiple => true, label: false %>
   </p>
+  <h3>
+    Tickets
+  </h3>
+  <div id="tickets">
+    <%= f.simple_fields_for :tickets do |ticket| %>
+      <%= render 'ticket_fields', f: ticket %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'add ticket', f, :tickets %>
+    </div>
+  </div>
 
   <p>
     <%= f.submit %>

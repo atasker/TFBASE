@@ -1,0 +1,13 @@
+<tr>
+  <td><%= ticket.event.id %></td>
+  <td><%= ticket.event.name %></td>
+  <td><%= ticket.category %></td>
+  <td><%= ticket.currency %></td>
+  <td><%= ticket.price %></td>
+  <td><%= ticket.quantity %></td>
+  <td><%= link_to 'Show', admin_ticket_path(ticket) %></td>
+  <td><%= link_to 'Edit', edit_admin_ticket_path(ticket) %></td>
+  <td><%= link_to 'Destroy', admin_ticket_path(ticket),
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
+</tr>

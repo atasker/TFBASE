@@ -1,11 +1,17 @@
 class Admin::EventsController < AdminController
 
   def index
-    @events = Event.all
+    if params[:search]
+      @events = Event.search(params[:search]).order(:start_time)
+    else
+      @events = Event.where('start_time > ?', DateTime.now).order(:start_time)
+    end
+    @event = Event.new
   end
 
   def show
     @event = Event.find(params[:id])
+    @tickets = @event.tickets
   end
 
   def new
@@ -18,11 +24,15 @@ class Admin::EventsController < AdminController
 
   def create
     @event = Event.new(event_params)
-    if @event.save
-      flash[:notice] = "Event successfully created"
-      redirect_to [:admin, @event]
-    else
-      render 'new'
+
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to [:admin, @event], notice: 'Event was successfully created' }
+        format.js { }
+      else
+        format.html { render 'new' }
+        format.js { @errors = @event.errors.full_messages.join(". ") }
+      end
     end
   end
 
@@ -48,7 +58,7 @@ class Admin::EventsController < AdminController
   def event_params
     params.require(:event).permit(:name, :start_time, :venue_id,
                                   :category_id, :competition_id,
-                                  :sports, :priority, player_ids: [])
+                                  :sports, :priority, player_ids: [], tickets_attributes: [:id, :price, :category, :quantity, :currency, :text, :pairs_only, :_destroy])
   end
 
 end
