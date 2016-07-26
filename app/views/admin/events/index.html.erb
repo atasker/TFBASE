@@ -1,12 +1,30 @@
 <h1>Listing Events</h1>
 
 <%= link_to 'New event', new_admin_event_path, class: "pure-button" %>
-
+<div class="errors">
+</div>
+<%= render 'form' %>
 <br />
 <br />
 
-<table class="pure-table pure-table-striped pure-table-horizontal">
-  <tr>
+
+
+<% if @event.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@event.errors.count, "error") %> prohibited
+      this event from being saved:
+    </h2>
+    <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<table class="pure-table pure-table-striped pure-table-horizontal just-added">
+  <thead>
     <th>ID</th>
     <th>Name</th>
     <th>Start time</th>
@@ -15,20 +33,6 @@
     <th></th>
     <th></th>
     <th></th>
-  </tr>
-
-  <% @events.each do |event| %>
-    <tr>
-      <td><%= event.id %></td>
-      <td><%= event.name %></td>
-      <td><%= event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %></td>
-      <td><%= Venue.find(event.venue_id).name %></td>
-      <td><%= Category.find(event.category_id).description %></td>
-      <td><%= link_to 'Show', admin_event_path(event) %></td>
-      <td><%= link_to 'Edit', edit_admin_event_path(event) %></td>
-      <td><%= link_to 'Destroy', admin_event_path(event),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
+  </thead>
+  <%= render @events %>
 </table>

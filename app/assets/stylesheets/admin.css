@@ -49,3 +49,7 @@ body {
   padding:12px;
   border-radius:.5em;
 }
+
+.center {
+  text-align: center;
+}

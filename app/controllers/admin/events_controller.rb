@@ -6,6 +6,7 @@ class Admin::EventsController < AdminController
       @events = Event.where(venue_id: @venue.id)
     else
       @events = Event.all
+      @event = Event.new
     end
   end
 
@@ -30,13 +31,10 @@ class Admin::EventsController < AdminController
   end
 
   def create
-    binding.pry
     @event = Event.new(event_params)
     if @event.save
-      flash[:notice] = "Event successfully created"
-      redirect_to [:admin, @event]
     else
-      render 'new'
+      @errors = @event.errors.full_messages.join(". ")
     end
   end
 
