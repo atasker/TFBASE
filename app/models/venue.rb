@@ -6,7 +6,7 @@ class Venue < ActiveRecord::Base
   after_validation :geocode, :if => :address_changed?
 
   has_many :events, dependent: :destroy
-  accepts_nested_attributes_for :events
+  accepts_nested_attributes_for :events, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true,
                    length: { maximum: 50 }
