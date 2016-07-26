@@ -1,4 +1,4 @@
-<%= form_for [:admin, @event] do |f| %>
+<%= simple_form_for [:admin, @event] do |f| %>
 
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -53,8 +53,19 @@
 
   <p>
     <%= f.label :players %>
-    <%= select_tag "event_players", options_from_collection_for_select(Player.all, 'id', 'name',@event.players.map{ |player| player.id }), :multiple => true %>
+    <%= f.association :players, :multiple => true, label: false %>
   </p>
+  <h3>
+    Tickets
+  </h3>
+  <div id="tickets">
+    <%= f.simple_fields_for :tickets do |ticket| %>
+      <%= render 'ticket_fields', f: ticket %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'add ticket', f, :tickets %>
+    </div>
+  </div>
 
   <p>
     <%= f.submit %>

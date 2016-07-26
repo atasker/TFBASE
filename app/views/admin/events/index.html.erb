@@ -1,34 +1,22 @@
 <h1>Listing Events</h1>
-
-<%= link_to 'New event', new_admin_event_path, class: "pure-button" %>
-
-<br />
-<br />
-
-<table class="pure-table pure-table-striped pure-table-horizontal">
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Start time</th>
-    <th>Venue</th>
-    <th>Category</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @events.each do |event| %>
-    <tr>
-      <td><%= event.id %></td>
-      <td><%= event.name %></td>
-      <td><%= event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %></td>
-      <td><%= Venue.find(event.venue_id).name %></td>
-      <td><%= Category.find(event.category_id).description %></td>
-      <td><%= link_to 'Show', admin_event_path(event) %></td>
-      <td><%= link_to 'Edit', edit_admin_event_path(event) %></td>
-      <td><%= link_to 'Destroy', admin_event_path(event),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+<div id="element2"
+  <%= form_tag(admin_events_path, method: :get, id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by Keywords" %>
   <% end %>
-</table>
+</div>
+<div id="element1">
+  <%= link_to 'New event', new_admin_event_path, class: "pure-button" %>
+</div>
+
+</br>
+</br>
+
+<div class="errors">
+</div>
+<% if params[:search].nil? %>
+  <%= render 'quick_add_form', event: @event %>
+<% else %>
+  <%= link_to 'Return to All Events', admin_events_path %>
+<% end %>
+
+<%= render 'events', events: @events %>
