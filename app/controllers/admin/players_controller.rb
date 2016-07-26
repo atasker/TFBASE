@@ -6,6 +6,7 @@ class Admin::PlayersController < AdminController
 
   def show
     @player = Player.find(params[:id])
+    @events = @player.events
   end
 
   def new

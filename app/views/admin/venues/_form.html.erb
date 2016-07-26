@@ -1,4 +1,4 @@
-<%= form_for [:admin, @venue] do |f| %>
+<%= simple_form_for [:admin, @venue] do |f| %>
 
   <% if @venue.errors.any? %>
     <div id="error_explanation">
@@ -46,7 +46,31 @@
     <%= f.label :avatar, "Image" %>
     <%= f.file_field :avatar %>
   </p>
+  <h3> Events </h3>
+  <div id="events">
+    <table class="pure-table pure-table-striped pure-table-horizontal">
+      <thead>
+        <th>Name</th>
+        <th>Start time</th>
+        <th>Venue</th>
+        <th>Category</th>
+        <th>Competition</th>
+        <th>Sports</th>
+        <th>Priority</th>
+        <th>Players</th>
+        <th>Remove Event</th>
+      </thead>
+      <tbody class="event_items">
+        <%= f.simple_fields_for :events do |event| %>
+          <%= render 'event_fields', f: event %>
+        <% end %>
 
+  </tbody>
+  </table>
+  <div class="links"%>
+    <%= link_to_add_association 'add event', f, :events, data: {"association-insertion-node" => "tbody.event_items", "association-insertion-method" => "append"} %>
+  </div>
+  </div>
   <p>
     <%= f.submit %>
   </p>

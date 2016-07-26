@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
 
   has_and_belongs_to_many :players
   has_many :tickets, dependent: :destroy
+  accepts_nested_attributes_for :tickets, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true,
                    length: { maximum: 50 }

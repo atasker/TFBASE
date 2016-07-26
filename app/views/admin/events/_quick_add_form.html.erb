@@ -1,0 +1,68 @@
+<%= simple_form_for [:admin, @event], remote: true do |f| %>
+
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@event.errors.count, "error") %> prohibited
+        this event from being saved:
+      </h2>
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table class="pure-table pure-table-striped pure-table-horizontal">
+    <thead>
+      <th>Name</th>
+      <th>Start time</th>
+      <th>Venue</th>
+      <th>Category</th>
+      <th>Competition</th>
+      <th>Sports</th>
+      <th>Priority</th>
+      <th>Players</th>
+      <th></th>
+    </thead>
+    <tr>
+      <td>
+        <%= f.text_field :name %>
+      </td>
+
+      <td>
+        <%= f.datetime_select :start_time %>
+      </td>
+
+      <td>
+        <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
+      </td>
+
+      <td>
+        <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+      </td>
+
+      <td>
+        <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
+      </td>
+
+      <td class="center">
+        <%= f.check_box :sports %>
+      </td>
+
+      <td class="center">
+        <%= f.check_box :priority %>
+      </td>
+
+      <!-- habtm addition -->
+
+      <td>
+        <%= f.association :players, :multiple => true, label: false %>
+      </td>
+
+      <td>
+        <%= f.submit %>
+      </td>
+    </tr>
+  </table>
+<% end %>

@@ -6,6 +6,7 @@ class Admin::VenuesController < AdminController
 
   def show
     @venue = Venue.find(params[:id])
+    @events = @venue.events
   end
 
   def new
@@ -48,7 +49,9 @@ class Admin::VenuesController < AdminController
   private
 
   def venue_params
-    params.require(:venue).permit(:name, :capacity, :city, :country, :address, :latitude, :longitude, :avatar)
+    params.require(:venue).permit(:name, :capacity, :city, :country, :address, :latitude, :longitude, :avatar, events_attributes: [:id, :name, :start_time, :venue_id,
+                                  :category_id, :competition_id,
+                                  :sports, :priority, :_destroy, player_ids: []])
   end
 
 end

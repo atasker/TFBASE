@@ -49,3 +49,10 @@ body {
   padding:12px;
   border-radius:.5em;
 }
+
+.center {
+  text-align: center;
+}
+
+#element1 {display:inline-block;margin-right:10px; width:200px;}
+#element2 {display:inline-block; margin-right: 50%; width:200px;}
