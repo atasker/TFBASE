@@ -6,6 +6,7 @@ class Admin::CompetitionsController < AdminController
 
   def show
     @competition = Competition.find(params[:id])
+    @events = @competition.events
   end
 
   def new

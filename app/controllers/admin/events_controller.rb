@@ -1,13 +1,8 @@
 class Admin::EventsController < AdminController
 
   def index
-    if params["venue_id"]
-      @venue = Venue.find(params[:venue_id])
-      @events = Event.where(venue_id: @venue.id)
-    else
-      @events = Event.all
-      @event = Event.new
-    end
+    @events = Event.where('start_time > ?', DateTime.now)
+    @event = Event.new
   end
 
   def show
@@ -16,11 +11,6 @@ class Admin::EventsController < AdminController
 
   def new
     @event = Event.new
-    if params["venue_id"]
-      @venue = Venue.find(params[:venue_id])
-    else
-      @event = Event.new
-    end
   end
 
   def edit
@@ -29,9 +19,15 @@ class Admin::EventsController < AdminController
 
   def create
     @event = Event.new(event_params)
-    if @event.save
-    else
-      @errors = @event.errors.full_messages.join(". ")
+
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to [:admin, @event], notice: 'Event was successfully created' }
+        format.js { }
+      else
+        format.html { render 'new' }
+        format.js { @errors = @event.errors.full_messages.join(". ") }
+      end
     end
   end
 

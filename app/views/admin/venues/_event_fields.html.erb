@@ -1,36 +1,38 @@
-<div class="nested-fields">
-  <td>
-    <%= f.text_field :name %>
-  </td>
+<tr class="nested-fields">
+    <td>
+      <%= f.input :name %>
+    </td>
 
-  <td>
-    <%= f.datetime_select :start_time %>
-  </td>
+    <td>
+      <%= f.datetime_select :start_time %>
+    </td>
 
-  <td>
-    <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
-  </td>
+    <td>
+      <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
+    </td>
 
-  <td>
-    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
-  </td>
+    <td>
+      <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+    </td>
 
-  <td>
-    <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
-  </td>
+    <td>
+      <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
+    </td>
 
-  <td class="center">
-    <%= f.check_box :sports %>
-  </td>
+    <td class="center">
+      <%= f.check_box :sports %>
+    </td>
 
-  <td class="center">
-    <%= f.check_box :priority %>
-  </td>
+    <td class="center">
+      <%= f.check_box :priority %>
+    </td>
 
-  <!-- habtm addition -->
+    <!-- habtm addition -->
 
-  <td>
-    <%= f.association :players, :multiple => true, label: false %>
+    <td>
+      <%= f.association :players, :multiple => true, label: false %>
+    </td>
+    <td>
+      <%= link_to_remove_association "remove event", f %>
   </td>
-  <%= link_to_remove_association "remove event", f
-  </div>
+</tr>

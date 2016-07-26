@@ -6,6 +6,7 @@ class Admin::VenuesController < AdminController
 
   def show
     @venue = Venue.find(params[:id])
+    @events = @venue.events
   end
 
   def new
@@ -28,7 +29,6 @@ class Admin::VenuesController < AdminController
   end
 
   def update
-    binding.pry
     @venue = Venue.find(params[:id])
 
     if @venue.update(venue_params)

@@ -1,5 +1,5 @@
 <% if @event.save %>
-  $('thead').append("<tr><%= j (render @event) %></tr>");
+  $('thead.event_listings').append("<tr><%= j (render @event) %></tr>");
   $(".errors").empty();
 <% else %>
   $(".errors").html("<%= j @errors %>");
