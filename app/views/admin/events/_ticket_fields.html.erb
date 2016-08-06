@@ -1,38 +1,28 @@
-<div class="nested-fields" >
-  <p>
-    <%= f.label :price %><br>
+<tr class="nested-fields" >
+  <td>
     <%= f.text_field :price %>
-  </p>
+  </td>
 
-  <p>
-    <%= f.label :category %><br>
+  <td>
     <%= f.text_area :category %>
-  </p>
+  </td>
 
-  <p>
-    <%= f.label :quantity %><br>
+  <td>
     <%= f.text_area :quantity %>
-  </p>
+  </td>
 
-  <p>
-    <%= f.label :text %><br>
+  <td>
     <%= f.text_area :text %>
-  </p>
+  </td>
 
-  <p>
-    <%= f.label :pairs_only, 'Only sell in pairs?' %>
+  <td>
     <%= f.check_box :pairs_only %>
-  </p>
+  </td>
 
-  <p>
-    <%= f.label :currency %><br>
+  <td>
     <%= f.select :currency, ["Dollars", "Euros", "Pounds"], :prompt => "Choose Currency" %>
-  </p>
-
-  <p>
-    <%= f.label :event_id %><br>
-    <%= f.collection_select(:event_id, Event.order('id ASC'), :id, :id, prompt: true) %>
-  </p>
-
+  </td>
+  <td>
   <%= link_to_remove_association "remove ticket", f %>
-</div>
+</td>
+</tr>

@@ -64,8 +64,7 @@
         <%= f.simple_fields_for :events do |event| %>
           <%= render 'event_fields', f: event %>
         <% end %>
-
-  </tbody>
+    </tbody>
   </table>
   <div class="links"%>
     <%= link_to_add_association 'add event', f, :events, data: {"association-insertion-node" => "tbody.event_items", "association-insertion-method" => "append"} %>

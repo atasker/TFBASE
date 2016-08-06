@@ -59,11 +59,24 @@
     Tickets
   </h3>
   <div id="tickets">
-    <%= f.simple_fields_for :tickets do |ticket| %>
-      <%= render 'ticket_fields', f: ticket %>
-    <% end %>
+    <table class="pure-table pure-table-striped pure-table-horizontal">
+      <thead>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Text</th>
+        <th>Pairs Only</th>
+        <th>Currency</th>
+        <th>Remove Ticket</th>
+      </thead>
+      <tbody class="ticket_items">
+        <%= f.simple_fields_for :tickets do |ticket| %>
+          <%= render 'ticket_fields', f: ticket %>
+        <% end %>
+    </tbody>
+  </table>
     <div class="links">
-      <%= link_to_add_association 'add ticket', f, :tickets %>
+      <%= link_to_add_association 'add ticket', f, :tickets, data: {"association-insertion-node" => "tbody.ticket_items", "association-insertion-method" => "append"} %>
     </div>
   </div>
 
