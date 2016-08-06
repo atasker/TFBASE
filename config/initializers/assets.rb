@@ -11,6 +11,7 @@ Rails.application.config.assets.precompile += %w( admin.css )
 
 # added as part of foundation install
 Rails.application.config.assets.precompile += %w( vendor/modernizr.js )
+Rails.application.config.assets.precompile += %w( cocoon.js )
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
