@@ -1,31 +1,25 @@
 <tr class="nested-fields" >
   <td>
-    <%= f.label :price %><br>
     <%= f.text_field :price %>
   </td>
 
   <td>
-    <%= f.label :category %><br>
     <%= f.text_area :category %>
   </td>
 
   <td>
-    <%= f.label :quantity %><br>
     <%= f.text_area :quantity %>
   </td>
 
   <td>
-    <%= f.label :text %><br>
     <%= f.text_area :text %>
   </td>
 
   <td>
-    <%= f.label :pairs_only, 'Only sell in pairs?' %>
     <%= f.check_box :pairs_only %>
   </td>
 
   <td>
-    <%= f.label :currency %><br>
     <%= f.select :currency, ["Dollars", "Euros", "Pounds"], :prompt => "Choose Currency" %>
   </td>
   <td>
