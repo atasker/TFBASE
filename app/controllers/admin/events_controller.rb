@@ -1,7 +1,9 @@
 class Admin::EventsController < AdminController
 
   def index
-    if params[:search]
+    if params[:search] == "archive"
+      @events = Event.where('start_time < ?', DateTime.now).order(:start_time)
+    elsif params[:search]
       @events = Event.search(params[:search]).order(:start_time)
     else
       @events = Event.where('start_time > ?', DateTime.now).order(:start_time)
@@ -17,6 +19,11 @@ class Admin::EventsController < AdminController
   def new
     @event = Event.new
   end
+
+  def archive
+    @events = Event.where('start_time < ?', DateTime.now).order(:start_time)
+  end
+
 
   def edit
     @event = Event.find(params[:id])
