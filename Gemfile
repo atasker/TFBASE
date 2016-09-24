@@ -27,7 +27,7 @@ gem 'pg_search'
 # Sitemap
 gem 'sitemap_generator'
 
-gem 'foundation-rails', '~> 5.5.3.2'
+gem 'foundation-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
