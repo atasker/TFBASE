@@ -3,7 +3,7 @@ ADMIN_PASSWORD: "Fk75gY934y7Wh29B3F638xzFdQxaVz"
 
 # Login info for Gmail SMTP settings
 GMAIL_USER: "ticketfindersinternational@gmail.com"
-GMAIL_PASSWORD: "@Ovhgs2^H"
+GMAIL_PASSWORD: "Fk75gY934y7Wh29B3F638xzFdQxaVz"
 
 # PSQL password supplied by digitalocean (corresponds with database.yml credentials)
 APP_DATABASE_PASSWORD: "yTlxhholbg"
