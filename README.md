@@ -1,19 +1,23 @@
 ### A few things to check before deploying to remote machine
 
-> Move fresh local copy into remote machine **OR** clone from this repo
+> Login to server from terminal
 
-`scp -r appfolder root@ip.address:/home/rails` OR `git clone <repo>`
+`ssh root@ip`
 
-> Copy & Replace **/config/database.yml** with pre-completed file from **/home/rails**
+> Copy & Replace **/config/database.yml** & **/config/application/yml** with pre-completed file from **/home/rails** or just copy working files from old version of app.
 
 <!-- -->
 > Bundle install inside the new folder
 
-`bundle install`
+`bundle`
 
 > Bundle update
 
 `bundle update`
+
+> Precompile assets
+
+*DB dump and create is Deprecated*
 
 > Sometimes it's necessary to drop & reseed the database, here's how to do it
 
@@ -50,23 +54,14 @@
 
 `RAILS_ENV=production rake assets:precompile`
 
-<!-- -->
-> App uses **Ruby2.0.0p643**, ensure rvm on server is using the same
-
-`rvm list`
-
 > Ensure root app folder is owned by rails user
 
 `chown -R rails: /home/rails/ticketfinders1/`
-
-> Ensure app folder names match **/home/rails/ticketfinders1**
 
 <!-- -->
 > Give read-write permissions to **tmp/cache**
 
 `chmod -R 0777 cache/`
-
-> Check for Gemfile discrepancies
 
 <!-- -->
 > **Troubleshoot** in root/log/production.log
