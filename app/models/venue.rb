@@ -5,7 +5,7 @@ class Venue < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
 
-  has_many :events, dependent: :destroy
+  has_many :events, dependent: :destroy, inverse_of: :venue
   accepts_nested_attributes_for :events, reject_if: :all_blank, allow_destroy: true
   has_many :players, through: :events
 

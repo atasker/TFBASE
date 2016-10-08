@@ -8,10 +8,6 @@
     </td>
 
     <td>
-      <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
-    </td>
-
-    <td>
       <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
     </td>
 
