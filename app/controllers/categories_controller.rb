@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class CategoriesController < BaseFrontendController
 
   def index
     @categories = Category.order('description ASC')

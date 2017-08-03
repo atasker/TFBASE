@@ -1,4 +1,4 @@
-class CompetitionsController < ApplicationController
+class CompetitionsController < BaseFrontendController
 
   def show
     @competition = Competition.find(params[:id])

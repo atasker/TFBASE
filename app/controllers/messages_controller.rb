@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class MessagesController < BaseFrontendController
 
   def new
     @message = Message.new

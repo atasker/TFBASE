@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class EventsController < BaseFrontendController
 
   def index
     @events = Event.text_search(params[:query])

@@ -1,4 +1,4 @@
-class StaticController < ApplicationController
+class StaticController < BaseFrontendController
 
   def sport
     @categories = Category.where(sports: true)

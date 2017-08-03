@@ -1,9 +1,8 @@
           <div class="page-title">
             <div class="container-fluid">
-              <h1>test</h1>
+              <h1><%= page_meta[:title] %></h1>
             </div>
           </div>
-
           <div class="main-top">
             <div class="main-top__info">
               <h1>International  Ticket Agency</h1>
@@ -15,61 +14,31 @@
               </div>
             </div>
             <div class="main-top__slider">
-              <div class="main-top__item" style="background: url(/content/main1.jpg)">
+              <% @top_slides.each do |slide| %>
+              <div class="main-top__item" style="background: url(<%= slide.bg_img_url %>)">
                 <div class="container-fluid">
                   <div class="main-top__events">
                     <div class="main-top__events-inner">
-                      <div class="main-top__events-title">Cirque du Soleil Amaluna</div>
-                      <div class="main-top__events-place">London, UK</div>
+                      <div class="main-top__events-title"><%= slide.title %></div>
+                      <div class="main-top__events-place"><%= slide.place %></div>
                       <div class="event-date">
                         <div class="event-date__item">
-                          <strong>12</strong>
-                          Jan
+                          <strong><%= l slide.start_date, format: "%d" %></strong>
+                          <%= l slide.start_date, format: "%b" %>
                         </div>
+                        <% if slide.end_date.present? %>
                         <div class="event-date__item">
-                          <strong>04</strong>
-                          Feb
+                          <strong><%= l slide.end_date, format: "%d" %></strong>
+                          <%= l slide.end_date, format: "%b" %>
                         </div>
+                        <% end %>
                       </div>
-                      <a href="#" class="btn">Show Event</a>
+                      <%= link_to 'Show Event', slide.event_url, :class => 'btn' %>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="main-top__item" style="background: url(/content/main1.jpg)">
-                <div class="container-fluid">
-                  <div class="main-top__events">
-                    <div class="main-top__events-inner">
-                      <div class="main-top__events-title">Test 1</div>
-                      <div class="main-top__events-place">test, UK</div>
-                      <div class="event-date">
-                        <div class="event-date__item">
-                          <strong>04</strong>
-                          Feb
-                        </div>
-                      </div>
-                      <a href="#" class="btn">Show Event</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="main-top__item" style="background: url(/content/main1.jpg)">
-                <div class="container-fluid">
-                  <div class="main-top__events">
-                    <div class="main-top__events-inner">
-                      <div class="main-top__events-title">Test 2</div>
-                      <div class="main-top__events-place">London, UK</div>
-                      <div class="event-date">
-                        <div class="event-date__item">
-                          <strong>12</strong>
-                          Jan
-                        </div>
-                      </div>
-                      <a href="#" class="btn">Show Event</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <% end %>
             </div>
           </div>
           <div class="main-cathegories">
@@ -82,7 +51,7 @@
                     </svg>
                   </div>
                   <h3>Sport</h3>
-                  We have access to the best seats for all the <a href="#">key matchups</a> this season
+                  We have access to the best seats for all the <%= link_to 'key matchups', static_sport_path %> this season
                 </div>
                 <div class="col-lg-3 col-sm-6 main-cathegories__item">
                   <div class="main-cathegories__icon">
@@ -91,7 +60,8 @@
                     </svg>
                   </div>
                   <h3>Theater</h3>
-                  The best seats in the house for all <a href="#">the hottest shows</a>
+                  The best seats in the house for all
+                  <%= link_to_if @main_categories['Theater'].present?, 'the hottest shows', category_path(@main_categories['Theater']) %>
                 </div>
                 <div class="col-lg-3 col-sm-6 main-cathegories__item">
                   <div class="main-cathegories__icon">
@@ -100,7 +70,8 @@
                     </svg>
                   </div>
                   <h3>Classical</h3>
-                  Access to hard-to-find tickets for the year's <a href="#">best shows</a>
+                  Access to hard-to-find tickets for the year's
+                  <%= link_to_if @main_categories['Classical'].present?, 'best shows', category_path(@main_categories['Classical']) %>
                 </div>
                 <div class="col-lg-3 col-sm-6 main-cathegories__item">
                   <div class="main-cathegories__icon">
@@ -109,7 +80,8 @@
                     </svg>
                   </div>
                   <h3>Concerts</h3>
-                  We have access to hard-to-find tickets for <a href="#">the year's best shows</a>
+                  We have access to hard-to-find tickets for
+                  <%= link_to_if @main_categories['Concerts'].present?, "the year's best shows", category_path(@main_categories['Concerts']) %>
                 </div>
               </div>
             </div>

@@ -5,15 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="a0y8f0wF8qt5fmiYeHmHRtpe811seo4JMJSHp9I4PXk" />
-    <title>
-      <%= if content_for?(:title) then yield(:title) + ' Tickets - ' end %>
-      TicketFinders | Tickets for Concerts, Sports, Opera, Theater
-    </title>
-    <% if content_for?(:description) %>
-      <meta name='description' content="Buy <%= yield :description %> tickets from the official Ticket-Finders.com site.">
-    <% else %>
-      <meta name='description' content="Buy tickets to concerts, sports, arts, theater and hard to find sold out events worldwide.">
-    <% end %>
+    <title><%= page_meta[:title] %></title>
+    <meta name='description' content="<%= page_meta[:description] %>">
     <%= favicon_link_tag '/favicon.ico' %>
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,400,700" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
@@ -25,7 +18,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="layout layout--index">
+    <div class="layout<%= @is_homepage ? ' layout--index' : '' %>">
       <header class="page-header">
         <a href="#popup-send" class="send-link popup-inline" data-effect="mfp-zoom-in">
           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="25" viewBox="0 0 36 25">
@@ -63,12 +56,12 @@
             </div>
           </div>
           <div class="top-search">
-            <form action="#" method="post">
-              <input type="text">
-              <input type="submit">
-            </form>
+            <%= form_tag events_path, method: :get do  %>
+              <%= text_field_tag :query, params[:query] %>
+              <%= submit_tag '' %>
+            <% end %>
           </div>
-          <div class="top-logo"></div>
+          <% if @is_homepage %><div class="top-logo"></div><% else %><%= link_to '', root_path, :class => 'top-logo' %><% end %>
         </div>
       </header>
       <div class="wrapper">

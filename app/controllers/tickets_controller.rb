@@ -1,4 +1,4 @@
-class TicketsController < ApplicationController
+class TicketsController < BaseFrontendController
 
   def show
     @ticket = Ticket.find(params[:id])
