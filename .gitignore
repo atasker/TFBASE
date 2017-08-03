@@ -12,3 +12,10 @@
 !/log/.keep
 /tmp
 .env
+
+# Ignore rmv files
+.ruby-version
+.ruby-gemset
+
+# Ignore system files
+.DS_Store
