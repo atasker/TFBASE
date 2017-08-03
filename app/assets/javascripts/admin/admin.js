@@ -12,5 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-// do not require_tree .
+//= require foundation
+//= require turbolinks
+//= require_tree .
+//= require cocoon
 
+$(document).on('ready page:load', function () {
+  $(document).foundation();
+});
