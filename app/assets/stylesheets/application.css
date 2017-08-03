@@ -11,5 +11,7 @@
  * file per style scope.
  *
  * do not require_tree .
+ *= require libs.min
+ *= require style
  *= require_self
  */

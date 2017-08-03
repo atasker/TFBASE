@@ -19,3 +19,6 @@
 
 # Ignore system files
 .DS_Store
+
+# Ignore temporary content folder
+/public/content
