@@ -3,6 +3,8 @@ default: &default
   encoding: unicode
   pool: 5
   host: localhost
+  username: tfbase
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
