@@ -1,6 +1,10 @@
 class BaseFrontendController < ApplicationController
 
-  before_filter :collect_categories
+  before_filter :collect_categories, :add_home_breadcrumb
+
+  helper_method :page_meta, :add_breadcrumb, :breadcrumbs
+
+  protected
 
   def page_meta
     unless @page_meta_carrier
@@ -20,12 +24,22 @@ class BaseFrontendController < ApplicationController
     @page_meta_carrier
   end
 
-  helper_method :page_meta
+  def breadcrumbs
+    @breadcrumbs ||= []
+  end
+
+  def add_breadcrumb(name, path)
+    self.breadcrumbs << { name: name, path: path }
+  end
 
   private
 
   def collect_categories
     @categories = Category.order('description ASC')
+  end
+
+  def add_home_breadcrumb
+    add_breadcrumb 'Home', root_path
   end
 
 end

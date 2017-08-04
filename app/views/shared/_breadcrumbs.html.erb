@@ -1,0 +1,10 @@
+<div class="breadcrumbs">
+  <% breadcrumbs_count = breadcrumbs.length %>
+  <% breadcrumbs.each_with_index do |breadcrumb, indx| %>
+    <% if indx < breadcrumbs_count - 1 %>
+      <%= link_to breadcrumb[:name], breadcrumb[:path], :class => 'breadcrumbs__item' %>
+    <% else %>
+      <span class="breadcrumbs__item"><%= breadcrumb[:name] %></span>
+    <% end %>
+  <% end %>
+</div>
