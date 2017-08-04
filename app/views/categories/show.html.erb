@@ -1,11 +1,9 @@
 <div class="page-title">
   <div class="container-fluid">
-    <div class="page-title__inner" style="background:url(img/content/title-bg.png)">
+    <div class="page-title__inner" style="<%= @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
       <%= render 'shared/breadcrumbs' %>
       <h1><%= @category.description %></h1>
-      <%#<div class="page-title__info">
-        If you're looking for Premier League Tickets, Ticketfinders is the place for you! Ticketfinders has English Premier League Tickets for all matches, so get your Football Tickets here! Ticketfinders International offer the very best selection of Premier League tickets. All tickets are covered by the Ticketfinders guarantee so you can feel safe in your purchase, wherever in the world you are. <a href="#">Read more</a>
-      </div>%>
+      <%#<div class="page-title__info"><a href="#">Read more</a></div>%>
     </div>
   </div>
 </div>
@@ -36,9 +34,6 @@
       </div>
     </div>
   <% else %>
-      <h4>Can't find what you’re looking for?</h5>
-      <p>Ticketfinders has been finding our clients sold out and hard to get tickets to events all around the World for over 40 years and we encourage you to send us a message if you can’t find what you’re looking for on our site.
-      So please send us a quick message and we’ll get back to you as soon as we can.<p>
-      <p><%= link_to 'Contact Us', new_message_path %></p>
+    <%= render 'shared/nothing_found_message' %>
   <% end %>
 </div>

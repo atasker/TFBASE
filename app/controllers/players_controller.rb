@@ -2,7 +2,7 @@ class PlayersController < BaseFrontendController
 
   def show
     @player = Player.find(params[:id])
-    @category = Category.find(@player.category_id)
+    @category = @player.category
     if params[:comp]
       @competition = Competition.find(params[:comp])
       # Retrieve all events in the given competition
@@ -29,6 +29,16 @@ class PlayersController < BaseFrontendController
       end
       @events = @tmp.sort { |a,b| a.start_time <=> b.start_time }
     end
+
+    @page_meta = { title: @player.name,
+                   description: @player.name }
+
+    add_breadcrumb 'Categories', categories_path
+    add_breadcrumb @category.description, category_path(@category)
+    if @competition
+      add_breadcrumb @competition.name, competition_path(@competition)
+    end
+    add_breadcrumb @player.name, nil
   end
 
 end

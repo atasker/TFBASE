@@ -3,6 +3,8 @@ class EventsController < BaseFrontendController
   def index
     @events = Event.text_search(params[:query])
     @sorted = @events.sort { |a,b| a.start_time <=> b.start_time }
+
+    add_breadcrumb 'Search Results', nil
   end
 
   def show
@@ -33,6 +35,24 @@ class EventsController < BaseFrontendController
 
     @tickets = @event.tickets
     @sorted_tickets = @tickets.sort { |a,b| a.price <=> b.price }
+
+
+    @page_meta = { title: @event.name,
+                   description: @event.name }
+
+    add_breadcrumb 'Categories', categories_path
+    add_breadcrumb @category.description, category_path(@category)
+    if @competition
+      add_breadcrumb @competition.name, competition_path(@competition)
+    end
+    if @player
+      if @competition
+        add_breadcrumb @player.name, player_path(@player, comp: @competition)
+      else
+        add_breadcrumb @player.name, player_path(@player)
+      end
+    end
+    add_breadcrumb @event.name, nil
   end
 
 end

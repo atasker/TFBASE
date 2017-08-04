@@ -10,6 +10,9 @@ class TicketsController < BaseFrontendController
     else
       @symbol = "€"
     end
+
+    add_breadcrumb @event.name, event_path(@event)
+    add_breadcrumb 'Ticket', nil
   end
 
 end
