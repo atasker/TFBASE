@@ -6,7 +6,6 @@ gem 'unicorn'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
-gem 'foundation-icons-sass-rails'
 
 # Image uploading purposes
 gem 'carrierwave'
@@ -27,7 +26,6 @@ gem 'pg_search'
 # Sitemap
 gem 'sitemap_generator'
 
-gem 'foundation-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
