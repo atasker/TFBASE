@@ -1,259 +1,258 @@
-          <div class="page-title">
-            <div class="container-fluid">
-              <h1><%= page_meta[:title] %></h1>
-            </div>
-          </div>
-          <div class="main-top">
-            <div class="main-top__info">
-              <h1>International  Ticket Agency</h1>
-              <div class="main-top__form">
-                <%= form_tag events_path, method: :get do  %>
-                  <%= text_field_tag :query, params[:query], :placeholder => "Search for an artist, team or city" %>
-                  <%= submit_tag '' %>
-                <% end %>
-              </div>
-            </div>
-            <div class="main-top__slider">
-              <% @top_slides.each do |slide| %>
-              <div class="main-top__item" style="background: url(<%= slide.bg_img_url %>)">
-                <div class="container-fluid">
-                  <div class="main-top__events">
-                    <div class="main-top__events-inner">
-                      <div class="main-top__events-title"><%= slide.title %></div>
-                      <div class="main-top__events-place"><%= slide.place %></div>
-                      <div class="event-date">
-                        <%= render partial: 'shared/event_date_item', locals: { the_date: slide.start_date } %>
-                        <% if slide.end_date.present? %>
-                          <%= render partial: 'shared/event_date_item', locals: { the_date: slide.end_date } %>
-                        <% end %>
-                      </div>
-                      <%= link_to 'Show Event', slide.event_url, :class => 'btn' %>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<div class="page-title">
+  <div class="container-fluid">
+    <h1><%= page_meta[:title] %></h1>
+  </div>
+</div>
+<div class="main-top">
+  <div class="main-top__info">
+    <h1>International  Ticket Agency</h1>
+    <div class="main-top__form">
+      <%= form_tag events_path, method: :get do  %>
+        <%= text_field_tag :query, params[:query], :placeholder => "Search for an artist, team or city" %>
+        <%= submit_tag '' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="main-top__slider">
+    <% @top_slides.each do |slide| %>
+    <div class="main-top__item" style="background: url(<%= slide.bg_img_url %>)">
+      <div class="container-fluid">
+        <div class="main-top__events">
+          <div class="main-top__events-inner">
+            <div class="main-top__events-title"><%= slide.title %></div>
+            <div class="main-top__events-place"><%= slide.place %></div>
+            <div class="event-date">
+              <%= render partial: 'shared/event_date_item', locals: { the_date: slide.start_date } %>
+              <% if slide.end_date.present? %>
+                <%= render partial: 'shared/event_date_item', locals: { the_date: slide.end_date } %>
               <% end %>
             </div>
-          </div>
-          <div class="main-cathegories">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-lg-3 col-sm-6 main-cathegories__item">
-                  <div class="main-cathegories__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="61.937" height="66.843" viewBox="0 0 61.937 66.843" class="cvg-anim">
-                      <path d="M307.6,684.077a1.006,1.006,0,0,0-1.373.369L281.082,729.2a1,1,0,0,0,.367,1.373l34.808,20.1a1.007,1.007,0,0,0,1.373-.368l25.145-44.75a1.006,1.006,0,0,0-.368-1.373l-34.807-20.1h0Zm-0.135,2.244,8.7,5.024-1.508,2.612a1,1,0,0,0,.368,1.372l13.923,8.039a1,1,0,0,0,1.372-.369l1.508-2.611,8.7,5.024-10.064,18.627-8.751-5.052A9.041,9.041,0,0,0,306.153,710l-8.752-5.053Zm10.442,6.029,12.183,7.033-1,1.741L316.9,694.091Zm-0.957,16.921a7.016,7.016,0,0,1,3.014,8.7l-12.058-6.961A7.016,7.016,0,0,1,316.95,709.271ZM296.4,706.689l8.752,5.053a9.041,9.041,0,0,0,15.564,8.986l8.751,5.052-13.071,22.64-8.7-5.024,1.508-2.611a1,1,0,0,0-.368-1.373l-13.923-8.038a1,1,0,0,0-1.373.368l-1.507,2.611-8.7-5.024,13.071-22.64h0Zm10.5,6.065,12.057,6.962A7.033,7.033,0,0,1,306.9,712.754Zm-12.129,20.863,12.183,7.034-1,1.741-12.183-7.034Z" transform="translate(-280.969 -683.938)"/>
-                    </svg>
-                  </div>
-                  <h3>Sport</h3>
-                  We have access to the best seats for all the <%= link_to 'key matchups', static_sport_path %> this season
-                </div>
-                <div class="col-lg-3 col-sm-6 main-cathegories__item">
-                  <div class="main-cathegories__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="58.157" height="53.406" viewBox="0 0 58.157 53.406" class="cvg-anim">
-                      <path d="M669.286,692H613.174a1.027,1.027,0,0,0-1.028,1.027v51.341a1.027,1.027,0,0,0,1.028,1.027h56.112a1.027,1.027,0,0,0,1.027-1.027V693.027A1.027,1.027,0,0,0,669.286,692ZM614.2,694.054h54.057V700.7a8.426,8.426,0,0,1-9.17,0v-4.937a1.028,1.028,0,0,0-2.055,0V700.7a8.428,8.428,0,0,1-9.167,0V697.41a1.028,1.028,0,0,0-2.055,0V700.7a8.427,8.427,0,0,1-9.166,0V697.41a1.028,1.028,0,0,0-2.056,0V700.7a8.428,8.428,0,0,1-9.167,0v-4.937a1.028,1.028,0,0,0-2.055,0V700.7a8.431,8.431,0,0,1-9.166,0v-6.649h0Zm51.231,31.334c-2.261-4.809-3.636-12.786-3.713-21.455a10.473,10.473,0,0,0,6.539-.876v26.3c-4-.383-7.751-3-10.658-7.469a34.278,34.278,0,0,1-5.02-17.771,10.482,10.482,0,0,0,5.482-1.627,10.591,10.591,0,0,0,1.6.828c0.015,9.194,1.474,17.763,3.91,22.946a1.029,1.029,0,0,0,.931.591,1.018,1.018,0,0,0,.437-0.1A1.028,1.028,0,0,0,665.432,725.388ZM614.2,703.058a10.47,10.47,0,0,0,6.539.874c-0.076,8.67-1.452,16.647-3.712,21.456a1.028,1.028,0,1,0,1.86.874c2.436-5.183,3.895-13.753,3.911-22.947a10.618,10.618,0,0,0,1.6-.828,10.482,10.482,0,0,0,5.483,1.627,34.291,34.291,0,0,1-5.019,17.772c-2.908,4.468-6.66,7.086-10.658,7.469v-26.3h0Zm4.383,40.283h0a36.263,36.263,0,0,0-.982-7.932,1.028,1.028,0,0,0-1.993.5,34.664,34.664,0,0,1,.919,7.429H614.2V731.566a7.455,7.455,0,0,1,4.525,3.508,16.774,16.774,0,0,1,2.465,8.267h-2.607Zm35.526,0H628.349v-2.166H654.11v2.166h0Zm2.056,0v-3.193a1.028,1.028,0,0,0-1.028-1.028H627.322a1.028,1.028,0,0,0-1.028,1.028v3.193h-3.048a18.893,18.893,0,0,0-2.8-9.388,11.173,11.173,0,0,0-3.046-3.2c3.468-1.186,6.636-3.835,9.18-7.743a36.437,36.437,0,0,0,5.356-19.072,10.486,10.486,0,0,0,3.678-1.448,10.469,10.469,0,0,0,11.223,0,10.51,10.51,0,0,0,3.681,1.449,36.436,36.436,0,0,0,5.356,19.071c2.544,3.908,5.712,6.557,9.181,7.743a11.163,11.163,0,0,0-3.047,3.2,18.907,18.907,0,0,0-2.8,9.388h-3.048Zm12.092,0h-2.327a34.664,34.664,0,0,1,.919-7.429,1.028,1.028,0,0,0-1.993-.5,36.263,36.263,0,0,0-.982,7.932h-2.607a16.788,16.788,0,0,1,2.465-8.267,7.463,7.463,0,0,1,4.525-3.508v11.775h0Z" transform="translate(-612.156 -692)"/>
-                    </svg>
-                  </div>
-                  <h3>Theater</h3>
-                  The best seats in the house for all
-                  <%= link_to_if @main_categories['Theater'].present?, 'the hottest shows', category_path(@main_categories['Theater']) %>
-                </div>
-                <div class="col-lg-3 col-sm-6 main-cathegories__item">
-                  <div class="main-cathegories__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="58.312" height="58.313" viewBox="0 0 58.312 58.313" class="cvg-anim">
-                      <path d="M979.033,709.441c-4.782,0-9.191-3.521-12.75-10.181a17.5,17.5,0,0,0-32.942,8.237v20.415a0.972,0.972,0,0,0,.972.972h4.861v8.75a0.972,0.972,0,0,0,.972.972h3.889a0.972,0.972,0,0,0,.972-0.972v-8.75h1.944v8.75a0.973,0.973,0,0,0,.973.972h3.888a0.972,0.972,0,0,0,.972-0.972v-8.75h1.945v8.75a0.972,0.972,0,0,0,.972.972h3.889a0.972,0.972,0,0,0,.972-0.972v-8.75h3.888v17.5h-5.833v-4.86a0.972,0.972,0,1,0-1.944,0v4.86H950.84v-4.86a0.972,0.972,0,1,0-1.944,0v4.86h-5.833v-4.86a0.972,0.972,0,1,0-1.944,0v4.86h-5.833V731.8a0.973,0.973,0,0,0-1.945,0v15.555a0.972,0.972,0,0,0,.972.972H990.7a0.972,0.972,0,0,0,.972-0.972V722.079A12.652,12.652,0,0,0,979.033,709.441Zm-35.97,27.22h-1.944v-7.777h1.944v7.777h0Zm7.777,0H948.9v-7.777h1.944v7.777Zm7.778,0h-1.945v-7.777h1.945v7.777Zm31.109,9.722h-7.778v-4.86a0.972,0.972,0,1,0-1.944,0v4.86h-5.833v-4.86a0.972,0.972,0,1,0-1.944,0v4.86H966.4v-17.5h3.889v8.75a0.972,0.972,0,0,0,.972.972h3.888a0.972,0.972,0,0,0,.972-0.972v-8.75h1.945v8.75a0.972,0.972,0,0,0,.972.972h3.889a0.972,0.972,0,0,0,.972-0.972v-8.75h2.916a0.972,0.972,0,0,0,0-1.944H935.285V707.5a15.557,15.557,0,0,1,29.283-7.321c4.951,9.265,10.6,11.209,14.465,11.209a10.707,10.707,0,0,1,10.694,10.694v24.3h0Zm-17.5-9.722v-7.777h1.944v7.777h-1.944Zm7.777,0v-7.777h1.945v7.777h-1.945Z" transform="translate(-933.344 -690)"/>
-                    </svg>
-                  </div>
-                  <h3>Classical</h3>
-                  Access to hard-to-find tickets for the year's
-                  <%= link_to_if @main_categories['Classical'].present?, 'best shows', category_path(@main_categories['Classical']) %>
-                </div>
-                <div class="col-lg-3 col-sm-6 main-cathegories__item">
-                  <div class="main-cathegories__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="54.16" height="54.156" viewBox="0 0 54.16 54.156" class="cvg-anim">
-                      <path d="M1312.13,702.867a13.821,13.821,0,0,0-18.85-.628,3.336,3.336,0,0,0-3.9,5.317l0.11,0.106a13.813,13.813,0,0,0-.71,7.422L1262.27,744.9a1.068,1.068,0,0,0,.05,1.476l6.3,6.307a1.08,1.08,0,0,0,1.48.044l29.82-26.506a13.774,13.774,0,0,0,2.43.217,13.923,13.923,0,0,0,4.99-.921l0.1,0.1a3.34,3.34,0,0,0,5.7-2.359,3.271,3.271,0,0,0-.38-1.542A13.825,13.825,0,0,0,1312.13,702.867Zm-42.7,47.577-4.87-4.871,1.52-1.717,5.06,5.063Zm3.33-2.957-5.25-5.242,22.47-25.278,8.05,8.049Zm27.37-23.415-9.2-9.2a11.8,11.8,0,0,1,.25-5.509l14.46,14.46A11.775,11.775,0,0,1,1300.13,724.072Zm10.51,0.027a1.178,1.178,0,0,1-1.67,0l-18.07-18.066a1.187,1.187,0,0,1,0-1.673,1.181,1.181,0,0,1,1.67,0l18.07,18.066A1.175,1.175,0,0,1,1310.64,724.1Zm0.7-4.02-16.42-16.415A11.66,11.66,0,0,1,1311.34,720.079Z" transform="translate(-1262.03 -698.844)"/>
-                    </svg>
-                  </div>
-                  <h3>Concerts</h3>
-                  We have access to hard-to-find tickets for
-                  <%= link_to_if @main_categories['Concerts'].present?, "the year's best shows", category_path(@main_categories['Concerts']) %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main-featured">
-            <div class="container-fluid">
-              <h2>Featured Events</h2>
-              <div class="main-featured__slider">
-                <% @featured_slides.each do |slide| %>
-                  <div class="main-featured__slide">
-                    <div class="main-featured__inner">
-                      <%= link_to '', slide.url, :class => 'main-featured__img', style: "background-image:url(#{slide.bg_img_url})" %>
-                      <%= link_to slide.title, slide.url, :class => 'main-featured__title' %>
-                      <% if slide.labels.any? %>
-                        <div class="main-featured__labels">
-                          <% slide.labels.each do |label| %>
-                            <%= link_to label.name, label.url, :class => "main-featured__label #{label.sqheme_color}--sqheme" %>
-                          <% end %>
-                        </div>
-                      <% end %>
-                      <span class="main-featured__place"><%= slide.place %></span>
-                      <% if slide.start_date.present? || slide.end_date.present? %>
-                        <div class="event-date">
-                          <% if slide.start_date.present? %>
-                            <%= render partial: 'shared/event_date_item', locals: { the_date: slide.start_date } %>
-                          <% end %>
-                          <% if slide.end_date.present? %>
-                            <%= render partial: 'shared/event_date_item', locals: { the_date: slide.end_date } %>
-                          <% end %>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="main-top-events">
-            <div class="container-fluid">
-              <h2>Top events</h2>
-              <div class="row">
-                <% toppest_event = @top_events.first %>
-                <div class="col-md-6 main-top-event__col">
-                  <div class="main-top-event main-top-event--full-h">
-                    <%= link_to toppest_event.url, :class => 'main-top-event__inner', style: "background-image:url(#{toppest_event.bg_img_url})" do %>
-                      <% if toppest_event.start_date.present? || toppest_event.end_date.present? %>
-                        <div class="event-date">
-                          <% if toppest_event.start_date.present? %>
-                            <%= render partial: 'shared/event_date_item', locals: { the_date: toppest_event.start_date } %>
-                          <% end %>
-                          <% if toppest_event.end_date.present? %>
-                            <%= render partial: 'shared/event_date_item', locals: { the_date: toppest_event.end_date } %>
-                          <% end %>
-                        </div>
-                      <% end %>
-                      <div class="main-top-event__info">
-                        <span><%= toppest_event.title %></span>
-                        <% if toppest_event.label.present? %>
-                          <div class="main-top-event__label"><%= toppest_event.label %></div>
-                        <% end %>
-                        <div class="main-top-event__place"><%= toppest_event.place %></div>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-                <div class="col-md-6 main-top-event__col">
-                  <% @top_events[1..3].each do |event| %>
-                    <div class="col-md-12 main-top-event main-top-event--small-h">
-                      <%= link_to event.url, :class => 'main-top-event__inner', style: "background-image:url(#{event.bg_img_url})" do %>
-                        <% if event.start_date.present? || event.end_date.present? %>
-                          <div class="event-date">
-                            <% if event.start_date.present? %>
-                              <%= render partial: 'shared/event_date_item', locals: { the_date: event.start_date } %>
-                            <% end %>
-                            <% if event.end_date.present? %>
-                              <%= render partial: 'shared/event_date_item', locals: { the_date: event.end_date } %>
-                            <% end %>
-                          </div>
-                        <% end %>
-                        <div class="main-top-event__info">
-                          <span><%= event.title %></span>
-                          <% if event.label.present? %>
-                            <div class="main-top-event__label"><%= event.label %></div>
-                          <% end %>
-                          <div class="main-top-event__place"><%= event.place %></div>
-                        </div>
-                      <% end %>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main-popular-events">
-            <div class="container-fluid">
-              <h2>Popular Events</h2>
-              <div class="main-popular-events__slider">
-                <% @popular_events.each do |event| %>
-                  <div class="main-popular-events__slide">
-                    <div class="main-popular-events__inner">
-                      <%= link_to '', event.url, :class => 'main-popular-events__img', style: "background-image:url(#{event.bg_img_url})" %>
-                      <%= link_to event.title, event.url, :class => 'main-popular-events__title' %>
-                      <% if event.labels.any? %>
-                        <div class="main-popular-events__labels">
-                          <% event.labels.each do |label| %>
-                            <%= link_to label.name, label.url, :class => "main-popular-events__label #{label.sqheme_color}--sqheme" %>
-                          <% end %>
-                        </div>
-                      <% end %>
-                      <span class="main-popular-events__place"><%= event.place %></span>
-                      <% if event.start_date.present? || event.end_date.present? %>
-                        <div class="event-date">
-                          <% if event.start_date.present? %>
-                            <%= render partial: 'shared/event_date_item', locals: { the_date: event.start_date } %>
-                          <% end %>
-                          <% if event.end_date.present? %>
-                            <%= render partial: 'shared/event_date_item', locals: { the_date: event.end_date } %>
-                          <% end %>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="main-services">
-            <div class="container-fluid">
-              <h2>Hospitality & Concierge services</h2>
-              <div class="main-services__msg">
-                Ticketfinders International also offers bespoke services to till the needs of the most decerning costumers, whether access to the most exlusive events or drivers to the theatre please contact one of our specialist with your request!
-              </div>
-              <div class="main-services__form">
-                <form action="#" method="post">
-                  <input type="text" placeholder="Submit email">
-                  <input type="submit" value="Submit">
-                </form>
-              </div>
-              <h3>#Popular Events</h3>
-              <div class="main-services__slider">
-                <% @main_services.each do |serv| %>
-                  <div class="main-services__item">
-                    <%= link_to serv.url do %>
-                      <div class="main-services__img" style="background:url('<%= serv.bg_img_url %>')"></div>
-                      <%= serv.name %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
-              <div class="main-benefits">
-                <div class="main-benefits__item">
-                  <div class="main-benefits__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="66.594" height="79.97" viewBox="0 0 66.594 79.97">
-                      <path  d="M478.853,3816.2a1.144,1.144,0,0,1-.582.26,1.4,1.4,0,0,1-.2.02,1.258,1.258,0,0,1-.788-0.28,84.073,84.073,0,0,1-32.512-66.14v-8.94a1.257,1.257,0,0,1,1.059-1.24l11.649-1.79a134.76,134.76,0,0,1,41.183,0l11.65,1.79a1.257,1.257,0,0,1,1.059,1.24v8.94A84.056,84.056,0,0,1,478.853,3816.2Zm30.017-74.01-10.591-1.63a132.327,132.327,0,0,0-40.421,0l-10.59,1.63v7.87a81.554,81.554,0,0,0,30.8,63.58,81.554,81.554,0,0,0,30.8-63.58v-7.87Zm-27.761,58.95a1.264,1.264,0,0,1-.9.38,1.245,1.245,0,0,1-.9-2.11c20.213-21.15,18.9-47.94,18.886-48.2a1.249,1.249,0,0,1,1.174-1.32,1.263,1.263,0,0,1,1.32,1.17C500.7,3751.34,502.1,3779.18,481.109,3801.14Z" transform="translate(-444.781 -3736.5)"/>
-                    </svg>
-                  </div>
-                  <div class="main-benefits__title">Trust</div>
-                  All tickets are<br> 100% Guaranteed
-                </div>
-                <div class="main-benefits__item">
-                  <div class="main-benefits__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="55.312" height="80.09" viewBox="0 0 55.312 80.09">
-                      <path d="M824.641,3811.29a3.818,3.818,0,0,1-2.725,1.13h-0.569a1.25,1.25,0,1,1,0-2.5h0.569a1.328,1.328,0,0,0,.956-0.4,1.35,1.35,0,0,0,.4-0.95v-47.62H807.361a1.237,1.237,0,0,1-.889-0.37,1.262,1.262,0,0,1-.362-0.89c0.055-5.14.108-13.05,0.061-15.9h-31.83a1.378,1.378,0,0,0-1.372,1.38v63.19a1.564,1.564,0,0,0,1.556,1.56h16.441a1.25,1.25,0,1,1,0,2.5H774.525a4.063,4.063,0,0,1-4.056-4.06v-63.19a3.88,3.88,0,0,1,3.872-3.88h32.6c0.352-.21.659-0.14,1.435,0.54l0.01-.01s0,0,0,.01l0.026,0.03c0.552,0.49,1.338,1.27,2.529,2.46,1.611,1.61,3.756,3.76,5.9,5.9,4.286,4.3,8.567,8.6,8.567,8.6a1.152,1.152,0,0,1,.242.36c0.016,0.03.024,0.07,0.037,0.1a1.318,1.318,0,0,1,.07.35,0.572,0.572,0,0,1,.014.07v48.87A3.886,3.886,0,0,1,824.641,3811.29Zm-15.948-65.68c0.019,2.35,0,6.26-.069,12.84h12.887C816.98,3753.9,811.617,3748.53,808.693,3745.61Zm-11.645,57.33a12.493,12.493,0,1,1,18.889-.35,1.222,1.222,0,0,1,.221.42l4.2,14.39a1.238,1.238,0,0,1-.387,1.3,1.271,1.271,0,0,1-1.345.19l-4.25-2-2.679,3.85a1.255,1.255,0,0,1-1.027.54,1.577,1.577,0,0,1-.215-0.02,1.259,1.259,0,0,1-.992-0.91l-2.868-10.7-2.869,10.7a1.248,1.248,0,0,1-1,.91,1.52,1.52,0,0,1-.212.02,1.253,1.253,0,0,1-1.029-.54l-2.673-3.88-4.252,2.02a1.246,1.246,0,0,1-1.736-1.48Zm14.131,14.16,1.746-2.51a1.252,1.252,0,0,1,1.559-.42l2.7,1.27-3.2-10.97a12.4,12.4,0,0,1-5.533,2.43Zm5.273-22.51a10.12,10.12,0,1,0-10.119,10.12A10.129,10.129,0,0,0,816.452,3794.59Zm-17.747,19.56a1.237,1.237,0,0,1,1.565.42l1.741,2.52,2.711-10.11a12.486,12.486,0,0,1-5.608-2.19l-3.105,10.64Zm7.628-25.8a6.245,6.245,0,1,1-6.251,6.24A6.242,6.242,0,0,1,806.333,3788.35Zm0,9.99a3.745,3.745,0,1,0-3.75-3.75A3.753,3.753,0,0,0,806.333,3798.34Z" transform="translate(-770.469 -3741.19)"/>
-                    </svg>
-                  </div>
-                  <div class="main-benefits__title">Longevity</div>
-                  Establish over<br> 40years
-                </div>
-                <div class="main-benefits__item">
-                  <div class="main-benefits__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" class="svg-anim">
-                      <path d="M1134.35,3783.64a10.56,10.56,0,0,0,1.1-9.57l5.36-16.53a1.251,1.251,0,0,0-2-1.34l-13.09,11.13a10.158,10.158,0,0,0-8.33,4.58,10.583,10.583,0,0,0-1.11,9.58l-5.35,16.53a1.252,1.252,0,0,0,.49,1.42,1.3,1.3,0,0,0,.7.21,1.232,1.232,0,0,0,.81-0.3l13.08-11.13A10.15,10.15,0,0,0,1134.35,3783.64Zm-8.75,2.08a1.193,1.193,0,0,0-.85.29l-10.08,8.58,4.13-12.76a1.27,1.27,0,0,0-.04-0.88,8.077,8.077,0,0,1,.71-7.65,7.669,7.669,0,0,1,6.4-3.47c0.09,0,.18.01,0.27,0.01a1.2,1.2,0,0,0,.85-0.3l10.08-8.58-4.13,12.77a1.243,1.243,0,0,0,.03.87,8.065,8.065,0,0,1-.7,7.66A7.708,7.708,0,0,1,1125.6,3785.72Zm23.1,2.31a1.161,1.161,0,0,0-1.6.4c-6.24,10.41-14.09,11.93-14.2,11.95a1.164,1.164,0,0,0-.95,1.34,1.177,1.177,0,0,0,1.15.98,1.355,1.355,0,0,0,.2-0.02c0.36-.06,8.97-1.64,15.8-13.05A1.15,1.15,0,0,0,1148.7,3788.03Zm-22.83-50.25a40,40,0,1,0,40,40A40,40,0,0,0,1125.87,3737.78Zm0,77.5a37.5,37.5,0,1,1,37.5-37.5A37.539,37.539,0,0,1,1125.87,3815.28Zm0-71.25a33.75,33.75,0,1,0,33.75,33.75A33.75,33.75,0,0,0,1125.87,3744.03Zm0,65a31.25,31.25,0,1,1,31.25-31.25A31.287,31.287,0,0,1,1125.87,3809.03Z" transform="translate(-1085.88 -3737.78)"/>
-                    </svg>
-                  </div>
-                  <div class="main-benefits__title">Security</div>
-                  Tickets are securely<br> shippped around the world
-                </div>
-              </div>
-            </div>
+            <%= link_to 'Show Event', slide.event_url, :class => 'btn' %>
           </div>
         </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<div class="main-cathegories">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-sm-6 main-cathegories__item">
+        <div class="main-cathegories__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="61.937" height="66.843" viewBox="0 0 61.937 66.843" class="cvg-anim">
+            <path d="M307.6,684.077a1.006,1.006,0,0,0-1.373.369L281.082,729.2a1,1,0,0,0,.367,1.373l34.808,20.1a1.007,1.007,0,0,0,1.373-.368l25.145-44.75a1.006,1.006,0,0,0-.368-1.373l-34.807-20.1h0Zm-0.135,2.244,8.7,5.024-1.508,2.612a1,1,0,0,0,.368,1.372l13.923,8.039a1,1,0,0,0,1.372-.369l1.508-2.611,8.7,5.024-10.064,18.627-8.751-5.052A9.041,9.041,0,0,0,306.153,710l-8.752-5.053Zm10.442,6.029,12.183,7.033-1,1.741L316.9,694.091Zm-0.957,16.921a7.016,7.016,0,0,1,3.014,8.7l-12.058-6.961A7.016,7.016,0,0,1,316.95,709.271ZM296.4,706.689l8.752,5.053a9.041,9.041,0,0,0,15.564,8.986l8.751,5.052-13.071,22.64-8.7-5.024,1.508-2.611a1,1,0,0,0-.368-1.373l-13.923-8.038a1,1,0,0,0-1.373.368l-1.507,2.611-8.7-5.024,13.071-22.64h0Zm10.5,6.065,12.057,6.962A7.033,7.033,0,0,1,306.9,712.754Zm-12.129,20.863,12.183,7.034-1,1.741-12.183-7.034Z" transform="translate(-280.969 -683.938)"/>
+          </svg>
+        </div>
+        <h3>Sport</h3>
+        We have access to the best seats for all the <%= link_to 'key matchups', static_sport_path %> this season
+      </div>
+      <div class="col-lg-3 col-sm-6 main-cathegories__item">
+        <div class="main-cathegories__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="58.157" height="53.406" viewBox="0 0 58.157 53.406" class="cvg-anim">
+            <path d="M669.286,692H613.174a1.027,1.027,0,0,0-1.028,1.027v51.341a1.027,1.027,0,0,0,1.028,1.027h56.112a1.027,1.027,0,0,0,1.027-1.027V693.027A1.027,1.027,0,0,0,669.286,692ZM614.2,694.054h54.057V700.7a8.426,8.426,0,0,1-9.17,0v-4.937a1.028,1.028,0,0,0-2.055,0V700.7a8.428,8.428,0,0,1-9.167,0V697.41a1.028,1.028,0,0,0-2.055,0V700.7a8.427,8.427,0,0,1-9.166,0V697.41a1.028,1.028,0,0,0-2.056,0V700.7a8.428,8.428,0,0,1-9.167,0v-4.937a1.028,1.028,0,0,0-2.055,0V700.7a8.431,8.431,0,0,1-9.166,0v-6.649h0Zm51.231,31.334c-2.261-4.809-3.636-12.786-3.713-21.455a10.473,10.473,0,0,0,6.539-.876v26.3c-4-.383-7.751-3-10.658-7.469a34.278,34.278,0,0,1-5.02-17.771,10.482,10.482,0,0,0,5.482-1.627,10.591,10.591,0,0,0,1.6.828c0.015,9.194,1.474,17.763,3.91,22.946a1.029,1.029,0,0,0,.931.591,1.018,1.018,0,0,0,.437-0.1A1.028,1.028,0,0,0,665.432,725.388ZM614.2,703.058a10.47,10.47,0,0,0,6.539.874c-0.076,8.67-1.452,16.647-3.712,21.456a1.028,1.028,0,1,0,1.86.874c2.436-5.183,3.895-13.753,3.911-22.947a10.618,10.618,0,0,0,1.6-.828,10.482,10.482,0,0,0,5.483,1.627,34.291,34.291,0,0,1-5.019,17.772c-2.908,4.468-6.66,7.086-10.658,7.469v-26.3h0Zm4.383,40.283h0a36.263,36.263,0,0,0-.982-7.932,1.028,1.028,0,0,0-1.993.5,34.664,34.664,0,0,1,.919,7.429H614.2V731.566a7.455,7.455,0,0,1,4.525,3.508,16.774,16.774,0,0,1,2.465,8.267h-2.607Zm35.526,0H628.349v-2.166H654.11v2.166h0Zm2.056,0v-3.193a1.028,1.028,0,0,0-1.028-1.028H627.322a1.028,1.028,0,0,0-1.028,1.028v3.193h-3.048a18.893,18.893,0,0,0-2.8-9.388,11.173,11.173,0,0,0-3.046-3.2c3.468-1.186,6.636-3.835,9.18-7.743a36.437,36.437,0,0,0,5.356-19.072,10.486,10.486,0,0,0,3.678-1.448,10.469,10.469,0,0,0,11.223,0,10.51,10.51,0,0,0,3.681,1.449,36.436,36.436,0,0,0,5.356,19.071c2.544,3.908,5.712,6.557,9.181,7.743a11.163,11.163,0,0,0-3.047,3.2,18.907,18.907,0,0,0-2.8,9.388h-3.048Zm12.092,0h-2.327a34.664,34.664,0,0,1,.919-7.429,1.028,1.028,0,0,0-1.993-.5,36.263,36.263,0,0,0-.982,7.932h-2.607a16.788,16.788,0,0,1,2.465-8.267,7.463,7.463,0,0,1,4.525-3.508v11.775h0Z" transform="translate(-612.156 -692)"/>
+          </svg>
+        </div>
+        <h3>Theater</h3>
+        The best seats in the house for all
+        <%= link_to_if @main_categories['Theater'].present?, 'the hottest shows', category_path(@main_categories['Theater']) %>
+      </div>
+      <div class="col-lg-3 col-sm-6 main-cathegories__item">
+        <div class="main-cathegories__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="58.312" height="58.313" viewBox="0 0 58.312 58.313" class="cvg-anim">
+            <path d="M979.033,709.441c-4.782,0-9.191-3.521-12.75-10.181a17.5,17.5,0,0,0-32.942,8.237v20.415a0.972,0.972,0,0,0,.972.972h4.861v8.75a0.972,0.972,0,0,0,.972.972h3.889a0.972,0.972,0,0,0,.972-0.972v-8.75h1.944v8.75a0.973,0.973,0,0,0,.973.972h3.888a0.972,0.972,0,0,0,.972-0.972v-8.75h1.945v8.75a0.972,0.972,0,0,0,.972.972h3.889a0.972,0.972,0,0,0,.972-0.972v-8.75h3.888v17.5h-5.833v-4.86a0.972,0.972,0,1,0-1.944,0v4.86H950.84v-4.86a0.972,0.972,0,1,0-1.944,0v4.86h-5.833v-4.86a0.972,0.972,0,1,0-1.944,0v4.86h-5.833V731.8a0.973,0.973,0,0,0-1.945,0v15.555a0.972,0.972,0,0,0,.972.972H990.7a0.972,0.972,0,0,0,.972-0.972V722.079A12.652,12.652,0,0,0,979.033,709.441Zm-35.97,27.22h-1.944v-7.777h1.944v7.777h0Zm7.777,0H948.9v-7.777h1.944v7.777Zm7.778,0h-1.945v-7.777h1.945v7.777Zm31.109,9.722h-7.778v-4.86a0.972,0.972,0,1,0-1.944,0v4.86h-5.833v-4.86a0.972,0.972,0,1,0-1.944,0v4.86H966.4v-17.5h3.889v8.75a0.972,0.972,0,0,0,.972.972h3.888a0.972,0.972,0,0,0,.972-0.972v-8.75h1.945v8.75a0.972,0.972,0,0,0,.972.972h3.889a0.972,0.972,0,0,0,.972-0.972v-8.75h2.916a0.972,0.972,0,0,0,0-1.944H935.285V707.5a15.557,15.557,0,0,1,29.283-7.321c4.951,9.265,10.6,11.209,14.465,11.209a10.707,10.707,0,0,1,10.694,10.694v24.3h0Zm-17.5-9.722v-7.777h1.944v7.777h-1.944Zm7.777,0v-7.777h1.945v7.777h-1.945Z" transform="translate(-933.344 -690)"/>
+          </svg>
+        </div>
+        <h3>Classical</h3>
+        Access to hard-to-find tickets for the year's
+        <%= link_to_if @main_categories['Classical'].present?, 'best shows', category_path(@main_categories['Classical']) %>
+      </div>
+      <div class="col-lg-3 col-sm-6 main-cathegories__item">
+        <div class="main-cathegories__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="54.16" height="54.156" viewBox="0 0 54.16 54.156" class="cvg-anim">
+            <path d="M1312.13,702.867a13.821,13.821,0,0,0-18.85-.628,3.336,3.336,0,0,0-3.9,5.317l0.11,0.106a13.813,13.813,0,0,0-.71,7.422L1262.27,744.9a1.068,1.068,0,0,0,.05,1.476l6.3,6.307a1.08,1.08,0,0,0,1.48.044l29.82-26.506a13.774,13.774,0,0,0,2.43.217,13.923,13.923,0,0,0,4.99-.921l0.1,0.1a3.34,3.34,0,0,0,5.7-2.359,3.271,3.271,0,0,0-.38-1.542A13.825,13.825,0,0,0,1312.13,702.867Zm-42.7,47.577-4.87-4.871,1.52-1.717,5.06,5.063Zm3.33-2.957-5.25-5.242,22.47-25.278,8.05,8.049Zm27.37-23.415-9.2-9.2a11.8,11.8,0,0,1,.25-5.509l14.46,14.46A11.775,11.775,0,0,1,1300.13,724.072Zm10.51,0.027a1.178,1.178,0,0,1-1.67,0l-18.07-18.066a1.187,1.187,0,0,1,0-1.673,1.181,1.181,0,0,1,1.67,0l18.07,18.066A1.175,1.175,0,0,1,1310.64,724.1Zm0.7-4.02-16.42-16.415A11.66,11.66,0,0,1,1311.34,720.079Z" transform="translate(-1262.03 -698.844)"/>
+          </svg>
+        </div>
+        <h3>Concerts</h3>
+        We have access to hard-to-find tickets for
+        <%= link_to_if @main_categories['Concerts'].present?, "the year's best shows", category_path(@main_categories['Concerts']) %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-featured">
+  <div class="container-fluid">
+    <h2>Featured Events</h2>
+    <div class="main-featured__slider">
+      <% @featured_slides.each do |slide| %>
+        <div class="main-featured__slide">
+          <div class="main-featured__inner">
+            <%= link_to '', slide.url, :class => 'main-featured__img', style: "background-image:url(#{slide.bg_img_url})" %>
+            <%= link_to slide.title, slide.url, :class => 'main-featured__title' %>
+            <% if slide.labels.any? %>
+              <div class="main-featured__labels">
+                <% slide.labels.each do |label| %>
+                  <%= link_to label.name, label.url, :class => "main-featured__label #{label.sqheme_color}--sqheme" %>
+                <% end %>
+              </div>
+            <% end %>
+            <span class="main-featured__place"><%= slide.place %></span>
+            <% if slide.start_date.present? || slide.end_date.present? %>
+              <div class="event-date">
+                <% if slide.start_date.present? %>
+                  <%= render partial: 'shared/event_date_item', locals: { the_date: slide.start_date } %>
+                <% end %>
+                <% if slide.end_date.present? %>
+                  <%= render partial: 'shared/event_date_item', locals: { the_date: slide.end_date } %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="main-top-events">
+  <div class="container-fluid">
+    <h2>Top events</h2>
+    <div class="row">
+      <% toppest_event = @top_events.first %>
+      <div class="col-md-6 main-top-event__col">
+        <div class="main-top-event main-top-event--full-h">
+          <%= link_to toppest_event.url, :class => 'main-top-event__inner', style: "background-image:url(#{toppest_event.bg_img_url})" do %>
+            <% if toppest_event.start_date.present? || toppest_event.end_date.present? %>
+              <div class="event-date">
+                <% if toppest_event.start_date.present? %>
+                  <%= render partial: 'shared/event_date_item', locals: { the_date: toppest_event.start_date } %>
+                <% end %>
+                <% if toppest_event.end_date.present? %>
+                  <%= render partial: 'shared/event_date_item', locals: { the_date: toppest_event.end_date } %>
+                <% end %>
+              </div>
+            <% end %>
+            <div class="main-top-event__info">
+              <span><%= toppest_event.title %></span>
+              <% if toppest_event.label.present? %>
+                <div class="main-top-event__label"><%= toppest_event.label %></div>
+              <% end %>
+              <div class="main-top-event__place"><%= toppest_event.place %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-6 main-top-event__col">
+        <% @top_events[1..3].each do |event| %>
+          <div class="col-md-12 main-top-event main-top-event--small-h">
+            <%= link_to event.url, :class => 'main-top-event__inner', style: "background-image:url(#{event.bg_img_url})" do %>
+              <% if event.start_date.present? || event.end_date.present? %>
+                <div class="event-date">
+                  <% if event.start_date.present? %>
+                    <%= render partial: 'shared/event_date_item', locals: { the_date: event.start_date } %>
+                  <% end %>
+                  <% if event.end_date.present? %>
+                    <%= render partial: 'shared/event_date_item', locals: { the_date: event.end_date } %>
+                  <% end %>
+                </div>
+              <% end %>
+              <div class="main-top-event__info">
+                <span><%= event.title %></span>
+                <% if event.label.present? %>
+                  <div class="main-top-event__label"><%= event.label %></div>
+                <% end %>
+                <div class="main-top-event__place"><%= event.place %></div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-popular-events">
+  <div class="container-fluid">
+    <h2>Popular Events</h2>
+    <div class="main-popular-events__slider">
+      <% @popular_events.each do |event| %>
+        <div class="main-popular-events__slide">
+          <div class="main-popular-events__inner">
+            <%= link_to '', event.url, :class => 'main-popular-events__img', style: "background-image:url(#{event.bg_img_url})" %>
+            <%= link_to event.title, event.url, :class => 'main-popular-events__title' %>
+            <% if event.labels.any? %>
+              <div class="main-popular-events__labels">
+                <% event.labels.each do |label| %>
+                  <%= link_to label.name, label.url, :class => "main-popular-events__label #{label.sqheme_color}--sqheme" %>
+                <% end %>
+              </div>
+            <% end %>
+            <span class="main-popular-events__place"><%= event.place %></span>
+            <% if event.start_date.present? || event.end_date.present? %>
+              <div class="event-date">
+                <% if event.start_date.present? %>
+                  <%= render partial: 'shared/event_date_item', locals: { the_date: event.start_date } %>
+                <% end %>
+                <% if event.end_date.present? %>
+                  <%= render partial: 'shared/event_date_item', locals: { the_date: event.end_date } %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="main-services">
+  <div class="container-fluid">
+    <h2>Hospitality & Concierge services</h2>
+    <div class="main-services__msg">
+      Ticketfinders International also offers bespoke services to till the needs of the most decerning costumers, whether access to the most exlusive events or drivers to the theatre please contact one of our specialist with your request!
+    </div>
+    <div class="main-services__form">
+      <form action="#" method="post">
+        <input type="text" placeholder="Submit email">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <h3>#Popular Events</h3>
+    <div class="main-services__slider">
+      <% @main_services.each do |serv| %>
+        <div class="main-services__item">
+          <%= link_to serv.url do %>
+            <div class="main-services__img" style="background:url('<%= serv.bg_img_url %>')"></div>
+            <%= serv.name %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="main-benefits">
+      <div class="main-benefits__item">
+        <div class="main-benefits__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="66.594" height="79.97" viewBox="0 0 66.594 79.97">
+            <path  d="M478.853,3816.2a1.144,1.144,0,0,1-.582.26,1.4,1.4,0,0,1-.2.02,1.258,1.258,0,0,1-.788-0.28,84.073,84.073,0,0,1-32.512-66.14v-8.94a1.257,1.257,0,0,1,1.059-1.24l11.649-1.79a134.76,134.76,0,0,1,41.183,0l11.65,1.79a1.257,1.257,0,0,1,1.059,1.24v8.94A84.056,84.056,0,0,1,478.853,3816.2Zm30.017-74.01-10.591-1.63a132.327,132.327,0,0,0-40.421,0l-10.59,1.63v7.87a81.554,81.554,0,0,0,30.8,63.58,81.554,81.554,0,0,0,30.8-63.58v-7.87Zm-27.761,58.95a1.264,1.264,0,0,1-.9.38,1.245,1.245,0,0,1-.9-2.11c20.213-21.15,18.9-47.94,18.886-48.2a1.249,1.249,0,0,1,1.174-1.32,1.263,1.263,0,0,1,1.32,1.17C500.7,3751.34,502.1,3779.18,481.109,3801.14Z" transform="translate(-444.781 -3736.5)"/>
+          </svg>
+        </div>
+        <div class="main-benefits__title">Trust</div>
+        All tickets are<br> 100% Guaranteed
+      </div>
+      <div class="main-benefits__item">
+        <div class="main-benefits__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="55.312" height="80.09" viewBox="0 0 55.312 80.09">
+            <path d="M824.641,3811.29a3.818,3.818,0,0,1-2.725,1.13h-0.569a1.25,1.25,0,1,1,0-2.5h0.569a1.328,1.328,0,0,0,.956-0.4,1.35,1.35,0,0,0,.4-0.95v-47.62H807.361a1.237,1.237,0,0,1-.889-0.37,1.262,1.262,0,0,1-.362-0.89c0.055-5.14.108-13.05,0.061-15.9h-31.83a1.378,1.378,0,0,0-1.372,1.38v63.19a1.564,1.564,0,0,0,1.556,1.56h16.441a1.25,1.25,0,1,1,0,2.5H774.525a4.063,4.063,0,0,1-4.056-4.06v-63.19a3.88,3.88,0,0,1,3.872-3.88h32.6c0.352-.21.659-0.14,1.435,0.54l0.01-.01s0,0,0,.01l0.026,0.03c0.552,0.49,1.338,1.27,2.529,2.46,1.611,1.61,3.756,3.76,5.9,5.9,4.286,4.3,8.567,8.6,8.567,8.6a1.152,1.152,0,0,1,.242.36c0.016,0.03.024,0.07,0.037,0.1a1.318,1.318,0,0,1,.07.35,0.572,0.572,0,0,1,.014.07v48.87A3.886,3.886,0,0,1,824.641,3811.29Zm-15.948-65.68c0.019,2.35,0,6.26-.069,12.84h12.887C816.98,3753.9,811.617,3748.53,808.693,3745.61Zm-11.645,57.33a12.493,12.493,0,1,1,18.889-.35,1.222,1.222,0,0,1,.221.42l4.2,14.39a1.238,1.238,0,0,1-.387,1.3,1.271,1.271,0,0,1-1.345.19l-4.25-2-2.679,3.85a1.255,1.255,0,0,1-1.027.54,1.577,1.577,0,0,1-.215-0.02,1.259,1.259,0,0,1-.992-0.91l-2.868-10.7-2.869,10.7a1.248,1.248,0,0,1-1,.91,1.52,1.52,0,0,1-.212.02,1.253,1.253,0,0,1-1.029-.54l-2.673-3.88-4.252,2.02a1.246,1.246,0,0,1-1.736-1.48Zm14.131,14.16,1.746-2.51a1.252,1.252,0,0,1,1.559-.42l2.7,1.27-3.2-10.97a12.4,12.4,0,0,1-5.533,2.43Zm5.273-22.51a10.12,10.12,0,1,0-10.119,10.12A10.129,10.129,0,0,0,816.452,3794.59Zm-17.747,19.56a1.237,1.237,0,0,1,1.565.42l1.741,2.52,2.711-10.11a12.486,12.486,0,0,1-5.608-2.19l-3.105,10.64Zm7.628-25.8a6.245,6.245,0,1,1-6.251,6.24A6.242,6.242,0,0,1,806.333,3788.35Zm0,9.99a3.745,3.745,0,1,0-3.75-3.75A3.753,3.753,0,0,0,806.333,3798.34Z" transform="translate(-770.469 -3741.19)"/>
+          </svg>
+        </div>
+        <div class="main-benefits__title">Longevity</div>
+        Establish over<br> 40years
+      </div>
+      <div class="main-benefits__item">
+        <div class="main-benefits__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" class="svg-anim">
+            <path d="M1134.35,3783.64a10.56,10.56,0,0,0,1.1-9.57l5.36-16.53a1.251,1.251,0,0,0-2-1.34l-13.09,11.13a10.158,10.158,0,0,0-8.33,4.58,10.583,10.583,0,0,0-1.11,9.58l-5.35,16.53a1.252,1.252,0,0,0,.49,1.42,1.3,1.3,0,0,0,.7.21,1.232,1.232,0,0,0,.81-0.3l13.08-11.13A10.15,10.15,0,0,0,1134.35,3783.64Zm-8.75,2.08a1.193,1.193,0,0,0-.85.29l-10.08,8.58,4.13-12.76a1.27,1.27,0,0,0-.04-0.88,8.077,8.077,0,0,1,.71-7.65,7.669,7.669,0,0,1,6.4-3.47c0.09,0,.18.01,0.27,0.01a1.2,1.2,0,0,0,.85-0.3l10.08-8.58-4.13,12.77a1.243,1.243,0,0,0,.03.87,8.065,8.065,0,0,1-.7,7.66A7.708,7.708,0,0,1,1125.6,3785.72Zm23.1,2.31a1.161,1.161,0,0,0-1.6.4c-6.24,10.41-14.09,11.93-14.2,11.95a1.164,1.164,0,0,0-.95,1.34,1.177,1.177,0,0,0,1.15.98,1.355,1.355,0,0,0,.2-0.02c0.36-.06,8.97-1.64,15.8-13.05A1.15,1.15,0,0,0,1148.7,3788.03Zm-22.83-50.25a40,40,0,1,0,40,40A40,40,0,0,0,1125.87,3737.78Zm0,77.5a37.5,37.5,0,1,1,37.5-37.5A37.539,37.539,0,0,1,1125.87,3815.28Zm0-71.25a33.75,33.75,0,1,0,33.75,33.75A33.75,33.75,0,0,0,1125.87,3744.03Zm0,65a31.25,31.25,0,1,1,31.25-31.25A31.287,31.287,0,0,1,1125.87,3809.03Z" transform="translate(-1085.88 -3737.78)"/>
+          </svg>
+        </div>
+        <div class="main-benefits__title">Security</div>
+        Tickets are securely<br> shippped around the world
+      </div>
+    </div>
+  </div>
+</div>
