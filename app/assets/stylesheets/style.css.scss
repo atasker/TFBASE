@@ -890,6 +890,8 @@ input[type="submit"] {
     background: #ffea5a; }
   input[type="submit"]:active {
     background: #eed219; }
+  input[type="submit"]:disabled {
+    background: #ccc; }
 
 input[type="reset"] {
   background: transparent;
@@ -2699,6 +2701,10 @@ a.breadcrumbs__item:after {
   .popup-send__form input[type="reset"]:hover {
     text-decoration: underline; }
 
+.popup-send__success-msg {
+  display: none;
+  color: #96ec89; }
+
 .input-wrap {
   margin-bottom: 20px; }
 
@@ -2711,11 +2717,7 @@ a.breadcrumbs__item:after {
   line-height: 1.35;
   display: none; }
 
-.popup-send__question {
-  margin-bottom: 10px; }
-
-.input-wrap--question label {
-  margin-top: 48px; }
+.popup-send__question { margin: 0 0 10px 101px; }
 
 .input-wrap--textarea label {
   margin-top: 0; }
@@ -3325,6 +3327,8 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     padding: 20px 30px; }
   .popup-send__form .submit-wrap {
     padding-left: 0; }
+  .popup-send__question {
+    margin-left: 0; }
   .main-benefits__item {
     margin-right: 0;
     width: 100%;

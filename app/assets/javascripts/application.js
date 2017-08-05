@@ -13,5 +13,6 @@
 //= require libs.min
 //= require jquery_ujs
 //= require interface
+//= require feedback_popup
 //= require tickets
 // do not require_tree .
