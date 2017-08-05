@@ -1,74 +1,56 @@
-<div class="row">&nbsp;</div>
-
-<div class="row">
-  <h4 class="gotham-regular">About us</h4>
-</div>
-
-<div class="row">&nbsp;</div>
-
-<div class="row">
-  <div class="small-10 columns no-pad">
-
-
-    <p class="gotham-regular">
-    We at Ticketfinders International LLC have forty-four years experience of the secondary ticket market.</p>
-
-    <p class="gotham-regular">
-    Ticketfinders International is a truly international ticket brokerage, specializing in sourcing tickets throughout Europe and the World with particular expertise in finding hard to get and sold out events.  Whether for personal or corporate clients, Ticketfinders International aims to offer the best personalized experience for each one of our patrons, with particular detail taken to find the very best tickets available at the best possible price.
-    </p>
-
-    <div class="row">&nbsp;</div>
-    <h5 class="gotham-light">Testimonials</h5>
-    <div class="row">&nbsp;</div>
-
-    <ul class="bxslider">
-      <li>
-        <blockquote class="gotham-regular">
-        “Thank you for your help, and for great service. We had a great evening:)
-        Keep up the good work!”
-        <br />
-        <span class="gotham-bold">Kai U. (Oslo, Norway)</span>
-        </blockquote>
-      </li>
-      <li>
-        <blockquote class="gotham-regular">
-        “Everything went well with your tickets. I'll definitely recommend your site to others for those hard to get European events. Regards, Carlos”
-        <br />
-        <span class="gotham-bold">Carlos G. (USA)</span>
-        </blockquote>
-      </li>
-      <li>
-        <blockquote class="gotham-regular">
-        “I just wanted to tell you how pleased I was with your services.  The seats for both events were top notch, as promised, and I can't thank you enough.  Wimbledon especially was magnificent, really the highlight of the entire trip for me.”
-        <br />
-        <span class="gotham-bold">Kevin B. (San Antonio, TX, USA)</span>
-        </blockquote>
-      </li>
-      <li>
-        <blockquote class="gotham-regular">
-        <p>“I have used Ticketfinders consistently over the years for tickets.</p>
-        The team at Ticketfinders always find the best seats at the best prices and they deliver always on time to the best location to ensure a great experience, they have never let me down, there is no match when it comes to Ticketfinders against other agencies, Ticketfinders always come out on top, hence I will continue to use their services and highly recommend them”
-        <br />
-        <span class="gotham-bold">Simon C (Monaco, Monte-Carlo)</span>
-        </blockquote>
-      </li>
-    </ul>
-
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>About us</h1>
+    </div>
   </div>
 </div>
 
-<div class="row">&nbsp;</div>
+<div class="container-fluid">
+  <p>We at Ticketfinders International LLC have forty-four years experience of the secondary ticket market.</p>
+  <p>Ticketfinders International is a truly international ticket brokerage, specializing in sourcing tickets throughout Europe and the World with particular expertise in finding hard to get and sold out events.  Whether for personal or corporate clients, Ticketfinders International aims to offer the best personalized experience for each one of our patrons, with particular detail taken to find the very best tickets available at the best possible price.</p>
+  <h4>Testimonials</h4>
+  <ul class="bxslider">
+    <li>
+      <blockquote>
+        <p>“Thank you for your help, and for great service. We had a great evening:) Keep up the good work!”</p>
+        <footer>Kai U. (Oslo, Norway)</footer>
+      </blockquote>
+    </li>
+    <li>
+      <blockquote>
+        <p>“Everything went well with your tickets. I'll definitely recommend your site to others for those hard to get European  events. Regards, Carlos”</p>
+        <footer>Carlos G. (USA)</footer>
+      </blockquote>
+    </li>
+    <li>
+      <blockquote>
+        <p>“I just wanted to tell you how pleased I was with your services.  The seats for both events were top notch, as promised, and I can't thank you enough.  Wimbledon especially was magnificent, really the highlight of the entire trip for me.”</p>
+        <footer>Kevin B. (San Antonio, TX, USA)</footer>
+      </blockquote>
+    </li>
+    <li>
+      <blockquote>
+        <p>“I have used Ticketfinders consistently over the years for tickets.<br>
+        The team at Ticketfinders always find the best seats at the best prices and they deliver always on time to the best location to ensure a great experience, they have never let me down, there is no match when it comes to Ticketfinders against other agencies, Ticketfinders always come out on top, hence I will continue to use their services and highly recommend them”</p>
+        <footer>Simon C (Monaco, Monte-Carlo)</footer>
+      </blockquote>
+    </li>
+  </ul>
+</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.js"></script>
-
-<script>
-$(document).ready(function(){
-  $('.bxslider').bxSlider({
-    controls: false,
-    auto: true,
-    pager: false,
-    reload: true,
-    pause: 8000
+<% content_for :right_before_body_ends do %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $('.bxslider').bxSlider({
+      controls: false,
+      auto: true,
+      pager: false,
+      reload: true,
+      pause: 8000
+    });
   });
-});
-</script>
+  </script>
+<% end %>

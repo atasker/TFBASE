@@ -78,4 +78,15 @@ module ApplicationHelper
     avl_icons.include?(key) ? render("categories/icons/#{key}") : ''
   end
 
+  # Method returns correct char symbol to ticket's currency
+  # Params:
+  #   ticket - object of Ticket class
+  def currency_symbol(ticket)
+    case ticket.currency
+    when 'Pounds' then '£'
+    when 'Dollars' then '$'
+    else '€'
+    end
+  end
+
 end

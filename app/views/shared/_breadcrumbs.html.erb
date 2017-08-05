@@ -2,7 +2,9 @@
   <% breadcrumbs_count = breadcrumbs.length %>
   <% breadcrumbs.each_with_index do |breadcrumb, indx| %>
     <% if indx < breadcrumbs_count - 1 %>
-      <%= link_to breadcrumb[:name], breadcrumb[:path], :class => 'breadcrumbs__item' %>
+      <% opts = { :class => 'breadcrumbs__item' } %>
+      <% opts[:id] = 'category-submenu-btn' if breadcrumb[:path] == categories_path %>
+      <%= link_to breadcrumb[:name], breadcrumb[:path], opts %>
     <% else %>
       <span class="breadcrumbs__item"><%= breadcrumb[:name] %></span>
     <% end %>

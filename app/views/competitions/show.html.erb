@@ -3,9 +3,7 @@
     <div class="page-title__inner" style="<%= @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
       <%= render 'shared/breadcrumbs' %>
       <h1><%= @competition.name %></h1>
-      <% if @competition.text.present? %>
-        <div class="page-title__info"><%= @competition.text %></div>
-      <% end %>
+      <% if @competition.text.present? %><div class="page-title__info"><%= @competition.text %></div><% end %>
     </div>
   </div>
 </div>
@@ -25,15 +23,7 @@
         <div class="considered__calendar-wrap">
           <div id="datepicker"></div>
         </div>
-        <%#<h4>Similar events</h4>
-        <div class="main-featured__labels">
-          <a href="#" class="main-featured__label green--sqheme">Horse Racing</a>
-          <a href="#" class="main-featured__label yellow--sqheme">Special Events</a>
-          <a href="#" class="main-featured__label green--sqheme">Golf</a>
-          <a href="#" class="main-featured__label yellow--sqheme">Test</a>
-          <a href="#" class="main-featured__label green--sqheme">Test</a>
-          <a href="#" class="main-featured__label green--sqheme">Test</a>
-        </div>%>
+        <%#= render 'shared/similar_events_under_calendar' %>
       </div>
       <div class="considered considered--ticket">
         <a href="#" class="considered__calendar-toggle"><span>Show Calendar</span></a>

@@ -1,7 +1,6 @@
-<% gon include_gon %>
 <div class="page-title">
   <div class="container-fluid">
-    <div class="page-title__inner" style="<%= @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
+    <div class="page-title__inner" style="<%= @category && @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
       <%= render 'shared/breadcrumbs' %>
       <h1><%= @event.name %></h1>
       <div class="page-title__info">
@@ -31,14 +30,14 @@
       <% end %>
       <%= render 'shared/social_shares' %>
     </div>
-    <% if @event.tickets.sum(:quantity) > 0 %>
+    <% if @event_have_tickets %>
       <div class="buy__list">
         <h2>Buy Tickets</h2>
         <div class="buy__list-inner">
           <div class="buy__list-scroller nano">
             <div class="buy__list-scroll nano-content">
               <% @sorted_tickets.each do |ticket| %>
-                <%= render partial: 'tickets/item', locals: { ticket: ticket, symbol: @symbol } %>
+                <%= render partial: 'tickets/item', locals: { ticket: ticket } %>
               <% end %>
             </div>
           </div>
@@ -55,9 +54,9 @@
       <li class="tab-head-cont">
         <a href="#" class="is-active">Buy Tickets</a>
         <div class="tab-main">
-          <% if @event.tickets.sum(:quantity) > 0 %>
+          <% if @event_have_tickets %>
             <% @sorted_tickets.each do |ticket| %>
-              <%= render partial: 'tickets/item', locals: { ticket: ticket, symbol: @symbol } %>
+              <%= render partial: 'tickets/item', locals: { ticket: ticket } %>
             <% end %>
           <% else %>
             <%= render 'shared/nothing_found_message' %>
@@ -86,7 +85,7 @@
   </div>
 </div>
 <div class="map-wrap">
-  <div id="map" data-venue-address="<%= @event.venue.address %>"></div>
+  <div id="map"></div>
 </div>
 <div class="considered">
   <div class="container-fluid">
@@ -98,16 +97,22 @@
 </div>
 
 <% content_for :after_layout do %>
-  <div id="popup-txt" class="popup mfp-with-anim mfp-hide">
-    <h2>Ticket Info</h2>
-    East? West and Quadrants
-  </div>
+  <% gon include_gon %>
+
+  <% @sorted_tickets.each do |ticket| %>
+    <div id="popup-txt-tckt-<%= ticket.id %>" class="popup mfp-with-anim mfp-hide">
+      <h2>Ticket Info</h2>
+      <%= simple_format(ticket.text) %>
+    </div>
+  <% end %>
 
   <div id="popup-chart" class="popup mfp-with-anim mfp-hide">
     <h2><%= @event.venue.name %> Seating Chart</h2>
     <%= image_tag @event.venue.avatar.venue.url, alt: @event.venue.name %>
   </div>
+<% end %>
 
+<% content_for :right_before_body_ends do %>
   <%# GOOGLE MAP API
   old version
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAZw1G4GSEF6-0hYY698R3Y0rnZ77fWuQ&callback=initMap"></script>

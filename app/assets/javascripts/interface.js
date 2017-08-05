@@ -19,9 +19,9 @@ $(document).ready(function() {
 	};
 
 	//SUBMENU TOGGLE
-	$("body").on("click", ".menu-btn", function(e){
+	$("body").on("click", "#category-submenu-btn", function(e){
 		e.preventDefault();
-		$(this).toggleClass('active');
+		$("header .menu-btn").toggleClass('active');
 		$('.top-submenu').fadeToggle();
 		$('body').toggleClass('fix');
 	})
@@ -262,8 +262,10 @@ $(window).on('scroll', function(){
 });
 
 function initMap() {
+		var placeLat = parseInt(gon.latitude)
+		var placeLng = parseInt(gon.longitude)
     var googleMapOptions = {
-        center: new google.maps.LatLng(53.9201691, 27.4997595),
+        center: new google.maps.LatLng(placeLat, placeLng),
         zoom: 15,
         mapTypeControl: false,
         navigationControl: false,
@@ -274,17 +276,16 @@ function initMap() {
             position: google.maps.ControlPosition.RIGHT_CENTER
         },
     };
-    var map = new google.maps.Map(document.getElementById("map"),
-    googleMapOptions);
+    var map = new google.maps.Map(document.getElementById("map"), googleMapOptions);
     var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(53.9201691, 27.4997595),
+        position: new google.maps.LatLng(placeLat, placeLng),
     });
 
     marker.setMap(map);
 
     if ($(window).width() < 700){
 	    var infoBubble = new InfoBubble({
-	        content: '<div class="map-label"><div class="map-label__txt">Church Road, Wimbledon, London, SW19 5AE</div></div>',
+	        content: '<div class="map-label"><div class="map-label__txt">' + gon.placename + '</div></div>',
 	        shadowStyle: 0,
 	        padding: 0,
 	        borderRadius: 0,
@@ -303,7 +304,7 @@ function initMap() {
     }
 	else{
 		 var infoBubble = new InfoBubble({
-	        content: '<div class="map-label"><div class="map-label__txt">Church Road, Wimbledon, London, SW19 5AE</div></div>',
+	        content: '<div class="map-label"><div class="map-label__txt">' + gon.placename + '</div></div>',
 	        shadowStyle: 0,
 	        padding: 0,
 	        borderRadius: 0,

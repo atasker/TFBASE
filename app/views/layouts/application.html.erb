@@ -46,7 +46,7 @@
               <a href="#" class="page-header__info--mobile__close"></a>
             </div>
           </div>
-          <a href="#" class="menu-btn">
+          <a href="#" class="menu-btn" id="category-submenu-btn">
             <span class="burger-icon"></span>
             <span class="menu-btn__msg">Categories</span>
           </a>
@@ -115,5 +115,7 @@
     /* custom configuration goes here (www.olark.com/documentation) */
     olark.identify('4925-318-10-1508');/*]]>*/</script><noscript><a href="https://www.olark.com/site/4925-318-10-1508/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
     <!-- end olark code --><% end %>
+
+    <%= yield :right_before_body_ends %>
   </body>
 </html>
