@@ -26,12 +26,8 @@
         <% end %>
       </div>
     </div>
-  <% elsif @events.count > 0 %>
-    <div class="considered__wrapper">
-      <div class="considered considered--ticket">
-        <%= render partial: 'events/list', locals: { events: @events } %>
-      </div>
-    </div>
+  <% elsif @event_count_before_filtration > 0 %>
+    <%= render partial: 'events/list_with_calendar', locals: { events: @events } %>
   <% else %>
     <%= render 'shared/nothing_found_message' %>
   <% end %>

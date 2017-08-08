@@ -236,8 +236,20 @@ $(document).ready(function() {
 
 
 	//CALENDAR
-	if ($("#datepicker").length>0) {
-		$("#datepicker").datepicker();
+	var eventDatepicker = $("#datepicker");
+	if (eventDatepicker.length > 0) {
+		var startDateStr = eventDatepicker.data("start-date");
+		if (startDateStr.length < 1) { startDateStr = null; }
+		eventDatepicker.datepicker({
+			dateFormat: "yy-mm-dd",
+			defaultDate: startDateStr,
+			onSelect: function(dateText, inst) {
+				var href = eventDatepicker.data("base-url");
+				href += (href.indexOf('?') == -1) ? '?' : '&';
+				href += "dt=" + dateText;
+				window.location = href;
+			}
+		});
 	};
 
 	//CALENDAR-toggle
@@ -286,8 +298,8 @@ $(window).on('scroll', function(){
 });
 
 function initMap() {
-		var placeLat = parseInt(gon.latitude)
-		var placeLng = parseInt(gon.longitude)
+		var placeLat = parseFloat(gon.latitude)
+		var placeLng = parseFloat(gon.longitude)
     var googleMapOptions = {
         center: new google.maps.LatLng(placeLat, placeLng),
         zoom: 15,

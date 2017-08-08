@@ -19,19 +19,8 @@
         <% end %>
       </div>
     </div>
-  <% elsif @events.count > 0 %>
-    <div class="considered__wrapper">
-      <div class="considered__calendar">
-        <div class="considered__calendar-wrap">
-          <div id="datepicker"></div>
-        </div>
-        <%#= render 'shared/similar_events_under_calendar' %>
-      </div>
-      <div class="considered considered--ticket">
-        <a href="#" class="considered__calendar-toggle"><span>Show Calendar</span></a>
-        <%= render partial: 'events/list', locals: { events: @events } %>
-      </div>
-    </div>
+  <% elsif @event_count_before_filtration > 0 %>
+    <%= render partial: 'events/list_with_calendar', locals: { events: @events } %>
   <% else %>
     <%= render 'shared/nothing_found_message' %>
   <% end %>
