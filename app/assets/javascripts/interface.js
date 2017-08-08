@@ -148,6 +148,30 @@ $(document).ready(function() {
 		$(".nano").nanoScroller();
 	};
 
+	//show more or less text TOGGLE
+	$("body").on("click", ".read-more", function(e){
+		e.preventDefault();
+		var previewer = $(this).closest('.info-preview');
+		if (previewer.length) {
+			var fuller = previewer.next();
+			if (fuller.hasClass('info-full')) {
+				previewer.hide();
+				fuller.show();
+			}
+		}
+	});
+	$("body").on("click", ".read-less", function(e){
+		e.preventDefault();
+		var fuller = $(this).closest('.info-full');
+		if (fuller.length) {
+			var previewer = fuller.prev();
+			if (previewer.hasClass('info-preview')) {
+				fuller.hide();
+				previewer.show();
+			}
+		}
+	});
+
 
 	//tickets info TOGGLE
 	$("body").on("click", ".tickets__info-link", function(e){

@@ -3,7 +3,9 @@
     <div class="page-title__inner" style="<%= @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
       <%= render 'shared/breadcrumbs' %>
       <h1><%= @player.name %><% if @competition %> | <%= @competition.name %><% end %></h1>
-      <% if @player.text.present? %><div class="page-title__info"><%= @player.text %></div><% end %>
+      <% if @player.text.present? %>
+        <%= render partial: 'shared/page_title_info_text_with_shrink', locals: { text: @player.text } %>
+      <% end %>
     </div>
   </div>
 </div>

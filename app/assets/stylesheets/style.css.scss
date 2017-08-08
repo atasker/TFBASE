@@ -1999,6 +1999,9 @@ input[type="reset"] {
 
 .page-title__info {
   font-size: 22px; }
+  // .page-title__info.info-preview {}
+  .page-title__info.info-full {
+    display: none; }
 
 .page-title__clarification {
   color: #0d7aa6;
