@@ -1,16 +1,24 @@
-class EventsController < ApplicationController
+class EventsController < BaseFrontendController
 
   def index
     @events = Event.text_search(params[:query])
+    @event_count_before_filtration = @events.count
+    if params[:dt].present?
+      begin
+        @start_date = Date.parse params[:dt]
+        @events = @events.where("events.start_time >= ?", @start_date)
+      rescue
+        # just do nothing
+      end
+    end
     @sorted = @events.sort { |a,b| a.start_time <=> b.start_time }
+
+    add_breadcrumb 'Search Results', nil
   end
 
   def show
     @event = Event.find(params[:id])
     @category = Category.find(@event.category_id)
-    @category_description = Category.find(@event.category_id).description
-    gon.latitude = @event.venue.latitude
-    gon.longitude = @event.venue.longitude
     if params[:comp]
       @competition = Competition.find(params[:comp])
     elsif @event.competition_id != nil
@@ -20,19 +28,32 @@ class EventsController < ApplicationController
       @player = Player.find(params[:player])
     end
 
-    if @event.tickets.count > 0
-      @currency = @event.tickets.first.currency
-      if @currency == "Pounds"
-        @symbol = "£"
-      elsif @currency == "Dollars"
-        @symbol = "$"
-      else
-        @symbol = "€"
-      end
-    end
+    gon.latitude = @event.venue.latitude
+    gon.longitude = @event.venue.longitude
+    gon.placename = @event.venue.address
 
     @tickets = @event.tickets
+    @event_have_tickets = @tickets.sum(:quantity) > 0
     @sorted_tickets = @tickets.sort { |a,b| a.price <=> b.price }
+
+    @page_meta = { title: @event.name,
+                   description: @event.name }
+
+    if @category
+      add_breadcrumb 'Categories', categories_path
+      add_breadcrumb @category.description, category_path(@category)
+    end
+    if @competition
+      add_breadcrumb @competition.name, competition_path(@competition)
+    end
+    if @player
+      if @competition
+        add_breadcrumb @player.name, player_path(@player, comp: @competition)
+      else
+        add_breadcrumb @player.name, player_path(@player)
+      end
+    end
+    add_breadcrumb @event.name, nil
   end
 
 end

@@ -1,0 +1,16 @@
+<div class="considered__wrapper">
+  <div class="considered__calendar">
+    <div class="considered__calendar-wrap">
+      <div id="datepicker" data-base-url="<%= url_for(params.merge(dt: nil)) %>" data-start-date="<%= @start_date ? @start_date.strftime('%Y-%m-%d') : '' %>"></div>
+    </div>
+    <%#= render 'shared/similar_events_under_calendar' %>
+  </div>
+  <div class="considered considered--ticket">
+    <a href="#" class="considered__calendar-toggle"><span>Show Calendar</span></a>
+    <% if events.any? %>
+      <%= render partial: 'events/list', locals: { events: events } %>
+    <% else %>
+      <%= render 'shared/nothing_found_message' %>
+    <% end %>
+  </div>
+</div>

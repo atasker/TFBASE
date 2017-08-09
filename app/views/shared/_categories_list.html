@@ -1,0 +1,12 @@
+<% categories ||= @categories %>
+
+<div class="categories-list">
+  <% categories.each do |category| %>
+  <div class="categories-item">
+    <%= link_to category_path(category), :class => 'categories-link' do %>
+      <div class="categories-icon"><%= category_icon category %></div>
+      <div class="categories-name"><%= category.description %></div>
+    <% end %>
+  </div>
+  <% end %>
+</div>

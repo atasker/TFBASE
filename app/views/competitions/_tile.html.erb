@@ -1,0 +1,14 @@
+<div class="col-lg-3 col-md-4 col-sm-6 tickets__item">
+  <%= link_to competition_path(competition), :class => 'tickets__inner' do %>
+    <div class="tickets__img">
+      <div class="tickets__img">
+        <div class="tickets__img-inner" style="background:url(<%= competition.avatar.grid_small.url %>)"></div>
+      </div>
+    </div>
+    <div class="tickets__title"><%= competition.name %></div>
+    <div class="tickets__events">
+      <% events_count = competition.events.count %>
+      <span><%= events_count %></span> <%= 'Event'.pluralize events_count %>
+    </div>
+  <% end %>
+</div>

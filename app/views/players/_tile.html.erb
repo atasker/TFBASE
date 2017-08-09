@@ -1,0 +1,18 @@
+<% competition ||= nil %>
+
+<div class="col-lg-3 col-md-4 col-sm-6 tickets__item">
+  <%= link_to player_path(player, comp: competition), :class => 'tickets__inner' do %>
+    <div class="tickets__img">
+      <div class="tickets__img-inner tickets__img-inner--nobg">
+        <% unless player.avatar.blank? %>
+          <%= image_tag player.avatar.grid_small.url, alt: player.name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="tickets__title"><%= player.name %></div>
+    <div class="tickets__events">
+      <% events_count = player.events.count %>
+      <span><%= events_count %></span> <%= 'Event'.pluralize events_count %>
+    </div>
+  <% end %>
+</div>

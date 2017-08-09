@@ -1,86 +1,72 @@
-<div class="row">
-  &nbsp;
-</div>
-
-<div class="row">
-  <% flash.each do |key, value| %>
-      <div class="gotham-regular flash flash-<%= key %>"><%= value %></div>
-  <% end %>
-</div>
-
-<div class="row">
-  &nbsp;
-</div>
-
-<div class="row">
-  <div class="small-12 medium-6 columns">
-    <div class="row">
-      <%= form_for :message, url: messages_path do |f| %>
-        <% if @message.errors.any? %>
-          <div id="error_explanation">
-            <h5 class="gotham-regular" style="color: #FF0000;">
-              <%= pluralize(@message.errors.count, "error") %> prohibited
-              this message from being sent:
-            </h5>
-            <ul style="list-style-type: none;">
-              <% @message.errors.full_messages.each do |msg| %>
-                <li class="gotham-regular" style="color: #FF0000;"><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Contacts us</h1>
     </div>
-    <div class="row">
-      <div class="small-12 columns">
-        <p>
-          <%= f.text_field :name, :placeholder => "Name", :class => "contact-input" %>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="small-12 columns">
-        <p>
-          <%= f.text_field :email, :placeholder => "Email", :class => "contact-input" %>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="small-12 columns">
-        <p>
-          <%= f.text_area :body, :placeholder => "Message", :class => "contact-input", :style => "height: 250px;" %>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="small-12 columns">
-        <p>
-          <%= f.label :humanizer_answer, @message.humanizer_question %>
-          <%= f.text_field :humanizer_answer %>
-          <%= f.hidden_field :humanizer_question_id %>
-        </p>
-      </div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="small-12 columns">
-        <p>
-          <%= f.submit "Send", :class => "button success expand small contact-button gotham-regular" %>
-        </p>
-      </div>
-    </div>
-      <% end %>
   </div>
-  <div class="small-12 medium-6 columns text-right">
-    <p class="gotham-regular" style="color: #696969;">
+</div>
+
+<div class="container-fluid">
+  <div class="col-md-6">
+    <p>
       USA +1 240 764 4969<br />
       UK +44 20 7193 8557<br />
-      Info@ticket-finders.com
+      <%= mail_to 'Info@ticket-finders.com' %>
     </p>
-    <p class="gotham-regular" style="color: #696969;">
+    <p>
       <span style="text-decoration: underline;">Head Office</span><br />
       Ticketfinders International LLC<br />
       1013 Centre Road, Suite 403-A<br />
       Wilmington DE 19805, USA
     </p>
+  </div>
+  <div class="col-md-6">
+    <% flash.each do |key, value| %>
+      <p><b><%= value %></b></p>
+    <% end %>
+    <% if @message.errors.any? %>
+      <div id="error_explanation">
+        <p style="margin-bottom: 0; color: #f00;">
+          <%= pluralize(@message.errors.count, "error") %> prohibited
+          this message from being sent:
+        </p>
+        <ul style="list-style-type: none; margin-top: 0; padding-left: 12px;">
+          <% @message.errors.full_messages.each do |msg| %>
+            <li style="color: #f00;"><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form_for :message, url: messages_path do |f| %>
+      <div class="input-wrap">
+        <%= f.label :name %>
+        <div class="input-wrap__in">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+      <div class="input-wrap">
+        <%= f.label :email %>
+        <div class="input-wrap__in">
+          <%= f.email_field :email %>
+        </div>
+      </div>
+      <div class="input-wrap input-wrap--textarea">
+        <%= f.label :body, 'Message' %>
+        <div class="input-wrap__in">
+          <%= f.text_area :body, style: 'width:100%; height: 98px;' %>
+        </div>
+      </div>
+      <div class="input-wrap input-wrap--question">
+        <%= f.label :humanizer_answer, @message.humanizer_question %>
+        <div class="input-wrap__in">
+          <%= f.text_field :humanizer_answer %>
+          <%= f.hidden_field :humanizer_question_id %>
+        </div>
+      </div>
+      <div class="submit-wrap">
+        <%= f.submit "Send" %>
+      </div>
+    <% end %>
   </div>
 </div>

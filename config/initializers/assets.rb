@@ -7,12 +7,8 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 
 # added this line to fix problem 'Sprockets::Rails::Helper::AssetFilteredError' when trying to load admin.css on admin pages
-Rails.application.config.assets.precompile += %w( admin.css )
-
-# added as part of foundation install
-Rails.application.config.assets.precompile += %w( vendor/modernizr.js )
-Rails.application.config.assets.precompile += %w( cocoon.js )
+Rails.application.config.assets.precompile += %w( admin/admin.css )
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( admin/admin.js )

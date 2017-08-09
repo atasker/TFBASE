@@ -1,108 +1,64 @@
-<section class="grey-bg">
-  <div class="row">
-    <div class="small-10 small-centered columns">
-      <div class="row">
-      <div class="progress small-12 secondary">
-        <span class="meter" style="width: 80%"></span>
-      </div>
-      </div>
-      <div class="row">
-        <p class="fineprint">Note: While on this page these tickets will be held for you, once you navigate away we will release your tickets for others to buy.</p>
-      </div>
-      <div class="row">
-        <div class="small-4 columns no-pad">
-          <span class="event-name gotham-light"><%= @event.name %></span>
-          <ul class="social-list-container gotham-regular">
-            <li class="social-list-icon"><%= @event.venue.name %></li>
-            <li class="social-list-icon"><%= nice_time(@event.start_time) %></li>
-            <li class="social-list-icon">
-              <span style="color: #2C9DDF; font-size: 0.8em;">
-                <a href="#" data-reveal-id="myModal" >Ticket Info</a>
-                <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-                <h2 id="modalTitle">Ticket Info</h2>
-                <p><%= simple_format(@ticket.text) %></p>
-                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-                </div>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">&nbsp;</div>
-      <div class="row">
-        <div class="small-12 medium-6 columns white-bg" style="padding: 10px;">
-          <div class="row gotham-regular">
-            <div class="small-6 columns">
-              <ul class="social-list-container">
-                <li class="social-list-icon ticket-text"><strong>Category:</strong></li>
-                <li class="social-list-icon ticket-text"><strong>Ticket Price:</strong></li>
-                <li class="social-list-icon ticket-text"><strong>Quantity:</strong></li>
-              </ul>
-            </div>
-            <div class="small-6 columns">
-              <ul class="social-list-container">
-                <li class="social-list-icon ticket-text"><%= @ticket.category %></li>
-                <li class="social-list-icon ticket-text"><%= @symbol %><span id="ticket-price"><%= @ticket.price %></span></li>
-                <li class="social-list-icon ticket-text">
-                    <select id="ticket-quantity-select">
-                      <% if @ticket.pairs_only == true %>
-                        <% (2..@ticket.quantity).step(2).to_a.each do |option| %>
-                          <option value="<%= option %>"><%= option.to_i %></option>
-                        <% end %>
-                      <% else %>
-                        <% (1..@ticket.quantity).to_a.each do |option| %>
-                          <option value="<%= option %>"><%= option.to_i %></option>
-                        <% end %>
-                      <% end %>
-                    </select>
-                </li>
-              </ul>
-            </div>
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner" style="<%= @category && @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
+      <%= render 'shared/breadcrumbs' %>
+      <% if @event %>
+        <h1><%= @event.name %> Ticket</h1>
+        <div class="page-title__info">
+          <% if @competition %>
+            <%= link_to @competition.name, competition_path(@competition), :class => 'page-title__clarification' %>
+          <% end %>
+          <div class="page-title__place"><%= "#{@event.venue.city}, #{@event.venue.country}" %></div>
+          <div class="page-title__place-in"><%= @event.venue.name %></div>
+          <div class="page-title__time">
+            <%= l(@event.start_time, format: "<span>%a</span> <span>%d %B</span> <span>%H:%M</span>").html_safe %>
           </div>
         </div>
-
-      </div>
-
-      <div class="row gotham-regular">
-        <div class="small-12 medium-6 columns white-bg" style="padding: 10px;">
-          <div class="row">
-            <div class="small-6 columns">
-              <ul class="social-list-container">
-                <li class="social-list-icon ticket-text" style="color: #CC0000; font-size: 1.2em;"><strong>Total:</strong></li>
-              </ul>
-            </div>
-            <div class="small-6 columns">
-              <ul class="social-list-container">
-                <li class="social-list-icon ticket-text" style="color: #CC0000; font-size: 1.2em;"><%= @symbol %><span id="ticket-total"><%= @ticket.pairs_only == false ? @ticket.price : @ticket.price * 2 %></span></li>
-              </ul>
-            </div>
-          </div>
-          <%= form_tag 'https://www.paypal.com/cgi-bin/webscr' do %>
-                <input type="hidden" name="cmd" value="_cart">
-                <input type="hidden" name="upload" value="1">
-                <input type="hidden" name="business" value="info@ticket-finders.com">
-                <input type="hidden" name="return" value="https://www.ticket-finders.com/">
-                <input type="hidden" name="amount_1" value="<%= @ticket.price %>">
-                <input type="hidden" name="shipping_1" value="15.00">
-                <input type="hidden" name="item_name_1" value="<%= @ticket.event.name %>">
-                <input type="hidden" name="item_number_1" value="<%= @ticket.id %>">
-                <input type="hidden" name="quantity_1" id="hidden-quantity" value="1">
-                <input type="hidden" name="on0_1" value="<%= @ticket.category %>">
-                <div class="row text-center" style="padding-top: 20px;">
-                  <input type="submit" class="button paypal gotham-regular" value="Buy with PayPal">
-                </div>
-            <% end %>
-        </div>
-      </div>
+      <% else %>
+        <h1>Ticket</h1>
+      <% end %>
     </div>
   </div>
-</section>
+</div>
+<div class="container-fluid">
+  <p>Note: While on this page these tickets will be held for you, once you navigate away we will release your tickets for others to buy.</p>
+  <h2>Ticket Info</h2>
+  <% if @ticket.text.present? %><%= simple_format(@ticket.text) %><% end %>
+  <p>Category: <%= @ticket.category %></p>
+  <p>Ticket Price: <%= currency_symbol(@ticket) %><span id="ticket-price"><%= @ticket.price %></span></p>
+  <p>
+    Quantity:
+    <select id="ticket-quantity-select">
+      <% if @ticket.pairs_only == true %>
+        <% (2..@ticket.quantity).step(2).to_a.each do |option| %>
+          <option value="<%= option %>"><%= option.to_i %></option>
+        <% end %>
+      <% else %>
+        <% (1..@ticket.quantity).to_a.each do |option| %>
+          <option value="<%= option %>"><%= option.to_i %></option>
+        <% end %>
+      <% end %>
+    </select>
+  </p>
 
-<script>
-  $('select').change(function() {
-    var selected = $("select option:selected").attr("value");
-    var newPrice = $("#ticket-price").text() * selected;
-    $("#ticket-total").text(newPrice);
-    $("#hidden-quantity").val(selected);
-  });
-</script>
+  <p>
+    <strong>Total:</strong>
+    <%= currency_symbol(@ticket) %><span id="ticket-total"><%= @ticket.pairs_only == false ? @ticket.price : @ticket.price * 2 %></span>
+  </p>
+
+  <%= form_tag 'https://www.paypal.com/cgi-bin/webscr' do %>
+    <input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="upload" value="1">
+    <input type="hidden" name="business" value="info@ticket-finders.com">
+    <input type="hidden" name="return" value="https://www.ticket-finders.com/">
+    <input type="hidden" name="amount_1" value="<%= @ticket.price %>">
+    <input type="hidden" name="shipping_1" value="15.00">
+    <input type="hidden" name="item_name_1" value="<%= @event ? @event.name : 'Ticket' %>">
+    <input type="hidden" name="item_number_1" value="<%= @ticket.id %>">
+    <input type="hidden" name="quantity_1" id="hidden-quantity" value="1">
+    <input type="hidden" name="on0_1" value="<%= @ticket.category %>">
+    <div style="padding-top: 20px;">
+      <input type="submit" class="btn" style="padding: 10px 50px;font-size: 22px;font-weight: 100;" value="Buy with PayPal">
+    </div>
+  <% end %>
+</div>

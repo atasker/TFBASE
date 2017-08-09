@@ -1,0 +1,40 @@
+<% message = Message.new %>
+<div id="popup-send" class="popup popup--send mfp-with-anim mfp-hide">
+  <h2>Contact us</h2>
+  <div class="popup-send__msg">All fields must be completed</div>
+  <div class="popup-send__form">
+    <%= form_for message, url: messages_path(format: 'json'), remote: true, html: { id: 'popup-feedback-form' } do |f| %>
+      <div class="input-wrap">
+        <%= f.label :name %>
+        <div class="input-wrap__in">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+      <div class="input-wrap">
+        <%= f.label :email %>
+        <div class="input-wrap__in">
+          <%= f.email_field :email, placeholder: "user@gmail.com" %>
+        </div>
+      </div>
+      <div class="input-wrap input-wrap--textarea">
+        <%= f.label :body, 'Message' %>
+        <div class="input-wrap__in">
+          <%= f.text_area :body %>
+        </div>
+      </div>
+      <div class="popup-send__question"><%= message.humanizer_question %></div>
+      <div class="input-wrap input-wrap--question">
+        <%= f.label :humanizer_answer, 'Answer' %>
+        <div class="input-wrap__in">
+          <%= f.text_field :humanizer_answer %>
+          <%= f.hidden_field :humanizer_question_id %>
+        </div>
+      </div>
+      <div class="submit-wrap">
+        <%= f.submit "Send" %>
+        <%#<input type="reset" value="Cancel">%>
+        <span class="popup-send__success-msg">Message is sent. Thank you.</span>
+      </div>
+    <% end %>
+  </div>
+</div>

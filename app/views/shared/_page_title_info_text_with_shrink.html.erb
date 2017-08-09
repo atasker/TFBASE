@@ -1,0 +1,12 @@
+<% if text.length > 250 %>
+  <div class="page-title__info info-preview">
+    <%= truncate(text, length: 250) %>
+    <%= link_to 'Read more', '#read-more', class: "read-more" %>
+  </div>
+  <div class="page-title__info info-full">
+    <%= text %>
+    <%= link_to 'Hide', '#read-less', class: "read-less" %>
+  </div>
+<% else %>
+  <div class="page-title__info"><%= text %></div>
+<% end %>

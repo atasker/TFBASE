@@ -65,4 +65,28 @@ module ApplicationHelper
     end
   end
 
+  # Method returns svg code of category icon if available, else empty string
+  # Params:
+  #   category — object of Category class
+  def category_icon(category)
+    key = category.description.to_s.parameterize.underscore
+    # available icons defined by html files with svg icons inside in 'app/views/categories/icons'
+    avl_icons = %w(american_football classical golf motor_racing special_events
+                   baseball concerts hockey motorcycling tennis basketball
+                   cricket horse_racing olympics theater boxing football mma
+                   rugby)
+    avl_icons.include?(key) ? render("categories/icons/#{key}") : ''
+  end
+
+  # Method returns correct char symbol to ticket's currency
+  # Params:
+  #   ticket - object of Ticket class
+  def currency_symbol(ticket)
+    case ticket.currency
+    when 'Pounds' then '£'
+    when 'Dollars' then '$'
+    else '€'
+    end
+  end
+
 end

@@ -1,0 +1,15 @@
+<div class="buy__item">
+  <div class="buy__item-in">
+    <a href="#popup-txt-tckt-<%= ticket.id %>" class="buy__item-title popup-inline" data-effect="mfp-zoom-in"><%= ticket.category %><i></i></a>
+  </div>
+  <div class="buy__item-in">
+    <div class="buy__item-price"><%= currency_symbol(ticket) %> <%= ticket.price.round %></div>
+  </div>
+  <div class="buy__item-in">
+    <%= link_to 'Buy', ticket_path(ticket), :class => 'btn' %>
+  </div>
+  <%# There is second variant of button (but I don't understand why)
+  <div class="buy__item-in">
+    <a href="#" class="btn btn--sec">Enquire</a>
+  </div> %>
+</div>
