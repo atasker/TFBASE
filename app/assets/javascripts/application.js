@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require interface
 //= require feedback_popup
+//= require hos_n_con_form
 //= require tickets
 // do not require_tree .

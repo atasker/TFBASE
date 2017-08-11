@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  post '/messages/hospitality-and-concierge',
+    to: 'messages#hospitality_concierge',
+    as: :hospitality_concierge
   resources :messages, only: [:new, :create]
 
   get 'static/sport'

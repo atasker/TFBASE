@@ -1898,7 +1898,7 @@ input[type="reset"] {
   padding: 0 20px;
   margin: -38px auto 60px;
   position: relative; }
-  .main-services__form input[type="text"] {
+  .main-services__form input[type="email"] {
     background: #f7f7f7;
     border: 0;
     border-bottom: 1px solid #a7a7a7;
@@ -1913,6 +1913,11 @@ input[type="reset"] {
     position: absolute;
     right: 45px;
     top: 15px; }
+  .main-services__form .success_message {
+    background: #fff;
+    text-align: center;
+    font-size: 22px;
+    line-height: 72px; }
 
 .main-services__slider {
   margin-bottom: 50px; }
@@ -3216,6 +3221,8 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     font-size: 36px; }
   .main-services__form {
     background: transparent; }
+    .main-services__form .success_message {
+      line-height: 30px; }
   .main-top__events .event-date {
     left: 0px;
     top: -28px;

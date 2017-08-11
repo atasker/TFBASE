@@ -204,18 +204,17 @@
 </div>
 <div class="main-services">
   <div class="container-fluid">
-    <!--
     <h2>Hospitality & Concierge services</h2>
     <div class="main-services__msg">
       Ticketfinders International also offers bespoke services to till the needs of the most decerning costumers, whether access to the most exlusive events or drivers to the theatre please contact one of our specialist with your request!
     </div>
     <div class="main-services__form">
-      <form action="#" method="post">
-        <input type="text" placeholder="Submit email">
-        <input type="submit" value="Submit">
-      </form>
+      <%= form_tag hospitality_concierge_path(format: 'json'), remote: true, id: 'hos-n-con-form' do %>
+        <%= email_field_tag :email, nil, placeholder: "Submit email" %>
+      <%= submit_tag "Submit" %>
+      <% end %>
+      <%#<p class="success_message">Thank you! Your message has been successfully sent. We will contact you very soon.</p>%>
     </div>
-    -->
     <h3>#Popular Events</h3>
     <div class="main-services__slider">
       <% @main_services.each do |serv| %>

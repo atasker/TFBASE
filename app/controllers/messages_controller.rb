@@ -27,6 +27,29 @@ class MessagesController < BaseFrontendController
     end
   end
 
+  def hospitality_concierge
+    if params[:email].present? && !params[:email].match(/\A[^@]+@([^@\.]+\.)+[^@\.]+\z/).nil?
+      MessageMailer.send_hospitality_concierge_email(params[:email]).deliver
+      successfully_sent = true
+    else
+      successfully_sent = false
+    end
+
+    respond_to do |format|
+      format.html do
+        flash[:notice] = "Message sent!"
+        redirect_to root_url
+      end
+      format.json do
+        if successfully_sent
+          render json: { status: 'success' }, status: :created
+        else
+          render json: { status: 'error', errors: { email: 'Wrong email' } }
+        end
+      end
+    end
+  end
+
   private
 
   def message_params
