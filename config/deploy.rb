@@ -1,7 +1,7 @@
 require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
-# require 'mina/rvm'    # for rvm support. (https://rvm.io)
+require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require "yaml"
 
 # Load environment variables from the application config
@@ -27,6 +27,8 @@ set :forward_agent, true      # SSH forward_agent.
 # Optional settings:
 #   set :port, '30000'           # SSH port number.
 
+set :rvm_use_path, '/usr/local/rvm/scripts/rvm'
+
 # shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 set :shared_dirs, fetch(:shared_dirs, []).push('public/uploads',
                                                'public/content')
@@ -41,7 +43,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use', 'ruby-1.9.3-p125@default'
+  invoke :'rvm:use', 'ruby-2.0.0-p643'
 end
 
 # Put any custom commands you need to run at setup
@@ -61,7 +63,6 @@ task :deploy do
     # instance of your project.
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
-    invoke :path_fix
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
@@ -78,13 +79,6 @@ task :deploy do
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   # run(:local){ say 'done' }
-end
-
-task :path_fix do
-  # command %{echo hello}
-  # command %{export PATH="$PATH:/usr/local/rvm/gems/ruby-2.0.0-p643/bin:/usr/local/rvm/gems/ruby-2.0.0-p643@global/bin:/usr/local/rvm/rubies/ruby-2.0.0-p643/bin"}
-  command %{source /etc/profile.d/rvm.sh}
-  # command %{echo $PATH}
 end
 
 # For help in making your deploy script, see the Mina documentation:
