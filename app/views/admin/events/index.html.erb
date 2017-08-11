@@ -1,24 +1,26 @@
-<h1>Listing Events</h1>
-<div id="element2">
-  <%= form_tag admin_events_path, method: :get, id: "search-form" do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search by Keywords" %>
-    <%= submit_tag "Search by Keywords" %>
+<div class="holder">
+  <h1>Listing Events</h1>
+  <div id="element2">
+    <%= form_tag admin_events_path, method: :get, id: "search-form" do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search by Keywords" %>
+      <%= submit_tag "Search by Keywords" %>
+    <% end %>
+  </div>
+  <div id="element1">
+    <%= link_to 'New event', new_admin_event_path, class: "pure-button" %>
+  </div>
+
+  </br>
+  </br>
+
+  <div class="errors">
+  </div>
+  <% if params[:search].nil? %>
+    <%= render 'quick_add_form', event: @event %>
+  <% else %>
+    <%= link_to 'Return to All Events', admin_events_path %>
   <% end %>
-</div>
-<div id="element1">
-  <%= link_to 'New event', new_admin_event_path, class: "pure-button" %>
-</div>
+    <%= link_to 'View Past Events', admin_events_path(search: "archive") %>
 
-</br>
-</br>
-
-<div class="errors">
+  <%= render 'events', events: @events %>
 </div>
-<% if params[:search].nil? %>
-  <%= render 'quick_add_form', event: @event %>
-<% else %>
-  <%= link_to 'Return to All Events', admin_events_path %>
-<% end %>
-  <%= link_to 'View Past Events', admin_events_path(search: "archive") %>
-
-<%= render 'events', events: @events %>

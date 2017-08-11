@@ -1,37 +1,39 @@
-<p>
-  <strong>Event:</strong>
-  <%= Event.find(@ticket.event_id).name %>
-</p>
+<div class="holder">
+  <p>
+    <strong>Event:</strong>
+    <%= Event.find(@ticket.event_id).name %>
+  </p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @ticket.category %>
-</p>
+  <p>
+    <strong>Category:</strong>
+    <%= @ticket.category %>
+  </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @ticket.price %>
-</p>
+  <p>
+    <strong>Price:</strong>
+    <%= @ticket.price %>
+  </p>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @ticket.quantity %>
-</p>
+  <p>
+    <strong>Quantity:</strong>
+    <%= @ticket.quantity %>
+  </p>
 
-<p>
-  <strong>Currency:</strong>
-  <%= @ticket.currency %>
-</p>
+  <p>
+    <strong>Currency:</strong>
+    <%= @ticket.currency %>
+  </p>
 
-<p>
-  <strong>Sell in pairs only?</strong>
-  <%= @ticket.pairs_only %>
-</p>
+  <p>
+    <strong>Sell in pairs only?</strong>
+    <%= @ticket.pairs_only %>
+  </p>
 
-<p style="word-wrap: break-word;">
-  <strong>Text:</strong>
-  <%= @ticket.text %>
-</p>
+  <p style="word-wrap: break-word;">
+    <strong>Text:</strong>
+    <%= @ticket.text %>
+  </p>
 
-<%= link_to 'Edit', edit_admin_ticket_path(@ticket) %> |
-<%= link_to 'Back', admin_tickets_path %>
+  <%= link_to 'Edit', edit_admin_ticket_path(@ticket) %> |
+  <%= link_to 'Back', admin_tickets_path %>
+</div>

@@ -2,6 +2,14 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+.holder {
+  /*margin-right: auto;
+  margin-left: auto;*/
+  padding-right: 20px;
+  padding-left: 20px;
+  /*max-width: 780px;*/
+}
+
 .pure-menu {
   font-size: 1.7em;
   background-color: #2D9EE4;

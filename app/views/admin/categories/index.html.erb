@@ -1,26 +1,28 @@
-<h1>Listing Categories</h1>
+<div class="holder">
+  <h1>Listing Categories</h1>
 
-<%= link_to 'New category', new_admin_category_path, class: "pure-button" %>
+  <%= link_to 'New category', new_admin_category_path, class: "pure-button" %>
 
-<br />
-<br />
+  <br />
+  <br />
 
-<table class="pure-table pure-table-striped pure-table-horizontal">
-  <tr>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @categories.each do |category| %>
+  <table class="pure-table pure-table-striped pure-table-horizontal">
     <tr>
-      <td><%= category.description %></td>
-      <td><%= link_to 'Show', admin_category_path(category) %></td>
-      <td><%= link_to 'Edit', edit_admin_category_path(category) %></td>
-      <td><%= link_to 'Destroy', admin_category_path(category),
-              method: :delete,
-              data: { confirm: 'Warning. Deleting this category will delete all associated events & competitions.' } %></td>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
+
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.description %></td>
+        <td><%= link_to 'Show', admin_category_path(category) %></td>
+        <td><%= link_to 'Edit', edit_admin_category_path(category) %></td>
+        <td><%= link_to 'Destroy', admin_category_path(category),
+                method: :delete,
+                data: { confirm: 'Warning. Deleting this category will delete all associated events & competitions.' } %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

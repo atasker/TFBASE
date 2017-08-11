@@ -1,10 +1,12 @@
-<p>
-  <strong>Description:</strong> <%= @category.description %><br />
-  <strong>Created at:</strong> <%= @category.created_at %><br />
-  <strong>ID:</strong> <%= @category.id %>
-</p>
+<div class="holder">
+  <p>
+    <strong>Description:</strong> <%= @category.description %><br />
+    <strong>Created at:</strong> <%= @category.created_at %><br />
+    <strong>ID:</strong> <%= @category.id %>
+  </p>
 
-<%= link_to 'Edit', edit_admin_category_path(@category) %> |
-<%= link_to 'Back', admin_categories_path %>
+  <%= link_to 'Edit', edit_admin_category_path(@category) %> |
+  <%= link_to 'Back', admin_categories_path %>
 
-<%= render 'admin/events/events', events: @events %>
+  <%= render 'admin/events/events', events: @events %>
+</div>

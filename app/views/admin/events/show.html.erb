@@ -1,48 +1,50 @@
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Start time:</strong>
-  <%= @event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %>
-</p>
-
-<p>
-  <strong>Venue:</strong>
-  <%= Venue.find(@event.venue_id).name %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= Category.find(@event.category_id).description %>
-</p>
-
-<% if @event.competition_id != nil %>
+<div class="holder">
   <p>
-    <strong>Competition:</strong>
-    <%= Competition.find(@event.competition_id).name %>
+    <strong>Name:</strong>
+    <%= @event.name %>
   </p>
-  <% else %>
-  <p>
-    This event doesn't have a competition.
-  </p>
-<% end %>
 
-<% if @event.players.count != 0 %>
   <p>
-    <strong>Players:</strong><br />
-    <% @event.players.each do |player| %>
-      <%= player.name %><br />
-    <% end %>
+    <strong>Start time:</strong>
+    <%= @event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %>
   </p>
-  <% else %>
+
   <p>
-    This event doesn't have any players.
+    <strong>Venue:</strong>
+    <%= Venue.find(@event.venue_id).name %>
   </p>
-<% end %>
 
-<%= link_to 'Edit/Add Tickets to Event', edit_admin_event_path(@event) %> |
-<%= link_to 'Back', admin_events_path %>
+  <p>
+    <strong>Category:</strong>
+    <%= Category.find(@event.category_id).description %>
+  </p>
 
-<%= render 'admin/tickets/tickets', tickets: @tickets %>
+  <% if @event.competition_id != nil %>
+    <p>
+      <strong>Competition:</strong>
+      <%= Competition.find(@event.competition_id).name %>
+    </p>
+    <% else %>
+    <p>
+      This event doesn't have a competition.
+    </p>
+  <% end %>
+
+  <% if @event.players.count != 0 %>
+    <p>
+      <strong>Players:</strong><br />
+      <% @event.players.each do |player| %>
+        <%= player.name %><br />
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      This event doesn't have any players.
+    </p>
+  <% end %>
+
+  <%= link_to 'Edit/Add Tickets to Event', edit_admin_event_path(@event) %> |
+  <%= link_to 'Back', admin_events_path %>
+
+  <%= render 'admin/tickets/tickets', tickets: @tickets %>
+</div>
