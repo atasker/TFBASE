@@ -11,7 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
-.env
 
 # Ignore rmv files
 .ruby-version
