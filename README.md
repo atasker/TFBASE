@@ -50,6 +50,11 @@ Also you need to create `config/application.yml` file to set env. variables:
     # PSQL password (corresponds with database.yml credentials)
     APP_DATABASE_PASSWORD: "password"
 
+    # Deploy variables
+    DEPLOY_DOMAIN: "<server domain or IP address>"
+    DEPLOY_TO: "<path to the application directory on the server>"
+    DEPLOY_USER: "<username in the server to SSH to>"
+
 When done, run:
 
     $ bin/bundle install --without production

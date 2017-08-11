@@ -34,6 +34,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simple_form'
 gem 'cocoon'
 
+# Use Mina for deployment
+gem 'mina', '1.0.6', group: :development
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
