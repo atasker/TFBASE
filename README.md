@@ -40,6 +40,9 @@ Also you need to create `config/application.yml` file to set env. variables:
     ADMIN_NAME: "admin"
     ADMIN_PASSWORD: "password"
 
+    # Secret key (for secrets.yml)
+    SECRET_KEY_BASE: "bb9f009fb3fd28b15c5313b91c49978d70cc97067e61b58dfffba2814f54cf49eb0105615f27b7ba0bd96b6ac46c7ee0a23ac44bceeb9580e604d41dbdda5acc"
+
     # Login info for Gmail SMTP settings
     GMAIL_USER: "user@gmail.com"
     GMAIL_PASSWORD: "password"
