@@ -195,7 +195,7 @@ DEPENDENCIES
   jquery-rails
   mini_magick
   pg
-  pg_search
+  pg_search (~> 1.0.6)
   pry
   rails (= 4.2.1)
   sass-rails (~> 5.0)

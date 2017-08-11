@@ -21,7 +21,7 @@ gem 'humanizer'
 gem 'gon'
 
 # Search
-gem 'pg_search'
+gem 'pg_search', '~> 1.0.6'
 
 # Sitemap
 gem 'sitemap_generator'
