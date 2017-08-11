@@ -61,6 +61,7 @@ task :deploy do
     # instance of your project.
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
+    invoke :path_fix
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
@@ -77,6 +78,13 @@ task :deploy do
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   # run(:local){ say 'done' }
+end
+
+task :path_fix do
+  # command %{echo hello}
+  # command %{export PATH="$PATH:/usr/local/rvm/gems/ruby-2.0.0-p643/bin:/usr/local/rvm/gems/ruby-2.0.0-p643@global/bin:/usr/local/rvm/rubies/ruby-2.0.0-p643/bin"}
+  command %{source /etc/profile.d/rvm.sh}
+  # command %{echo $PATH}
 end
 
 # For help in making your deploy script, see the Mina documentation:
