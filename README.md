@@ -79,6 +79,7 @@ Deploy
 ------
 
 Run deploy with command `mina deploy`.
+Restart Unicorn manually (under root) after mina finish her job. (TODO)
 
 Before the first deploy to server you'll need to run 'mina setup'.
 Also you'll need create files 'database.yml' and 'application.yml' with correct
