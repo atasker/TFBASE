@@ -53,4 +53,13 @@
       <% end %>
     </div>
   </div>
+  <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+    <div class="l-box">
+      <h3>Homepage</h3>
+      <p><%= link_to "Top slides", admin_home_slides_path(slides_kind: 'top_slides') %></p>
+      <p><%= link_to "Featured events", admin_home_slides_path(slides_kind: 'featured_events') %></p>
+      <p><%= link_to "Top events", admin_home_slides_path(slides_kind: 'top_events') %></p>
+      <p><%= link_to "Popular events", admin_home_slides_path(slides_kind: 'popular_events') %></p>
+    </div>
+  </div>
 </div>

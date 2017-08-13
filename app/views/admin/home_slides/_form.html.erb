@@ -1,0 +1,92 @@
+<%= form_for @home_slide, url: (@home_slide.new_record? ? admin_home_slides_path(slides_kind: @kind_option) : admin_home_slide_path(slides_kind: @kind_option, id: @home_slide.id)) do |f| %>
+
+  <% if @home_slide.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@home_slide.errors.count, "error") %> prohibited
+        this home_slide from being saved:
+      </h2>
+      <ul>
+        <% @home_slide.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @slides_kind == HomeSlide::KIND_TOP_SLIDE %>
+  <p>
+    <% if @home_slide.huge_image? %><%= image_tag(@home_slide.huge_image.thumb.url) %><br><% end %>
+    <%= f.label :huge_image, "Image*" %>
+    <%= f.file_field :huge_image %>
+    <%= f.hidden_field :huge_image_cache %>
+    <br><small>Recommended image size is 1980x685 pixels or more.</small>
+  </p>
+  <% elsif @slides_kind == HomeSlide::KIND_FEATURED_EVENT %>
+  <p>
+    <% if @home_slide.avatar? %><%= image_tag(@home_slide.avatar.grid_small.url) %><br><% end %>
+    <%= f.label :avatar, "Image*" %>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+  </p>
+  <% elsif @slides_kind == HomeSlide::KIND_TOP_EVENT %>
+  <p>
+    <% if @home_slide.big_image? %><%= image_tag(@home_slide.big_image.other.url) %><br><% end %>
+    <%= f.label :big_image, "Image*" %>
+    <%= f.file_field :big_image %>
+    <%= f.hidden_field :big_image_cache %>
+  </p>
+  <% elsif @slides_kind == HomeSlide::KIND_POPULAR_EVENT %>
+  <p>
+    <% if @home_slide.tile_image? %><%= image_tag(@home_slide.tile_image.url) %><br><% end %>
+    <%= f.label :tile_image, "Image*" %>
+    <%= f.file_field :tile_image %>
+    <%= f.hidden_field :tile_image_cache %>
+  </p>
+  <% end %>
+
+  <p>
+    <%= f.radio_button :manual_input, false %>
+    <%= f.label :manual_input, "Enter an event ID" %>
+    <br>
+    <%= f.radio_button :manual_input, true %>
+    <%= f.label :manual_input, "or enter all the data manually" %>
+  </p>
+
+  <div id="home-slide-manual-input-off-fields" style="<%= @home_slide.manual_input? ? 'display: none' : '' %>">
+    <p>
+      <%= f.label :event_id, "ID of Event" %><br>
+      <%= f.number_field :event_id %>
+    </p>
+  </div>
+
+  <div id="home-slide-manual-input-on-fields" style="<%= @home_slide.manual_input? ? '' : 'display: none' %>">
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :url %><br>
+      <%= f.text_field :url %>
+    </p>
+    <p>
+      <%= f.label :place %><br>
+      <%= f.text_field :place %>
+    </p>
+    <p>
+      <%= f.label :start_date %><br>
+      <%= f.date_select :start_date, include_blank: true %>
+    </p>
+    <p>
+      <%= f.label :end_date %><br>
+      <%= f.date_select :end_date, include_blank: true %>
+    </p>
+    <p>
+      <%= f.label :category_id %><br>
+      <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+    </p>
+  </div>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

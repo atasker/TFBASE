@@ -1,0 +1,30 @@
+<div class="holder">
+  <h1>Listing <%= @kind_human_name %>s</h1>
+
+  <%= link_to "New #{@kind_human_name}", new_admin_home_slide_path(slides_kind: @kind_option), class: "pure-button" %>
+
+  <br />
+  <br />
+
+  <table class="pure-table pure-table-striped pure-table-horizontal">
+    <tr>
+      <th>Title</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>ID</th>
+    </tr>
+
+    <% @home_slides.each do |home_slide| %>
+      <tr>
+        <td><%= home_slide.view_title %></td>
+        <td><%= link_to 'Show', admin_home_slide_path(home_slide, slides_kind: @kind_option) %></td>
+        <td><%= link_to 'Edit', edit_admin_home_slide_path(home_slide, slides_kind: @kind_option) %></td>
+        <td><%= link_to 'Destroy', admin_home_slide_path(home_slide, slides_kind: @kind_option),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+        <td><%= home_slide.id %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

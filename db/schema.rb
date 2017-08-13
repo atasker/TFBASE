@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170813160644) do
   end
 
   add_index "home_slides", ["event_id"], name: "index_home_slides_on_event_id", using: :btree
+  add_index "home_slides", ["kind"], name: "index_home_slides_on_kind", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.string   "name"

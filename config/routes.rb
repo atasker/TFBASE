@@ -15,8 +15,6 @@ Rails.application.routes.draw do
   resources :players, only: [:show]
   resources :tickets, only: [:show]
 
-  root 'home#index'
-
   namespace :admin do
     root 'welcome#index'
     resources :categories
@@ -25,6 +23,19 @@ Rails.application.routes.draw do
     resources :players
     resources :tickets
     resources :venues
+    get '/homepage/', to: redirect('/admin')
   end
 
+  scope '/admin/homepage/:slides_kind' do
+    get '/', to: 'admin/home_slides#index', as: :admin_home_slides
+    post '/', to: 'admin/home_slides#create'
+    get 'new', to: 'admin/home_slides#new', as: :new_admin_home_slide
+    get ':id/edit', to: 'admin/home_slides#edit', as: :edit_admin_home_slide
+    get ':id', to: 'admin/home_slides#show', as: :admin_home_slide
+    patch ':id', to: 'admin/home_slides#update'
+    put ':id', to: 'admin/home_slides#update'
+    delete ':id', to: 'admin/home_slides#destroy'
+  end
+
+  root 'home#index'
 end
