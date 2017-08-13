@@ -14,24 +14,28 @@
     </div>
   </div>
   <div class="main-top__slider">
-    <% @top_slides.each do |slide| %>
-    <div class="main-top__item" style="background: url(<%= slide.bg_img_url %>)">
-      <div class="container-fluid">
-        <div class="main-top__events">
-          <div class="main-top__events-inner">
-            <div class="main-top__events-title"><%= slide.title %></div>
-            <div class="main-top__events-place"><%= slide.place %></div>
-            <div class="event-date">
-              <%= render partial: 'shared/event_date_item', locals: { the_date: slide.start_date } %>
-              <% if slide.end_date.present? %>
-                <%= render partial: 'shared/event_date_item', locals: { the_date: slide.end_date } %>
-              <% end %>
+    <% if @top_slides.any? %>
+      <% @top_slides.each do |slide| %>
+      <div class="main-top__item" style="background: url(<%= slide.bg_img_url %>)">
+        <div class="container-fluid">
+          <div class="main-top__events">
+            <div class="main-top__events-inner">
+              <div class="main-top__events-title"><%= slide.title %></div>
+              <div class="main-top__events-place"><%= slide.place %></div>
+              <div class="event-date">
+                <%= render partial: 'shared/event_date_item', locals: { the_date: slide.start_date } %>
+                <% if slide.end_date.present? %>
+                  <%= render partial: 'shared/event_date_item', locals: { the_date: slide.end_date } %>
+                <% end %>
+              </div>
+              <%= link_to 'Show Event', slide.event_url, :class => 'btn' %>
             </div>
-            <%= link_to 'Show Event', slide.event_url, :class => 'btn' %>
           </div>
         </div>
       </div>
-    </div>
+      <% end %>
+    <% else %>
+      <div class="main-top__item" style="background: url('<%= asset_path('top_slider_default_back.jpg') %>')"></div>
     <% end %>
   </div>
 </div>
@@ -80,6 +84,7 @@
     </div>
   </div>
 </div>
+<% if @featured_slides.any? %>
 <div class="main-featured">
   <div class="container-fluid">
     <h2>Featured Events</h2>
@@ -113,6 +118,8 @@
     </div>
   </div>
 </div>
+<% end %>
+<% if @top_events.any? %>
 <div class="main-top-events">
   <div class="container-fluid">
     <h2>Top events</h2>
@@ -169,6 +176,8 @@
     </div>
   </div>
 </div>
+<% end %>
+<% if @popular_events.any? %>
 <div class="main-popular-events">
   <div class="container-fluid">
     <h2>Popular Events</h2>
@@ -202,6 +211,7 @@
     </div>
   </div>
 </div>
+<% end %>
 <div class="main-services">
   <div class="container-fluid">
     <h2>Hospitality & Concierge services</h2>
@@ -215,6 +225,7 @@
       <% end %>
       <%#<p class="success_message">Thank you! Your message has been successfully sent. We will contact you very soon.</p>%>
     </div>
+    <% if @main_services.any? %>
     <h3>#Popular Events</h3>
     <div class="main-services__slider">
       <% @main_services.each do |serv| %>
@@ -226,6 +237,7 @@
         </div>
       <% end %>
     </div>
+    <% end %>
     <div class="main-benefits">
       <div class="main-benefits__item">
         <div class="main-benefits__icon">

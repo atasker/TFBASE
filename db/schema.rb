@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608123520) do
+ActiveRecord::Schema.define(version: 20170813160644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,27 @@ ActiveRecord::Schema.define(version: 20160608123520) do
 
   add_index "events_players", ["event_id", "player_id"], name: "index_events_players_on_event_id_and_player_id", using: :btree
   add_index "events_players", ["player_id", "event_id"], name: "index_events_players_on_player_id_and_event_id", using: :btree
+
+  create_table "home_slides", force: :cascade do |t|
+    t.integer  "kind",         default: 0, null: false
+    t.string   "huge_image"
+    t.string   "big_image"
+    t.string   "tile_image"
+    t.boolean  "manual_input"
+    t.integer  "event_id"
+    t.string   "title"
+    t.string   "url"
+    t.string   "avatar"
+    t.string   "place"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "category_id"
+    t.integer  "prior",        default: 9, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "home_slides", ["event_id"], name: "index_home_slides_on_event_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.string   "name"
@@ -117,6 +138,8 @@ ActiveRecord::Schema.define(version: 20160608123520) do
   add_foreign_key "events", "categories"
   add_foreign_key "events", "competitions"
   add_foreign_key "events", "venues"
+  add_foreign_key "home_slides", "categories"
+  add_foreign_key "home_slides", "events"
   add_foreign_key "players", "categories"
   add_foreign_key "tickets", "events"
 end
