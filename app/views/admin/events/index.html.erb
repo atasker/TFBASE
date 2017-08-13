@@ -23,4 +23,5 @@
     <%= link_to 'View Past Events', admin_events_path(search: "archive") %>
 
   <%= render 'events', events: @events %>
+  <%= paginate @events %>
 </div>

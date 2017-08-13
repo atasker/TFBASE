@@ -8,6 +8,7 @@ class Admin::EventsController < AdminController
     else
       @events = Event.where('start_time > ?', DateTime.now).order(:start_time)
     end
+    @events = @events.page(params[:page]).per(100)
     @event = Event.new
   end
 

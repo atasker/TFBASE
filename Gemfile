@@ -24,6 +24,9 @@ gem 'gon'
 # Search
 gem 'pg_search', '~> 1.0.6'
 
+# Pagination
+gem 'kaminari', '~> 1.0.1'
+
 # Sitemap
 gem 'sitemap_generator'
 
