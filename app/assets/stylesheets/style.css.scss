@@ -2988,6 +2988,18 @@ _::-webkit-:host:not(:root:root), .safari_only {
   color: #0000FF;
   background-color: #CCCCCC; }
 
+_::-webkit-:host:not(:root:root), .main-featured__slider .slick-track {
+  display: block; }
+
+_::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
+  display: block; }
+
+_::-webkit-full-page-media, _:future, :root .main-featured__slider .slick-track {
+  display: block; }
+
+_::-webkit-full-page-media, _:future, :root .main-popular-events__slider .slick-track {
+  display: block; }
+
 _::-webkit-:host:not(:root:root), input[type="text"] {
   line-height: inherit !important; }
 
