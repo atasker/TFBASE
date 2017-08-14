@@ -9,6 +9,7 @@
   <table class="pure-table pure-table-striped pure-table-horizontal">
     <tr>
       <th>Title</th>
+      <th>Prior.</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,6 +19,7 @@
     <% @home_slides.each do |home_slide| %>
       <tr>
         <td><%= home_slide.view_title %></td>
+        <td><%= home_slide.prior %></td>
         <td><%= link_to 'Show', admin_home_slide_path(home_slide, slides_kind: @kind_option) %></td>
         <td><%= link_to 'Edit', edit_admin_home_slide_path(home_slide, slides_kind: @kind_option) %></td>
         <td><%= link_to 'Destroy', admin_home_slide_path(home_slide, slides_kind: @kind_option),

@@ -1,37 +1,43 @@
 <div class="holder">
-  <p>
-    <strong>Title:</strong>
-    <%= @home_slide.view_title %>
-  </p>
-  <p>
-    <strong>Url:</strong>
-    <%= @home_slide.manual_input? ? @home_slide.url : event_path(@home_slide.event) %>
-  </p>
-  <p>
-    <strong>Place:</strong>
-    <%= @home_slide.view_place %>
-  </p>
-  <p>
-    <strong>Start date:</strong>
-    <% if (start_date = @home_slide.view_start_date).present? %>
-    <%= l start_date, format: "%d %B %Y" %>
-    <% end %>
-  </p>
-  <p>
-    <strong>End date:</strong>
-    <% if (end_date = @home_slide.view_end_date).present? %>
-    <%= l end_date, format: "%d %B %Y" %>
-    <% end %>
-  </p>
-  <p>
-    <strong>Category:</strong>
-    <%= @home_slide.view_category.try(:description) %>
-  </p>
-  <p>
-    <strong>Image:</strong><br>
-    <%= image_tag @home_slide.image.url %>
-  </p>
-
-  <%= link_to 'Edit', edit_admin_home_slide_path(@home_slide, slides_kind: @kind_option) %> |
-  <%= link_to 'Back', admin_home_slides_path(slides_kind: @kind_option) %>
+  <div class="pure-g">
+    <div class="pure-u-1 pure-u-lg-2-5">
+      <p>
+        <strong>Title:</strong>
+        <%= @home_slide.view_title %>
+      </p>
+      <p>
+        <strong>URL:</strong>
+        <% url = @home_slide.manual_input? ? @home_slide.url : event_path(@home_slide.event) %>
+        <%= link_to url, url, target: '_blank' %>
+      </p>
+      <p>
+        <strong>Place:</strong>
+        <%= @home_slide.view_place %>
+      </p>
+      <p>
+        <strong>Start date:</strong>
+        <% if (start_date = @home_slide.view_start_date).present? %>
+        <%= l start_date, format: "%d %B %Y" %>
+        <% end %>
+      </p>
+      <p>
+        <strong>End date:</strong>
+        <% if (end_date = @home_slide.view_end_date).present? %>
+        <%= l end_date, format: "%d %B %Y" %>
+        <% end %>
+      </p>
+      <p>
+        <strong>Category:</strong>
+        <%= @home_slide.view_category.try(:description) %>
+      </p>
+      <%= link_to 'Edit', edit_admin_home_slide_path(@home_slide, slides_kind: @kind_option) %> |
+      <%= link_to 'Back', admin_home_slides_path(slides_kind: @kind_option) %>
+    </div>
+    <div class="pure-u-1 pure-u-lg-3-5">
+      <p>
+        <strong>Image:</strong><br>
+        <%= image_tag @home_slide.image.url, :class => 'pure-img' %>
+      </p>
+    </div>
+  </div>
 </div>

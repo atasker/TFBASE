@@ -3,28 +3,26 @@ body {
 }
 
 .holder {
-  /*margin-right: auto;
-  margin-left: auto;*/
   padding-right: 20px;
+  padding-bottom: 20px;
   padding-left: 20px;
-  /*max-width: 780px;*/
 }
 
-.pure-menu {
+.top-menu {
   font-size: 1.7em;
   background-color: #2D9EE4;
 }
 
-.pure-menu-link {
+.top-menu-link {
   color: #fff;
 }
 
-.pure-menu-heading {
+.top-menu-heading {
   text-transform: capitalize;
   color: #fff;
 }
 
-.pure-menu-link:hover {
+.top-menu-link:hover {
   color: #2D9EE4;
 }
 
@@ -64,3 +62,11 @@ body {
 
 #element1 {display:inline-block;margin-right:10px; width:200px;}
 #element2 {display:inline-block; margin-right: 50%; width:200px;}
+
+.form-switcher input[type=radio] { display: none; }
+.form-switcher .pure-menu-link { border: 1px solid #666; cursor: pointer;}
+.form-switcher input:checked + .pure-menu-link {
+  border: 1px solid #2d9ee4;
+  background: #2d9ee4;
+  color: #fff;
+}

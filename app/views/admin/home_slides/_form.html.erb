@@ -16,42 +16,41 @@
 
   <% if @slides_kind == HomeSlide::KIND_TOP_SLIDE %>
   <p>
-    <% if @home_slide.huge_image? %><%= image_tag(@home_slide.huge_image.thumb.url) %><br><% end %>
+    <% if @home_slide.huge_image? %><%= image_tag(@home_slide.huge_image.thumb.url, :class => 'pure-img') %><br><% end %>
     <%= f.label :huge_image, "Image*" %>
     <%= f.file_field :huge_image %>
     <%= f.hidden_field :huge_image_cache %>
-    <br><small>Recommended image size is 1980x685 pixels or more.</small>
+    <br><small>Recommended image size is 1980x685 pixels or more. Use only dark images to avoid bad readability of slide text.</small>
   </p>
   <% elsif @slides_kind == HomeSlide::KIND_FEATURED_EVENT %>
   <p>
-    <% if @home_slide.avatar? %><%= image_tag(@home_slide.avatar.grid_small.url) %><br><% end %>
+    <% if @home_slide.avatar? %><%= image_tag(@home_slide.avatar.grid_small.url, :class => 'pure-img') %><br><% end %>
     <%= f.label :avatar, "Image*" %>
     <%= f.file_field :avatar %>
     <%= f.hidden_field :avatar_cache %>
   </p>
   <% elsif @slides_kind == HomeSlide::KIND_TOP_EVENT %>
   <p>
-    <% if @home_slide.big_image? %><%= image_tag(@home_slide.big_image.other.url) %><br><% end %>
+    <% if @home_slide.big_image? %><%= image_tag(@home_slide.big_image.other.url, :class => 'pure-img') %><br><% end %>
     <%= f.label :big_image, "Image*" %>
     <%= f.file_field :big_image %>
     <%= f.hidden_field :big_image_cache %>
   </p>
   <% elsif @slides_kind == HomeSlide::KIND_POPULAR_EVENT %>
   <p>
-    <% if @home_slide.tile_image? %><%= image_tag(@home_slide.tile_image.url) %><br><% end %>
+    <% if @home_slide.tile_image? %><%= image_tag(@home_slide.tile_image.url, :class => 'pure-img') %><br><% end %>
     <%= f.label :tile_image, "Image*" %>
     <%= f.file_field :tile_image %>
     <%= f.hidden_field :tile_image_cache %>
   </p>
   <% end %>
 
-  <p>
-    <%= f.radio_button :manual_input, false %>
-    <%= f.label :manual_input, "Enter an event ID" %>
-    <br>
-    <%= f.radio_button :manual_input, true %>
-    <%= f.label :manual_input, "or enter all the data manually" %>
-  </p>
+  <div class="form-switcher pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><%= f.radio_button :manual_input, false %><label for="home_slide_manual_input_false" class="pure-menu-link">Enter an event ID</label></li>
+      <li class="pure-menu-item"><%= f.radio_button :manual_input, true %><label for="home_slide_manual_input_true" class="pure-menu-link">Enter all the data manually</label></li>
+    </ul>
+  </div>
 
   <div id="home-slide-manual-input-off-fields" style="<%= @home_slide.manual_input? ? 'display: none' : '' %>">
     <p>
@@ -62,11 +61,11 @@
 
   <div id="home-slide-manual-input-on-fields" style="<%= @home_slide.manual_input? ? '' : 'display: none' %>">
     <p>
-      <%= f.label :title %><br>
+      <%= f.label :title, "Title*" %><br>
       <%= f.text_field :title %>
     </p>
     <p>
-      <%= f.label :url %><br>
+      <%= f.label :url, "URL*" %><br>
       <%= f.text_field :url %>
     </p>
     <p>
@@ -87,6 +86,11 @@
     </p>
   </div>
   <p>
-    <%= f.submit %>
+    <%= f.label :prior, "Priority" %><br>
+    <%= f.number_field :prior %>
+    <br><small><%= @kind_human_name %>s with smaller priority will be before <%= @kind_human_name %>s with bigger priority.</small>
+  </p>
+  <p>
+    <%= f.submit ((@home_slide.new_record? ? "Create" : "Update") + " #{@kind_human_name}") %>
   </p>
 <% end %>
