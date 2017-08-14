@@ -23,6 +23,8 @@ class HomeSlide < ActiveRecord::Base
 
   validates :title, :url, presence: true, if: :manual_input?
 
+  before_save :clean_unused_fields
+
   scope :ordered, -> { order(prior: :asc, id: :asc) }
 
   def image
@@ -49,4 +51,25 @@ class HomeSlide < ActiveRecord::Base
   def view_start_date; manual_input? ? start_date : event.start_time end
   def view_end_date; manual_input? ? end_date : nil end
   def view_category; manual_input? ? category : event.category end
+
+  private
+
+  # before save
+  def clean_unused_fields
+    remove_huge_image! if huge_image.present? && kind != HomeSlide::KIND_TOP_SLIDE
+    remove_avatar! if avatar.present? && kind != HomeSlide::KIND_FEATURED_EVENT
+    remove_big_image! if big_image.present? && kind != HomeSlide::KIND_TOP_EVENT
+    remove_tile_image! if tile_image.present? && kind != HomeSlide::KIND_POPULAR_EVENT
+
+    if manual_input?
+      self.event = nil unless event.nil?
+    else
+      self.title = nil unless title.nil?
+      self.url = nil unless url.nil?
+      self.place = nil unless place.nil?
+      self.start_date = nil unless start_date.nil?
+      self.end_date = nil unless end_date.nil?
+      self.category = nil unless category.nil?
+    end
+  end
 end

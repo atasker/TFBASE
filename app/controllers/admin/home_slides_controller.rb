@@ -1,24 +1,28 @@
 class Admin::HomeSlidesController < AdminController
-  before_filter :determine_kind
 
   def index
+    determine_kind
     @home_slides = HomeSlide.where(kind: @slides_kind).ordered
   end
 
   def show
+    determine_kind
     @home_slide = HomeSlide.where(kind: @slides_kind).find(params[:id])
   end
 
   def new
+    determine_kind
     @home_slide = HomeSlide.new kind: @slides_kind
     @home_slide.manual_input = false
   end
 
   def edit
+    determine_kind
     @home_slide = HomeSlide.where(kind: @slides_kind).find(params[:id])
   end
 
   def create
+    determine_kind
     @home_slide = HomeSlide.new(home_slide_params)
     @home_slide.kind = @slides_kind
 
@@ -31,6 +35,7 @@ class Admin::HomeSlidesController < AdminController
   end
 
   def update
+    determine_kind
     @home_slide = HomeSlide.where(kind: @slides_kind).find(params[:id])
 
     if @home_slide.update(home_slide_params)
@@ -42,6 +47,7 @@ class Admin::HomeSlidesController < AdminController
   end
 
   def destroy
+    determine_kind
     @home_slide = HomeSlide.where(kind: @slides_kind).find(params[:id])
     @home_slide.destroy
     flash[:notice] = "#{@kind_human_name} successfully deleted"
