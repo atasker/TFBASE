@@ -1,7 +1,7 @@
 class Admin::CompetitionsController < AdminController
 
   def index
-    @competitions = Competition.all
+    @competitions = Competition.all.includes(:category)
   end
 
   def show

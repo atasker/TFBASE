@@ -8,13 +8,14 @@ class Admin::EventsController < AdminController
     else
       @events = Event.where('start_time > ?', DateTime.now).order(:start_time)
     end
+    @events = @events.includes(:venue, :category)
     @events = @events.page(params[:page]).per(100)
     @event = Event.new
   end
 
   def show
     @event = Event.find(params[:id])
-    @tickets = @event.tickets
+    @tickets = @event.tickets.includes(:event)
   end
 
   def new

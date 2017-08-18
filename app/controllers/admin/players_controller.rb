@@ -1,7 +1,7 @@
 class Admin::PlayersController < AdminController
 
   def index
-    @players = Player.all
+    @players = Player.all.includes(:category)
   end
 
   def show

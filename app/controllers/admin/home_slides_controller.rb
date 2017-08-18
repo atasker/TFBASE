@@ -2,7 +2,7 @@ class Admin::HomeSlidesController < AdminController
 
   def index
     determine_kind
-    @home_slides = HomeSlide.where(kind: @slides_kind).ordered
+    @home_slides = HomeSlide.where(kind: @slides_kind).ordered.includes(:event)
   end
 
   def show

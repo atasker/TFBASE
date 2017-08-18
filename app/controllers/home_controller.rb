@@ -3,11 +3,11 @@ class HomeController < BaseFrontendController
   def index
     @is_homepage = true
 
-    @top_slides = HomeSlide.where(kind: HomeSlide::KIND_TOP_SLIDE).ordered
-    @featured_slides = HomeSlide.where(kind: HomeSlide::KIND_FEATURED_EVENT).ordered
-    @top_events = HomeSlide.where(kind: HomeSlide::KIND_TOP_EVENT).ordered.limit(4)
-    @popular_events = HomeSlide.where(kind: HomeSlide::KIND_POPULAR_EVENT).ordered
-    @main_services = HomeLineItem.ordered
+    @top_slides = HomeSlide.where(kind: HomeSlide::KIND_TOP_SLIDE).ordered.includes(:category, event: [:venue, :category])
+    @featured_slides = HomeSlide.where(kind: HomeSlide::KIND_FEATURED_EVENT).ordered.includes(:category, event: [:venue, :category])
+    @top_events = HomeSlide.where(kind: HomeSlide::KIND_TOP_EVENT).ordered.limit(4).includes(:category, event: [:venue, :category])
+    @popular_events = HomeSlide.where(kind: HomeSlide::KIND_POPULAR_EVENT).ordered.includes(:category, event: [:venue, :category])
+    @main_services = HomeLineItem.ordered.includes(:competition, :player)
 
     # Main categories (line under top slider)
     @main_categories = {}

@@ -1,7 +1,7 @@
 class Admin::HomeLineItemsController < AdminController
 
   def index
-    @home_line_items = HomeLineItem.ordered
+    @home_line_items = HomeLineItem.ordered.includes(:competition, :player)
   end
 
   def show

@@ -2,8 +2,8 @@
   <td><%= event.id %></td>
   <td><%= event.name %></td>
   <td><%= event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %></td>
-  <td><%= Venue.find(event.venue_id).name %></td>
-  <td><%= Category.find(event.category_id).description %></td>
+  <td><%= event.venue ? event.venue.name : '' %></td>
+  <td><%= event.category ? event.category.description : '' %></td>
   <td><%= link_to 'Show', admin_event_path(event) %></td>
   <td><%= link_to 'Edit', edit_admin_event_path(event) %></td>
   <td><%= link_to 'Destroy', admin_event_path(event),

@@ -19,7 +19,7 @@
     <% @players.each do |player| %>
       <tr>
         <td><%= player.name %></td>
-        <td><%= Category.find(player.category_id).description %></td>
+        <td><%= player.category ? player.category.description : '' %></td>
         <td><%= link_to 'Show', admin_player_path(player) %></td>
         <td><%= link_to 'Edit', edit_admin_player_path(player) %></td>
         <td><%= link_to 'Destroy', admin_player_path(player),

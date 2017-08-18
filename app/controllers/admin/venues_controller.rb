@@ -6,7 +6,7 @@ class Admin::VenuesController < AdminController
 
   def show
     @venue = Venue.find(params[:id])
-    @events = @venue.events
+    @events = @venue.events.includes(:venue, :category)
   end
 
   def new

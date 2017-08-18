@@ -1,7 +1,7 @@
 class Admin::TicketsController < AdminController
 
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.all.includes(:event)
   end
 
   def show
