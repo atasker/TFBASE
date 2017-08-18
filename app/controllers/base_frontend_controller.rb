@@ -12,12 +12,14 @@ class BaseFrontendController < ApplicationController
       if @page_meta
         @page_meta_carrier = {
           title: "#{@page_meta[:title]} Tickets - #{def_title}",
-          description: "Buy #{@page_meta[:description]} tickets from the official Ticket-Finders.com site."
+          description: "Buy #{@page_meta[:description]} tickets from the official Ticket-Finders.com site.",
+          image: @page_meta[:image]
         }
       else
         @page_meta_carrier = {
           title: def_title,
-          description: 'Buy tickets to concerts, sports, arts, theater and hard to find sold out events worldwide.'
+          description: 'Buy tickets to concerts, sports, arts, theater and hard to find sold out events worldwide.',
+          image: nil
         }
       end
     end

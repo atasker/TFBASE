@@ -25,7 +25,8 @@ class CompetitionsController < BaseFrontendController
     @players = @tmp.sort { |a,b| a.name <=> b.name }
 
     @page_meta = { title: @competition.name,
-                   description: @competition.name }
+                   description: @competition.name,
+                   image: @competition.avatar.grid_large.url }
 
     add_breadcrumb 'Categories', categories_path
     add_breadcrumb @category.description, category_path(@category)

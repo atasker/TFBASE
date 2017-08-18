@@ -34,7 +34,8 @@ class PlayersController < BaseFrontendController
     @events = @tmp.sort { |a,b| a.start_time <=> b.start_time }
 
     @page_meta = { title: @player.name,
-                   description: @player.name }
+                   description: @player.name,
+                   image: @player.avatar.grid_large.url }
 
     add_breadcrumb 'Categories', categories_path
     add_breadcrumb @category.description, category_path(@category)

@@ -36,8 +36,15 @@ class EventsController < BaseFrontendController
     @event_have_tickets = @tickets.sum(:quantity) > 0
     @sorted_tickets = @tickets.sort { |a,b| a.price <=> b.price }
 
+    page_meta_image_url = nil
+    if @competition
+      page_meta_image_url = @competition.avatar.grid_large.url
+    elsif @player
+      page_meta_image_url = @player.avatar.grid_large.url
+    end
     @page_meta = { title: @event.name,
-                   description: @event.name }
+                   description: @event.name,
+                   image: page_meta_image_url }
 
     if @category
       add_breadcrumb 'Categories', categories_path
