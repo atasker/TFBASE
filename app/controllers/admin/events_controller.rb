@@ -6,7 +6,7 @@ class Admin::EventsController < AdminController
     elsif params[:search]
       @events = Event.search(params[:search]).order(:start_time)
     else
-      @events = Event.where('start_time > ?', DateTime.now).order(:start_time)
+      @events = Event.actual.order(:start_time)
     end
     @events = @events.includes(:venue, :category)
     @events = @events.page(params[:page]).per(100)

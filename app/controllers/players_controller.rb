@@ -12,15 +12,17 @@ class PlayersController < BaseFrontendController
       @all_events = Event.all
     end
 
-    @event_count_before_filtration = @all_events.count
+    @event_count_before_filtration = @all_events.actual.count
 
     if params[:dt].present?
       begin
         @start_date = Date.parse params[:dt]
         @all_events = @all_events.where("start_time >= ?", @start_date)
       rescue
-        # just do nothing
+        @all_events = @all_events.actual
       end
+    else
+      @all_events = @all_events.actual
     end
 
     @tmp = []

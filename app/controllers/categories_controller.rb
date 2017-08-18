@@ -11,15 +11,17 @@ class CategoriesController < BaseFrontendController
     @players = @category.players.order(name: :asc)
     @events = @category.events.order(start_time: :asc)
 
-    @event_count_before_filtration = @events.count
+    @event_count_before_filtration = @events.actual.count
 
     if params[:dt].present?
       begin
         @start_date = Date.parse params[:dt]
         @events = @events.where("events.start_time >= ?", @start_date)
       rescue
-        # just do nothing
+        @events = @events.actual
       end
+    else
+      @events = @events.actual
     end
 
     add_breadcrumb 'Categories', categories_path

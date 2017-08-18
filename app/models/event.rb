@@ -28,6 +28,8 @@ class Event < ActiveRecord::Base
       competition: :name
     }
 
+  scope :actual, -> { where('events.start_time >= ?', DateTime.now) }
+
   def self.text_search(query)
     if query.present?
       search(query)

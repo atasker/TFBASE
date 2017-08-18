@@ -47,7 +47,7 @@ module ApplicationHelper
       end
     end
     target_venues.each do |venue|
-      venue.events.each do |event|
+      venue.events.actual.each do |event|
         target_events << event unless event == master
       end
     end

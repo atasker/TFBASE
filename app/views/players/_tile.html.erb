@@ -11,7 +11,7 @@
     </div>
     <div class="tickets__title"><%= player.name %></div>
     <div class="tickets__events">
-      <% events_count = player.events.count %>
+      <% events_count = player.events.actual.count %>
       <span><%= events_count %></span> <%= 'Event'.pluralize events_count %>
     </div>
   <% end %>
