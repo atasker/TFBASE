@@ -35,7 +35,7 @@
         <h2>Buy Tickets</h2>
         <div class="buy__list-inner">
           <div class="buy__list-scroller nano">
-            <div class="buy__list-scroll nano-content">
+            <div class="buy__list-scroll nano-content" style="right: 0;">
               <% @sorted_tickets.each do |ticket| %>
                 <%= render partial: 'tickets/item', locals: { ticket: ticket } %>
               <% end %>

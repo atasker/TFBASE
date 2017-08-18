@@ -2157,6 +2157,12 @@ a.breadcrumbs__item:after {
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
   padding: 5px 0; }
+  .tickets__list.row:before {
+    width: 0; height: 0; }
+    // flexbox using :before element as part of his blocks
+    // in this case you have empty gap in the first row
+    // explain: when you have two blocks with width 50% and one block 1px width
+    //          you get the second 50% width block on the next line
 
 .tickets__item {
   padding: 0;
