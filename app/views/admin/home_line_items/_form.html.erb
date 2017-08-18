@@ -51,13 +51,13 @@
   <div id="home-line-item-competition-kind-fields" style="<%= @home_line_item.kind != HomeLineItem::KIND_COMPETITION ? 'display: none' : '' %>">
     <p>
       <%= f.label :competition_id %><br>
-      <%= f.collection_select(:competition_id, Competition.order(name: :asc), :id, :name, prompt: true) %>
+      <%= f.collection_select(:competition_id, Competition.order(name: :asc), :id, :name, { prompt: true }, { :class => 'hidden-chzn-select' }) %>
     </p>
   </div>
   <div id="home-line-item-player-kind-fields" style="<%= @home_line_item.kind != HomeLineItem::KIND_PLAYER ? 'display: none' : '' %>">
     <p>
       <%= f.label :player_id %><br>
-      <%= f.collection_select(:player_id, Player.order(name: :asc), :id, :name, prompt: true) %>
+      <%= f.collection_select(:player_id, Player.order(name: :asc), :id, :name, { prompt: true }, { :class => 'hidden-chzn-select', width: '200px' }) %>
     </p>
   </div>
 

@@ -26,17 +26,17 @@
 
   <p>
     <%= f.label :venue_id %><br>
-    <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
+    <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
   </p>
 
   <p>
     <%= f.label :category_id %><br>
-    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, { prompt: true }, { :class => 'chzn-select' }) %>
   </p>
 
   <p>
     <%= f.label :competition_id %><br>
-    <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
+    <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
   </p>
 
   <p>
@@ -53,7 +53,7 @@
 
   <p>
     <%= f.label :players %>
-    <%= f.association :players, :multiple => true, label: false %>
+    <%= f.association :players, :multiple => true, label: false, input_html: { :class => 'chzn-select' } %>
   </p>
   <h3>
     Tickets

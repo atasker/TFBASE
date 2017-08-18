@@ -26,7 +26,7 @@
 
   <p>
     <%= f.label :category_id %><br>
-    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
+    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, { prompt: true }, { :class => 'chzn-select' }) %>
   </p>
 
   <!-- if image already exists for this competition, show image -->

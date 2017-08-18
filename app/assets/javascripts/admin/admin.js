@@ -14,9 +14,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require cocoon
+//= require chosen.jquery
 // do not require_tree .
 
 $(document).on('ready turbolinks:load', function() {
+
+  $('.chzn-select').chosen();
+
+  $("tbody.event_items").on('cocoon:after-insert', function(e, insertedItem) {
+    insertedItem.find('.chzn-select').chosen();
+  });
 
   if ($(".form-switcher").length) {
     $(".form-switcher input").change(function(evnt) {
@@ -26,7 +33,9 @@ $(document).on('ready turbolinks:load', function() {
         var panelid = $(this).data('panel-id');
         $("#" + panelid).toggle(panelid == activePanelId);
       });
+      $("#" + activePanelId + " .hidden-chzn-select").chosen();
     });
+    $("#" + $(".form-switcher input:checked").data('panel-id') + " .hidden-chzn-select").chosen();
   }
 
 });

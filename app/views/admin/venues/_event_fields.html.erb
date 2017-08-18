@@ -1,6 +1,6 @@
 <tr class="nested-fields">
     <td>
-      <%= f.input :name %>
+      <%= f.text_field :name %>
     </td>
 
     <td>
@@ -8,31 +8,24 @@
     </td>
 
     <td>
-      <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
-    </td>
-
-    <td>
-      <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
-    </td>
-
-    <td>
-      <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
+      <%= f.label :category_id %><br>
+      <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, { prompt: true }, { :class => 'chzn-select' }) %>
+      <br><br>
+      <%= f.label :competition_id %><br>
+      <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
     </td>
 
     <td class="center">
-      <%= f.check_box :sports %>
-    </td>
-
-    <td class="center">
-      <%= f.check_box :priority %>
+      <%= f.check_box :sports %> <%= f.label :sports, 'Sports' %><br><br>
+      <%= f.check_box :priority %> <%= f.label :priority, 'Priority' %>
     </td>
 
     <!-- habtm addition -->
 
     <td>
-      <%= f.association :players, :multiple => true, label: false %>
+      <%= f.association :players, :multiple => true, label: false, input_html: { :class => 'chzn-select' } %>
     </td>
     <td>
-      <%= link_to_remove_association "remove event", f %>
+      <%= link_to_remove_association "remove<br>event".html_safe, f %>
   </td>
 </tr>

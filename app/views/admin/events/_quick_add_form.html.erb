@@ -15,19 +15,20 @@
   <% end %>
   <table class="pure-table pure-table-striped pure-table-horizontal">
     <thead>
-      <th>Name</th>
-      <th>Start time</th>
-      <th>Venue</th>
-      <th>Category</th>
-      <th>Competition</th>
-      <th>Sports</th>
-      <th>Priority</th>
+      <th>Name/Venue</th>
+      <th width="110px">Start time</th>
+      <th></th>
+      <th></th>
       <th>Players</th>
       <th></th>
     </thead>
     <tr>
       <td>
+        <%= f.label :name %><br>
         <%= f.text_field :name %>
+        <br><br>
+        <%= f.label :venue_id %><br>
+        <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
       </td>
 
       <td>
@@ -35,33 +36,27 @@
       </td>
 
       <td>
-        <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, prompt: true) %>
-      </td>
-
-      <td>
-        <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, prompt: true) %>
-      </td>
-
-      <td>
-        <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, prompt: true) %>
+        <%= f.label :category_id %><br>
+        <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, { prompt: true }, { :class => 'chzn-select' }) %>
+        <br><br>
+        <%= f.label :competition_id %><br>
+        <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
       </td>
 
       <td class="center">
-        <%= f.check_box :sports %>
-      </td>
-
-      <td class="center">
-        <%= f.check_box :priority %>
+        <%= f.check_box :sports %><br><%= f.label :sports, 'Sports' %><br><br>
+        <%= f.check_box :priority %><br><%= f.label :priority, 'Priority' %>
       </td>
 
       <!-- habtm addition -->
 
       <td>
-        <%= f.association :players, :multiple => true, label: false %>
+        <%= f.label :players %>
+        <%= f.association :players, :multiple => true, label: false, input_html: { :class => 'chzn-select' } %>
       </td>
 
       <td>
-        <%= f.submit %>
+        <%= f.submit 'Create' %>
       </td>
     </tr>
   </table>
