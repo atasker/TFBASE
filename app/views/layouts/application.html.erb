@@ -7,7 +7,25 @@
     <meta name="google-site-verification" content="a0y8f0wF8qt5fmiYeHmHRtpe811seo4JMJSHp9I4PXk" />
     <title><%= page_meta[:title] %></title>
     <meta name='description' content="<%= page_meta[:description] %>">
-    <%= favicon_link_tag '/favicon.ico' %>
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@TicketfinderInt">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= page_meta[:title] %>">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <%# meta property="og:image" content=(seo.image || asset_url('ico/310.png')) %>
+    <% if page_meta[:description].present? %><meta property="og:description" content="<%= page_meta[:description] %>"><% end %>
+    <meta property="og:site_name" content="TicketFinders">
+    <%# <meta property="fb:app_id" content="00000000000">%>
+    <%= favicon_link_tag '/favicon.ico', rel: 'icon', sizes: '16x16 32x32 48x48 64x64' %>
+    <!--[if IE]><%= favicon_link_tag '/favicon.ico' %><![endif]-->
+    <link rel="apple-touch-icon" href="<%= asset_path('/ico/ticket-finders-apple-touch-icon.png') %>">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="<%= asset_path('/ico/ticket-finders-msapp-square-big-ico.png') %>">
+    <meta name="msapplication-square70x70logo" content="<%= asset_path('/ico/ticket-finders-msapp-square-small-ico.png') %>" />
+    <meta name="msapplication-square150x150logo" content="<%= asset_path('/ico/ticket-finders-msapp-square-middle-ico.png') %>" />
+    <meta name="msapplication-wide310x150logo" content="<%= asset_path('/ico/ticket-finders-msapp-wide-big-ico.png') %>" />
+    <meta name="msapplication-square310x310logo" content="<%= asset_path('/ico/ticket-finders-msapp-square-big-ico.png') %>" />
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,400,700" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
     <!--[if lt IE 9]>
@@ -82,8 +100,8 @@
             &copy;TicketFinders International LLC Copyright 2016
           </div>
           <div class="socials">
-            <a href="https://www.facebook.com/ticketfindersinternational" class="socials__item twitter"></a>
-            <a href="https://twitter.com/ticketfinderint" class="socials__item fb"></a>
+            <a href="https://twitter.com/ticketfinderint" class="socials__item twitter"></a>
+            <a href="https://www.facebook.com/ticketfindersinternational" class="socials__item fb"></a>
             <a href="https://www.instagram.com/ticketfindersinternational" class="socials__item instagram"></a>
           </div>
         </div>
