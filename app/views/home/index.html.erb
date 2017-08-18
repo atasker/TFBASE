@@ -229,10 +229,19 @@
     <h3>#Popular Events</h3>
     <div class="main-services__slider">
       <% @main_services.each do |serv| %>
+        <% url = case serv.kind
+                 when HomeLineItem::KIND_COMPETITION then competition_path(serv.competition)
+                 when HomeLineItem::KIND_PLAYER then player_path(serv.player)
+                 else serv.url
+                 end %>
         <div class="main-services__item">
-          <%= link_to serv.url do %>
-            <div class="main-services__img" style="background:url('<%= serv.bg_img_url %>')"></div>
-            <%= serv.name %>
+          <%= link_to url do %>
+            <% if serv.image.present? %>
+            <div class="main-services__img" style="background:url('<%= serv.image.grid_small.url %>')"></div>
+            <% else %>
+            <div class="main-services__img"></div>
+            <% end %>
+            <%= serv.view_title %>
           <% end %>
         </div>
       <% end %>

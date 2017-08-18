@@ -18,12 +18,14 @@
 
 $(document).on('ready turbolinks:load', function() {
 
-  var home_slide_manual_switchers = $("#home_slide_manual_input_false, #home_slide_manual_input_true");
-  if (home_slide_manual_switchers.length) {
-    home_slide_manual_switchers.change(function(evnt) {
+  if ($(".form-switcher").length) {
+    $(".form-switcher input").change(function(evnt) {
       var switcher = $(this);
-      $("#home-slide-manual-input-off-fields").toggle(switcher.val() == 'false');
-      $("#home-slide-manual-input-on-fields").toggle(switcher.val() == 'true');
+      var activePanelId = switcher.data('panel-id');
+      switcher.closest(".form-switcher").find("input").each(function(indx) {
+        var panelid = $(this).data('panel-id');
+        $("#" + panelid).toggle(panelid == activePanelId);
+      });
     });
   }
 

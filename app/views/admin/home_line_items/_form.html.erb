@@ -1,0 +1,73 @@
+<%= form_for @home_line_item, url: (@home_line_item.new_record? ? admin_home_line_items_path : admin_home_line_item_path(@home_line_item)) do |f| %>
+
+  <% if @home_line_item.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@home_line_item.errors.count, "error") %> prohibited
+        this home_line_item from being saved:
+      </h2>
+      <ul>
+        <% @home_line_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-switcher pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item">
+        <%= f.radio_button :kind, HomeLineItem::KIND_MANUAL, data: { 'panel-id' => "home-line-item-manual-kind-fields" } %>
+        <label for="home_line_item_kind_<%= HomeLineItem::KIND_MANUAL %>" class="pure-menu-link">Manual</label>
+      </li>
+      <li class="pure-menu-item">
+        <%= f.radio_button :kind, HomeLineItem::KIND_COMPETITION, data: { 'panel-id' => "home-line-item-competition-kind-fields" } %>
+        <label for="home_line_item_kind_<%= HomeLineItem::KIND_COMPETITION %>" class="pure-menu-link">Competition</label>
+      </li>
+      <li class="pure-menu-item">
+        <%= f.radio_button :kind, HomeLineItem::KIND_PLAYER, data: { 'panel-id' => "home-line-item-player-kind-fields" } %>
+        <label for="home_line_item_kind_<%= HomeLineItem::KIND_PLAYER %>" class="pure-menu-link">Player</label>
+      </li>
+    </ul>
+  </div>
+
+  <div id="home-line-item-manual-kind-fields" style="<%= @home_line_item.kind != HomeLineItem::KIND_MANUAL ? 'display: none' : '' %>">
+    <p>
+      <%= f.label :title, "Title*" %><br>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :url, "URL*" %><br>
+      <%= f.text_field :url %>
+    </p>
+    <p>
+      <% if @home_line_item.avatar? %><%= image_tag(@home_line_item.avatar.grid_small.url, height: 140) %><br><% end %>
+      <%= f.label :avatar, "Image*" %>
+      <%= f.file_field :avatar %>
+      <%= f.hidden_field :avatar_cache %>
+    </p>
+  </div>
+
+  <div id="home-line-item-competition-kind-fields" style="<%= @home_line_item.kind != HomeLineItem::KIND_COMPETITION ? 'display: none' : '' %>">
+    <p>
+      <%= f.label :competition_id %><br>
+      <%= f.collection_select(:competition_id, Competition.order(name: :asc), :id, :name, prompt: true) %>
+    </p>
+  </div>
+  <div id="home-line-item-player-kind-fields" style="<%= @home_line_item.kind != HomeLineItem::KIND_PLAYER ? 'display: none' : '' %>">
+    <p>
+      <%= f.label :player_id %><br>
+      <%= f.collection_select(:player_id, Player.order(name: :asc), :id, :name, prompt: true) %>
+    </p>
+  </div>
+
+  <p>
+    <%= f.label :prior, "Priority" %><br>
+    <%= f.number_field :prior %>
+    <br><small>"#Popular Event" line items with smaller priority will be before "#Popular Event" line items with bigger priority.</small>
+  </p>
+
+  <p>
+    <%= f.submit ((@home_line_item.new_record? ? "Create" : "Update") + " \"#Popular Event\" line item") %>
+  </p>
+<% end %>

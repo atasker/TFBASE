@@ -1,0 +1,33 @@
+<div class="holder">
+  <p>
+    <strong>Image:</strong><br>
+    <%= image_tag @home_line_item.image.grid_small.url, height: 140 %>
+  </p>
+  <% if @home_line_item.kind == HomeLineItem::KIND_COMPETITION %>
+    <p>
+      <strong>Competition:</strong>
+      <%= link_to @home_line_item.competition.name, admin_competition_path(@home_line_item.competition) %>
+    </p>
+  <% elsif @home_line_item.kind == HomeLineItem::KIND_PLAYER %>
+    <p>
+      <strong>Player:</strong>
+      <%= link_to @home_line_item.player.name, admin_player_path(@home_line_item.player) %>
+    </p>
+  <% else %>
+    <p>
+      <strong>Title:</strong>
+      <%= @home_line_item.view_title %>
+    </p>
+  <% end %>
+  <p>
+    <strong>URL:</strong>
+    <% url = case @home_line_item.kind
+             when HomeLineItem::KIND_COMPETITION then competition_path(@home_line_item.competition)
+             when HomeLineItem::KIND_PLAYER then player_path(@home_line_item.player)
+             else @home_line_item.url
+             end %>
+    <%= link_to url, url, target: '_blank' %>
+  </p>
+  <%= link_to 'Edit', edit_admin_home_line_item_path(@home_line_item) %> |
+  <%= link_to 'Back', admin_home_line_items_path %>
+</div>

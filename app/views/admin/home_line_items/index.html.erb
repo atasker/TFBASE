@@ -1,0 +1,34 @@
+<div class="holder">
+  <h1>Listing "#Popular Event" line items</h1>
+
+  <%= link_to "New \"#Popular Event\" line item", new_admin_home_line_item_path, class: "pure-button" %>
+
+  <br />
+  <br />
+
+  <table class="pure-table pure-table-striped pure-table-horizontal">
+    <tr>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Prior.</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>ID</th>
+    </tr>
+
+    <% @home_line_items.each do |home_line_item| %>
+      <tr>
+        <td><%= image_tag home_line_item.image.grid_small.url, height: 100 %></td>
+        <td><%= home_line_item.view_title %></td>
+        <td><%= home_line_item.prior %></td>
+        <td><%= link_to 'Show', admin_home_line_item_path(home_line_item) %></td>
+        <td><%= link_to 'Edit', edit_admin_home_line_item_path(home_line_item) %></td>
+        <td><%= link_to 'Destroy', admin_home_line_item_path(home_line_item),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+        <td><%= home_line_item.id %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

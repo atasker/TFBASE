@@ -47,8 +47,14 @@
 
   <div class="form-switcher pure-menu pure-menu-horizontal">
     <ul class="pure-menu-list">
-      <li class="pure-menu-item"><%= f.radio_button :manual_input, false %><label for="home_slide_manual_input_false" class="pure-menu-link">Enter an event ID</label></li>
-      <li class="pure-menu-item"><%= f.radio_button :manual_input, true %><label for="home_slide_manual_input_true" class="pure-menu-link">Enter all the data manually</label></li>
+      <li class="pure-menu-item">
+        <%= f.radio_button :manual_input, false, data: { 'panel-id' => "home-slide-manual-input-off-fields" } %>
+        <label for="home_slide_manual_input_false" class="pure-menu-link">Enter an event ID</label>
+      </li>
+      <li class="pure-menu-item">
+        <%= f.radio_button :manual_input, true, data: { 'panel-id' => "home-slide-manual-input-on-fields" } %>
+        <label for="home_slide_manual_input_true" class="pure-menu-link">Enter all the data manually</label>
+      </li>
     </ul>
   </div>
 

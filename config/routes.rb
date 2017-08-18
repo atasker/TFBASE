@@ -23,7 +23,10 @@ Rails.application.routes.draw do
     resources :players
     resources :tickets
     resources :venues
-    get '/homepage/', to: redirect('/admin')
+    scope '/homepage/' do
+      resources :home_line_items
+      get '/', to: redirect('/admin')
+    end
   end
 
   scope '/admin/homepage/:slides_kind' do
