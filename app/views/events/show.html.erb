@@ -120,7 +120,7 @@
   <script src="http://maps.google.com/maps/api/js?key=AIzaSyDj0jj7Vp77F66JiIv-mKzIxkymi1lvj8M"></script>%>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAZw1G4GSEF6-0hYY698R3Y0rnZ77fWuQ"></script>
 
-  <% if Rails.env == :production %>
+  <% if Rails.env == 'production' %>
     <script>
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
     </script>
