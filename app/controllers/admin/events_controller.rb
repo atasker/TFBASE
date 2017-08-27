@@ -65,9 +65,15 @@ class Admin::EventsController < AdminController
   private
 
   def event_params
-    params.require(:event).permit(:name, :start_time, :venue_id,
-                                  :category_id, :competition_id,
-                                  :sports, :priority, player_ids: [], tickets_attributes: [:id, :price, :category, :quantity, :currency, :text, :pairs_only, :_destroy])
+    params.require(:event).permit(
+      :name, :start_time, :venue_id,
+      :category_id, :competition_id,
+      :sports, :priority, player_ids: [],
+      tickets_attributes: [
+        :id, :price, :category, :quantity, :currency,
+        :text, :pairs_only, :_destroy],
+      info_blocks_attributes: [
+        :id, :title, :text, :prior, :_destroy])
   end
 
 end

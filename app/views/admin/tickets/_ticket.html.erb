@@ -1,6 +1,9 @@
+<% skip_event_info ||= false %>
 <tr>
+  <% unless skip_event_info %>
   <td><%= ticket.event.id %></td>
   <td><%= ticket.event.name %></td>
+  <% end %>
   <td><%= ticket.category %></td>
   <td><%= ticket.currency %></td>
   <td><%= ticket.price %></td>

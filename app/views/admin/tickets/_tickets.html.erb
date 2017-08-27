@@ -1,10 +1,13 @@
+<% skip_event_info ||= false %>
 <br />
 <br />
-
+<% if title ||= nil %><h3><%= title %></h3><% end %>
 <table class="pure-table pure-table-striped pure-table-horizontal">
   <thead>
+    <% unless skip_event_info %>
     <th>Event ID</th>
     <th>Event</th>
+    <% end %>
     <th>Category</th>
     <th>Currency</th>
     <th>Price</th>
@@ -13,5 +16,5 @@
     <th></th>
     <th></th>
   </thead>
-  <%= render @tickets %>
+  <%= render @tickets, skip_event_info: skip_event_info %>
 </table>

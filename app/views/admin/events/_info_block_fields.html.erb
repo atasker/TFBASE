@@ -1,0 +1,11 @@
+<li class="nested-fields">
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+    <br>
+    <%= f.label :text %><br>
+    <%= f.text_area :text, rows: 4 %>
+    <br>
+    <%= link_to_remove_association "- remove this information block", f %>
+  </p>
+</li>

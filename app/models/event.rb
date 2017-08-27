@@ -8,8 +8,14 @@ class Event < ActiveRecord::Base
 
   has_and_belongs_to_many :players
   has_many :tickets, dependent: :destroy
-  accepts_nested_attributes_for :tickets, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :tickets, reject_if: :all_blank,
+                                          allow_destroy: true
   has_many :home_slides, inverse_of: :event, dependent: :destroy
+  has_many :info_blocks, class_name: 'EventInfoBlock',
+                         inverse_of: :event,
+                         dependent: :destroy
+  accepts_nested_attributes_for :info_blocks, reject_if: :all_blank,
+                                              allow_destroy: true
 
   validates :name, presence: true,
                    length: { maximum: 50 }

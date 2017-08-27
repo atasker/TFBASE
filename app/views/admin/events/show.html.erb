@@ -46,5 +46,21 @@
   <%= link_to 'Edit/Add Tickets to Event', edit_admin_event_path(@event) %> |
   <%= link_to 'Back', admin_events_path %>
 
-  <%= render 'admin/tickets/tickets', tickets: @tickets %>
+  <%= render 'admin/tickets/tickets', tickets: @tickets, title: 'Tickets', skip_event_info: true %>
+
+  <h3>Information blocks</h3>
+  <% if @event.info_blocks.any? %>
+    <ul>
+    <% @event.info_blocks.each do |info_block| %>
+      <li>
+        <p>
+          <b><%= info_block.title %></b><br>
+          <%= simple_format info_block.text, {}, wrapper_tag: 'span' %>
+        </p>
+      </li>
+    <% end %>
+    </ul>
+  <% else %>
+    <p>Have no information blocks</p>
+  <% end %>
 </div>

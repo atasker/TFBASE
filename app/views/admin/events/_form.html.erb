@@ -55,9 +55,8 @@
     <%= f.label :players %>
     <%= f.association :players, :multiple => true, label: false, input_html: { :class => 'chzn-select' } %>
   </p>
-  <h3>
-    Tickets
-  </h3>
+
+  <h3>Tickets</h3>
   <div id="tickets">
     <table class="pure-table pure-table-striped pure-table-horizontal">
       <thead>
@@ -73,11 +72,21 @@
         <%= f.simple_fields_for :tickets do |ticket| %>
           <%= render 'ticket_fields', f: ticket %>
         <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
     <div class="links">
-      <%= link_to_add_association 'add ticket', f, :tickets, data: {"association-insertion-node" => "tbody.ticket_items", "association-insertion-method" => "append"} %>
+      <%= link_to_add_association '+ Add new ticket', f, :tickets, data: {"association-insertion-node" => "tbody.ticket_items", "association-insertion-method" => "append"} %>
     </div>
+  </div>
+
+  <h3>Information blocks</h3>
+  <ul id="info-blocks">
+    <%= f.simple_fields_for :info_blocks do |info_block| %>
+      <%= render 'info_block_fields', f: info_block %>
+    <% end %>
+  </ul>
+  <div class="links">
+    <%= link_to_add_association '+ Add new information block', f, :info_blocks, data: { "association-insertion-node" => "#info-blocks", "association-insertion-method" => "append"} %>
   </div>
 
   <p>
