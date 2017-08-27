@@ -1,7 +1,8 @@
 <% if Rails.env == 'production' %>
   <%# Works only with social networks scripts enabled (see at events/show) %>
-  <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="ticketfinders">Tweet</a>
-  <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+  <%#<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="ticketfinders">Tweet</a>
+  <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>%>
+  <div class="sharethis-inline-share-buttons"></div>
 <% else %>
   <%= image_tag 'buy-socials.jpg' %>
 <% end %>
