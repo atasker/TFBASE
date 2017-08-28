@@ -22,7 +22,7 @@ class Admin::CategoriesController < AdminController
 
     if @category.save
       flash[:notice] = "Category successfully created"
-      redirect_to [:admin, @category]
+      redirect_to admin_category_path(@category.id)
     else
       render 'new'
     end
@@ -33,7 +33,7 @@ class Admin::CategoriesController < AdminController
 
     if @category.update(category_params)
       flash[:notice] = "Category successfully updated"
-      redirect_to [:admin, @category]
+      redirect_to admin_category_path(@category.id)
     else
       render 'edit'
     end
@@ -49,7 +49,7 @@ class Admin::CategoriesController < AdminController
   private
 
   def category_params
-    params.require(:category).permit(:description, :sports)
+    params.require(:category).permit(:description, :slug, :sports)
   end
 
 end

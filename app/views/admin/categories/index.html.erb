@@ -17,9 +17,9 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.description %></td>
-        <td><%= link_to 'Show', admin_category_path(category) %></td>
-        <td><%= link_to 'Edit', edit_admin_category_path(category) %></td>
-        <td><%= link_to 'Destroy', admin_category_path(category),
+        <td><%= link_to 'Show', admin_category_path(category.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_category_path(category.id) %></td>
+        <td><%= link_to 'Destroy', admin_category_path(category.id),
                 method: :delete,
                 data: { confirm: 'Warning. Deleting this category will delete all associated events & competitions.' } %></td>
       </tr>

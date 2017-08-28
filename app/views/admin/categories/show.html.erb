@@ -1,11 +1,12 @@
 <div class="holder">
   <p>
     <strong>Description:</strong> <%= @category.description %><br />
+    <strong>Slug:</strong> <%= link_to (@category.slug.present? ? @category.slug : @category.id), category_path(@category), target: '_blank' %><br />
     <strong>Created at:</strong> <%= @category.created_at %><br />
     <strong>ID:</strong> <%= @category.id %>
   </p>
 
-  <%= link_to 'Edit', edit_admin_category_path(@category) %> |
+  <%= link_to 'Edit', edit_admin_category_path(@category.id) %> |
   <%= link_to 'Back', admin_categories_path %>
 
   <%= render 'admin/events/events', events: @events %>

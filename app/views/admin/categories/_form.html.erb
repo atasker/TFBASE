@@ -1,4 +1,4 @@
-<%= form_for [:admin, @category] do |f| %>
+<%= form_for [:admin, @category], url: (@category.new_record? ? nil : admin_category_path(@category.id)) do |f| %>
 
   <% if @category.errors.any? %>
     <div id="error_explanation">
@@ -17,6 +17,12 @@
   <p>
     <%= f.label :description %><br>
     <%= f.text_field :description %>
+  </p>
+
+  <p>
+    <%= f.label :slug %><br>
+    <%= categories_path() %>/ <%= f.text_field :slug %><br>
+    <small>* leave blank to autobuild slug based on description</small>
   </p>
 
   <p>

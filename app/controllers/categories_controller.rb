@@ -6,7 +6,15 @@ class CategoriesController < BaseFrontendController
   end
 
   def show
-    @category = Category.find(params[:id])
+    @category = Category.find_by_slug params[:id]
+    unless @category
+      @category = Category.find params[:id]
+      if @category.slug.present?
+        redirect_to category_path(@category.slug), status: :moved_permanently
+        return
+      end
+    end
+
     @competitions = @category.competitions.order(name: :asc)
     @players = @category.players.order(name: :asc)
     @events = @category.events.order(start_time: :asc)
