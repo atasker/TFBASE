@@ -2306,7 +2306,10 @@ a.breadcrumbs__item:after {
   display: table-cell;
   vertical-align: middle;
   text-align: center; }
+  .considered__info-item-time {
+    width: 72px; }
   .considered__info-item:last-child {
+    width: 80px;
     text-align: right; }
 
 .considered__date {
@@ -2315,6 +2318,7 @@ a.breadcrumbs__item:after {
   display: inline-block;
   vertical-align: middle;
   margin-right: 30px;
+  width: 84px;
   text-align: center; }
   .considered__date strong {
     display: block;
@@ -3104,11 +3108,14 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     height: 300px; }
   .considered--ticket .considered__date {
     padding: 10px;
-    margin-right: 10px; }
+    margin-right: 10px;
+    width: 64px; }
   .considered--ticket .considered__title {
     font-size: 18px; }
   .considered--ticket .considered__info-inner {
     font-size: 16px; }
+  .considered__info-item-time {
+    width: 58px; }
   .main-popular-events__slider .slick-arrow {
     top: 127px; } }
 
@@ -3221,6 +3228,8 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     margin-bottom: 10px; }
   .accordion-tabs li.tab-head-cont a.is-active {
     font-size: 24px; }
+  .considered__date {
+    width: 53px; }
   .considered__date strong {
     font-size: 30px; }
   .tickets {
@@ -3503,7 +3512,10 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     text-align: left;
     padding-left: 61px;
     margin-bottom: 10px; }
+  .considered__info-item-time {
+    width: auto; }
   .considered__info-item:last-child {
+    width: auto;
     text-align: left; }
   .main-popular-events__title,
   .main-popular-events__place,
