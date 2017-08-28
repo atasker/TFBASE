@@ -22,12 +22,8 @@
       <a href="#popup-chart" class="tickets__view popup-inline" style="background: url('<%= asset_path("view.png") %>');" data-effect="mfp-zoom-in">
         <span>View Seating Chart</span>
       </a>
-      <% if @event.info_blocks.any? || @competition && @competition.text.present? %>
+      <% if @event.info_blocks.any? %>
       <div class="tickets__info-item">
-        <% if @competition && @competition.text.present? %>
-        <a href="#" class="tickets__info-link">Information<i></i></a>
-        <div class="tickets__info-txt"><%= @competition.text %></div>
-        <% end %>
         <% @event.info_blocks.ordered.each do |info_block| %>
         <a href="#" class="tickets__info-link"><%= info_block.title %><i></i></a>
         <div class="tickets__info-txt"><%= simple_format info_block.text, {}, wrapper_tag: 'div' %></div>
@@ -75,15 +71,11 @@
           <%= image_tag @event.venue.avatar.venue.url, alt: @event.venue.name %>
         </div>
       </li>
-      <% if @event.info_blocks.any? || @competition && @competition.text.present? %>
+      <% if @event.info_blocks.any? %>
         <li class="tab-head-cont">
           <a href="#">Information</a>
           <div class="tab-main">
             <div class="tab-head__inner">
-              <% if @competition && @competition.text.present? %>
-              <h3>Information</h3>
-              <p><%= @competition.text %></p>
-              <% end %>
               <% @event.info_blocks.ordered.each do |info_block| %>
               <h3><%= info_block.title %></h3>
               <%= simple_format info_block.text %>
