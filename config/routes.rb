@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'static/terms'
   get 'static/about'
 
+  get '/competitions/:compet/:id', to: 'players#show', as: :competition_player
   resources :categories, only: [:show, :index]
   resources :competitions, only: [:show, :index]
   resources :events, only: [:show, :index]

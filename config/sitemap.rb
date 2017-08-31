@@ -33,6 +33,7 @@ SitemapGenerator::Sitemap.create do
 
   Competition.find_each do |competition|
     add competition_path(competition), :lastmod => competition.updated_at, :priority => 0.7, :changefreq => 'daily'
+    # TODO add competition_player_paths
   end
 
   Player.find_each do |player|

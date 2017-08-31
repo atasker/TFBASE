@@ -22,7 +22,7 @@ class Admin::CompetitionsController < AdminController
 
     if @competition.save
       flash[:notice] = "Competition successfully created"
-      redirect_to [:admin, @competition]
+      redirect_to admin_competition_path(@competition.id)
     else
       render 'new'
     end
@@ -33,7 +33,7 @@ class Admin::CompetitionsController < AdminController
 
     if @competition.update(competition_params)
       flash[:notice] = "Competition successfully updated"
-      redirect_to [:admin, @competition]
+      redirect_to admin_competition_path(@competition.id)
     else
       render 'edit'
     end
@@ -49,7 +49,7 @@ class Admin::CompetitionsController < AdminController
   private
 
   def competition_params
-    params.require(:competition).permit(:name, :category_id, :text, :avatar)
+    params.require(:competition).permit(:name, :slug, :category_id, :text, :avatar)
   end
 
 end

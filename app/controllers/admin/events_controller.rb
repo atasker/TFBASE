@@ -36,7 +36,10 @@ class Admin::EventsController < AdminController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to [:admin, @event], notice: 'Event was successfully created' }
+        format.html do
+          redirect_to admin_event_path(@event.id),
+                      notice: 'Event was successfully created'
+        end
         format.js { }
       else
         format.html { render 'new' }
@@ -49,7 +52,7 @@ class Admin::EventsController < AdminController
     @event = Event.find(params[:id])
     if @event.update(event_params)
       flash[:notice] = "Event successfully updated"
-      redirect_to [:admin, @event]
+      redirect_to admin_event_path(@event.id)
     else
       render 'edit'
     end
@@ -66,7 +69,7 @@ class Admin::EventsController < AdminController
 
   def event_params
     params.require(:event).permit(
-      :name, :start_time, :venue_id,
+      :name, :slug, :start_time, :venue_id,
       :category_id, :competition_id,
       :sports, :priority, player_ids: [],
       tickets_attributes: [

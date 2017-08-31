@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  include FriendlySlugable
 
   belongs_to :venue
   belongs_to :category
@@ -44,4 +45,9 @@ class Event < ActiveRecord::Base
     end
   end
 
+  private
+
+  def prepare_slug
+    super name
+  end
 end

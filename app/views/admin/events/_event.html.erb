@@ -4,9 +4,9 @@
   <td><%= event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %></td>
   <td><%= event.venue ? event.venue.name : '' %></td>
   <td><%= event.category ? event.category.description : '' %></td>
-  <td><%= link_to 'Show', admin_event_path(event) %></td>
-  <td><%= link_to 'Edit', edit_admin_event_path(event) %></td>
-  <td><%= link_to 'Destroy', admin_event_path(event),
+  <td><%= link_to 'Show', admin_event_path(event.id) %></td>
+  <td><%= link_to 'Edit', edit_admin_event_path(event.id) %></td>
+  <td><%= link_to 'Destroy', admin_event_path(event.id),
           method: :delete,
           data: { confirm: 'Are you sure?' } %></td>
 </tr>

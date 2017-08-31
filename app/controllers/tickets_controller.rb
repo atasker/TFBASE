@@ -26,7 +26,7 @@ class TicketsController < BaseFrontendController
       end
       if @player
         if @competition
-          add_breadcrumb @player.name, player_path(@player, comp: @competition)
+          add_breadcrumb @player.name, competition_player_path(@player, compet: @competition)
         else
           add_breadcrumb @player.name, player_path(@player)
         end

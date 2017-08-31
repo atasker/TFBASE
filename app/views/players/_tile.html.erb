@@ -1,7 +1,12 @@
 <% competition ||= nil %>
+<% if competition %>
+  <% path_to_player = competition_player_path(player, compet: competition) %>
+<% else %>
+  <% path_to_player = player_path(player) %>
+<% end %>
 
 <div class="col-lg-3 col-md-4 col-sm-6 tickets__item">
-  <%= link_to player_path(player, comp: competition), :class => 'tickets__inner' do %>
+  <%= link_to path_to_player, :class => 'tickets__inner' do %>
     <div class="tickets__img">
       <div class="tickets__img-inner tickets__img-inner--nobg">
         <% unless player.avatar.blank? %>

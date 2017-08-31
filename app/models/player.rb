@@ -1,4 +1,5 @@
 class Player < ActiveRecord::Base
+  include FriendlySlugable
 
   mount_uploader :avatar, AvatarUploader
   has_and_belongs_to_many :events
@@ -10,4 +11,9 @@ class Player < ActiveRecord::Base
                    length: { maximum: 50 }
   validates :category_id, presence: true
 
+  private
+
+  def prepare_slug
+    super name
+  end
 end

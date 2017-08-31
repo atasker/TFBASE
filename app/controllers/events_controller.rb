@@ -19,7 +19,15 @@ class EventsController < BaseFrontendController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by_slug params[:id]
+    unless @event
+      @event = Event.find params[:id]
+      if @event.slug.present?
+        redirect_to event_path(@event.slug), status: :moved_permanently
+        return
+      end
+    end
+
     @category = Category.find(@event.category_id)
     if params[:comp]
       @competition = Competition.find(params[:comp])
@@ -57,7 +65,7 @@ class EventsController < BaseFrontendController
     end
     if @player
       if @competition
-        add_breadcrumb @player.name, player_path(@player, comp: @competition)
+        add_breadcrumb @player.name, competition_player_path(@player, compet: @competition)
       else
         add_breadcrumb @player.name, player_path(@player)
       end

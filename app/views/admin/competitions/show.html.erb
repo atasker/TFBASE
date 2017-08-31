@@ -5,6 +5,11 @@
   </p>
 
   <p>
+    <strong>Slug:</strong>
+    <%= link_to (@competition.slug.present? ? @competition.slug : @competition.id), competition_path(@competition), target: '_blank' %>
+  </p>
+
+  <p>
     <strong>Category:</strong>
     <%= Category.find(@competition.category_id).description %>
   </p>
@@ -18,7 +23,7 @@
     <%= @competition.text %>
   </p>
 
-  <%= link_to 'Edit', edit_admin_competition_path(@competition) %> |
+  <%= link_to 'Edit', edit_admin_competition_path(@competition.id) %> |
   <%= link_to 'Back', admin_competitions_path %>
 
   <%= render 'admin/events/events', events: @events %>

@@ -1,4 +1,4 @@
-<%= form_for [:admin, @competition] do |f| %>
+<%= form_for [:admin, @competition], url: (@competition.new_record? ? nil : admin_competition_path(@competition.id)) do |f| %>
 
   <% if @competition.errors.any? %>
     <div id="error_explanation">
@@ -17,6 +17,12 @@
   <p>
     <%= f.label :name %><br>
     <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :slug %><br>
+    <%= competitions_path() %>/ <%= f.text_field :slug %><br>
+    <small>* leave blank to autobuild slug based on name</small>
   </p>
 
   <p>

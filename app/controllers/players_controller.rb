@@ -1,12 +1,44 @@
 class PlayersController < BaseFrontendController
 
   def show
-    @player = Player.find(params[:id])
+    need_redirect = false
+
+    if params[:comp].present? && params[:compet].blank?
+      params[:compet] = params[:comp]
+      need_redirect = true # because this old url where ...?comp={id}
+    end
+
+    if params[:compet]
+      @competition = Competition.find_by_slug params[:compet]
+      unless @competition
+        @competition = Competition.find params[:compet]
+        if @competition.slug.present?
+          need_redirect = true # because new url uses slug instead of id
+        end
+      end
+    end
+
+    @player = Player.find_by_slug params[:id]
+    unless @player
+      @player = Player.find params[:id]
+      if @player.slug.present?
+        need_redirect = true # because new url uses slug instead of id
+      end
+    end
+
+    if need_redirect
+      if @competition
+        redirect_to competition_player_path(@player, compet: @competition),
+                    status: :moved_permanently
+      else
+        redirect_to player_path(@player.slug), status: :moved_permanently
+      end
+      return
+    end
+
     @category = @player.category
 
-    if params[:comp]
-      @competition = Competition.find(params[:comp])
-      # Retrieve all events in the given competition
+    if @competition
       @all_events = Event.where(competition_id: @competition.id)
     else
       @all_events = Event.all

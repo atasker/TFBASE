@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, @event] do |f| %>
+<%= simple_form_for [:admin, @event], url: (@event.new_record? ? nil : admin_event_path(@event.id)) do |f| %>
 
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -17,6 +17,12 @@
   <p>
     <%= f.label :name %><br>
     <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :slug %><br>
+    <%= events_path() %>/ <%= f.text_field :slug %><br>
+    <small>* leave blank to autobuild slug based on name</small>
   </p>
 
   <p>

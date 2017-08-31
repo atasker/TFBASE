@@ -5,6 +5,11 @@
   </p>
 
   <p>
+    <strong>Slug:</strong>
+    <%= link_to (@player.slug.present? ? @player.slug : @player.id), player_path(@player), target: '_blank' %>
+  </p>
+
+  <p>
     <strong>Category:</strong>
     <%= Category.find(@player.category_id).description %>
   </p>
@@ -18,7 +23,7 @@
     <%= @player.text %>
   </p>
 
-  <%= link_to 'Edit', edit_admin_player_path(@player) %> |
+  <%= link_to 'Edit', edit_admin_player_path(@player.id) %> |
   <%= link_to 'Back', admin_players_path %>
 
   <%= render 'admin/events/events', events: @events %>

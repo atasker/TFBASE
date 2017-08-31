@@ -22,7 +22,7 @@ class Admin::PlayersController < AdminController
 
     if @player.save
       flash[:notice] = "Player successfully created"
-      redirect_to [:admin, @player]
+      redirect_to admin_player_path(@player.id)
     else
       render 'new'
     end
@@ -33,7 +33,7 @@ class Admin::PlayersController < AdminController
 
     if @player.update(player_params)
       flash[:notice] = "Player successfully updated"
-      redirect_to [:admin, @player]
+      redirect_to admin_player_path(@player.id)
     else
       render 'edit'
     end
@@ -49,7 +49,7 @@ class Admin::PlayersController < AdminController
   private
 
   def player_params
-    params.require(:player).permit(:name, :category_id, :text, :avatar)
+    params.require(:player).permit(:name, :slug, :category_id, :text, :avatar)
   end
 
 end

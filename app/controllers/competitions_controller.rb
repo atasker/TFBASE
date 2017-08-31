@@ -1,7 +1,15 @@
 class CompetitionsController < BaseFrontendController
 
   def show
-    @competition = Competition.find(params[:id])
+    @competition = Competition.find_by_slug params[:id]
+    unless @competition
+      @competition = Competition.find params[:id]
+      if @competition.slug.present?
+        redirect_to competition_path(@competition.slug), status: :moved_permanently
+        return
+      end
+    end
+
     @category = @competition.category
     @events = @competition.events.order(start_time: :asc)
 

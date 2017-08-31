@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20170828162900) do
     t.string   "slug"
   end
 
+  add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
+
   create_table "competitions", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",  null: false
@@ -31,9 +33,11 @@ ActiveRecord::Schema.define(version: 20170828162900) do
     t.integer  "category_id"
     t.text     "text"
     t.string   "avatar"
+    t.string   "slug"
   end
 
   add_index "competitions", ["category_id"], name: "index_competitions_on_category_id", using: :btree
+  add_index "competitions", ["slug"], name: "index_competitions_on_slug", unique: true, using: :btree
 
   create_table "event_info_blocks", force: :cascade do |t|
     t.integer  "event_id"
@@ -56,10 +60,12 @@ ActiveRecord::Schema.define(version: 20170828162900) do
     t.integer  "competition_id"
     t.boolean  "sports",         default: false, null: false
     t.boolean  "priority",       default: false, null: false
+    t.string   "slug"
   end
 
   add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
   add_index "events", ["competition_id"], name: "index_events_on_competition_id", using: :btree
+  add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
   add_index "events", ["venue_id"], name: "index_events_on_venue_id", using: :btree
 
   create_table "events_players", id: false, force: :cascade do |t|
@@ -131,9 +137,11 @@ ActiveRecord::Schema.define(version: 20170828162900) do
     t.integer  "category_id"
     t.text     "text"
     t.string   "avatar"
+    t.string   "slug"
   end
 
   add_index "players", ["category_id"], name: "index_players_on_category_id", using: :btree
+  add_index "players", ["slug"], name: "index_players_on_slug", unique: true, using: :btree
 
   create_table "tickets", force: :cascade do |t|
     t.float    "price"

@@ -1,4 +1,5 @@
 class Competition < ActiveRecord::Base
+  include FriendlySlugable
 
   mount_uploader :avatar, AvatarUploader
   has_many :players
@@ -12,4 +13,9 @@ class Competition < ActiveRecord::Base
 
   validates :category_id, presence: true
 
+  private
+
+  def prepare_slug
+    super name
+  end
 end

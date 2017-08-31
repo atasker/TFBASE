@@ -20,9 +20,9 @@
       <tr>
         <td><%= competition.name %></td>
         <td><%= competition.category ? competition.category.description : '' %></td>
-        <td><%= link_to 'Show', admin_competition_path(competition) %></td>
-        <td><%= link_to 'Edit', edit_admin_competition_path(competition) %></td>
-        <td><%= link_to 'Destroy', admin_competition_path(competition),
+        <td><%= link_to 'Show', admin_competition_path(competition.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_competition_path(competition.id) %></td>
+        <td><%= link_to 'Destroy', admin_competition_path(competition.id),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %></td>
         <td><%= competition.id %></td>
