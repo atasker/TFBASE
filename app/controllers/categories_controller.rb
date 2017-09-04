@@ -19,6 +19,16 @@ class CategoriesController < BaseFrontendController
     @players = @category.players.order(name: :asc)
     @events = @category.events.order(start_time: :asc)
 
+    # for the filter works
+    @competitions_venues = Venue.joins(events: [:competition]).
+                                 where('events.start_time >= ?', DateTime.now).
+                                 where(competitions: { id: @competitions.pluck(:id) }).
+                                 group(:id)
+    @players_venues = Venue.joins(events: [:players]).
+                            where('events.start_time >= ?', DateTime.now).
+                            where(players: { id: @players.pluck(:id) }).
+                            group(:id)
+
     @event_count_before_filtration = @events.actual.count
 
     if params[:dt].present?

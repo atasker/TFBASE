@@ -12,7 +12,7 @@
 <div class="container-fluid">
   <% if @players.count > 0 %>
     <div class="tickets">
-      <%#= render 'shared/sub_search_and_filter' %>
+      <%= render 'shared/sub_search_and_filter', locations: @players_venues.pluck(:name, :id), count: @players.count %>
       <div class="tickets__list row">
         <% @players.each do |player| %>
           <%= render partial: 'players/tile', locals: { player: player, competition: @competition } %>

@@ -10,7 +10,7 @@
 <div class="container-fluid">
   <% if @competitions.count > 0 %>
     <div class="tickets">
-      <%#= render 'shared/sub_search_and_filter' %>
+      <%= render 'shared/sub_search_and_filter', locations: @competitions_venues.pluck(:name, :id), count: @competitions.count %>
       <div class="tickets__list row">
         <% @competitions.each do |competition| %>
           <%= render partial: 'competitions/tile', locals: { competition: competition } %>
@@ -19,7 +19,7 @@
     </div>
   <% elsif @players.count > 0 %>
     <div class="tickets">
-      <%#= render 'shared/sub_search_and_filter' %>
+      <%= render 'shared/sub_search_and_filter', locations: @players_venues.pluck(:name, :id), count: @players.count %>
       <div class="tickets__list row">
         <% @players.each do |player| %>
           <%= render partial: 'players/tile', locals: { player: player } %>

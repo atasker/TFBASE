@@ -1,23 +1,19 @@
+<% count ||= 0 %>
+
 <div class="tickets__top">
+  <% if count > 4 %>
   <div class="tickets__search">
     <form action="#" method="post">
       <input type="text" placeholder="Fast search">
       <input type="submit">
     </form>
   </div>
+  <% end %>
   <div class="tickets__filter">
     <form action="#" method="post">
       <select class="fs">
         <option>All locations</option>
-        <option>Location 1</option>
-        <option>Location 2</option>
-        <option>Location 3</option>
-        <option>Location 4</option>
-        <option>Location 5</option>
-        <option>Location 6</option>
-        <option>Location 7</option>
-        <option>Location 8</option>
-        <option>Location 9</option>
+        <%= locations.each do |lc| %><option value="<%= lc[1] %>"><%= lc[0] %></option><% end %>
       </select>
     </form>
   </div>

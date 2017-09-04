@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-4 col-sm-6 tickets__item">
+<div class="col-lg-3 col-md-4 col-sm-6 tickets__item" data-item-name="<%= competition.name %>" data-location-ids="<%= competition.events.actual.pluck(:venue_id).uniq.join(',') %>">
   <%= link_to competition_path(competition), :class => 'tickets__inner' do %>
     <div class="tickets__img">
       <div class="tickets__img">

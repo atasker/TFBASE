@@ -5,7 +5,7 @@
   <% path_to_player = player_path(player) %>
 <% end %>
 
-<div class="col-lg-3 col-md-4 col-sm-6 tickets__item">
+<div class="col-lg-3 col-md-4 col-sm-6 tickets__item" data-item-name="<%= player.name %>" data-location-ids="<%= player.events.actual.pluck(:venue_id).uniq.join(',') %>">
   <%= link_to path_to_player, :class => 'tickets__inner' do %>
     <div class="tickets__img">
       <div class="tickets__img-inner tickets__img-inner--nobg">

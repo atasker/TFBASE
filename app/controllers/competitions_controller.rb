@@ -34,6 +34,12 @@ class CompetitionsController < BaseFrontendController
     end
     @players = @tmp.sort { |a,b| a.name <=> b.name }
 
+    # for the filter works
+    @players_venues = Venue.joins(events: [:players]).
+                            where('events.start_time >= ?', DateTime.now).
+                            where(players: { id: @players.collect { |pl| pl.id } }).
+                            group(:id)
+
     @page_meta = { title: @competition.name,
                    description: @competition.name,
                    image: @competition.avatar.grid_large.url }
