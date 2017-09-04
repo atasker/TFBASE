@@ -2314,9 +2314,8 @@ a.breadcrumbs__item:after {
 
 .considered__date {
   background: #f8dd28;
+  float: left;
   padding: 10px 20px;
-  display: inline-block;
-  vertical-align: middle;
   margin-right: 30px;
   width: 84px;
   text-align: center; }
@@ -2327,10 +2326,16 @@ a.breadcrumbs__item:after {
     line-height: 37px; }
 
 .considered__title {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 22px;
-  color: #0d7aa6; }
+  display: block;
+  margin-left: 114px;
+  line-height: 80px; }
+  .considered__title a {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 22px;
+    line-height: 1.3;
+    color: #0d7aa6;
+  }
 
 .layout--index .page-title,
 .layout--index .top-search {
@@ -3111,7 +3116,10 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     margin-right: 10px;
     width: 64px; }
   .considered--ticket .considered__title {
-    font-size: 18px; }
+    margin-left: 74px;
+    line-height: 80px; }
+    .considered--ticket .considered__title a {
+      font-size: 18px; }
   .considered--ticket .considered__info-inner {
     font-size: 16px; }
   .considered__info-item-time {
@@ -3196,7 +3204,10 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
   .considered__date {
     margin-right: 10px; }
   .considered__title {
-    font-size: 18px; }
+    margin-left: 74px;
+    line-height: 80px; }
+    .considered__title a {
+      font-size: 18px; }
   .accordion-tabs li.tab-head-cont > a {
     padding: 2px 10px;
     font-size: 18px; }
@@ -3303,8 +3314,7 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
       position: relative; }
       .considered__left a:after {
         content: "";
-        display: inline-block;
-        vertical-align: middle;
+        display: block;
         width: 16px;
         height: 10px;
         background: image-url('arrow.svg') no-repeat;
@@ -3321,14 +3331,16 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
         -webkit-transform: rotate(0deg);
         -ms-transform: rotate(0deg);
         transform: rotate(0deg); }
-  .considered__date {
-    float: left; }
   .considered__title {
-    overflow: hidden;
-    display: block; }
+    overflow: hidden; }
     .considered__title a {
       display: block;
-      margin-top: 28px; }
+      padding-right: 26px;
+      line-height: 80px; }
+      .considered__title .considered__title_text {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1.3; }
   .main-cathegories__item {
     width: 100%; }
   .main-top-event--full-h {

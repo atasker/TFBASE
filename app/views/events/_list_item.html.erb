@@ -2,7 +2,7 @@
   <div class="considered__left">
     <div class="considered__date"><strong><%= l event.start_time, format: '%d' %></strong><%= l event.start_time, format: '%b' %></div>
     <div class="considered__title">
-      <%= link_to event.name, event_path(event) %>
+      <%= link_to event_path(event) do %><span class="considered__title_text"><%= event.name %></span><% end %>
     </div>
   </div>
   <div class="considered__info">
