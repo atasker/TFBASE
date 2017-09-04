@@ -69,16 +69,17 @@ task :deploy do
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
+    invoke :'whenever:update'
 
     on :launch do
-      in_path(fetch(:current_path)) do
+      in_path "#{fetch(:current_path)}" do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
+      invoke :'rvm:use', 'ruby-2.0.0-p643'
+      invoke :'whenever:update'
+      invoke :rake, 'sitemap:refresh:no_ping'
     end
-
-    invoke :'whenever:update'
-    invoke :rake, 'sitemap:refresh:no_ping'
   end
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
