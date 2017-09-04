@@ -1,5 +1,42 @@
 # See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 #
-# To ban all spiders from the entire site uncomment the next two lines:
-# User-agent: *
-# Disallow: /
+#       ( )
+#        H
+#        H
+#       _H_
+#    .-'-.-'-.
+#   /         \
+#  |           |
+#  |   .-------'._
+#  |  / /  '.' '. \
+#  |  \ \ @   @ / /
+#  |   '---------'
+#  |    _______|
+#  |  .'-+-+-+|
+#  |  '.-+-+-+|  ------ KILL ALL HUMANS!
+#  |    """""" |
+#  '-.__   __.-'
+#       """  sul
+#
+#   Art by Sulliwan Sucks
+
+User-agent: Yandex
+Disallow: /messages/hospitality-and-concierge
+Disallow: /admin/
+Disallow: /humans.txt
+Allow: /
+Host: www.ticket-finders.com
+
+User-agent: Googlebot
+Disallow: /messages/hospitality-and-concierge
+Disallow: /admin/
+Disallow: /humans.txt
+Allow: /
+
+User-agent: *
+Disallow: /messages/hospitality-and-concierge
+Disallow: /admin/
+Disallow: /humans.txt
+Disallow:
+
+Sitemap: http://www.ticket-finders.com/sitemap.xml.gz
