@@ -6,12 +6,12 @@
   <% if @home_line_item.kind == HomeLineItem::KIND_COMPETITION %>
     <p>
       <strong>Competition:</strong>
-      <%= link_to @home_line_item.competition.name, admin_competition_path(@home_line_item.competition) %>
+      <%= link_to @home_line_item.competition.name, admin_competition_path(@home_line_item.competition.id) %>
     </p>
   <% elsif @home_line_item.kind == HomeLineItem::KIND_PLAYER %>
     <p>
       <strong>Player:</strong>
-      <%= link_to @home_line_item.player.name, admin_player_path(@home_line_item.player) %>
+      <%= link_to @home_line_item.player.name, admin_player_path(@home_line_item.player.id) %>
     </p>
   <% else %>
     <p>

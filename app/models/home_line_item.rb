@@ -1,6 +1,6 @@
 class HomeLineItem < ActiveRecord::Base
-  belongs_to :competition, inverse_of: :home_popular_line_items
-  belongs_to :player, inverse_of: :home_popular_line_items
+  belongs_to :competition, inverse_of: :home_line_items
+  belongs_to :player, inverse_of: :home_line_items
 
   mount_uploader :avatar, AvatarUploader
 
