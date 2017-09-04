@@ -1,5 +1,6 @@
 require 'mina/rails'
 require 'mina/git'
+require 'mina/whenever'
 # require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require "yaml"
@@ -21,6 +22,7 @@ set :branch, 'master'
 
 set :user, ENV['DEPLOY_USER'] # Username in the server to SSH to.
 set :forward_agent, true      # SSH forward_agent.
+set :whenever_name, 'ticketfinders_production' # default: "#{domain}_#{rails_env}"
 # probably you will need to add RSA key of repository server manually once before deploy
 # just enter your server with `ssh user@server -A` and clone your repo to any folder
 
@@ -74,6 +76,7 @@ task :deploy do
         command %{touch tmp/restart.txt}
       end
     end
+    invoke :'whenever:update'
     invoke :rake, 'sitemap:refresh:no_ping'
   end
 

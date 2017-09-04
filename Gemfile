@@ -38,8 +38,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simple_form'
 gem 'cocoon'
 
+# Whenever is a Ruby gem that provides a clear syntax for writing and deploying cron jobs.
+gem 'whenever', '0.9.7'
+
 # Use Mina for deployment
 gem 'mina', '1.0.6', group: :development
+gem 'mina-whenever', '1.0.0', group: :development
 
 group :development, :test do
   gem 'byebug'

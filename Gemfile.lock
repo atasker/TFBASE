@@ -49,6 +49,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    chronic (0.10.2)
     cocoon (1.2.9)
     coderay (1.1.1)
     coffee-rails (4.1.1)
@@ -109,6 +110,8 @@ GEM
     mina (1.0.6)
       open4 (~> 1.3.4)
       rake
+    mina-whenever (1.0.0)
+      mina (~> 1.0.0)
     mini_magick (4.5.1)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
@@ -202,6 +205,8 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    whenever (0.9.7)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -220,6 +225,7 @@ DEPENDENCIES
   kgio (= 2.10.0)
   letter_opener
   mina (= 1.0.6)
+  mina-whenever (= 1.0.0)
   mini_magick
   pg
   pg_search (~> 1.0.6)
@@ -234,6 +240,7 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   web-console (~> 2.0)
+  whenever (= 0.9.7)
 
 BUNDLED WITH
    1.11.2
