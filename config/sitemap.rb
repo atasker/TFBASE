@@ -23,7 +23,12 @@ SitemapGenerator::Sitemap.create do
   # Add all articles:
   #
 
-  Event.find_each do |event|
+  statics_updated_at = Date.new 2017, 8, 5
+  add '/static/sport', :lastmod => statics_updated_at, :priority => 0.7, :changefreq => 'monthly'
+  add '/static/terms', :lastmod => statics_updated_at, :priority => 0.7, :changefreq => 'monthly'
+  add '/static/about', :lastmod => statics_updated_at, :priority => 0.7, :changefreq => 'monthly'
+
+  Event.actual.each do |event|
     add event_path(event), :lastmod => event.updated_at, :priority => 0.7, :changefreq => 'daily'
   end
 
@@ -31,13 +36,22 @@ SitemapGenerator::Sitemap.create do
     add category_path(category), :lastmod => category.updated_at, :priority => 0.7, :changefreq => 'daily'
   end
 
-  Competition.find_each do |competition|
-    add competition_path(competition), :lastmod => competition.updated_at, :priority => 0.7, :changefreq => 'daily'
-    # TODO add competition_player_paths
-  end
-
   Player.find_each do |player|
     add player_path(player), :lastmod => player.updated_at, :priority => 0.7, :changefreq => 'daily'
+  end
+
+  Competition.find_each do |competition|
+    add competition_path(competition), :lastmod => competition.updated_at, :priority => 0.7, :changefreq => 'daily'
+
+    competition_players = []
+    competition.events.actual.each do |event|
+      event.players.each do |player|
+        competition_players << player unless competition_players.include?(player)
+      end
+    end
+    competition_players.each do |player|
+      add competition_player_path(player, compet: competition), :lastmod => player.updated_at, :priority => 0.7, :changefreq => 'daily'
+    end
   end
 
 end
