@@ -1,5 +1,6 @@
 <% count ||= 0 %>
 
+<% if count > 4 || locations.any? %>
 <div class="tickets__top">
   <% if count > 4 %>
   <div class="tickets__search">
@@ -9,6 +10,7 @@
     </form>
   </div>
   <% end %>
+  <% if locations.any? %>
   <div class="tickets__filter">
     <form action="#" method="post">
       <select class="fs">
@@ -17,4 +19,6 @@
       </select>
     </form>
   </div>
+  <% end %>
 </div>
+<% end %>
