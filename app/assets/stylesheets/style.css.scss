@@ -3563,7 +3563,8 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
 @media screen and (min-width: 500px) {
   .accordion-tabs {
     border: none;
-    position: relative; }
+    position: relative;
+    white-space: nowrap; }
   .accordion-tabs li.tab-head-cont {
     display: inline; }
   .accordion-tabs li.tab-head-cont a {
@@ -3581,4 +3582,5 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     border-top: 2px solid #f5f5f5;
     float: left;
     left: 0;
-    padding: 25px 0; } }
+    padding: 25px 0;
+    white-space: normal; } }
