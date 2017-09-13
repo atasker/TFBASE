@@ -1197,6 +1197,8 @@ input[type="reset"] {
     white-space: nowrap;
     display: block;
     margin-bottom: 10px; }
+    .page-header__info--mobile-list a:first-child {
+      margin-top: 10px; }
     .page-header__info--mobile-list a:last-child {
       margin-bottom: 0; }
   .page-header__info--mobile-list .page-header__phone i,
