@@ -951,6 +951,7 @@ input[type="reset"] {
   padding: 21px 0;
   background: #333738;
   position: relative;
+  min-height: 79px;
   font-weight: 300;
   z-index: 40; }
   .page-header.fixed {
@@ -3093,6 +3094,8 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     top: 8px; }
   .page-header.fixed .top-logo {
     background: image-url('top-logo-fixed-min.png') no-repeat; }
+  .page-header {
+    min-height: 68px; }
   .page-header__info a {
     font-size: 14px;
     margin-bottom: 4px; }
@@ -3150,6 +3153,7 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
 @media screen and (max-width: 850px) {
   .page-header,
   .page-header.fixed {
+    min-height: 0;
     padding: 5px 0 21px; }
   .page-header__info {
     display: none; }
