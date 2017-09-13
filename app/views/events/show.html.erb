@@ -71,15 +71,12 @@
           <%= image_tag @event.venue.avatar.venue.url, alt: @event.venue.name %>
         </div>
       </li>
-      <% if @event.info_blocks.any? %>
+      <% @event.info_blocks.ordered.each do |info_block| %>
         <li class="tab-head-cont">
-          <a href="#">Information</a>
+          <a href="#"><%= info_block.title %></a>
           <div class="tab-main">
             <div class="tab-head__inner">
-              <% @event.info_blocks.ordered.each do |info_block| %>
-              <h3><%= info_block.title %></h3>
               <%= simple_format info_block.text %>
-              <% end %>
             </div>
           </div>
         </li>
