@@ -1,0 +1,33 @@
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Event",
+    "name": "<%= @event.name %>",
+    "startDate": "<%= l @event.start_time, format: "%Y-%m-%dT%H:%M" %>",
+    "location": {
+      "@type": "Place",
+      "name": "<%= @event.venue.name %>",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "<%= @event.venue.address %>",
+        "addressLocality": "<%= @event.venue.city %>",
+        "addressCountry": "<%= @event.venue.country %>"
+      }
+    }<% if @event.venue.avatar.present? %>,
+    "image": [
+      "<%= root_url[0..-2] %><%= @event.venue.avatar.venue.url %>"
+    ]<% end %><% if @event.info_blocks.any? %>,
+    "description": "<%= @event.info_blocks.ordered.map { |info_block| "#{info_block.title}. #{info_block.text}" }.join("; ") %>"<% end %><% if @event_have_tickets %>,<% offer = @sorted_tickets.first %>
+    "offers": {
+      "@type": "Offer",
+      "url": "<%= ticket_url(offer) %>",
+      "price": "<%= offer.price.round %>",
+      "priceCurrency": "<%= currency_code(offer) %>",
+      "availability": <% if offer.quantity > 0 %>"http://schema.org/InStock"<% else %>"http://schema.org/SoldOut"<% end %>
+    }<% end %><% if @player %>,
+    "performer": {
+      "@type": "PerformingGroup",
+      "name": "<%= @player.name %>"
+    }<% end %>
+  }
+</script>

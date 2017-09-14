@@ -89,4 +89,12 @@ module ApplicationHelper
     end
   end
 
+  def currency_code(ticket)
+    case ticket.currency
+    when 'Pounds' then 'GBP'
+    when 'Dollars' then 'USD'
+    else 'EUR'
+    end
+  end
+
 end

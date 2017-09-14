@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
                                               allow_destroy: true
 
   validates :name, presence: true,
-                   length: { maximum: 50 }
+                   length: { maximum: 70 }
   validates :start_time, presence: true
   validates :venue_id, presence: true
   validates :category_id, presence: true

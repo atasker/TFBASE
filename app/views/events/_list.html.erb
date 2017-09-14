@@ -1,3 +1,4 @@
+<% player ||= nil %>
 <% cur_m = nil %>
 <% events.each do |event| %>
   <% e_m = event.start_time.strftime('%Y%m') %>
@@ -9,6 +10,6 @@
     <% cur_m = e_m %>
     <div class="considered__list">
   <% end %>
-  <%= render partial: 'events/list_item', locals: { event: event } %>
+  <%= render partial: 'events/list_item', locals: { event: event, player: player } %>
 <% end %>
 </div>

@@ -11,7 +11,7 @@
 </div>
 <div class="container-fluid">
   <% if @event_count_before_filtration > 0 %>
-    <%= render partial: 'events/list_with_calendar', locals: { events: @events } %>
+    <%= render partial: 'events/list_with_calendar', locals: { events: @events, player: @player.id } %>
   <% else %>
     <%= render 'shared/nothing_found_message' %>
   <% end %>

@@ -1,3 +1,4 @@
+<% player ||= nil %>
 <div class="considered__wrapper">
   <div class="considered__calendar">
     <div class="considered__calendar-wrap">
@@ -8,7 +9,7 @@
   <div class="considered considered--ticket">
     <a href="#" class="considered__calendar-toggle"><span>Show Calendar</span></a>
     <% if events.any? %>
-      <%= render partial: 'events/list', locals: { events: events } %>
+      <%= render partial: 'events/list', locals: { events: events, player: player } %>
     <% else %>
       <%= render 'shared/nothing_found_message' %>
     <% end %>
