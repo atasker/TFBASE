@@ -6,8 +6,8 @@ class Event < ActiveRecord::Base
 
   # used to be has_one, changed to enable search query on competitions, change back if anything breaks
   belongs_to :competition
-
   has_and_belongs_to_many :players
+
   has_many :tickets, dependent: :destroy
   accepts_nested_attributes_for :tickets, reject_if: :all_blank,
                                           allow_destroy: true

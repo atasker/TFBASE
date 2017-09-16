@@ -38,7 +38,7 @@
         <div class="buy__list-inner">
           <div class="buy__list-scroller nano">
             <div class="buy__list-scroll nano-content" style="right: 0;">
-              <% @sorted_tickets.each do |ticket| %>
+              <% @tickets.each do |ticket| %>
                 <%= render partial: 'tickets/item', locals: { ticket: ticket } %>
               <% end %>
             </div>
@@ -57,7 +57,7 @@
         <a href="#" class="is-active">Buy Tickets</a>
         <div class="tab-main">
           <% if @event_have_tickets %>
-            <% @sorted_tickets.each do |ticket| %>
+            <% @tickets.each do |ticket| %>
               <%= render partial: 'tickets/item', locals: { ticket: ticket } %>
             <% end %>
           <% else %>
@@ -100,7 +100,7 @@
 <% content_for :after_layout do %>
   <% gon include_gon %>
 
-  <% @sorted_tickets.each do |ticket| %>
+  <% @tickets.each do |ticket| %>
     <div id="popup-txt-tckt-<%= ticket.id %>" class="popup mfp-with-anim mfp-hide">
       <h2>Ticket Info</h2>
       <%= simple_format(ticket.text) %>
