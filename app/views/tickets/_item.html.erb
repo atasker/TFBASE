@@ -1,3 +1,4 @@
+<% player ||= nil %>
 <div class="buy__item">
   <div class="buy__item-in">
     <a href="#popup-txt-tckt-<%= ticket.id %>" class="buy__item-title popup-inline" data-effect="mfp-zoom-in"><%= ticket.category %><i></i></a>
@@ -6,7 +7,7 @@
     <div class="buy__item-price"><%= currency_symbol(ticket) %> <%= ticket.price.round %></div>
   </div>
   <div class="buy__item-in">
-    <%= link_to 'Buy', ticket_path(ticket), :class => 'btn' %>
+    <%= link_to 'Buy', ticket_path(ticket, player: player), :class => 'btn' %>
   </div>
   <%# There is second variant of button (but I don't understand why)
   <div class="buy__item-in">

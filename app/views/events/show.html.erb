@@ -39,7 +39,7 @@
           <div class="buy__list-scroller nano">
             <div class="buy__list-scroll nano-content" style="right: 0;">
               <% @tickets.each do |ticket| %>
-                <%= render partial: 'tickets/item', locals: { ticket: ticket } %>
+                <%= render partial: 'tickets/item', locals: { ticket: ticket, player: (@player ? @player.id : nil) } %>
               <% end %>
             </div>
           </div>
@@ -58,7 +58,7 @@
         <div class="tab-main">
           <% if @event_have_tickets %>
             <% @tickets.each do |ticket| %>
-              <%= render partial: 'tickets/item', locals: { ticket: ticket } %>
+              <%= render partial: 'tickets/item', locals: { ticket: ticket, player: (@player ? @player.id : nil) } %>
             <% end %>
           <% else %>
             <%= render 'shared/nothing_found_message' %>

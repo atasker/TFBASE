@@ -81,7 +81,9 @@ class BaseFrontendController < ApplicationController
       add_breadcrumb player.name, ppth
     end
 
-    add_breadcrumb event.name, event_path(event) if event
+    if event
+      add_breadcrumb event.name, event_path(event, player: (player ? player.id : nil))
+    end
     add_breadcrumb 'Ticket', ticket_path(ticket) if ticket
   end
 
