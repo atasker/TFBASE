@@ -10,7 +10,7 @@
   </div>
 </div>
 <div class="container-fluid">
-  <% if @players.count > 0 %>
+  <% if @players.size > 0 %>
     <div class="tickets">
       <%= render 'shared/sub_search_and_filter', locations: @players_venues.pluck(:name, :id), count: @players.count %>
       <div class="tickets__list row">
