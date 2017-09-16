@@ -13,10 +13,6 @@ class Competition < ActiveRecord::Base
 
   validates :category_id, presence: true
 
-  def players
-    Player.joins(:events).where(events: { competition: self })
-  end
-
   private
 
   def prepare_slug

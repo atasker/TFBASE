@@ -9,9 +9,12 @@ class CompetitionsController < BaseFrontendController
 
     @category = @competition.category
 
-    @players = @competition.players
+    @players = Player.joins(
+      'LEFT OUTER JOIN "events_players" ON "events_players"."player_id" = "players"."id" ' \
+      'LEFT OUTER JOIN "events" ON "events"."id" = "events_players"."event_id"').
+                      where(events: { competition: self })
 
-    if @players.count > 0
+    if @players.size > 0
       # for the filter works
       @players_venues = Venue.joins(events: [:players]).
                               where('events.start_time >= ?', DateTime.now).
