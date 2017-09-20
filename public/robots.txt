@@ -39,4 +39,4 @@ Disallow: /admin/
 Disallow: /humans.txt
 Disallow:
 
-Sitemap: http://www.ticket-finders.com/sitemap.xml.gz
+Sitemap: https://www.ticket-finders.com/sitemap.xml.gz

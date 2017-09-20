@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://www.ticket-finders.com"
+SitemapGenerator::Sitemap.default_host = "https://www.ticket-finders.com"
 
 SitemapGenerator::Sitemap.create do
 
