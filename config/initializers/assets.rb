@@ -9,6 +9,8 @@ Rails.application.config.assets.version = '1.0'
 # added this line to fix problem 'Sprockets::Rails::Helper::AssetFilteredError' when trying to load admin.css on admin pages
 Rails.application.config.assets.precompile += %w(
   chosen.css
+  pure-min.css
+  grids-responsive-min.css
   admin/admin.css
   )
 

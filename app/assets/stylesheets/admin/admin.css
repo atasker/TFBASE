@@ -1,6 +1,8 @@
 /*
  * This is a manifest file that'll be compiled into admin/admin.css, which will include all the files
  * listed below.
+ *= require pure-min
+ *= require grids-responsive-min
  *= require chosen
  *= require_self
  */
