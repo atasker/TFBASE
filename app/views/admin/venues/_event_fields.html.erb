@@ -1,13 +1,13 @@
 <tr class="nested-fields">
-    <td>
+    <td data-field-name="name">
       <%= f.text_field :name %>
     </td>
 
-    <td>
+    <td data-field-name="start_time">
       <%= f.datetime_select :start_time %>
     </td>
 
-    <td>
+    <td data-field-name="category_and_competition">
       <%= f.label :category_id %><br>
       <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, { prompt: true }, { :class => 'chzn-select' }) %>
       <br><br>
@@ -15,14 +15,14 @@
       <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
     </td>
 
-    <td class="center">
+    <td class="center" data-field-name="sports_and_priority">
       <%= f.check_box :sports %> <%= f.label :sports, 'Sports' %><br><br>
       <%= f.check_box :priority %> <%= f.label :priority, 'Priority' %>
     </td>
 
     <!-- habtm addition -->
 
-    <td>
+    <td data-field-name="players">
       <%= f.association :players, :multiple => true, label: false, input_html: { :class => 'chzn-select' } %>
     </td>
     <td>

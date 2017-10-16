@@ -17,13 +17,45 @@
 //= require chosen.jquery
 // do not require_tree .
 
+function initCocoonAddedItem(evnt, insertedItem) {
+  // dublicate info from the previous item (if exist)
+  var sourcer = insertedItem.prev();
+  while (sourcer.length > 0 && !sourcer.hasClass('nested-fields')) {
+    sourcer = sourcer.prev();
+  }
+  if (sourcer.length) {
+    var sourcerDateSelects = sourcer.find("td[data-field-name='start_time'] select");
+    var insertederDateSelects = insertedItem.find("td[data-field-name='start_time'] select");
+    for (var i = 0; i < 5; i++) {
+      $(insertederDateSelects[i]).val($(sourcerDateSelects[i]).val());
+    }
+
+    var sourcerCatCatSelects = sourcer.find("td[data-field-name='category_and_competition'] select");
+    var insertederCatCatSelects = insertedItem.find("td[data-field-name='category_and_competition'] select");
+    for (var i = 0; i < 2; i++) {
+      $(insertederCatCatSelects[i]).val($(sourcerCatCatSelects[i]).val());
+    }
+
+    var sourcerSportPriorCb = sourcer.find("td[data-field-name='sports_and_priority'] input[type='checkbox']");
+    var insertederSportPriorCb = insertedItem.find("td[data-field-name='sports_and_priority'] input[type='checkbox']");
+    for (var i = 0; i < 2; i++) {
+      $(insertederSportPriorCb[i]).prop('checked', $(sourcerSportPriorCb[i]).prop('checked'));
+    }
+
+    insertedItem.find("td[data-field-name='players'] select").val(
+      sourcer.find("td[data-field-name='players'] select").val());
+  }
+
+  // init chosen
+  insertedItem.find('.chzn-select').chosen();
+}
+
 $(document).on('ready turbolinks:load', function() {
 
   $('.chzn-select').chosen();
 
-  $("tbody.event_items").on('cocoon:after-insert', function(e, insertedItem) {
-    insertedItem.find('.chzn-select').chosen();
-  });
+  $("tbody.event_items").off('cocoon:after-insert', initCocoonAddedItem);
+  $("tbody.event_items").on('cocoon:after-insert', initCocoonAddedItem);
 
   if ($(".form-switcher").length) {
     $(".form-switcher input").change(function(evnt) {
