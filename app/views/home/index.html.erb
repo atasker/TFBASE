@@ -8,7 +8,7 @@
     <h1>International  Ticket Agency</h1>
     <div class="main-top__form">
       <%= form_tag events_path, method: :get do  %>
-        <%= text_field_tag :query, params[:query], :placeholder => "Search for an artist, team or city" %>
+        <%= text_field_tag :query, params[:query], :placeholder => "Search for an artist, team or city", id: 'main-top-form-query' %>
         <%= submit_tag '' %>
       <% end %>
     </div>
