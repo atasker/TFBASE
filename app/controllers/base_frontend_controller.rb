@@ -11,7 +11,7 @@ class BaseFrontendController < ApplicationController
       def_title = 'TicketFinders | Tickets for Concerts, Sports, Opera, Theater'
       if @page_meta
         @page_meta_carrier = {
-          title: "#{@page_meta[:title]} Tickets - #{def_title}",
+          title: "#{@page_meta[:title]} - #{def_title}",
           description: "Buy #{@page_meta[:description]} tickets from the official Ticket-Finders.com site.",
           image: @page_meta[:image]
         }
