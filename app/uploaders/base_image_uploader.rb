@@ -34,6 +34,10 @@ class BaseImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
+  # def image?(_ = nil)
+  #   self.file.content_type.include? 'image'
+  # end
+
   # Returns string like "#{width}x#{height}" or nil
   # def geom_sizes_string
   #   unless self.blank?
@@ -42,7 +46,7 @@ class BaseImageUploader < CarrierWave::Uploader::Base
   #   end
   # end
 
-  # protected
+  protected
 
   # def grayscale()
   #   manipulate! do |img|
@@ -55,5 +59,25 @@ class BaseImageUploader < CarrierWave::Uploader::Base
   #   image = MiniMagick::Image.open(picture.path)
   #   image[:width] > image[:height]
   # end
+
+  def optimize_for_pagespeed
+    # according to https://developers.google.com/speed/docs/insights/OptimizeImages
+    if self.file.content_type == 'image/jpeg'
+      # convert orig.jpg -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG orig_converted.jpg
+      manipulate! do |img|
+        img.sampling_factor '4:2:0'
+        img.strip
+        img.quality 85
+        img.interlace 'JPEG'
+        img
+      end
+    else
+      # convert cuppa.png -strip cuppa_converted.png
+      manipulate! do |img|
+        img.strip
+        img
+      end
+    end
+  end
 
 end

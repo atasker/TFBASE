@@ -5,9 +5,12 @@ class AvatarUploader < BaseImageUploader
 
   version :grid_large do
     process resize_to_fill: [400, 450]
+    process :optimize_for_pagespeed
   end
 
   version :grid_small do
     process resize_to_fill: [400, 300]
+    process :optimize_for_pagespeed
   end
+
 end
