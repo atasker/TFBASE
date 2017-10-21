@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     as: :hospitality_concierge
   resources :messages, only: [:new, :create]
 
+  post '/enquiry-ticket', to: 'enquiries#create', as: :create_enquiry
+
   get 'static/sport'
   get 'static/terms'
   get 'static/about'

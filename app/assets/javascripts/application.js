@@ -13,7 +13,7 @@
 //= require libs.min
 //= require jquery_ujs
 //= require interface
-//= require feedback_popup
+//= require remote_form_in_popup
 //= require hos_n_con_form
 //= require sub_filter
 //= require tickets

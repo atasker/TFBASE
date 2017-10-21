@@ -1,0 +1,12 @@
+A new ticket enquiry from <%= @enquiry.name %>
+===============================================
+
+Ticket #<%= @enquiry.ticket.id %>
+of Event #<%= @enquiry.ticket.event.id %> "<%= @enquiry.ticket.event.name %>"
+
+<% if @enquiry.body.present? %>
+Additional message from client:
+<%= @enquiry.body %>
+
+<% end %>
+Return address: <%= @enquiry.email %>

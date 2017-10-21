@@ -6,6 +6,7 @@ class Admin::TicketsController < AdminController
 
   def show
     @ticket = Ticket.find(params[:id])
+    @enquiries = @ticket.enquiries.ordered
   end
 
   def new

@@ -1,0 +1,38 @@
+<div class="popup-send__msg">Name and email must be completed</div>
+<% enquiry = Enquiry.new(ticket: ticket) %>
+<div class="popup-send__form">
+  <%= form_for enquiry, url: create_enquiry_path(format: 'json'), remote: true, html: { :class => 'new_message remote-form-in-popup', 'data-obj-ident' => 'enquiry' } do |f| %>
+    <%= f.hidden_field :ticket_id %>
+    <div class="input-wrap">
+      <%= f.label :name %>
+      <div class="input-wrap__in">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="input-wrap">
+      <%= f.label :email %>
+      <div class="input-wrap__in">
+        <%= f.email_field :email, placeholder: "user@gmail.com" %>
+      </div>
+    </div>
+    <div class="input-wrap input-wrap--textarea">
+      <%= f.label :body, 'Additional message' %>
+      <div class="input-wrap__in">
+        <%= f.text_area :body %>
+      </div>
+    </div>
+    <div class="popup-send__question"><%= enquiry.humanizer_question %></div>
+    <div class="input-wrap input-wrap--question">
+      <%= f.label :humanizer_answer, 'Answer' %>
+      <div class="input-wrap__in">
+        <%= f.text_field :humanizer_answer %>
+        <%= f.hidden_field :humanizer_question_id %>
+      </div>
+    </div>
+    <div class="submit-wrap">
+      <%= f.submit "Send" %>
+      <%#<input type="reset" value="Cancel">%>
+      <span class="popup-send__success-msg">Message is sent. Thank you.</span>
+    </div>
+  <% end %>
+</div>

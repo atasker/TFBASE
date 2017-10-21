@@ -43,4 +43,24 @@
 
   <%= link_to 'Edit', edit_admin_ticket_path(@ticket) %> |
   <%= link_to 'Back', admin_tickets_path %>
+
+  <% if @enquiries.any? %>
+    <h3>Enquiries</h3>
+    <table class="pure-table pure-table-striped pure-table-horizontal">
+      <thead>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Date</th>
+      </thead>
+      <% @enquiries.each do |enquiry| %>
+        <tr>
+          <td><%= enquiry.name %></td>
+          <td><%= enquiry.email %></td>
+          <td><%= enquiry.body %></td>
+          <td><%= l enquiry.created_at, format: :long %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 </div>

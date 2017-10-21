@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h2>TicketFinders</h2>
+    <h3>A new ticket enquiry from <%= @enquiry.name %></h3>
+    <p>
+      Ticket <a href="<%= admin_ticket_url(@enquiry.ticket) %>">#<%= @enquiry.ticket.id %></a>
+      of Event <a href="<%= admin_event_url(@enquiry.ticket.event.id) %>">#<%= @enquiry.ticket.event.id %> "<%= @enquiry.ticket.event.name %>"</a>
+    </p>
+    <% if @enquiry.body.present? %>
+      <p>Additional message from client:<br><%= @enquiry.body %></p>
+    <% end %>
+    <p>
+      Return address: <%= @enquiry.email %>
+    </p>
+  </body>
+</html>

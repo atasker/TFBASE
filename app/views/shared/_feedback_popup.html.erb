@@ -3,7 +3,7 @@
   <h2>Contact us</h2>
   <div class="popup-send__msg">All fields must be completed</div>
   <div class="popup-send__form">
-    <%= form_for message, url: messages_path(format: 'json'), remote: true, html: { id: 'popup-feedback-form' } do |f| %>
+    <%= form_for message, url: messages_path(format: 'json'), remote: true, html: { id: 'popup-feedback-form', :class => 'new_message remote-form-in-popup', 'data-obj-ident' => 'message' } do |f| %>
       <div class="input-wrap">
         <%= f.label :name %>
         <div class="input-wrap__in">

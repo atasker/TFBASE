@@ -10,7 +10,7 @@
   </div>
   <div class="buy__item-in">
     <% if ticket.enquire? %>
-    <%= link_to 'Enquire', "#", :class => 'btn btn--sec' %>
+    <%= link_to 'Enquire', "#popup-enquiry-tckt-#{ticket.id}", :class => 'btn btn--sec popup-inline', 'data-effect' => 'mfp-zoom-in' %>
     <% else %>
     <%= link_to 'Buy', ticket_path(ticket, player: player), :class => 'btn' %>
     <% end %>

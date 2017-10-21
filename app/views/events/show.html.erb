@@ -105,6 +105,12 @@
       <h2>Ticket Info</h2>
       <%= simple_format(ticket.text) %>
     </div>
+    <% if ticket.enquire? %>
+      <div id="popup-enquiry-tckt-<%= ticket.id %>" class="popup popup--send mfp-with-anim mfp-hide">
+        <h2>Enquire ticket <%= ticket.category %></h2>
+        <%= render partial: 'tickets/enquiry_form', locals: { ticket: ticket } %>
+      </div>
+    <% end %>
   <% end %>
 
   <div id="popup-chart" class="popup mfp-with-anim mfp-hide">
