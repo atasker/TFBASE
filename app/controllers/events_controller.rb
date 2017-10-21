@@ -27,7 +27,8 @@ class EventsController < BaseFrontendController
     gon.placename = @event.venue.address
 
     @tickets = @event.tickets.order(price: :asc)
-    @event_have_tickets = @tickets.buyable.sum(:quantity) > 0
+    @event_have_tickets = @tickets.any?
+    @event_have_buyable_tickets = @tickets.buyable.sum(:quantity) > 0
 
     page_meta_image_url = nil
     if @competition
