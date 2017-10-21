@@ -5,9 +5,10 @@
   <td><%= ticket.event.name %></td>
   <% end %>
   <td><%= ticket.category %></td>
-  <td><%= ticket.currency %></td>
-  <td><%= ticket.price %></td>
-  <td><%= ticket.quantity %></td>
+  <td><%= ticket.enquire? ? '' : ticket.currency %></td>
+  <td><%= ticket.enquire? ? '' : ticket.price %></td>
+  <td><%= ticket.enquire? ? '' : ticket.quantity %></td>
+  <td><%= ticket.enquire? ? 'Y' : '' %></td>
   <td><%= link_to 'Show', admin_ticket_path(ticket) %></td>
   <td><%= link_to 'Edit', edit_admin_ticket_path(ticket) %></td>
   <td><%= link_to 'Destroy', admin_ticket_path(ticket),

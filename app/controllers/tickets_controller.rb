@@ -2,6 +2,7 @@ class TicketsController < BaseFrontendController
 
   def show
     @ticket = Ticket.find(params[:id])
+    raise ActionController::RoutingError, "Routing error" if @ticket.enquire?
     @event = @ticket.event
     @category = @event.category if @event
     @competition = Competition.find(params[:comp]) if params[:comp]

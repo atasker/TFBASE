@@ -17,7 +17,7 @@
     "image": [
       "<%= root_url[0..-2] %><%= @event.venue.avatar.venue.url %>"
     ]<% end %><% if @event.info_blocks.any? %>,
-    "description": "<%= @event.info_blocks.ordered.map { |info_block| "#{info_block.title}. #{info_block.text}" }.join("; ") %>"<% end %><% if @event_have_tickets %>,<% offer = @tickets.first %>
+    "description": "<%= @event.info_blocks.ordered.map { |info_block| "#{info_block.title}. #{info_block.text}" }.join("; ") %>"<% end %><% if @event_have_tickets %>,<% offer = @tickets.buyable.first %>
     "offers": {
       "@type": "Offer",
       "url": "<%= ticket_url(offer) %>",

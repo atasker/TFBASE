@@ -15,8 +15,8 @@
   <% end %>
 
   <p>
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
+    <%= f.label :event_id %><br>
+    <%= f.collection_select(:event_id, Event.order('id ASC'), :id, :id, prompt: true) %>
   </p>
 
   <p>
@@ -25,13 +25,18 @@
   </p>
 
   <p>
-    <%= f.label :quantity %><br>
-    <%= f.text_area :quantity %>
+    <%= f.label :enquire %>
+    <%= f.check_box :enquire %>
   </p>
 
   <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </p>
+
+  <p>
+    <%= f.label :quantity %><br>
+    <%= f.text_area :quantity %>
   </p>
 
   <p>
@@ -45,8 +50,8 @@
   </p>
 
   <p>
-    <%= f.label :event_id %><br>
-    <%= f.collection_select(:event_id, Event.order('id ASC'), :id, :id, prompt: true) %>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
   </p>
 
   <p>

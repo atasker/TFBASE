@@ -17,7 +17,7 @@
 //= require chosen.jquery
 // do not require_tree .
 
-function initCocoonAddedItem(evnt, insertedItem) {
+function initCocoonAddedEventOfVenue(evnt, insertedItem) {
   // dublicate info from the previous item (if exist)
   var sourcer = insertedItem.prev();
   while (sourcer.length > 0 && !sourcer.hasClass('nested-fields')) {
@@ -50,12 +50,54 @@ function initCocoonAddedItem(evnt, insertedItem) {
   insertedItem.find('.chzn-select').chosen();
 }
 
+function toggleVisibilityOfTicketField() {
+  var enquireOn = $("#ticket_enquire").prop('checked');
+  $("#ticket_price").closest("p").toggle(!enquireOn);
+  $("#ticket_quantity").closest("p").toggle(!enquireOn);
+  $("#ticket_pairs_only").closest("p").toggle(!enquireOn);
+  $("#ticket_currency").closest("p").toggle(!enquireOn);
+}
+function toggleVisibilityOfTicketCells(ticketRow) {
+  var enquireOn = ticketRow.find(".event-ticket-cell-enquire > input[type='checkbox']").prop('checked');
+  ticketRow.find(".event-ticket-cell-price > input").toggle(!enquireOn);
+  ticketRow.find(".event-ticket-cell-quantity > input").toggle(!enquireOn);
+  ticketRow.find(".event-ticket-cell-pairs-only > input[type='checkbox']").toggle(!enquireOn);
+  ticketRow.find(".event-ticket-cell-currency > select").toggle(!enquireOn);
+}
+function handleEnquireInCellChange(evnt) {
+  toggleVisibilityOfTicketCells($(this).parent().parent());
+}
+function initCocoonAddedTicketOfEvent(evnt, insertedItem) {
+  insertedItem.find(".event-ticket-cell-enquire > input[type='checkbox']").on('change', handleEnquireInCellChange);
+  toggleVisibilityOfTicketCells(insertedItem);
+}
+function initTicketFieldsVisibility() {
+  var enquireCbox = $("#ticket_enquire");
+  if (enquireCbox.length) {
+    enquireCbox.off('change', toggleVisibilityOfTicketField);
+    enquireCbox.on('change', toggleVisibilityOfTicketField);
+    toggleVisibilityOfTicketField();
+  }
+  var enquireCells = $(".event-ticket-cell-enquire");
+  if (enquireCells.length) {
+    $(".event-ticket-cell-enquire > input[type='checkbox']").off('change', handleEnquireInCellChange);
+    $(".event-ticket-cell-enquire > input[type='checkbox']").on('change', handleEnquireInCellChange);
+    enquireCells.each(function(indx) {
+      toggleVisibilityOfTicketCells($(this).parent());
+    });
+  }
+  $("tbody.ticket_items").off('cocoon:after-insert', initCocoonAddedTicketOfEvent);
+  $("tbody.ticket_items").on('cocoon:after-insert', initCocoonAddedTicketOfEvent);
+}
+
 $(document).on('ready turbolinks:load', function() {
 
   $('.chzn-select').chosen();
 
-  $("tbody.event_items").off('cocoon:after-insert', initCocoonAddedItem);
-  $("tbody.event_items").on('cocoon:after-insert', initCocoonAddedItem);
+  $("tbody.event_items").off('cocoon:after-insert', initCocoonAddedEventOfVenue);
+  $("tbody.event_items").on('cocoon:after-insert', initCocoonAddedEventOfVenue);
+
+  initTicketFieldsVisibility();
 
   if ($(".form-switcher").length) {
     $(".form-switcher input").change(function(evnt) {

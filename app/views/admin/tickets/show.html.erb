@@ -9,24 +9,31 @@
     <%= @ticket.category %>
   </p>
 
-  <p>
-    <strong>Price:</strong>
-    <%= @ticket.price %>
-  </p>
+  <% unless @ticket.enquire? %>
+    <p>
+      <strong>Price:</strong>
+      <%= @ticket.price %>
+    </p>
+
+    <p>
+      <strong>Quantity:</strong>
+      <%= @ticket.quantity %>
+    </p>
+
+    <p>
+      <strong>Currency:</strong>
+      <%= @ticket.currency %>
+    </p>
+
+    <p>
+      <strong>Sell in pairs only?</strong>
+      <%= @ticket.pairs_only %>
+    </p>
+  <% end %>
 
   <p>
-    <strong>Quantity:</strong>
-    <%= @ticket.quantity %>
-  </p>
-
-  <p>
-    <strong>Currency:</strong>
-    <%= @ticket.currency %>
-  </p>
-
-  <p>
-    <strong>Sell in pairs only?</strong>
-    <%= @ticket.pairs_only %>
+    <strong>Enquire?</strong>
+    <%= @ticket.enquire? ? 'Yes' : 'No' %>
   </p>
 
   <p style="word-wrap: break-word;">

@@ -74,7 +74,7 @@ class Admin::EventsController < AdminController
       :sports, :priority, player_ids: [],
       tickets_attributes: [
         :id, :price, :category, :quantity, :currency,
-        :text, :pairs_only, :_destroy],
+        :enquire, :text, :pairs_only, :_destroy],
       info_blocks_attributes: [
         :id, :title, :text, :prior, :_destroy])
   end

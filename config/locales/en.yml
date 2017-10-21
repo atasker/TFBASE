@@ -21,3 +21,13 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    # models:
+    #   ticket:
+    #     one:   "Ticket" # 1
+    #     few:   "Tickets" # 2
+    #     many:  "Tickets" # 5
+    #     other: "Tickets" # all
+    attributes:
+      ticket:
+        enquire: "Enquire?"
