@@ -1,7 +1,7 @@
 A new ticket enquiry from <%= @enquiry.name %>
 ===============================================
 
-Ticket #<%= @enquiry.ticket.id %>
+Ticket #<%= @enquiry.ticket.id %> "<%= @enquiry.ticket.category %>"
 of Event #<%= @enquiry.ticket.event.id %> "<%= @enquiry.ticket.event.name %>"
 
 <% if @enquiry.body.present? %>

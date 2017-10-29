@@ -7,7 +7,7 @@
     <h2>TicketFinders</h2>
     <h3>A new ticket enquiry from <%= @enquiry.name %></h3>
     <p>
-      Ticket <a href="<%= admin_ticket_url(@enquiry.ticket) %>">#<%= @enquiry.ticket.id %></a>
+      Ticket <a href="<%= admin_ticket_url(@enquiry.ticket) %>">#<%= @enquiry.ticket.id %> "<%= @enquiry.ticket.category %>"</a>
       of Event <a href="<%= admin_event_url(@enquiry.ticket.event.id) %>">#<%= @enquiry.ticket.event.id %> "<%= @enquiry.ticket.event.name %>"</a>
     </p>
     <% if @enquiry.body.present? %>

@@ -107,7 +107,7 @@
     </div>
     <% if ticket.enquire? %>
       <div id="popup-enquiry-tckt-<%= ticket.id %>" class="popup popup--send mfp-with-anim mfp-hide">
-        <h2>Enquire ticket <%= ticket.category %></h2>
+        <h2>Enquire form</h2>
         <%= render partial: 'tickets/enquiry_form', locals: { ticket: ticket } %>
       </div>
     <% end %>
