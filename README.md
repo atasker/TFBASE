@@ -1,4 +1,4 @@
-TicketFinders
+Ticketfinders
 =============
 
 Getting Started

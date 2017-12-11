@@ -8,11 +8,11 @@ class BaseFrontendController < ApplicationController
 
   def page_meta
     unless @page_meta_carrier
-      def_title = 'TicketFinders | Tickets for Concerts, Sports, Opera, Theater'
+      def_title = 'Ticketfinders | Tickets for Concerts, Sports, Opera, Theater'
       if @page_meta
         @page_meta_carrier = {
           title: "#{@page_meta[:title]} - #{def_title}",
-          description: "Buy #{@page_meta[:description]} tickets from the official Ticket-Finders.com site.",
+          description: "Buy #{@page_meta[:description]} tickets from the official ticket-finders.com site.",
           image: @page_meta[:image]
         }
       else
