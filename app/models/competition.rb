@@ -1,6 +1,8 @@
 class Competition < ActiveRecord::Base
   include FriendlySlugable
 
+  acts_as_seo_carrier
+
   belongs_to :category
   has_many :events, dependent: :destroy
 
@@ -12,6 +14,10 @@ class Competition < ActiveRecord::Base
                    length: { maximum: 50 }
 
   validates :category_id, presence: true
+
+  def title; name end
+
+  def seo_image; avatar.grid_large.url end
 
   private
 

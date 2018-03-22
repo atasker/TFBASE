@@ -49,7 +49,9 @@ class Admin::CompetitionsController < AdminController
   private
 
   def competition_params
-    params.require(:competition).permit(:name, :slug, :category_id, :text, :avatar)
+    params.require(:competition).permit(
+      :name, :slug, :category_id, :text, :avatar,
+      :no_title_postfix, :seo_title, :seo_descr, :seo_keywords)
   end
 
 end

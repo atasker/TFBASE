@@ -43,6 +43,8 @@
     <%= f.file_field :avatar %>
   </p>
 
+  <%= render partial: 'admin/shared/seo_data_fields', locals: { f: f, name: 'competition' } %>
+
   <p>
     <%= f.submit %>
   </p>

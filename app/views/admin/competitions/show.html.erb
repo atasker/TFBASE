@@ -23,6 +23,8 @@
     <%= @competition.text %>
   </p>
 
+  <%= render partial: 'admin/shared/seo_data_info', locals: { carrier: @competition, name: 'Competition' } %>
+
   <%= link_to 'Edit', edit_admin_competition_path(@competition.id) %> |
   <%= link_to 'Back', admin_competitions_path %>
 
