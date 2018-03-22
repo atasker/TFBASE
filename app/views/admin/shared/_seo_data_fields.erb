@@ -1,0 +1,28 @@
+<% name ||= nil %>
+<% hide_seo_title ||= false %>
+<% hide_no_title_postfix ||= false %>
+
+<fieldset>
+  <legend>SEO-related data for the <%= name ? "#{name}'s " : '' %>page</legend>
+  <% unless hide_seo_title && hide_no_title_postfix %>
+    <p>
+      <% unless hide_seo_title %>
+        <%= f.label :seo_title, 'Page title' %><br>
+        <%= f.text_field :seo_title %>
+        &nbsp;
+      <% end %>
+      <% unless hide_no_title_postfix %>
+        <%= f.check_box :no_title_postfix %>
+        <%= f.label :no_title_postfix, "don\'t attach a postfix to the page title (Ticketfinders | Tickets for Concerts, Sports, Opera, Theater)" %>
+      <% end %>
+    </p>
+  <% end %>
+  <p>
+    <%= f.label :seo_descr, 'Meta description' %><br>
+    <%= f.text_field :seo_descr %>
+  </p>
+  <p>
+    <%= f.label :seo_keywords, 'Meta keywords' %><br>
+    <%= f.text_field :seo_keywords %>
+  </p>
+</fieldset>

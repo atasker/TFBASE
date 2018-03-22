@@ -1,0 +1,7 @@
+<% name ||= nil %>
+<% seo_meta = Seo::Basic.new carrier, false %>
+<p>
+  <strong><%= name ? "#{name.capitalize}'s p" : 'P' %>age title:</strong> <%= seo_meta.title %><br />
+  <strong>Meta description:</strong> <%= seo_meta.description %><br />
+  <strong>Meta keywords:</strong> <%= seo_meta.keywords %><br />
+</p>

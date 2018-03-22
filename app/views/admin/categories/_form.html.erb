@@ -30,6 +30,8 @@
     <%= f.check_box :sports %>
   </p>
 
+  <%= render partial: 'admin/shared/seo_data_fields', locals: { f: f, name: 'category' } %>
+
   <p>
     <%= f.submit %>
   </p>

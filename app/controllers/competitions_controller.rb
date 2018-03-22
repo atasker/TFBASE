@@ -26,9 +26,10 @@ class CompetitionsController < BaseFrontendController
       @events, @event_count_before_filtration = apply_day_filter_to_events @events
     end
 
-    @page_meta = { title: @competition.name,
-                   description: @competition.name,
-                   image: @competition.avatar.grid_large.url }
+    @page_meta = OpenStruct.new({
+      title: @competition.name,
+      seo_descr: @competition.name,
+      seo_image: @competition.avatar.grid_large.url })
 
     add_common_breadcrumbs! @category, @competition
   end

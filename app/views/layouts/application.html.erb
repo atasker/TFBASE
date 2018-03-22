@@ -5,16 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="a0y8f0wF8qt5fmiYeHmHRtpe811seo4JMJSHp9I4PXk" />
-    <title><%= page_meta[:title] %></title>
-    <meta name='description' content="<%= page_meta[:description] %>">
+    <title><%= page_meta.title %></title>
+    <% if page_meta.description.present? %><meta name='description' content="<%= page_meta.description %>"><% end %>
+    <% if page_meta.keywords.present? %><meta name='keywords' content="<%= page_meta.keywords %>"><% end %>
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@TicketfinderInt">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="<%= page_meta[:title] %>">
+    <meta property="og:title" content="<%= page_meta.title %>">
     <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:image" content="<%= page_meta[:image].nil? ? asset_url('/ico/ticket-finders-square-big-ico.png') : asset_url(page_meta[:image]) %>">
-    <% if page_meta[:description].present? %><meta property="og:description" content="<%= page_meta[:description] %>"><% end %>
+    <meta property="og:image" content="<%= page_meta.image.nil? ? asset_url('/ico/ticket-finders-square-big-ico.png') : asset_url(page_meta.image) %>">
+    <% if page_meta.description.present? %><meta property="og:description" content="<%= page_meta.description %>"><% end %>
     <meta property="og:site_name" content="Ticketfinders">
     <%# <meta property="fb:app_id" content="00000000000">%>
     <%= favicon_link_tag '/favicon.ico', rel: 'icon', sizes: '16x16 32x32 48x48 64x64' %>

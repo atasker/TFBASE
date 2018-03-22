@@ -36,9 +36,10 @@ class EventsController < BaseFrontendController
     elsif @player
       page_meta_image_url = @player.avatar.grid_large.url
     end
-    @page_meta = { title: @event.name,
-                   description: @event.name,
-                   image: page_meta_image_url }
+    @page_meta = OpenStruct({
+      title: @event.name,
+      seo_descr: @event.name,
+      seo_image: page_meta_image_url })
 
     add_common_breadcrumbs! @category, @competition, @player, @event
   end

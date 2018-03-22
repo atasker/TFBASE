@@ -1,6 +1,8 @@
 class Category < ActiveRecord::Base
   include FriendlySlugable
 
+  acts_as_seo_carrier
+
   has_many :players, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :competitions, dependent: :destroy
@@ -10,6 +12,8 @@ class Category < ActiveRecord::Base
                           length: { maximum: 50 }
 
   validates :sports, inclusion: { in: [true, false] }
+
+  def title; description end
 
   private
 

@@ -33,6 +33,8 @@ class CategoriesController < BaseFrontendController
       end
     end
 
+    @page_meta = @category
+
     add_common_breadcrumbs! @category
   end
 

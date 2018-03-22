@@ -29,9 +29,9 @@ class PlayersController < BaseFrontendController
     @events = @events.where(competition: @competition) if @competition
     @events, @event_count_before_filtration = apply_day_filter_to_events @events
 
-    @page_meta = { title: @player.name,
-                   description: @player.name,
-                   image: @player.avatar.grid_large.url }
+    @page_meta = OpenStruct.new(title: @player.name,
+                                seo_descr: @player.name,
+                                seo_image: @player.avatar.grid_large.url)
 
     add_common_breadcrumbs! @category, @competition, @player
   end
