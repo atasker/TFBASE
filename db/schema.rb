@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20180322113806) do
     t.boolean  "sports",         default: false, null: false
     t.boolean  "priority",       default: false, null: false
     t.string   "slug"
+    t.text     "seodata"
   end
 
   add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree

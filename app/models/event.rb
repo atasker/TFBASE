@@ -1,6 +1,10 @@
 class Event < ActiveRecord::Base
   include FriendlySlugable
 
+  acts_as_seo_carrier
+
+  attr_accessor :seo_image
+
   belongs_to :venue
   belongs_to :category
 
@@ -38,6 +42,8 @@ class Event < ActiveRecord::Base
     }
 
   scope :actual, -> { where('events.start_time >= ?', DateTime.now) }
+
+  def title; name end
 
   def self.text_search(query)
     if query.present?

@@ -62,6 +62,8 @@
     <%= f.association :players, :multiple => true, label: false, input_html: { :class => 'chzn-select' } %>
   </p>
 
+  <%= render partial: 'admin/shared/seo_data_fields', locals: { f: f, name: 'event' } %>
+
   <h3>Tickets</h3>
   <div id="tickets">
     <table class="pure-table pure-table-striped pure-table-horizontal">

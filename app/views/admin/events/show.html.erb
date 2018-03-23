@@ -48,6 +48,8 @@
     </p>
   <% end %>
 
+  <%= render partial: 'admin/shared/seo_data_info', locals: { carrier: @event, name: 'Event' } %>
+
   <%= link_to 'Edit/Add Tickets to Event', edit_admin_event_path(@event.id) %> |
   <%= link_to 'Back', admin_events_path %>
 

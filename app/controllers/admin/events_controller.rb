@@ -71,7 +71,9 @@ class Admin::EventsController < AdminController
     params.require(:event).permit(
       :name, :slug, :start_time, :venue_id,
       :category_id, :competition_id,
-      :sports, :priority, player_ids: [],
+      :sports, :priority,
+      :no_title_postfix, :seo_title, :seo_descr, :seo_keywords,
+      player_ids: [],
       tickets_attributes: [
         :id, :price, :category, :quantity, :currency,
         :enquire, :text, :pairs_only, :_destroy],

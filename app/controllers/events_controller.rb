@@ -30,16 +30,13 @@ class EventsController < BaseFrontendController
     @event_have_tickets = @tickets.any?
     @event_have_buyable_tickets = @tickets.buyable.sum(:quantity) > 0
 
-    page_meta_image_url = nil
     if @competition
-      page_meta_image_url = @competition.avatar.grid_large.url
+      @event.seo_image = @competition.avatar.grid_large.url
     elsif @player
-      page_meta_image_url = @player.avatar.grid_large.url
+      @event.seo_image = @player.avatar.grid_large.url
     end
-    @page_meta = OpenStruct({
-      title: @event.name,
-      seo_descr: @event.name,
-      seo_image: page_meta_image_url })
+
+    @page_meta = @event
 
     add_common_breadcrumbs! @category, @competition, @player, @event
   end
