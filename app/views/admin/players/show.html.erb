@@ -23,6 +23,8 @@
     <%= @player.text %>
   </p>
 
+  <%= render partial: 'admin/shared/seo_data_info', locals: { carrier: @player, name: 'Player' } %>
+
   <%= link_to 'Edit', edit_admin_player_path(@player.id) %> |
   <%= link_to 'Back', admin_players_path %>
 

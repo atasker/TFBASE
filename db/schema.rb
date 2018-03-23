@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20180322113806) do
     t.text     "text"
     t.string   "avatar"
     t.string   "slug"
+    t.text     "seodata"
   end
 
   add_index "players", ["category_id"], name: "index_players_on_category_id", using: :btree
