@@ -1,0 +1,23 @@
+<div class="holder">
+  <p>
+    <strong>Title:</strong>
+    <%= @page.title %>
+  </p>
+
+  <% unless @page.home? %>
+    <p>
+      <strong>Path:</strong>
+      <%= link_to @page.path, page_path(@page.path), target: '_blank' %>
+    </p>
+
+    <p>
+      <strong>Body:</strong>
+    </p>
+    <div><%= raw @page.body %></div>
+  <% end %>
+
+  <%= render partial: 'admin/shared/seo_data_info', locals: { carrier: @page, titless: @page.home? } %>
+
+  <%= link_to 'Edit', edit_admin_page_path(@page.id) %> |
+  <%= link_to 'Back', admin_pages_path %>
+</div>

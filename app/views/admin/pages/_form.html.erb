@@ -1,0 +1,44 @@
+<%= form_for [:admin, @page], url: (@page.new_record? ? nil : admin_page_path(@page.id)) do |f| %>
+
+  <% if @page.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@page.errors.count, "error") %> prohibited
+        this page from being saved:
+      </h2>
+      <ul>
+        <% @page.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% unless @page.home? %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
+
+    <% unless @page.fixed? %>
+      <p>
+        <%= f.label :path %><br>
+        <%= f.text_field :path %><br>
+        <small>* required</small>
+      </p>
+    <% end %>
+
+    <p>
+      <%= f.label :body %><br>
+      <%= f.text_area :body %>
+      <small>* HTML</small>
+    </p>
+  <% end %>
+
+  <%= render partial: 'admin/shared/seo_data_fields', locals: { f: f, hide_seo_title: @page.home?, hide_no_title_postfix: @page.home? } %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :players
     resources :tickets
     resources :venues
+    resources :pages
     scope '/homepage/' do
       resources :home_line_items
       get '/', to: redirect('/admin')

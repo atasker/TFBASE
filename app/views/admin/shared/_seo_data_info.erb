@@ -1,5 +1,12 @@
 <% name ||= nil %>
+<% titless ||= false %>
+
+<% if titless %>
+  <% carrier = OpenStruct.new(seo_descr: carrier.seo_descr, seo_keywords: carrier.seo_keywords) %>
+<% end %>
+
 <% seo_meta = Seo::Basic.new carrier, false %>
+
 <p>
   <strong><%= name ? "#{name.capitalize}'s p" : 'P' %>age title:</strong> <%= seo_meta.title %><br />
   <strong>Meta description:</strong> <%= seo_meta.description %><br />

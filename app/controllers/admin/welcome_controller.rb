@@ -7,6 +7,7 @@ class Admin::WelcomeController < AdminController
     @players = Player.all
     @tickets = Ticket.all
     @venues = Venue.all
+    @pages = Page.all
   end
 
 end
