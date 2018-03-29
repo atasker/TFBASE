@@ -1,0 +1,11 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1><%= @current_page.title %></h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <%= raw @current_page.body %>
+</div>

@@ -5,6 +5,7 @@ class EventsController < BaseFrontendController
     @events, @event_count_before_filtration = apply_day_filter_to_events @events
     @sorted = @events.sort { |a,b| a.start_time <=> b.start_time }
 
+    @page_meta ||= OpenStruct.new(title: 'Search Results')
     add_breadcrumb 'Search Results', nil
   end
 

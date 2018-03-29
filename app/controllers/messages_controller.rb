@@ -1,5 +1,5 @@
 class MessagesController < BaseFrontendController
-  before_filter :add_message_breadcrumb
+  before_filter :add_message_breadcrumb, except: [:hospitality_concierge]
 
   def new
     @message = Message.new
@@ -57,7 +57,9 @@ class MessagesController < BaseFrontendController
   end
 
   def add_message_breadcrumb
-    add_breadcrumb 'Contacts us', nil
+    determine_page 'messages/new'
+    @page_meta = @current_page || OpenStruct.new(title: 'Contacts us')
+    add_breadcrumb (@current_page ? @current_page.title : 'Contacts us'), nil
   end
 
 end

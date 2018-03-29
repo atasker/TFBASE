@@ -7,10 +7,6 @@ Rails.application.routes.draw do
 
   post '/enquiry-ticket', to: 'enquiries#create', as: :create_enquiry
 
-  get 'static/sport'
-  get 'static/terms'
-  get 'static/about'
-
   get '/competitions/:compet/:id', to: 'players#show', as: :competition_player
   resources :categories, only: [:show, :index]
   resources :competitions, only: [:show, :index]
@@ -42,6 +38,10 @@ Rails.application.routes.draw do
     put ':id', to: 'admin/home_slides#update'
     delete ':id', to: 'admin/home_slides#destroy'
   end
+
+  get 'static/about', to: 'pages#about'
+  get 'static/sport', to: 'pages#sport'
+  get '*page_path', to: 'pages#show', as: :page
 
   root 'home#index'
 end

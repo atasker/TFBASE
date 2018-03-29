@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="page-title__inner" style="background:url('<%= asset_path("title-bg.png") %>')">
       <%= render 'shared/breadcrumbs' %>
-      <h1>Sport</h1>
+      <h1><%= @current_page ? @current_page.title : 'Sport' %></h1>
     </div>
   </div>
 </div>

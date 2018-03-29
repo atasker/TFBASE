@@ -2,14 +2,13 @@
   <div class="container-fluid">
     <div class="page-title__inner">
       <%= render 'shared/breadcrumbs' %>
-      <h1>About us</h1>
+      <h1><%= @current_page ? @current_page.title : 'About us' %></h1>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
-  <p>We at Ticketfinders International LLC have forty-four years experience of the secondary ticket market.</p>
-  <p>Ticketfinders International is a truly international ticket brokerage, specializing in sourcing tickets throughout Europe and the World with particular expertise in finding hard to get and sold out events.  Whether for personal or corporate clients, Ticketfinders International aims to offer the best personalized experience for each one of our patrons, with particular detail taken to find the very best tickets available at the best possible price.</p>
+  <% if @current_page %><%= raw @current_page.body %><% end %>
   <h4>Testimonials</h4>
   <ul class="bxslider">
     <li>

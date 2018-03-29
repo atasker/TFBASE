@@ -6,6 +6,14 @@ class BaseFrontendController < ApplicationController
 
   protected
 
+  def determine_page(checked_path = nil)
+    @current_page = nil
+    checked_path ||= request.fullpath # try to find page for current url
+    if path_match = checked_path.match(/^\/?([^\?]*)\??/)
+      @current_page = Page.find_by_path path_match[1]
+    end
+  end
+
   def page_meta
     unless @page_meta_carrier
       unless @page_meta

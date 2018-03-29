@@ -2,6 +2,9 @@ class CategoriesController < BaseFrontendController
 
   def index
     # @categories already initialized at collect_categories method of BaseFrontendController
+
+    determine_page
+    @page_meta = @current_page || OpenStruct.new(title: 'Categories')
     add_breadcrumb 'Categories', nil
   end
 

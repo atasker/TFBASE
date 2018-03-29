@@ -39,5 +39,15 @@ module Ticketfinders1
 
     # Added to allow custom font
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    # Mark page object as "fixed" by adding his path to array below.
+    # Fixed pages protected from hiding, deleting and changing path.
+    # Homepage (with empty path) is fixed by default.
+    config.fixed_pages_paths = %w(
+        messages/new
+        static/about
+        static/sport
+        static/terms
+      )
   end
 end

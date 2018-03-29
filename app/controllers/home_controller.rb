@@ -17,6 +17,12 @@ class HomeController < BaseFrontendController
       @main_categories[spec_category.description] = spec_category.id
     end
 
+    determine_page
+    @page_meta = OpenStruct.new(
+      seo_descr: @current_page.seo_descr,
+      seo_keywords: @current_page.seo_keywords
+    ) if @current_page
+
     ## That three commented lines of code was before me
     # @sports = Event.where(sports: true).sample(3)
     # @concerts_id = Category.where(description: "Concerts").ids

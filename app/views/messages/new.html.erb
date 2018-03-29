@@ -2,24 +2,14 @@
   <div class="container-fluid">
     <div class="page-title__inner">
       <%= render 'shared/breadcrumbs' %>
-      <h1>Contacts us</h1>
+      <h1><%= @current_page ? @current_page.title : 'Contacts us' %></h1>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
   <div class="col-md-6">
-    <p>
-      USA +1 240 764 4969<br />
-      UK +44 20 7193 8557<br />
-      <%= mail_to 'Info@ticket-finders.com' %>
-    </p>
-    <p>
-      <span style="text-decoration: underline;">Head Office</span><br />
-      Ticketfinders International LLC<br />
-      1013 Centre Road, Suite 403-A<br />
-      Wilmington DE 19805, USA
-    </p>
+    <% if @current_page %><%= raw @current_page.body %><% end %>
   </div>
   <div class="col-md-6">
     <% flash.each do |key, value| %>
