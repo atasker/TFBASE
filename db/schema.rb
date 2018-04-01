@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329123423) do
+ActiveRecord::Schema.define(version: 20180401101940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180329123423) do
     t.boolean  "sports",      default: false, null: false
     t.string   "slug"
     t.text     "seodata"
+    t.text     "text"
   end
 
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree

@@ -6,6 +6,11 @@
     <strong>ID:</strong> <%= @category.id %>
   </p>
 
+  <p style="word-wrap: break-word;">
+    <strong>Text:</strong>
+    <%= @category.text %>
+  </p>
+
   <%= render partial: 'admin/shared/seo_data_info', locals: { carrier: @category, name: 'Category' } %>
 
   <%= link_to 'Edit', edit_admin_category_path(@category.id) %> |

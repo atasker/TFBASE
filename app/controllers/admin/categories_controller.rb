@@ -50,7 +50,7 @@ class Admin::CategoriesController < AdminController
 
   def category_params
     params.require(:category).permit(
-      :description, :slug, :sports,
+      :description, :slug, :sports, :text,
       :no_title_postfix, :seo_title, :seo_descr, :seo_keywords)
   end
 
