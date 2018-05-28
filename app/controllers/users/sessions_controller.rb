@@ -5,6 +5,8 @@ class Users::SessionsController < Devise::SessionsController
 
   # before_action :configure_sign_in_params, only: [:create]
 
+  before_action :add_users_breadcrumb, except: [:destroy]
+
   # GET /resource/sign_in
   # def new
   #   super
@@ -26,4 +28,8 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def add_users_breadcrumb
+    add_breadcrumb 'User', ''
+  end
 end

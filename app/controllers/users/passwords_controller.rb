@@ -3,6 +3,8 @@
 class Users::PasswordsController < Devise::PasswordsController
   include Frontender
 
+  before_action :add_users_breadcrumb
+
   # GET /resource/password/new
   # def new
   #   super
@@ -33,4 +35,8 @@ class Users::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+
+  def add_users_breadcrumb
+    add_breadcrumb 'User', ''
+  end
 end

@@ -916,12 +916,17 @@ input[type="reset"] {
   .btn:active {
     background: #eed219; }
 
-.send-link {
+.fixed-side-links {
   position: fixed;
   top: 20px;
   right: -2px;
   display: inline-block;
   vertical-align: middle;
+  background: transparent;
+  z-index: 15;
+}
+.fixed-side-link {
+  display: block;
   background: transparent;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
@@ -934,18 +939,26 @@ input[type="reset"] {
           border-top-left-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
           border-bottom-left-radius: 5px;
-  z-index: 15; }
-  .send-link svg {
+
+  & + .fixed-side-link {
+    margin-top: 8px;
+  }
+
+  svg {
     fill: #2898c6;
     display: inline-block;
     vertical-align: middle;
     -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease; }
-  .send-link:hover {
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
     background: #2898c6;
-    border: 2px solid #2898c6; }
-    .send-link:hover svg {
-      fill: #fff; }
+    border: 2px solid #2898c6;
+
+    svg { fill: #fff; }
+  }
+}
 
 .page-header {
   padding: 21px 0;
@@ -3067,7 +3080,7 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     left: 0; } }
 
 @media screen and (max-width: 1400px) {
-  .send-link {
+  .fixed-side-links {
     top: 120px; } }
 
 @media screen and (max-width: 1300px) {
