@@ -1,25 +1,5 @@
 Rails.application.routes.draw do
 
-  post '/messages/hospitality-and-concierge',
-    to: 'messages#hospitality_concierge',
-    as: :hospitality_concierge
-  resources :messages, only: [:new, :create]
-
-  post '/enquiry-ticket', to: 'enquiries#create', as: :create_enquiry
-
-  get '/competitions/:compet/:id', to: 'players#show', as: :competition_player
-  resources :categories, only: [:show, :index]
-  resources :competitions, only: [:show, :index]
-  resources :events, only: [:show, :index]
-  resources :players, only: [:show]
-  resources :tickets, only: [:show]
-
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    passwords: 'users/passwords',
-    registrations: 'users/registrations'
-  }
-
   namespace :admin do
     root 'welcome#index'
     resources :categories
@@ -29,6 +9,7 @@ Rails.application.routes.draw do
     resources :tickets
     resources :venues
     resources :pages
+    resources :users
     scope '/homepage/' do
       resources :home_line_items
       get '/', to: redirect('/admin')
@@ -45,6 +26,26 @@ Rails.application.routes.draw do
     put ':id', to: 'admin/home_slides#update'
     delete ':id', to: 'admin/home_slides#destroy'
   end
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations'
+  }
+
+  post '/messages/hospitality-and-concierge',
+    to: 'messages#hospitality_concierge',
+    as: :hospitality_concierge
+  resources :messages, only: [:new, :create]
+
+  post '/enquiry-ticket', to: 'enquiries#create', as: :create_enquiry
+
+  get '/competitions/:compet/:id', to: 'players#show', as: :competition_player
+  resources :categories, only: [:show, :index]
+  resources :competitions, only: [:show, :index]
+  resources :events, only: [:show, :index]
+  resources :players, only: [:show]
+  resources :tickets, only: [:show]
 
   get 'static/about', to: 'pages#about'
   get 'static/sport', to: 'pages#sport'

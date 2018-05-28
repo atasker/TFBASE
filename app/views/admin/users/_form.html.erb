@@ -1,0 +1,39 @@
+<%= form_for [:admin, @user], url: (@user.new_record? ? nil : admin_user_path(@user.id)) do |f| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> prohibited
+        this user from being saved:
+      </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.label :current_password %><br>
+    <%= f.password_field :current_password %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
