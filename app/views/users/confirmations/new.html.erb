@@ -1,0 +1,31 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Resend confirmation instructions</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="col-md-6">
+    <% flash.each do |key, value| %>
+      <p><b><%= value %></b></p>
+    <% end %>
+
+    <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.full_error :confirmation_token %>
+
+      <div class="input-wrap">
+        <%= f.input :email, required: true, autofocus: true %>
+      </div>
+
+      <div class="submit-wrap">
+        <%= f.button :submit, "Resend confirmation instructions" %>
+      </div>
+    <% end %>
+
+    <%= render "users/shared/links" %>
+  </div>
+</div>

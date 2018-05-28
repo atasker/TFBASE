@@ -30,6 +30,9 @@ gem 'kaminari', '~> 1.0.1'
 # Sitemap
 gem 'sitemap_generator'
 
+# Authentication
+gem 'devise', '~> 4.4'
+
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'

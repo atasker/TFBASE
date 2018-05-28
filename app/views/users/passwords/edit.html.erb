@@ -1,0 +1,36 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Change your password</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="col-md-6">
+    <% flash.each do |key, value| %>
+      <p><b><%= value %></b></p>
+    <% end %>
+
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+
+      <%= f.input :reset_password_token, as: :hidden %>
+      <%= f.full_error :reset_password_token %>
+
+      <div class="input-wrap">
+        <%= f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+      </div>
+      <div class="input-wrap">
+        <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
+      </div>
+
+      <div class="submit-wrap">
+        <%= f.button :submit, "Change my password" %>
+      </div>
+    <% end %>
+
+    <%= render "users/shared/links" %>
+  </div>
+</div>

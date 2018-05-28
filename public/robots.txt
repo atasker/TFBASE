@@ -23,6 +23,7 @@
 User-agent: Yandex
 Disallow: /messages/hospitality-and-concierge
 Disallow: /admin/
+Disallow: /users/
 Disallow: /humans.txt
 Allow: /
 Host: www.ticket-finders.com
@@ -30,6 +31,7 @@ Host: www.ticket-finders.com
 User-agent: Googlebot
 Disallow: /messages/hospitality-and-concierge
 Disallow: /admin/
+Disallow: /users/
 Disallow: /humans.txt
 Allow: /
 

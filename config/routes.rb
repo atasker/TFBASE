@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   resources :players, only: [:show]
   resources :tickets, only: [:show]
 
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations'
+  }
+
   namespace :admin do
     root 'welcome#index'
     resources :categories

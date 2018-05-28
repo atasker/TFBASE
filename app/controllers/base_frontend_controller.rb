@@ -1,8 +1,5 @@
 class BaseFrontendController < ApplicationController
-
-  before_filter :collect_categories, :add_home_breadcrumb
-
-  helper_method :page_meta, :add_breadcrumb, :breadcrumbs
+  include Frontender
 
   protected
 
@@ -13,28 +10,6 @@ class BaseFrontendController < ApplicationController
       @current_page = Page.find_by_path path_match[1]
     end
   end
-
-  def page_meta
-    unless @page_meta_carrier
-      unless @page_meta
-        @page_meta = OpenStruct.new(
-          seo_descr: 'Buy tickets to concerts, sports, arts, theater and hard ' \
-                     'to find sold out events worldwide.')
-      end
-      @page_meta_carrier = Seo::Basic.new @page_meta, false
-    end
-    @page_meta_carrier
-  end
-
-  def breadcrumbs
-    @breadcrumbs ||= []
-  end
-
-  def add_breadcrumb(name, path)
-    self.breadcrumbs << { name: name, path: path }
-  end
-
-  protected
 
   def find_by_slug_with_fallback objClass, search_str
     unless [Category, Competition, Player, Event].include? objClass
@@ -86,15 +61,4 @@ class BaseFrontendController < ApplicationController
     end
     add_breadcrumb 'Ticket', ticket_path(ticket) if ticket
   end
-
-  private
-
-  def collect_categories
-    @categories = Category.order('description ASC')
-  end
-
-  def add_home_breadcrumb
-    add_breadcrumb 'Home', root_path
-  end
-
 end
