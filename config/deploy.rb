@@ -69,7 +69,7 @@ task :deploy do
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
-    invoke :'whenever:update'
+    # TODO uncomment for production ENDTODO invoke :'whenever:update'
 
     on :launch do
       in_path "#{fetch(:current_path)}" do
@@ -77,8 +77,8 @@ task :deploy do
         command %{touch tmp/restart.txt}
       end
       # TODO uncomment for production ENDTODO invoke :'rvm:use', 'ruby-2.0.0-p643'
-      invoke :'whenever:update'
-      invoke :rake, 'sitemap:refresh:no_ping'
+      # TODO uncomment for production ENDTODO invoke :'whenever:update'
+      # TODO uncomment for production ENDTODO invoke :rake, 'sitemap:refresh:no_ping'
     end
   end
 
