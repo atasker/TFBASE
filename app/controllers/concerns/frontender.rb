@@ -2,7 +2,7 @@ module Frontender
   extend ActiveSupport::Concern
 
   included do
-    before_filter :collect_categories, :add_home_breadcrumb
+    before_filter :determine_cart, :collect_categories, :add_home_breadcrumb
     helper_method :page_meta, :add_breadcrumb, :breadcrumbs
   end
 
@@ -29,6 +29,14 @@ module Frontender
   end
 
   private
+
+  def determine_cart
+    if user_signed_in?
+      @cart = current_user.cart
+    else
+      @cart = session[:cart] ? Cart.find_by_id(session[:cart]) : nil
+    end
+  end
 
   def collect_categories
     @categories = Category.order('description ASC')

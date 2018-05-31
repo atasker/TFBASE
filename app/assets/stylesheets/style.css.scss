@@ -960,6 +960,25 @@ input[type="reset"] {
   }
 }
 
+.cart-link {
+  position: relative;
+  .cart-count {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 4px;
+    min-width: 20px;
+    background: #f8dd28;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+  }
+}
+
 .page-header {
   padding: 21px 0;
   background: #333738;

@@ -33,6 +33,12 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  get 'cart/clear', to: 'cart#clear'
+  get 'cart/remove', to: 'cart#remove'
+  get 'cart/sub', to: 'cart#sub'
+  get 'cart/add', to: 'cart#add'
+  get 'cart', to: 'cart#show', as: :cart
+
   post '/messages/hospitality-and-concierge',
     to: 'messages#hospitality_concierge',
     as: :hospitality_concierge

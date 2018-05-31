@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180528105336) do
+ActiveRecord::Schema.define(version: 20180531130200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cart_items", force: :cascade do |t|
+    t.integer  "cart_id",                null: false
+    t.integer  "ticket_id",              null: false
+    t.integer  "amount",     default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "cart_items", ["cart_id"], name: "index_cart_items_on_cart_id", using: :btree
+  add_index "cart_items", ["ticket_id"], name: "index_cart_items_on_ticket_id", using: :btree
+
+  create_table "carts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "carts", ["user_id"], name: "index_carts_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "description"
@@ -216,6 +235,9 @@ ActiveRecord::Schema.define(version: 20180528105336) do
     t.string   "avatar"
   end
 
+  add_foreign_key "cart_items", "carts"
+  add_foreign_key "cart_items", "tickets"
+  add_foreign_key "carts", "users"
   add_foreign_key "competitions", "categories"
   add_foreign_key "enquiries", "tickets"
   add_foreign_key "event_info_blocks", "events"

@@ -1,0 +1,23 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Cart</h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <% if @cart && @cart.items.any? %>
+    <ul>
+      <% @cart.items.each do |item| %>
+        <li>
+          <%= item.ticket.event ? item.ticket.event.name : item.ticket.id %>
+          (<%= item.ticket.category %>)
+          &mdash;
+          <%= item.amount %></li>
+      <% end %>
+    </ul>
+    <% else %>
+      <p>Have no items in the cart.</p>
+    <% end %>
+</div>
