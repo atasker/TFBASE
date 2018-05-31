@@ -2,7 +2,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/whenever'
 # require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
-require 'mina/rvm'    # for rvm support. (https://rvm.io)
+# TODO uncomment for production ENDTODO require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require "yaml"
 
 # Load environment variables from the application config
@@ -18,7 +18,7 @@ set :application_name, 'ticketfinders'
 set :domain, ENV['DEPLOY_DOMAIN']
 set :deploy_to, ENV['DEPLOY_TO']
 set :repository, 'git@github.com:atasker/TFBASE.git'
-set :branch, 'master'
+set :branch, (ENV['DEPLOY_BRANCH'] || 'master')
 
 set :user, ENV['DEPLOY_USER'] # Username in the server to SSH to.
 set :forward_agent, true      # SSH forward_agent.
@@ -29,7 +29,7 @@ set :whenever_name, 'ticketfinders_production' # default: "#{domain}_#{rails_env
 # Optional settings:
 #   set :port, '30000'           # SSH port number.
 
-set :rvm_use_path, '/usr/local/rvm/scripts/rvm'
+# TODO uncomment for production ENDTODO set :rvm_use_path, '/usr/local/rvm/scripts/rvm'
 
 # shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 set :shared_dirs, fetch(:shared_dirs, []).push('public/uploads',
@@ -45,7 +45,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use', 'ruby-2.0.0-p643'
+  # TODO uncomment for production ENDTODO invoke :'rvm:use', 'ruby-2.0.0-p643'
 end
 
 # Put any custom commands you need to run at setup
@@ -76,7 +76,7 @@ task :deploy do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
-      invoke :'rvm:use', 'ruby-2.0.0-p643'
+      # TODO uncomment for production ENDTODO invoke :'rvm:use', 'ruby-2.0.0-p643'
       invoke :'whenever:update'
       invoke :rake, 'sitemap:refresh:no_ping'
     end
