@@ -8,16 +8,41 @@
 </div>
 <div class="container-fluid">
   <% if @cart && @cart.items.any? %>
-    <ul>
-      <% @cart.items.each do |item| %>
-        <li>
-          <%= item.ticket.event ? item.ticket.event.name : item.ticket.id %>
-          (<%= item.ticket.category %>)
-          &mdash;
-          <%= item.amount %></li>
+    <div class="tickets">
+      <div class="container-fluid">
+        <% @cart.items.each do |item| %>
+          <%= render partial: 'cart_item', locals: { item: item } %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      Sum: <%= @cart.items.inject(0.0) { |sum, item| sum + item.ticket.price.to_f } %>
+      <%# TODO check currencies of tickets ? %>
+      <br>
+      <%= link_to 'Clear cart', clear_cart_path %>
+      <br><br>
+      <%= form_tag 'https://www.paypal.com/cgi-bin/webscr' do %>
+        <input type="hidden" name="cmd" value="_cart">
+        <input type="hidden" name="upload" value="1">
+        <input type="hidden" name="business" value="info@ticket-finders.com">
+        <input type="hidden" name="return" value="https://www.ticket-finders.com/">
+        <% @cart.items.each_with_index do |item, indx| %>
+          <input type="hidden" name="amount_<%= indx + 1 %>" value="<%= item.ticket.price %>">
+          <input type="hidden" name="shipping_<%= indx + 1 %>" value="15.00">
+          <input type="hidden" name="item_name_<%= indx + 1 %>" value="<%= item.ticket.event ? item.ticket.event.name : 'Ticket' %>">
+          <input type="hidden" name="item_number_<%= indx + 1 %>" value="<%= item.ticket.id %>">
+          <input type="hidden" name="quantity_<%= indx + 1 %>" value="<%= item.amount %>">
+          <input type="hidden" name="on0_<%= indx + 1 %>" value="<%= item.ticket.category %>">
+        <% end %>
+        <%# notify_url - The URL to which PayPal posts information about the payment, in the form of Instant Payment Notification messages. %>
+        <div style="padding-top: 20px;">
+          <input type="submit" class="btn" style="padding: 10px 50px;font-size: 22px;font-weight: 100;" value="Buy with PayPal">
+        </div>
       <% end %>
-    </ul>
-    <% else %>
-      <p>No items in the cart.</p>
-    <% end %>
+
+    </div>
+  <% else %>
+    <p>No items in the cart.</p>
+  <% end %>
 </div>

@@ -3,6 +3,10 @@ class CartController < BaseFrontendController
   def show
     add_breadcrumb 'Cart', ''
 
+    if @cart
+      @cart = Cart.includes(items: { ticket: [:event] }).find(@cart.id)
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: cart_representor }

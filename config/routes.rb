@@ -33,9 +33,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get 'cart/clear', to: 'cart#clear'
-  get 'cart/remove', to: 'cart#remove'
-  get 'cart/sub', to: 'cart#sub'
+  get 'cart/clear', to: 'cart#clear', as: :clear_cart
+  get 'cart/remove', to: 'cart#remove', as: :remove_from_cart
+  get 'cart/sub', to: 'cart#sub', as: :sub_from_cart
   get 'cart/add', to: 'cart#add', as: :add_to_cart
   get 'cart', to: 'cart#show', as: :cart
 
