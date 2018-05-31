@@ -2,7 +2,11 @@ class CartController < BaseFrontendController
   before_filter :get_ticket, only: [:add, :sub, :remove]
   def show
     add_breadcrumb 'Cart', ''
-    # render show view
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: cart_representor }
+    end
   end
 
   def add
@@ -17,7 +21,10 @@ class CartController < BaseFrontendController
     end
     found_item.save
 
-    render json: cart_representor
+    respond_to do |format|
+      format.html { redirect_to cart_path }
+      format.json { render json: cart_representor }
+    end
   end
 
   def sub
@@ -32,19 +39,30 @@ class CartController < BaseFrontendController
       end
     end
 
-    render json: cart_representor
+    respond_to do |format|
+      format.html { redirect_to cart_path }
+      format.json { render json: cart_representor }
+    end
   end
 
   def remove
     raise ActiveRecord::RecordNotFound, "Record not found" unless @cart
-    found_item = @cart.items.where(ticket: @ticket).destroy_all
-    render json: cart_representor
+    @cart.items.where(ticket: @ticket).destroy_all
+
+    respond_to do |format|
+      format.html { redirect_to cart_path }
+      format.json { render json: cart_representor }
+    end
   end
 
   def clear
     raise ActiveRecord::RecordNotFound, "Record not found" unless @cart
     @cart.items.clear
-    render json: { status: 'ok' }
+
+    respond_to do |format|
+      format.html { redirect_to cart_path }
+      format.json { render json: { status: 'ok' } }
+    end
   end
 
   private

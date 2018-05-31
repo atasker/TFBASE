@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   get 'cart/clear', to: 'cart#clear'
   get 'cart/remove', to: 'cart#remove'
   get 'cart/sub', to: 'cart#sub'
-  get 'cart/add', to: 'cart#add'
+  get 'cart/add', to: 'cart#add', as: :add_to_cart
   get 'cart', to: 'cart#show', as: :cart
 
   post '/messages/hospitality-and-concierge',

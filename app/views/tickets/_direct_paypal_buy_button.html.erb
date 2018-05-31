@@ -1,0 +1,15 @@
+<%= form_tag 'https://www.paypal.com/cgi-bin/webscr' do %>
+  <input type="hidden" name="cmd" value="_cart">
+  <input type="hidden" name="upload" value="1">
+  <input type="hidden" name="business" value="info@ticket-finders.com">
+  <input type="hidden" name="return" value="https://www.ticket-finders.com/">
+  <input type="hidden" name="amount_1" value="<%= @ticket.price %>">
+  <input type="hidden" name="shipping_1" value="15.00">
+  <input type="hidden" name="item_name_1" value="<%= @event ? @event.name : 'Ticket' %>">
+  <input type="hidden" name="item_number_1" value="<%= @ticket.id %>">
+  <input type="hidden" name="quantity_1" id="hidden-quantity" value="1">
+  <input type="hidden" name="on0_1" value="<%= @ticket.category %>">
+  <div style="padding-top: 20px;">
+    <input type="submit" class="btn" style="padding: 10px 50px;font-size: 22px;font-weight: 100;" value="Buy with PayPal">
+  </div>
+<% end %>
