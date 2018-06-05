@@ -50,7 +50,7 @@
 
   <%= form_tag add_to_cart_path, method: 'get' do %>
     <input type="hidden" name="ticket" value="<%= @ticket.id %>">
-    <input type="hidden" name="amount" id="hidden-quantity" value="1">
+    <input type="hidden" name="quantity" id="hidden-quantity" value="1">
     <div style="padding-top: 20px;">
       <input type="submit" class="btn" style="padding: 10px 50px;font-size: 22px;font-weight: 100;" value="Add to cart">
     </div>
