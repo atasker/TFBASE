@@ -1,5 +1,6 @@
 class CartController < BaseFrontendController
   before_filter :get_ticket, only: [:add, :sub, :remove]
+  protect_from_forgery :except => [:apply]
 
   def show
     add_breadcrumb 'Cart', ''
@@ -71,8 +72,15 @@ class CartController < BaseFrontendController
   end
 
   def apply
-    logger.info "Processing cart #{params[:cart_id]}"
-    logger.debug params
+    if params[:payment_status] && params[:payment_status] == "Completed"
+      a_cart = Cart.find_by_id params[:cart_id]
+      if a_cart
+        logger.info "Processing cart #{a_cart.id}"
+        logger.debug params
+        # TODO make an order
+      end
+    end
+
     render plain: 'ok'
   end
 
