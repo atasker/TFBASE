@@ -75,9 +75,21 @@ class CartController < BaseFrontendController
     if params[:payment_status] && params[:payment_status] == "Completed"
       a_cart = Cart.find_by_id params[:cart_id]
       if a_cart
-        logger.info "Processing cart #{a_cart.id}"
-        logger.debug params
-        # TODO make an order
+        # logger.info "Processing cart #{a_cart.id}"
+        # logger.debug params
+
+        order = Order.create user: current_user
+        a_cart.items.each do |item|
+          order.items.create quantity: item.quantity,
+                             price: item.ticket.price,
+                             currency: item.ticket.currency,
+                             ticket_id: item.ticket.id,
+                             event_id: item.ticket.event.id,
+                             event_name: item.ticket.event.name,
+                             category: item.ticket.category,
+                             pairs_only: item.ticket.pairs_only
+        end
+        a_cart.destroy
       end
     end
 

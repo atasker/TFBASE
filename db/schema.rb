@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180531130200) do
+ActiveRecord::Schema.define(version: 20180605201356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,18 @@ ActiveRecord::Schema.define(version: 20180531130200) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id",   null: false
+    t.float    "price"
+    t.string   "currency"
+    t.integer  "quantity"
+    t.text     "descr"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+
   create_table "orders", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -162,7 +174,10 @@ ActiveRecord::Schema.define(version: 20180531130200) do
     t.string   "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.string   "title"
@@ -248,6 +263,8 @@ ActiveRecord::Schema.define(version: 20180531130200) do
   add_foreign_key "home_line_items", "players"
   add_foreign_key "home_slides", "categories"
   add_foreign_key "home_slides", "events"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "users"
   add_foreign_key "players", "categories"
   add_foreign_key "tickets", "events"
 end
