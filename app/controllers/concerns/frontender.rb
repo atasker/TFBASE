@@ -36,6 +36,18 @@ module Frontender
     else
       @cart = session[:cart] ? Cart.find_by_id(session[:cart]) : nil
     end
+
+    # Connect cart from session to user if user owns no cart but have cart id
+    # in session. It can be possible if visitor added tickets to a cart and then
+    # registered or signed in as user.
+    if user_signed_in? && !@cart && session[:cart]
+      session_cart = Cart.find_by_id session[:cart]
+      if session_cart && session_cart.user == null
+        session_cart.user = current_user
+        session_cart.save
+        @cart = session_cart
+      end
+    end
   end
 
   def collect_categories

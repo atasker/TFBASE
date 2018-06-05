@@ -1,5 +1,6 @@
 class CartController < BaseFrontendController
   before_filter :get_ticket, only: [:add, :sub, :remove]
+
   def show
     add_breadcrumb 'Cart', ''
 
@@ -19,9 +20,9 @@ class CartController < BaseFrontendController
     found_item = @cart.items.where(ticket: @ticket).take
     found_item = @cart.items.build(ticket: @ticket) unless found_item
 
-    found_item.amount += @amount
-    if @ticket.quantity && found_item.amount > @ticket.quantity
-      found_item.amount = @ticket.quantity
+    found_item.quantity += @quantity
+    if @ticket.quantity && found_item.quantity > @ticket.quantity
+      found_item.quantity = @ticket.quantity
     end
     found_item.save
 
@@ -35,8 +36,8 @@ class CartController < BaseFrontendController
     raise ActiveRecord::RecordNotFound, "Record not found" unless @cart
 
     if found_item = @cart.items.where(ticket: @ticket).take
-      found_item.amount -= @amount
-      if found_item.amount > 0
+      found_item.quantity -= @quantity
+      if found_item.quantity > 0
         found_item.save
       else
         found_item.destroy
@@ -69,11 +70,17 @@ class CartController < BaseFrontendController
     end
   end
 
+  def apply
+    logger.info "Processing cart #{params[:cart_id]}"
+    logger.debug params
+    render plain: 'ok'
+  end
+
   private
 
   def get_ticket
     @ticket = Ticket.find(params[:ticket])
-    @amount = params[:amount] ? params[:amount].to_i : 1
+    @quantity = params[:quantity] ? params[:quantity].to_i : 1
   end
 
   def create_new_cart!
@@ -92,7 +99,7 @@ class CartController < BaseFrontendController
       items_count++
       { id: item.id,
         ticket: item.ticket_id,
-        amount: item.amount }
+        quantity: item.quantity }
     end
     repr[:items_count] = items_count
     repr

@@ -8,64 +8,76 @@
 </div>
 <div class="container-fluid">
   <% if @cart && @cart.items.any? %>
-    <table class="cart-items">
-      <tbody>
+    <div class="cart-items-table">
+      <div class="cart-items-table-tbody">
         <% @cart.items.each do |item| %>
-          <tr>
-            <td>
-              <%= link_to ticket_path(item.ticket_id), 'class' => "buy__item-title" do %>
-                <%= item.ticket.event.name %>
-                <% if item.ticket.category.present? %>
-                  (category: <%= item.ticket.category %>)
-                <% end %>
-              <% end %>
-            </td>
-
-            <td>
+          <div class="cart-items-table-tr">
+            <div class="cart-items-table-td">
+              <%= link_to item.ticket.full_name, ticket_path(item.ticket_id) %>
+            </div>
+            <div class="cart-items-table-td">
               <%= currency_symbol(item.ticket) %>&nbsp;<%= item.ticket.price.round %>
-            </td>
-
-            <td>
-              <%= link_to '-', sub_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn' %>&nbsp;<%= item.amount %>&nbsp;<%= link_to '+', add_to_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', disabled: (item.ticket.quantity ? item.amount >= item.ticket.quantity : nil) %>
-            </td>
-
-            <td>
-              <%= currency_symbol(item.ticket) %>&nbsp;<%= item.ticket.price.round * item.amount %>
-            </td>
-
-            <td>
+            </div>
+            <div class="cart-items-table-td">
+              <%= link_to '-', sub_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn' %>&nbsp;<%= item.quantity %>&nbsp;<%= link_to '+', add_to_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', disabled: (item.ticket.quantity ? item.quantity >= item.ticket.quantity : nil) %>
+            </div>
+            <div class="cart-items-table-td">
+              <%= currency_symbol(item.ticket) %>&nbsp;<%= item.ticket.price.round * item.quantity %>
+            </div>
+            <div class="cart-items-table-td">
               <%= link_to 'X', remove_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', title: "Remove item" %>
-            </td>
-          </tr>
+            </div>
+          </div>
         <% end %>
-      </tbody>
-    </table>
+      </div>
+    </div>
 
     <div class="container-fluid">
       <div class="cart-summary">
-        <%= @cart.items.inject(0) { |sum, item| sum + item.ticket.price.round * item.amount } %>
+        <%= @cart.items.inject(0) { |sum, item| sum + item.ticket.price.round * item.quantity } %>
       </div>
       <%# TODO check currencies of tickets ? %>
-      <%= form_tag 'https://www.paypal.com/cgi-bin/webscr' do %>
+      <%
+        if false && Rails.env == 'production'
+          paypal_cnfg = {
+            form_url: 'https://www.paypal.com/cgi-bin/webscr',
+            business: 'info@ticket-finders.com',
+            currency: 'USD'
+          }
+        else
+          paypal_cnfg = {
+            form_url: 'https://www.sandbox.paypal.com/cgi-bin/webscr',
+            business: 'mstrdymio-facilitator@gmail.com',
+            currency: 'RUB'
+          }
+        end
+      %>
+      <form action="<%= paypal_cnfg[:form_url] %>" accept-charset="UTF-8" method="post">
         <input type="hidden" name="cmd" value="_cart">
         <input type="hidden" name="upload" value="1">
-        <input type="hidden" name="business" value="info@ticket-finders.com">
-        <input type="hidden" name="return" value="https://www.ticket-finders.com/">
+        <input type="hidden" name="business" value="<%= paypal_cnfg[:business] %>">
+        <input type="hidden" name="shopping_url" value="<%= cart_url %>">
+        <input type="hidden" name="notify_url" value="<%= apply_cart_url(@cart.id) %>">
+        <%# notify_url - The URL to which PayPal posts information about the payment, in the form of Instant Payment Notification messages. %>
+        <%# <input type="hidden" name="callback_url" value=""> %>
+        <%# <input type="hidden" name="currency_code" value=""> USD|EUR https://developer.paypal.com/docs/classic/api/currency_codes %>
+        <input type="hidden" name="currency_code" value="<%= paypal_cnfg[:currency] %>">
+        <input type="hidden" name="return" value="<%= root_url %>">
         <% @cart.items.each_with_index do |item, indx| %>
           <input type="hidden" name="amount_<%= indx + 1 %>" value="<%= item.ticket.price %>">
           <input type="hidden" name="shipping_<%= indx + 1 %>" value="15.00">
-          <input type="hidden" name="item_name_<%= indx + 1 %>" value="<%= item.ticket.event ? item.ticket.event.name : 'Ticket' %>">
+          <input type="hidden" name="item_name_<%= indx + 1 %>" value="Ticket <%= item.ticket.full_name %>">
           <input type="hidden" name="item_number_<%= indx + 1 %>" value="<%= item.ticket.id %>">
-          <input type="hidden" name="quantity_<%= indx + 1 %>" value="<%= item.amount %>">
+          <input type="hidden" name="quantity_<%= indx + 1 %>" value="<%= item.quantity %>">
           <input type="hidden" name="on0_<%= indx + 1 %>" value="<%= item.ticket.category %>">
+          <%# <input type="hidden" name="shipping_1" value="1.75"> %>
         <% end %>
-        <%# notify_url - The URL to which PayPal posts information about the payment, in the form of Instant Payment Notification messages. %>
         <div style="padding-top: 20px;">
           <input type="submit" class="btn" style="padding: 10px 50px;font-size: 22px;font-weight: 100;" value="Buy with PayPal">
           or
           <%= link_to 'clear the cart', clear_cart_path %>
         </div>
-      <% end %>
+      </form>
 
     </div>
   <% else %>

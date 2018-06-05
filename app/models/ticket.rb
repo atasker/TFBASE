@@ -11,4 +11,11 @@ class Ticket < ActiveRecord::Base
 
   scope :buyable, -> { where.not(enquire: true) }
 
+  def full_name
+    if persisted?
+      "#{event.name} (category: #{category})"
+    else
+      'New ticket'
+    end
+  end
 end
