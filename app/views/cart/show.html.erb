@@ -8,20 +8,44 @@
 </div>
 <div class="container-fluid">
   <% if @cart && @cart.items.any? %>
-    <div class="tickets">
-      <div class="container-fluid">
+    <table class="cart-items">
+      <tbody>
         <% @cart.items.each do |item| %>
-          <%= render partial: 'cart_item', locals: { item: item } %>
+          <tr>
+            <td>
+              <%= link_to ticket_path(item.ticket_id), 'class' => "buy__item-title" do %>
+                <%= item.ticket.event.name %>
+                <% if item.ticket.category.present? %>
+                  (category: <%= item.ticket.category %>)
+                <% end %>
+              <% end %>
+            </td>
+
+            <td>
+              <%= currency_symbol(item.ticket) %>&nbsp;<%= item.ticket.price.round %>
+            </td>
+
+            <td>
+              <%= link_to '-', sub_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn' %>&nbsp;<%= item.amount %>&nbsp;<%= link_to '+', add_to_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', disabled: (item.ticket.quantity ? item.amount >= item.ticket.quantity : nil) %>
+            </td>
+
+            <td>
+              <%= currency_symbol(item.ticket) %>&nbsp;<%= item.ticket.price.round * item.amount %>
+            </td>
+
+            <td>
+              <%= link_to 'X', remove_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', title: "Remove item" %>
+            </td>
+          </tr>
         <% end %>
-      </div>
-    </div>
+      </tbody>
+    </table>
 
     <div class="container-fluid">
-      Sum: <%= @cart.items.inject(0.0) { |sum, item| sum + item.ticket.price.to_f } %>
+      <div class="cart-summary">
+        <%= @cart.items.inject(0) { |sum, item| sum + item.ticket.price.round * item.amount } %>
+      </div>
       <%# TODO check currencies of tickets ? %>
-      <br>
-      <%= link_to 'Clear cart', clear_cart_path %>
-      <br><br>
       <%= form_tag 'https://www.paypal.com/cgi-bin/webscr' do %>
         <input type="hidden" name="cmd" value="_cart">
         <input type="hidden" name="upload" value="1">
@@ -38,6 +62,8 @@
         <%# notify_url - The URL to which PayPal posts information about the payment, in the form of Instant Payment Notification messages. %>
         <div style="padding-top: 20px;">
           <input type="submit" class="btn" style="padding: 10px 50px;font-size: 22px;font-weight: 100;" value="Buy with PayPal">
+          or
+          <%= link_to 'clear the cart', clear_cart_path %>
         </div>
       <% end %>
 
