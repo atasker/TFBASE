@@ -80,17 +80,27 @@ module ApplicationHelper
 
   # Method returns correct char symbol to ticket's currency
   # Params:
-  #   ticket - object of Ticket class
-  def currency_symbol(ticket)
-    case ticket.currency
+  #   currency_or_holder - currency string or object with currency as attribute
+  def currency_symbol(currency_or_holder)
+    currency = currency_or_holder
+    if (!currency_or_holder.is_a?(String) &&
+        currency_or_holder.respond_to?(:currency))
+      currency = currency_or_holder.currency
+    end
+    case currency
     when 'Pounds' then '£'
     when 'Dollars' then '$'
     else '€'
     end
   end
 
-  def currency_code(ticket)
-    case ticket.currency
+  def currency_code(currency_or_holder)
+    currency = currency_or_holder
+    if (!currency_or_holder.is_a?(String) &&
+        currency_or_holder.respond_to?(:currency))
+      currency = currency_or_holder.currency
+    end
+    case currency
     when 'Pounds' then 'GBP'
     when 'Dollars' then 'USD'
     else 'EUR'

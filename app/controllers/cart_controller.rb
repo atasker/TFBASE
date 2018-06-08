@@ -72,7 +72,10 @@ class CartController < BaseFrontendController
   end
 
   def apply
-    if params[:payment_status] && params[:payment_status] == "Completed"
+    # TODO return checking process of payment_status and return 'ok' instead of
+    # redirecting.
+
+    # if params[:payment_status] && params[:payment_status] == "Completed"
       a_cart = Cart.find_by_id params[:cart_id]
       if a_cart
         # logger.info "Processing cart #{a_cart.id}"
@@ -91,9 +94,10 @@ class CartController < BaseFrontendController
         end
         a_cart.destroy
       end
-    end
+    # end
 
-    render plain: 'ok'
+    # render plain: 'ok'
+    redirect_to root_path
   end
 
   private

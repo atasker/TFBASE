@@ -51,6 +51,8 @@
             currency: 'RUB'
           }
         end
+        # TODO remove the line below — it is only test
+        paypal_cnfg[:form_url] = apply_cart_path(@cart);
       %>
       <form action="<%= paypal_cnfg[:form_url] %>" accept-charset="UTF-8" method="post">
         <input type="hidden" name="cmd" value="_cart">

@@ -9,4 +9,8 @@ class Order < ActiveRecord::Base
   # validates :email, presence: true
   # validates :phone, presence: true
   # validations unfinished
+
+  def sum
+    items.inject(0) { |sum, item| sum + item.price.round * item.quantity }
+  end
 end

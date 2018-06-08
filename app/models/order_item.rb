@@ -11,4 +11,8 @@ class OrderItem < ActiveRecord::Base
   validates :price, numericality: { greater_than: 0 }
   validates :quantity, numericality: { only_integer: true,
                                        greater_than: 0 }
+
+  def ticket_name
+    "#{event_name} (category: #{category})"
+  end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :venues
     resources :pages
     resources :users
+    resources :orders, only: [:index, :show]
     scope '/homepage/' do
       resources :home_line_items
       get '/', to: redirect('/admin')
