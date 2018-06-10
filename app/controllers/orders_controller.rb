@@ -1,5 +1,5 @@
 class OrdersController < BaseFrontendController
-  protect_from_forgery :except => [:apply]
+  protect_from_forgery :except => [:apply_by_cart_id_after_paypal_payment]
 
   def show
     add_breadcrumb 'Order', ''
@@ -15,50 +15,68 @@ class OrdersController < BaseFrontendController
     logger.info "---- ---- ---- APPLY WITH PAYPAL ---- ---- ----"
     logger.debug params
 
-    # Got params:
     # {
-    #   "payment_type"=>"instant",
-    #   "payment_date"=>"Sun Jun 10 2018 22:42:20 GMT+0700 (+07)",
-    #   "payment_status"=>"Completed",
-    #   "payer_status"=>"verified",
-    #   "first_name"=>"John",
-    #   "last_name"=>"Smith",
-    #   "payer_email"=>"buyer@paypalsandbox.com",
-    #   "payer_id"=>"TESTBUYERID01",
-    #   "address_name"=>"John Smith",
-    #   "address_country"=>"United States",
-    #   "address_country_code"=>"US",
-    #   "address_zip"=>"95131",
-    #   "address_state"=>"CA",
-    #   "address_city"=>"San Jose",
-    #   "address_street"=>"123 any street",
-    #   "business"=>"seller@paypalsandbox.com",
-    #   "receiver_email"=>"seller@paypalsandbox.com",
-    #   "receiver_id"=>"seller@paypalsandbox.com",
-    #   "residence_country"=>"US",
-    #   "item_name1"=>"something",
-    #   "item_number1"=>"AK-1234",
-    #   "quantity"=>"1",
-    #   "shipping"=>"3.04",
-    #   "tax"=>"2.02",
-    #   "mc_currency"=>"USD",
-    #   "mc_fee"=>"0.44",
-    #   "mc_gross"=>"12.34",
-    #   "mc_gross_1"=>"12.34",
-    #   "mc_handling"=>"2.06",
-    #   "mc_handling1"=>"1.67",
-    #   "mc_shipping"=>"3.02",
-    #   "mc_shipping1"=>"1.02",
+    #   "txn_id"=>"70U68678SU8656119",
     #   "txn_type"=>"cart",
-    #   "txn_id"=>"899327589",
-    #   "notify_version"=>"2.4",
-    #   "custom"=>"xyz123",
-    #   "invoice"=>"abc1234",
+    #   "business"=>"mstrdymio-uk-business@gmail.com",
+    #   "receiver_email"=>"mstrdymio-uk-business@gmail.com",
+    #   "receiver_id"=>"KGJWP98ZPHPL4",
+    #
+    #   "payment_status"=>"Pending",
+    #   "pending_reason"=>"multi_currency",
+    #   "payment_date"=>"12:42:43 Jun 10, 2018 PDT",
+    #   "payment_type"=>"instant",
+    #   "payment_gross"=>"2360.00",
+    #
+    #   "mc_currency"=>"USD",
+    #   "mc_gross"=>"2360.00",
+    #   "mc_shipping"=>"30.00",
+    #   "num_cart_items"=>"2",
+    #
+    #   "item_number1"=>"6401",
+    #   "item_name1"=>"Ticket Messa di Gloria (category: Category Gold)",
+    #   "quantity1"=>"2",
+    #   "mc_shipping1"=>"15.00",
+    #   "mc_gross_1"=>"885.00",
+    #   "option_selection1_1"=>"N/A",
+    #   "option_name1_1"=>"Category Gold",
+    #
+    #   "item_number2"=>"6402",
+    #   "item_name2"=>"Ticket Messa di Gloria (category: Sector 1)",
+    #   "quantity2"=>"4",
+    #   "mc_shipping2"=>"15.00",
+    #   "mc_gross_2"=>"1475.00",
+    #   "option_selection1_2"=>"N/A",
+    #   "option_name1_2"=>"Sector 1",
+    #
+    #   "payer_id"=>"6H9NA45EZD9GE",
+    #   "payer_email"=>"mstrdymio-buyer@gmail.com",
+    #   "payer_status"=>"verified",
+    #   "first_name"=>"test",
+    #   "last_name"=>"buyer",
+    #
+    #   "address_country_code"=>"RU",
+    #   "address_name"=>"buyer test",
+    #   "address_country"=>"Russia",
+    #   "address_state"=>"\xD0\u001Aосква",
+    #   "address_status"=>"confirmed",
+    #   "address_street"=>"\xD1\u001Aли\xD1\u001Aа \xD0\u001Aе\xD1\u001Aвая, дом 1, ква\xD1\u001A\xD1\u001Aи\xD1\u001Aа 2",
+    #   "address_zip"=>"127001",
+    #   "address_city"=>"\xD0\u001Aосква",
+    #
+    #   "protection_eligibility"=>"Eligible",
+    #   "charset"=>"windows-1252",
+    #   "notify_version"=>"3.9",
+    #   "custom"=>"",
+    #   "verify_sign"=>"ASsJ54wcfEJZVuwOMU8vBNHZb1TpA2Nrttt7LMhvitNIW.grobXa7WDi",
+    #   "residence_country"=>"RU",
     #   "test_ipn"=>"1",
-    #   "verify_sign"=>"undefined",
+    #   "transaction_subject"=>"",
+    #   "ipn_track_id"=>"55b8d1156998",
+    #
     #   "controller"=>"orders",
-    #   "action"=>"apply",
-    #   "cart_id"=>"test"
+    #   "action"=>"apply_by_cart_id_after_paypal_payment",
+    #   "cart_id"=>"6"
     # }
 
     # https://developer.paypal.com/docs/classic/paypal-payments-standard/integration-guide/formbasics/
