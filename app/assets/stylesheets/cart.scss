@@ -2,6 +2,7 @@
 
 .cart-items-table {
   display: table;
+  margin-top: 40px;
   width: 100%;
 }
 .cart-items-table-tbody { display: table-row-group; }
@@ -57,4 +58,6 @@
   }
 
   &.cart-summary--left-yet { text-align: left; }
+
+  & + form { text-align: right; }
 }

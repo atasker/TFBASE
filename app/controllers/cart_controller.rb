@@ -6,6 +6,13 @@ class CartController < BaseFrontendController
 
     if @cart
       @cart = Cart.includes(items: { ticket: [:event] }).find(@cart.id)
+      @items_by_currencies = {}
+      @cart.items.each do |item|
+        unless @items_by_currencies[item.ticket.currency]
+          @items_by_currencies[item.ticket.currency] = []
+        end
+        @items_by_currencies[item.ticket.currency] << item
+      end
     end
 
     respond_to do |format|
