@@ -2,6 +2,10 @@
   <h1>Order #<%= @order.id %></h1>
 
   <p>
+    <strong>Guid:</strong>
+    <%= link_to @order.guid, order_path(@order.guid) %>
+  </p>
+  <p>
     <strong>User:</strong>
     <%= @order.user ? link_to(@order.user.email, admin_user_path(@order.user)) : 'Guest' %>
   </p>

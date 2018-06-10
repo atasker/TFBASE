@@ -1,0 +1,33 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Order #<%= @order.id %></h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="cart-items-table">
+    <div class="cart-items-table-tbody">
+      <% @order.items.each do |item| %>
+        <div class="cart-items-table-tr">
+          <div class="cart-items-table-td">
+            <%= link_to_if item.ticket_id.present?, item.ticket_name, admin_ticket_path(item.ticket_id) %>
+            <br>
+            <%= currency_symbol(item) %>&nbsp;<%= item.price.round %>
+            x
+            <%= item.quantity %>
+            =
+            <%= currency_symbol(item) %>&nbsp;<%= item.price.round * item.quantity %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="cart-summary cart-summary--left-yet">
+      <%= @order.sum %>
+    </div>
+  </div>
+</div>

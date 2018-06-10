@@ -10,7 +10,19 @@ class Order < ActiveRecord::Base
   # validates :phone, presence: true
   # validations unfinished
 
+  before_validation :process_guid
+
+  validates :guid, presence: true
+
   def sum
     items.inject(0) { |sum, item| sum + item.price.round * item.quantity }
+  end
+
+  private
+
+  # Generate new guid if the field is blank.
+  # @private
+  def process_guid
+    self.guid = SecureRandom.hex(20) if guid.blank?
   end
 end

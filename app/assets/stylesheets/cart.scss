@@ -55,4 +55,6 @@
   &:before {
     content: '=';
   }
+
+  &.cart-summary--left-yet { text-align: left; }
 }
