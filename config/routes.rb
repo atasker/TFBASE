@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     delete ':id', to: 'admin/home_slides#destroy'
   end
 
+  get 'users/profile', to: 'users/profile#show', as: :user_profile
+  get 'users/orders', to: 'users/orders#index', as: :user_orders
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',

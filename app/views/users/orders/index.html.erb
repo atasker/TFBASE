@@ -1,0 +1,22 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Orders history</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <% if @orders.any? %>
+    <% @orders.each do |order| %>
+      <p>
+        <%= link_to "Order ##{order.id}", order_path(order.guid) %>
+        <br>
+        At: <%= order.created_at.localtime %>
+      </p>
+    <% end %>
+  <% else %>
+    <p>Have no orders to show.</p>
+  <% end %>
+</div>

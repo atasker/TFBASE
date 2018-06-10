@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  before_action :add_users_breadcrumb, except: [:destroy]
+  before_action :add_users_breadcrumb, except: [:edit, :destroy]
 
   # GET /resource/sign_up
   # def new
@@ -19,9 +19,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    add_breadcrumb 'User', user_profile_path
+    add_breadcrumb 'Edit', ''
+    super
+  end
 
   # PUT /resource
   # def update
