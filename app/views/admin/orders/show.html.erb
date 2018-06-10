@@ -9,6 +9,16 @@
     <strong>User:</strong>
     <%= @order.user ? link_to(@order.user.email, admin_user_path(@order.user)) : 'Guest' %>
   </p>
+  <p><strong>First name:</strong> <%= @order.first_name %></p>
+  <p><strong>Last name:</strong> <%= @order.last_name %></p>
+  <p><strong>Email:</strong> <%= @order.email %></p>
+  <p><strong>Address name:</strong> <%= @order.address_name %></p>
+  <p><strong>Address country:</strong> <%= @order.address_country %></p>
+  <p><strong>Address country code:</strong> <%= @order.address_country_code %></p>
+  <p><strong>Address zip:</strong> <%= @order.address_zip %></p>
+  <p><strong>Address state:</strong> <%= @order.address_state %></p>
+  <p><strong>Address city:</strong> <%= @order.address_city %></p>
+  <p><strong>Address street:</strong> <%= @order.address_street %></p>
   <p>
     <strong>Created at:</strong> <%= @order.created_at.localtime %>
   </p>
