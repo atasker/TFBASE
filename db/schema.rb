@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180610091825) do
+ActiveRecord::Schema.define(version: 20180605201356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,13 +172,23 @@ ActiveRecord::Schema.define(version: 20180610091825) do
     t.string   "last_name"
     t.string   "email"
     t.string   "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "user_id"
-    t.string   "guid"
+    t.string   "guid",                 null: false
+    t.string   "txn_id"
+    t.string   "payer_paypal_id"
+    t.string   "address_name"
+    t.string   "address_country"
+    t.string   "address_country_code"
+    t.string   "address_zip"
+    t.string   "address_state"
+    t.string   "address_city"
+    t.string   "address_street"
   end
 
   add_index "orders", ["guid"], name: "index_orders_on_guid", using: :btree
+  add_index "orders", ["txn_id"], name: "index_orders_on_txn_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pages", force: :cascade do |t|

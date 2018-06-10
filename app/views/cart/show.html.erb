@@ -37,33 +37,16 @@
         <%= @cart.items.inject(0) { |sum, item| sum + item.ticket.price.round * item.quantity } %>
       </div>
       <%# TODO check currencies of tickets ? %>
-      <%
-        if false && Rails.env == 'production'
-          paypal_cnfg = {
-            form_url: 'https://www.paypal.com/cgi-bin/webscr',
-            business: 'info@ticket-finders.com',
-            currency: 'USD'
-          }
-        else
-          paypal_cnfg = {
-            form_url: 'https://www.sandbox.paypal.com/cgi-bin/webscr',
-            business: 'mstrdymio-facilitator@gmail.com',
-            currency: 'RUB'
-          }
-        end
-        # TODO remove the line below — it is only test
-        paypal_cnfg[:form_url] = apply_cart_path(@cart);
-      %>
-      <form action="<%= paypal_cnfg[:form_url] %>" accept-charset="UTF-8" method="post">
+      <form action="https://www.<%= ENV.fetch('PAYPAL_SANDBOX_MODE') == '1' ? 'sandbox.' : '' %>paypal.com/cgi-bin/webscr" accept-charset="UTF-8" method="post">
         <input type="hidden" name="cmd" value="_cart">
         <input type="hidden" name="upload" value="1">
-        <input type="hidden" name="business" value="<%= paypal_cnfg[:business] %>">
+        <input type="hidden" name="business" value="<%= ENV.fetch('PAYPAL_BUSINESS_EMAIL') %>">
         <input type="hidden" name="shopping_url" value="<%= cart_url %>">
         <input type="hidden" name="notify_url" value="<%= apply_order_by_cart(@cart.id) %>">
         <%# notify_url - The URL to which PayPal posts information about the payment, in the form of Instant Payment Notification messages. %>
-        <input type="hidden" name="currency_code" value="<%= paypal_cnfg[:currency] %>">
+        <input type="hidden" name="currency_code" value="USD">
         <%# currency_code - USD|EUR https://developer.paypal.com/docs/classic/api/currency_codes %>
-        <input type="hidden" name="return" value="<%= categories_url %>">
+        <input type="hidden" name="return" value="<%= root_url %>">
         <%# TODO think about return url %>
         <% @cart.items.each_with_index do |item, indx| %>
           <input type="hidden" name="amount_<%= indx + 1 %>" value="<%= item.ticket.price %>">

@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  match 'orders/apply-by/:cart_id', to: 'orders#apply',
+  match 'orders/apply-by/:cart_id', to: 'orders#apply_by_cart_id_after_paypal_payment',
                                     via: [:get, :post],
                                     as: :apply_order_by_cart
   get 'orders/:guid', to: 'orders#show', as: :order
