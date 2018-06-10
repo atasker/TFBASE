@@ -42,7 +42,7 @@
           <input type="hidden" name="upload" value="1">
           <input type="hidden" name="business" value="<%= ENV.fetch('PAYPAL_BUSINESS_EMAIL') %>">
           <input type="hidden" name="shopping_url" value="<%= cart_url %>">
-          <input type="hidden" name="notify_url" value="<%= apply_order_by_cart_path(@cart.id) %>">
+          <input type="hidden" name="notify_url" value="<%= apply_order_by_cart_url(@cart.id) %>">
           <input type="hidden" name="currency_code" value="<%= currency_code(currency) %>">
           <input type="hidden" name="return" value="<%= root_url %>">
           <% @cart.items.each_with_index do |item, indx| %>
