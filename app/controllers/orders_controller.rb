@@ -65,13 +65,13 @@ class OrdersController < BaseFrontendController
     # https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNIntro/
     # https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSimulator/
 
-    if (params['payment_status']
-        && params['payment_status'] == "Completed"
-        && params['receiver_email']
-        && params['receiver_email'] == ENV.fetch('PAYPAL_BUSINESS_EMAIL')
-        && params['txn_id']
-        && Order.where(tnx_id: params['txn_id']).count == 0
-        && (cart = Cart.find_by_id params[:cart_id]))
+    if (params['payment_status'] &&
+        params['payment_status'] == "Completed" &&
+        params['receiver_email'] &&
+        params['receiver_email'] == ENV.fetch('PAYPAL_BUSINESS_EMAIL') &&
+        params['txn_id'] &&
+        Order.where(tnx_id: params['txn_id']).count == 0 &&
+        (cart = Cart.find_by_id params[:cart_id]))
       # TODO validate with request like:
       # https://ipnpb.paypal.com/cgi-bin/webscr?cmd=_notify-validate&mc_gross=19.95
       # &protection_eligibility=Eligible&address_status=confirmed&payer_id=LPLWNMTBWMFAY
