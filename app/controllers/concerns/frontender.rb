@@ -42,7 +42,7 @@ module Frontender
     # registered or signed in as user.
     if user_signed_in? && !@cart && session[:cart]
       session_cart = Cart.find_by_id session[:cart]
-      if session_cart && session_cart.user == null
+      if session_cart && session_cart.user.nil?
         session_cart.user = current_user
         session_cart.save
         @cart = session_cart
