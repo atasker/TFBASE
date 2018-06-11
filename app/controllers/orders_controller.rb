@@ -49,9 +49,11 @@ class OrdersController < BaseFrontendController
     end
 
     # Check that it's not a duplicate
-    unless allowed && Order.where(txn_id: params['txn_id']).count == 0
-      allowed = false
-      pay_logger.error "Forbidden: Already have order with txn_id = #{params['txn_id']}."
+    if allowed
+      if Order.where(txn_id: params['txn_id']).any?
+        allowed = false
+        pay_logger.error "Forbidden: Already have order with txn_id = #{params['txn_id']}."
+      end
     end
 
     # Check that this request is valid by rending it back to PayPal
