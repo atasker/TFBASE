@@ -28,24 +28,29 @@ class OrdersController < BaseFrontendController
     allowed = true
 
     # Check necessary parameters
-    unless(allowed &&
-           params['receiver_email'].present? &&
-           params['payment_status'].present? &&
-           params['txn_id'].present?)
-      allowed = false
-      pay_logger.error 'Forbidden: Wrong params structure (no receiver_email, payment_status, txn_id).'
+    if allowed
+      unless(params['receiver_email'].present? &&
+             params['payment_status'].present? &&
+             params['txn_id'].present?)
+        allowed = false
+        pay_logger.error 'Forbidden: Wrong params structure (no receiver_email, payment_status, txn_id).'
+      end
     end
 
     # Check correct business email
-    unless allowed && params['receiver_email'] == ENV.fetch('PAYPAL_BUSINESS_EMAIL')
-      allowed = false
-      pay_logger.error "Forbidden: Wrong receiver email. Needs #{ENV.fetch('PAYPAL_BUSINESS_EMAIL')}."
+    if allowed
+      unless params['receiver_email'] == ENV.fetch('PAYPAL_BUSINESS_EMAIL')
+        allowed = false
+        pay_logger.error "Forbidden: Wrong receiver email. Needs #{ENV.fetch('PAYPAL_BUSINESS_EMAIL')}."
+      end
     end
 
     # Check status is correct
-    unless allowed && params['payment_status'] == "Completed"
-      allowed = false
-      pay_logger.error "Forbidden: Payment status is not Completed but #{params['payment_status']}."
+    if allowed
+      unless params['payment_status'] == "Completed"
+        allowed = false
+        pay_logger.error "Forbidden: Payment status is not Completed but #{params['payment_status']}."
+      end
     end
 
     # Check that it's not a duplicate
@@ -125,7 +130,7 @@ class OrdersController < BaseFrontendController
           break
         end
 
-        gross = found_ticket.price * quantity
+        gross = found_ticket.price * quantity + 15.0 # 15.0 it is shipping
         if gross != params["mc_gross_#{items_counter}"].to_f
           allowed = false
           pay_logger.error "Forbidden: Ticket gross not match with mc_gross: #{gross} " +
