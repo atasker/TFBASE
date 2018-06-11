@@ -46,7 +46,7 @@
             </svg>
           </a>
           <% user_icon_href = user_signed_in? ? user_profile_path : new_user_session_path %>
-          <%= link_to user_icon_href, class: "fixed-side-link", title: 'Account' do %>
+          <%= link_to user_icon_href, class: "fixed-side-link account-link", title: 'Account' do %>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
               <path d="M466,511.997H46c-25.375,0-46-20.625-46-46l1.563-36.875c38.313-80.688,97.688-97.844,100.188-98.563l4.25-0.563h30
                 c24.25,0,44-19.75,44-44v-14.266c-11.875-15.25-20.688-31.766-26.281-49.188l-1.125-3.594
@@ -64,6 +64,9 @@
                 c0.875,6.469-3.188,12.391-5.156,15.234c-5.281,9.469-3.156,21.094,3.813,26.813c6.25,4.281,8.469,11.75,9.656,15.766
                 c5.406,17,13.531,31.5,24.625,44.797l3.719,4.469v25.703c0,41.906-34.094,76-76,76h-27.469C99.75,365.153,60.5,381.997,32,439.653z"/>
             </svg>
+            <% if user_signed_in? %>
+              <span class="user-signed-in"></span>
+            <% end %>
           <% end %>
           <%= link_to cart_path, class: "fixed-side-link cart-link", title: 'Cart' do %>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36px" height="36px" viewBox="0 0 486.569 486.569" style="enable-background:new 0 0 486.569 486.569;" xml:space="preserve">
