@@ -49,25 +49,39 @@ class OrdersController < BaseFrontendController
     end
 
     # Check that it's not a duplicate
-    unless allowed && Order.where(tnx_id: params['txn_id']).count == 0
+    unless allowed && Order.where(txn_id: params['txn_id']).count == 0
       allowed = false
       pay_logger.error "Forbidden: Already have order with txn_id = #{params['txn_id']}."
     end
 
-    # TODO validate with request like:
-    # https://ipnpb.paypal.com/cgi-bin/webscr?cmd=_notify-validate&mc_gross=19.95
-    # &protection_eligibility=Eligible&address_status=confirmed&payer_id=LPLWNMTBWMFAY
-    # &tax=0.00&address_street=1+Main+St&payment_date=20%3A12%3A59+Jan+13%2C+2009+PST
-    # &payment_status=Completed&charset=windows-1252&address_zip=95131&first_name=Test
-    # &mc_fee=0.88&address_country_code=US&address_name=Test+User&notify_version=2.6
-    # &custom=&payer_status=verified&address_country=United+States&address_city=San+Jose&quantity=1&
-    # verify_sign=AtkOfCXbDm2hu0ZELryHFjY-Vb7PAUvS6nMXgysbElEn9v-1XcmSoGtf&
-    # payer_email=gpmac_1231902590_per%40paypal.com&txn_id=61E67681CH3238416&payment_type=instant
-    # &last_name=User&address_state=CA&receiver_email=gpmac_1231902686_biz%40paypal.com
-    # &payment_fee=0.88&receiver_id=S8XGHLYDW9T3S&txn_type=express_checkout&item_name=&mc_currency=USD
-    # &item_number=&residence_country=US&test_ipn=1&handling_amount=0.00&transaction_subject=
-    # &payment_gross=19.95&shipping=0.00
-    # --> Will return or VERIFIED or INVALID
+    # Check that this request is valid by rending it back to PayPal
+    # skip for development
+    if allowed && Rails.env != 'development'
+      raw = request.raw_post
+      sbstr = ENV.fetch('PAYPAL_SANDBOX_MODE') == '1' ? 'sandbox.' : '';
+      uri = URI.parse("https://ipnpb.#{sbstr}paypal.com/cgi-bin/webscr?cmd=_notify-validate")
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.open_timeout = 60
+      http.read_timeout = 60
+      http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+      http.use_ssl = true
+      response = http.post(
+        uri.request_uri,
+        raw,
+        'Content-Length' => "#{raw.size}",
+        'User-Agent' => "Ticketfinders-IPN-VerificationScript"
+      ).body
+      case response
+      when "VERIFIED"
+        # all ok in this case
+      when "INVALID"
+        allowed = false
+        pay_logger.warn "Forbidden: PayPal's ipnpb mark this request as invalid."
+      else
+        allowed = false
+        pay_logger.error "Forbidden: Error in PayPal's ipnpb check."
+      end
+    end
 
     items_to_process = []
 
@@ -78,7 +92,8 @@ class OrdersController < BaseFrontendController
         pay_logger.info "Check item ##{items_counter}: " +
                         "ID " + params["item_number#{items_counter}"] + ", " +
                         params["item_name#{items_counter}"]
-        found_ticket = Ticket.find_by_id(id: params["item_number#{items_counter}"])
+
+        found_ticket = Ticket.find_by_id(params["item_number#{items_counter}"])
 
         unless found_ticket
           allowed = false
@@ -99,7 +114,7 @@ class OrdersController < BaseFrontendController
           break
         end
 
-        quantity = params["quantity#{items_counter}"]).to_i
+        quantity = params["quantity#{items_counter}"].to_i
 
         if found_ticket.quantity < quantity
           allowed = false
@@ -130,7 +145,7 @@ class OrdersController < BaseFrontendController
 
     # Create order and add items to it
     if allowed && items_to_process.any?
-      order = Order.create user: (cart ? cart.user : nil)),
+      order = Order.create user: (cart ? cart.user : nil),
                            txn_id: params['txn_id'],
                            currency: params['mc_currency'],
                            first_name: params['first_name'],
@@ -159,8 +174,8 @@ class OrdersController < BaseFrontendController
 
     # Remove added to order tickets from the cart
     if allowed && cart
-      order.items.each do |item|
-        found_item = cart.items.where(id: item.ticket_id).take
+      items_to_process.each do |item|
+        found_item = cart.items.where(ticket_id: item.ticket_id).take
         found_item.destroy if found_item
       end
       unless cart.items.any?
@@ -178,6 +193,7 @@ class OrdersController < BaseFrontendController
 
     render nothing: true, status: :ok
 
+    # Parameters example:
     # {
     #   "txn_id"=>"70U68678SU8656119",
     #   "txn_type"=>"cart",

@@ -1,0 +1,46 @@
+<% gross = cart_items.inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity } %>
+<% shipping = 15.0 %>
+
+<%# Special form which emulates Paypal notification directly to method to apply it. %>
+<%# WARNING! This mean that system will get this request as true and will create new order. Use only for test on development. %>
+<form action="<%= apply_order_by_cart_path(cart) %>" accept-charset="UTF-8" method="post">
+  <input type="hidden" name="txn_id" value="<%= SecureRandom.hex(17) %>">
+  <input type="hidden" name="txn_type" value="cart">
+  <input type="hidden" name="business" value="<%= ENV.fetch('PAYPAL_BUSINESS_EMAIL') %>">
+  <input type="hidden" name="receiver_email" value="<%= ENV.fetch('PAYPAL_BUSINESS_EMAIL') %>">
+
+  <input type="hidden" name="payment_status" value="Completed">
+  <input type="hidden" name="payment_gross" value="<%= gross %>">
+  <input type="hidden" name="mc_currency" value="<%= currency %>">
+  <input type="hidden" name="mc_gross" value="<%= gross %>">
+  <input type="hidden" name="mc_shipping" value="<%= cart_items.size * shipping %>">
+  <input type="hidden" name="num_cart_items" value="<%= cart_items.size %>">
+
+  <% cart_items.each_with_index do |item, indx| %>
+    <input type="hidden" name="item_number<%= indx + 1 %>" value="<%= item.ticket.id %>">
+    <input type="hidden" name="item_name<%= indx + 1 %>" value="Ticket <%= item.ticket.full_name %>">
+    <input type="hidden" name="quantity<%= indx + 1 %>" value="<%= item.quantity %>">
+    <input type="hidden" name="mc_shipping<%= indx + 1 %>" value="<%= shipping %>">
+    <input type="hidden" name="mc_gross_<%= indx + 1 %>" value="<%= item.ticket.price * item.quantity %>">
+    <input type="hidden" name="option_selection1_<%= indx + 1 %>" value="N/A">
+    <input type="hidden" name="option_name1_<%= indx + 1 %>" value="<%= item.ticket.category %>">
+  <% end %>
+
+  <input type="hidden" name="payer_id" value="6H9NA45EZD9GE">
+  <input type="hidden" name="payer_email" value="mstrdymio-buyer@gmail.com">
+  <input type="hidden" name="payer_status" value="verified">
+  <input type="hidden" name="first_name" value="Ivan">
+  <input type="hidden" name="last_name" value="Dymkov">
+  <input type="hidden" name="address_country_code" value="RU">
+  <input type="hidden" name="address_name" value="Minskaya 12">
+  <input type="hidden" name="address_country" value="Russia">
+  <input type="hidden" name="address_state" value="Moscow">
+  <input type="hidden" name="address_status" value="confirmed">
+  <input type="hidden" name="address_street" value="Minskaya">
+  <input type="hidden" name="address_zip" value="603724">
+  <input type="hidden" name="address_city" value="Moscow">
+
+  <div style="padding-top: 20px;">
+    <input type="submit" class="btn" style="padding: 10px 50px;font-size: 22px;font-weight: 100;" value="Buy with DevPal">
+  </div>
+</form>
