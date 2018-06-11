@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   before_validation :process_guid
 
   def sum
-    items.inject(0) { |sum, item| sum + item.price.round * item.quantity }
+    items.inject(0) { |sum, item| sum + item.price * item.quantity }
   end
 
   private

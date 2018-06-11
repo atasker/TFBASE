@@ -14,11 +14,11 @@
           <div class="cart-items-table-td">
             <%= link_to_if item.ticket_id.present?, item.ticket_name, admin_ticket_path(item.ticket_id) %>
             <br>
-            <%= currency_symbol(item) %>&nbsp;<%= item.price.round %>
+            <%= currency_symbol(item) %>&nbsp;<%= "%g" % item.price %>
             x
             <%= item.quantity %>
             =
-            <%= currency_symbol(item) %>&nbsp;<%= item.price.round * item.quantity %>
+            <%= currency_symbol(item) %>&nbsp;<%= "%g" % (item.price * item.quantity) %>
           </div>
         </div>
       <% end %>

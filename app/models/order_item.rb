@@ -15,4 +15,14 @@ class OrderItem < ActiveRecord::Base
   def ticket_name
     "#{event_name} (category: #{category})"
   end
+
+  def fill_by_ticket(ticket)
+    self.price = ticket.price
+    self.currency = ticket.currency
+    self.ticket_id = ticket.id
+    self.event_id = ticket.event.id
+    self.event_name = ticket.event.name
+    self.category = ticket.category
+    self.pairs_only = ticket.pairs_only
+  end
 end

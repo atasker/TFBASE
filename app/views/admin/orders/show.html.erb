@@ -41,9 +41,9 @@
       <% @order.items.each do |item| %>
         <tr>
           <td><%= link_to_if item.ticket_id.present?, item.ticket_name, admin_ticket_path(item.ticket_id) %></td>
-          <td><%= currency_symbol(item) %>&nbsp;<%= item.price.round %></td>
+          <td><%= currency_symbol(item) %>&nbsp;<%= "%g" % item.price %></td>
           <td><%= item.quantity %></td>
-          <td><%= currency_symbol(item) %>&nbsp;<%= item.price.round * item.quantity %></td>
+          <td><%= currency_symbol(item) %>&nbsp;<%= "%g" % (item.price * item.quantity) %></td>
         </tr>
       <% end %>
     </tbody>

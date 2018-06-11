@@ -21,7 +21,7 @@
     "offers": {
       "@type": "Offer",
       "url": "<%= ticket_url(offer) %>",
-      "price": "<%= offer.price.round %>",
+      "price": "<%= "%g" % offer.price %>",
       "priceCurrency": "<%= currency_code(offer) %>",
       "availability": <% if offer.quantity > 0 %>"http://schema.org/InStock"<% else %>"http://schema.org/SoldOut"<% end %>
     }<% end %><% if @player %>,

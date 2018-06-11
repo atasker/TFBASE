@@ -17,13 +17,13 @@
                 <%= link_to item.ticket.full_name, ticket_path(item.ticket_id) %>
               </div>
               <div class="cart-items-table-td">
-                <%= currency_symbol(item.ticket) %>&nbsp;<%= item.ticket.price.round %>
+                <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.price %>
               </div>
               <div class="cart-items-table-td">
                 <%= link_to '-', sub_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn' %>&nbsp;<%= item.quantity %>&nbsp;<%= link_to '+', add_to_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', disabled: (item.ticket.quantity ? item.quantity >= item.ticket.quantity : nil) %>
               </div>
               <div class="cart-items-table-td">
-                <%= currency_symbol(item.ticket) %>&nbsp;<%= item.ticket.price.round * item.quantity %>
+                <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % (item.ticket.price * item.quantity) %>
               </div>
               <div class="cart-items-table-td">
                 <%= link_to 'X', remove_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', title: "Remove item" %>
@@ -35,8 +35,9 @@
 
       <div class="container-fluid">
         <div class="cart-summary">
-          <%= currency_symbol(currency) %>&nbsp;<%= @items_by_currencies[currency].inject(0) { |sum, item| sum + item.ticket.price.round * item.quantity } %>
+          <%= currency_symbol(currency) %>&nbsp;<%= "%g" % (@items_by_currencies[currency].inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity) } %>
         </div>
+
         <form action="https://www.<%= ENV.fetch('PAYPAL_SANDBOX_MODE') == '1' ? 'sandbox.' : '' %>paypal.com/cgi-bin/webscr" accept-charset="UTF-8" method="post">
           <input type="hidden" name="cmd" value="_cart">
           <input type="hidden" name="upload" value="1">
@@ -53,6 +54,7 @@
             <input type="hidden" name="quantity_<%= indx + 1 %>" value="<%= item.quantity %>">
             <input type="hidden" name="on0_<%= indx + 1 %>" value="<%= item.ticket.category %>">
           <% end %>
+          <input type="hidden" name="charset" value="utf-8">
           <div style="padding-top: 20px;">
             <%#= link_to 'clear the cart', clear_cart_path %>
             <%# &nbsp; or &nbsp; %>
