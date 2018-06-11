@@ -4,9 +4,10 @@ class CartController < BaseFrontendController
   def show
     add_breadcrumb 'Cart', ''
 
+    @items_by_currencies = {}
+
     if @cart
       @cart = Cart.includes(items: { ticket: [:event] }).find(@cart.id)
-      @items_by_currencies = {}
       @cart.items.each do |item|
         unless @items_by_currencies[item.ticket.currency]
           @items_by_currencies[item.ticket.currency] = []
