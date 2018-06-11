@@ -1,5 +1,5 @@
-<% gross = cart_items.inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity } %>
 <% shipping = 15.0 %>
+<% gross = cart_items.inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity + shipping } %>
 
 <%# Special form which emulates Paypal notification directly to method to apply it. %>
 <%# WARNING! This mean that system will get this request as true and will create new order. Use only for test on development. %>
@@ -21,7 +21,7 @@
     <input type="hidden" name="item_name<%= indx + 1 %>" value="Ticket <%= item.ticket.full_name %>">
     <input type="hidden" name="quantity<%= indx + 1 %>" value="<%= item.quantity %>">
     <input type="hidden" name="mc_shipping<%= indx + 1 %>" value="<%= shipping %>">
-    <input type="hidden" name="mc_gross_<%= indx + 1 %>" value="<%= item.ticket.price * item.quantity %>">
+    <input type="hidden" name="mc_gross_<%= indx + 1 %>" value="<%= item.ticket.price * item.quantity + shipping %>">
     <input type="hidden" name="option_selection1_<%= indx + 1 %>" value="N/A">
     <input type="hidden" name="option_name1_<%= indx + 1 %>" value="<%= item.ticket.category %>">
   <% end %>
