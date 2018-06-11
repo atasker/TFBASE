@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(version: 20180605201356) do
     t.datetime "updated_at",           null: false
     t.integer  "user_id"
     t.string   "guid",                 null: false
+    t.string   "currency"
     t.string   "txn_id"
     t.string   "payer_paypal_id"
     t.string   "address_name"

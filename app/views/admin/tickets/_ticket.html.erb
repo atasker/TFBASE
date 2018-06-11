@@ -5,7 +5,7 @@
   <td><%= ticket.event.name %></td>
   <% end %>
   <td><%= ticket.category %></td>
-  <td><%= ticket.enquire? ? '' : ticket.currency %></td>
+  <td><%= ticket.enquire? ? '' : currency_name(ticket.currency) %></td>
   <td><%= ticket.enquire? ? '' : ticket.price %></td>
   <td><%= ticket.enquire? ? '' : ticket.quantity %></td>
   <td><%= ticket.enquire? ? 'Y' : '' %></td>

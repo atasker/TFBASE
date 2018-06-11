@@ -1,5 +1,7 @@
 class Ticket < ActiveRecord::Base
 
+  CURRENCIES = %w(USD EUR GBP)
+
   belongs_to :event
   has_many :enquiries, inverse_of: :ticket, dependent: :destroy
 
@@ -8,6 +10,7 @@ class Ticket < ActiveRecord::Base
             :quantity,
             :currency,
             presence: true, unless: 'enquire?'
+  validates :currency, inclusion: { in: CURRENCIES }, unless: 'enquire?'
 
   scope :buyable, -> { where.not(enquire: true) }
 

@@ -2,6 +2,7 @@ class AddColumnsToOrders < ActiveRecord::Migration
   def change
     add_reference :orders, :user, index: true, foreign_key: true
     add_column :orders, :guid, :string, null: false
+    add_column :orders, :currency, :string
     add_column :orders, :txn_id, :string
     add_column :orders, :payer_paypal_id, :string
     add_column :orders, :address_name, :string

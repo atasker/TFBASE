@@ -20,7 +20,8 @@
   </td>
 
   <td class="event-ticket-cell-currency">
-    <%= f.select :currency, ["Dollars", "Euros", "Pounds"], :prompt => "-choose-" %>
+    <% opts = Ticket::CURRENCIES.collect {|cur| [currency_name(cur), cur] } %>
+    <%= f.select :currency, opts, :prompt => "-choose-" %>
   </td>
 
   <td>

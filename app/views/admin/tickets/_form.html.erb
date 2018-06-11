@@ -46,7 +46,8 @@
 
   <p>
     <%= f.label :currency %><br>
-    <%= f.select :currency, ["Dollars", "Euros", "Pounds"], :prompt => "Choose Currency" %>
+    <% opts = Ticket::CURRENCIES.collect {|cur| [currency_name(cur), cur] } %>
+    <%= f.select :currency, opts, :prompt => "Choose Currency" %>
   </p>
 
   <p>

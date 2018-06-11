@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :items, class_name: 'OrderItem', dependent: :destroy
 
-  validates :guid, presence: true
+  validates :guid, :currency, presence: true
 
   before_validation :process_guid
 

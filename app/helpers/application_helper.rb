@@ -88,9 +88,22 @@ module ApplicationHelper
       currency = currency_or_holder.currency
     end
     case currency
-    when 'Pounds' then '£'
-    when 'Dollars' then '$'
-    else '€'
+    when 'GBP' then '£'
+    when 'EUR' then '€'
+    else '$'
+    end
+  end
+
+  def currency_name(currency_or_holder)
+    currency = currency_or_holder
+    if (!currency_or_holder.is_a?(String) &&
+        currency_or_holder.respond_to?(:currency))
+      currency = currency_or_holder.currency
+    end
+    case currency
+    when 'GBP' then 'Pounds'
+    when 'EUR' then 'Euros'
+    else 'Dollars'
     end
   end
 
@@ -100,11 +113,7 @@ module ApplicationHelper
         currency_or_holder.respond_to?(:currency))
       currency = currency_or_holder.currency
     end
-    case currency
-    when 'Pounds' then 'GBP'
-    when 'Dollars' then 'USD'
-    else 'EUR'
-    end
+    return currency
   end
 
 end

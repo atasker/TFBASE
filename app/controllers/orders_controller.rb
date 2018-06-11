@@ -86,10 +86,28 @@ class OrdersController < BaseFrontendController
           break
         end
 
-        # TODO check currency match
-        # unless params['mc_currency'] == found_ticket.currency
+        if found_ticket.enquire?
+          allowed = false
+          pay_logger.error "Forbidden: Ticket is only for enquire, not for sale"
+          break
+        end
+
+        unless params['mc_currency'] == found_ticket.currency
+          allowed = false
+          pay_logger.error "Forbidden: Ticket currency not match with mc_currency: " +
+                              "#{found_ticket.currency} vs #{params['mc_currency']}."
+          break
+        end
 
         quantity = params["quantity#{items_counter}"]).to_i
+
+        if found_ticket.quantity < quantity
+          allowed = false
+          pay_logger.error "Forbidden: Ticket quantity is not enough for ordering: " +
+                              "#{found_ticket.quantity} < #{quantity}."
+          break
+        end
+
         gross = found_ticket.price * quantity
         if gross != params["mc_gross_#{items_counter}"].to_f
           allowed = false
@@ -108,11 +126,13 @@ class OrdersController < BaseFrontendController
     end
 
     order = nil
+    cart = Cart.find_by_id params[:cart_id]
 
     # Create order and add items to it
     if allowed && items_to_process.any?
-      order = Order.create user: current_user,
+      order = Order.create user: (cart ? cart.user : nil)),
                            txn_id: params['txn_id'],
+                           currency: params['mc_currency'],
                            first_name: params['first_name'],
                            last_name: params['last_name'],
                            email: params['payer_email'],
@@ -138,21 +158,19 @@ class OrdersController < BaseFrontendController
     end
 
     # Remove added to order tickets from the cart
-    if allowed
-      if cart = Cart.find_by_id params[:cart_id]
-        order.items.each do |item|
-          found_item = cart.items.where(id: item.ticket_id).take
-          found_item.destroy if found_item
-        end
-        unless cart.items.any?
-          cart.destroy
-        end
+    if allowed && cart
+      order.items.each do |item|
+        found_item = cart.items.where(id: item.ticket_id).take
+        found_item.destroy if found_item
+      end
+      unless cart.items.any?
+        cart.destroy
       end
     end
 
     if allowed && order
       pay_logger.info "Order ##{order.id} was sucessfully created." +
-        (order.user ? " User (#{order.user.id})#{order.user.email}" : '')
+        (order.user ? " User: (#{order.user.id}) #{order.user.email}" : '')
     else
       pay_logger.error "Order wasn't created."
     end
