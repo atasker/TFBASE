@@ -12,7 +12,7 @@
       <% @order.items.each do |item| %>
         <div class="cart-items-table-tr">
           <div class="cart-items-table-td">
-            <%= link_to_if item.ticket_id.present?, item.ticket_name, admin_ticket_path(item.ticket_id) %>
+            <%= link_to_if item.ticket_id.present?, item.ticket_name, ticket_path(item.ticket_id) %>
             <br>
             <%= currency_symbol(item) %>&nbsp;<%= "%g" % item.price %>
             x
