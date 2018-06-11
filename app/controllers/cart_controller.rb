@@ -83,6 +83,7 @@ class CartController < BaseFrontendController
   def get_ticket
     @ticket = Ticket.find(params[:ticket])
     @quantity = params[:quantity] ? params[:quantity].to_i : 1
+    @quantity += 1 if @ticket.pairs_only? && @quantity % 2 == 1
   end
 
   def create_new_cart!
