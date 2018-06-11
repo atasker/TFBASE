@@ -10,7 +10,11 @@
     <%= currency_name(@order.currency) %>
   </p>
   <p>
-    <strong>Sum:</strong> <%= @order.sum %>
+    <strong>Sum:</strong> <%= "%g" % @order.sum %>
+  </p>
+  <p>
+    <strong>Shipping:</strong>
+    <%= "%g" % @order.shipping %>
   </p>
   <p>
     <strong>Created at:</strong> <%= @order.created_at.localtime %>

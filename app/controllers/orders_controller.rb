@@ -155,6 +155,7 @@ class OrdersController < BaseFrontendController
       order = Order.create user: (cart ? cart.user : nil),
                            txn_id: params['txn_id'],
                            currency: params['mc_currency'],
+                           shipping: params['mc_shipping'].to_f,
                            first_name: params['first_name'],
                            last_name: params['last_name'],
                            email: params['payer_email'],
