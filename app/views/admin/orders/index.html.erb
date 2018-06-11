@@ -4,6 +4,10 @@
   <table class="pure-table pure-table-striped pure-table-horizontal">
     <tr>
       <th>ID</th>
+      <th>Buyer</th>
+      <th>Buyer email</th>
+      <th>Currency</th>
+      <th>Gross</th>
       <th>Created at</th>
       <th></th>
       <%#<th></th>%>
@@ -13,6 +17,10 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= order.id %></td>
+        <td><%= "#{order.first_name} #{order.last_name}" %></td>
+        <td><%= order.email %></td>
+        <td><%= currency_name(order.currency) %></td>
+        <td><%= "%g" % order.sum %></td>
         <td><%= order.created_at.localtime %></td>
         <td><%= link_to 'Show', admin_order_path(order) %></td>
         <%#<td><= link_to 'Edit', edit_admin_user_path(user.id) ></td>%>

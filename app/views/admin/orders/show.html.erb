@@ -6,6 +6,19 @@
     <%= link_to @order.guid, order_path(@order.guid) %>
   </p>
   <p>
+    <strong>Currency:</strong>
+    <%= currency_name(@order.currency) %>
+  </p>
+  <p>
+    <strong>Sum:</strong> <%= @order.sum %>
+  </p>
+  <p>
+    <strong>Created at:</strong> <%= @order.created_at.localtime %>
+  </p>
+
+  <hr>
+
+  <p>
     <strong>User:</strong>
     <%= @order.user ? link_to(@order.user.email, admin_user_path(@order.user)) : 'Guest' %>
   </p>
@@ -19,15 +32,8 @@
   <p><strong>Address state:</strong> <%= @order.address_state %></p>
   <p><strong>Address city:</strong> <%= @order.address_city %></p>
   <p><strong>Address street:</strong> <%= @order.address_street %></p>
-  <p>
-    <strong>Created at:</strong> <%= @order.created_at.localtime %>
-  </p>
-  <p>
-    <strong>Sum:</strong> <%= @order.sum %>
-  </p>
 
-  <br />
-  <br />
+  <hr>
 
   <h3>Tickets</h3>
   <table class="pure-table pure-table-striped pure-table-horizontal">
@@ -51,6 +57,5 @@
 
   <br />
   <br />
-
   <%= link_to 'Back', admin_orders_path %>
 </div>
