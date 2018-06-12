@@ -1,7 +1,9 @@
 class CartController < BaseFrontendController
   before_filter :get_ticket, only: [:add, :sub, :remove]
+  before_filter :authenticate_user!
 
   def show
+
     add_breadcrumb 'Cart', ''
 
     @items_by_currencies = {}
