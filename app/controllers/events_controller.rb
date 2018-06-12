@@ -3,7 +3,15 @@ class EventsController < BaseFrontendController
   def index
     @events = Event.text_search(params[:query])
     @events, @event_count_before_filtration = apply_day_filter_to_events @events
-    @sorted = @events.sort { |a,b| a.start_time <=> b.start_time }
+    @sorted = @events.sort do |a, b|
+      if a.tbc?
+        1
+      elsif b.tbc?
+        -1
+      else
+        a.start_time <=> b.start_time
+      end
+    end
 
     @page_meta ||= OpenStruct.new(title: 'Search Results')
     add_breadcrumb 'Search Results', nil

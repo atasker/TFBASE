@@ -1,12 +1,12 @@
 <% player ||= nil %>
 <% cur_m = nil %>
 <% events.each do |event| %>
-  <% e_m = event.start_time.strftime('%Y%m') %>
+  <% e_m = event.tbc? ? 'TBC' : event.start_time.strftime('%Y%m') %>
   <% if e_m != cur_m %>
     <% unless cur_m.nil? %>
       </div>
     <% end %>
-    <h3><%= l event.start_time, format: '%B' %></h3>
+    <h3><%= event.tbc? ? 'TBC' : l(event.start_time, format: '%B') %></h3>
     <% cur_m = e_m %>
     <div class="considered__list">
   <% end %>

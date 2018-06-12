@@ -50,6 +50,7 @@ class Admin::EventsController < AdminController
 
   def update
     @event = Event.find(params[:id])
+
     if @event.update(event_params)
       flash[:notice] = "Event successfully updated"
       redirect_to admin_event_path(@event.id)
@@ -69,7 +70,7 @@ class Admin::EventsController < AdminController
 
   def event_params
     params.require(:event).permit(
-      :name, :slug, :start_time, :venue_id,
+      :name, :slug, :start_time, :tbc, :venue_id,
       :category_id, :competition_id,
       :sports, :priority,
       :no_title_postfix, :seo_title, :seo_descr, :seo_keywords,

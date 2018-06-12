@@ -3,7 +3,7 @@
     "@context": "http://schema.org",
     "@type": "Event",
     "name": "<%= @event.name %>",
-    "startDate": "<%= l @event.start_time, format: "%Y-%m-%dT%H:%M" %>",
+    <% unless @event.tbc? %>"startDate": "<%= l @event.start_time, format: "%Y-%m-%dT%H:%M" %>",<% end %>
     "location": {
       "@type": "Place",
       "name": "<%= @event.venue.name %>",

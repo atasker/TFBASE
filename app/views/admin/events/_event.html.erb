@@ -1,7 +1,7 @@
 <tr>
   <td><%= event.id %></td>
   <td><%= event.name %></td>
-  <td><%= event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %></td>
+  <td><%= event.tbc? ? 'TBC' : event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %></td>
   <td><%= event.venue ? event.venue.name : '' %></td>
   <td><%= event.category ? event.category.description : '' %></td>
   <td><%= link_to 'Show', admin_event_path(event.id) %></td>

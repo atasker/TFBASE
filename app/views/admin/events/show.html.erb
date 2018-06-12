@@ -11,7 +11,7 @@
 
   <p>
     <strong>Start time:</strong>
-    <%= @event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %>
+    <%= @event.tbc? ? 'TBC' : @event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %>
   </p>
 
   <p>

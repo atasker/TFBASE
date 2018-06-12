@@ -18,7 +18,7 @@ class CompetitionsController < BaseFrontendController
     if @players.size > 0
       # for the filter works
       @players_venues = Venue.joins(events: [:players]).
-                              where('events.start_time >= ?', DateTime.now).
+                              where('(events.start_time >= ? OR events.start_time IS NULL)', DateTime.now).
                               where(players: { id: @players.collect { |pl| pl.id } }).
                               group(:id)
     else

@@ -19,7 +19,7 @@ class CategoriesController < BaseFrontendController
     if @competitions.count > 0
       # for the filter works
       @competitions_venues = Venue.joins(events: [:competition]).
-                                   where('events.start_time >= ?', DateTime.now).
+                                   where('(events.start_time >= ? OR events.start_time IS NULL)', DateTime.now).
                                    where(competitions: { id: @competitions.pluck(:id) }).
                                    group(:id)
     else
@@ -27,7 +27,7 @@ class CategoriesController < BaseFrontendController
       if @players.count > 0
         # for the filter works
         @players_venues = Venue.joins(events: [:players]).
-                                where('events.start_time >= ?', DateTime.now).
+                                where('(events.start_time >= ? OR events.start_time IS NULL)', DateTime.now).
                                 where(players: { id: @players.pluck(:id) }).
                                 group(:id)
       else

@@ -17,6 +17,22 @@
 //= require chosen.jquery
 // do not require_tree .
 
+function toggleEventStartTimeDisability() {
+  var tbcHere = $("#event_tbc").prop('checked');
+  for (var i = 1; i < 6; i++) {
+    $("#event_start_time_" + i + "i").prop('disabled', tbcHere);
+  }
+}
+function toggleEventRowStartTimeDisability() {
+  var tbcCheckbox = $(this);
+  var tbcHere = tbcCheckbox.prop('checked');
+  tbcCheckbox.parent().children("select").prop('disabled', tbcHere);
+}
+function listenTBCCheckboxInEventRow(container) {
+  var tbcCheckbox = container.find("td[data-field-name='start_time'] > input[type='checkbox']");
+  tbcCheckbox.on('change', toggleEventRowStartTimeDisability);
+  toggleEventRowStartTimeDisability.call(tbcCheckbox[0]);
+}
 function initCocoonAddedEventOfVenue(evnt, insertedItem) {
   // dublicate info from the previous item (if exist)
   var sourcer = insertedItem.prev();
@@ -46,9 +62,29 @@ function initCocoonAddedEventOfVenue(evnt, insertedItem) {
       sourcer.find("td[data-field-name='players'] select").val());
   }
 
+  // lister TBC change
+  listenTBCCheckboxInEventRow(insertedItem);
+
   // init chosen
   insertedItem.find('.chzn-select').chosen();
 }
+function initEventFieldsActions() {
+  var eventItems = $("tbody.event_items");
+  if (eventItems.length) {
+    $("tbody.event_items").off('cocoon:after-insert', initCocoonAddedEventOfVenue);
+    $("tbody.event_items").on('cocoon:after-insert', initCocoonAddedEventOfVenue);
+    $("tbody.event_items > tr").each(function(indx) {
+      listenTBCCheckboxInEventRow($(this));
+    });
+  }
+
+  var eventTBC = $("#event_tbc");
+  if (eventTBC.length) {
+    eventTBC.change(toggleEventStartTimeDisability);
+    toggleEventStartTimeDisability();
+  }
+}
+
 
 function toggleVisibilityOfTicketField() {
   var enquireOn = $("#ticket_enquire").prop('checked');
@@ -94,8 +130,7 @@ $(document).on('ready turbolinks:load', function() {
 
   $('.chzn-select').chosen();
 
-  $("tbody.event_items").off('cocoon:after-insert', initCocoonAddedEventOfVenue);
-  $("tbody.event_items").on('cocoon:after-insert', initCocoonAddedEventOfVenue);
+  initEventFieldsActions();
 
   initTicketFieldsVisibility();
 

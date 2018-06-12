@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   acts_as_seo_carrier
 
   attr_accessor :seo_image
+  attr_accessor :tbc
 
   belongs_to :venue
   belongs_to :category
@@ -24,12 +25,13 @@ class Event < ActiveRecord::Base
 
   validates :name, presence: true,
                    length: { maximum: 70 }
-  validates :start_time, presence: true
   validates :venue_id, presence: true
   validates :category_id, presence: true
   validates :sports, inclusion: { in: [true, false] }
   validates :priority, inclusion: { in: [true, false] }
 
+  after_initialize :set_tbc_attribute
+  before_save :check_tbc_attribute
   after_create :check_slug_generation
 
   include PgSearch
@@ -41,9 +43,13 @@ class Event < ActiveRecord::Base
       competition: :name
     }
 
-  scope :actual, -> { where('events.start_time >= ?', DateTime.now) }
+  scope :actual, -> { where('(events.start_time >= ? OR events.start_time IS NULL)', DateTime.now) }
 
   def title; name end
+
+  def tbc?
+    persisted? && start_time.nil?
+  end
 
   def self.text_search(query)
     if query.present?
@@ -54,6 +60,16 @@ class Event < ActiveRecord::Base
   end
 
   private
+
+  # After initialize set value of TBC (to be confirmed) attribute.
+  # TBC helps to set start_date to nil in editing
+  def set_tbc_attribute
+    self.tbc = tbc? ? '1' : '0'
+  end
+  # Before save checking TBC attribute to drop start_date if it is necessary
+  def check_tbc_attribute
+    self.start_time = nil if tbc == '1'
+  end
 
   # Event auto-generated slug must use name and id: "event-name-3532" as example
   # but new object has no id and get it only after save.

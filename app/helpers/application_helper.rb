@@ -51,18 +51,17 @@ module ApplicationHelper
         target_events << event unless event == master
       end
     end
-    if target_events.count > 1
-      if target_events.count > 6
-        sorted = target_events.sort { |a,b| a.start_time <=> b.start_time }
-        return sorted.take(6)
+    events_to_sort = target_events.count > 1 ? target_events : Event.all.sample(6)
+    sorted = events_to_sort.sort do |a, b|
+      if a.tbc?
+        1
+      elsif b.tbc?
+        -1
+      else
+        a.start_time <=> b.start_time
       end
-      sorted = target_events.sort { |a,b| a.start_time <=> b.start_time }
-      return sorted
-    else
-      random_events = Event.all.sample(6)
-      sorted = random_events.sort { |a,b| a.start_time <=> b.start_time }
-      return sorted
     end
+    sorted.count > 6 ? sorted.take(6) : sorted
   end
 
   # Method returns svg code of category icon if available, else empty string

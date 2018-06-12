@@ -1,7 +1,13 @@
 <% player ||= nil %>
 <div class="considered__item">
   <div class="considered__left">
-    <div class="considered__date"><strong><%= l event.start_time, format: '%d' %></strong><%= l event.start_time, format: '%b' %></div>
+    <div class="considered__date">
+      <% if event.tbc? %>
+        <strong>&nbsp;</strong>TBC
+      <% else %>
+        <strong><%= l event.start_time, format: '%d' %></strong><%= l event.start_time, format: '%b' %>
+      <% end %>
+    </div>
     <div class="considered__title">
       <%= link_to event_path(event, player: player) do %><span class="considered__title_text"><%= event.name %></span><% end %>
     </div>
@@ -10,7 +16,7 @@
     <div class="considered__info-inner">
       <div class="considered__info-item"><%= "#{event.venue.city}, #{event.venue.country}" %></div>
       <div class="considered__info-item"><%= event.venue.name %></div>
-      <div class="considered__info-item considered__info-item-time"><%= l event.start_time, format: "%H:%M" %></div>
+      <div class="considered__info-item considered__info-item-time"><%= event.tbc? ? 'TBC' : l(event.start_time, format: "%H:%M") %></div>
       <div class="considered__info-item "><%= link_to 'Show', event_path(event, player: player), class: 'btn' %></div>
     </div>
   </div>

@@ -10,7 +10,11 @@
         <div class="page-title__place"><%= "#{@event.venue.city}, #{@event.venue.country}" %></div>
         <a href="#map" class="page-title__place-in link-scroll"><%= @event.venue.name %></a>
         <div class="page-title__time">
-          <%= l(@event.start_time, format: "<span>%a</span> <span>%d %B</span> <span>%H:%M</span>").html_safe %>
+          <% if @event.tbc? %>
+            <span>TBC</span>
+          <% else %>
+            <%= l(@event.start_time, format: "<span>%a</span> <span>%d %B</span> <span>%H:%M</span>").html_safe %>
+          <% end %>
         </div>
       </div>
     </div>

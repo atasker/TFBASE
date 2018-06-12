@@ -29,7 +29,7 @@ class BaseFrontendController < ApplicationController
     if params[:dt].present?
       begin
         @start_date = Date.parse params[:dt]
-        events_scope = events_scope.where("events.start_time >= ?", @start_date)
+        events_scope = events_scope.where("(events.start_time >= ? OR events.start_time IS NULL)", @start_date)
       rescue
         events_scope = events_scope.actual
       end
