@@ -54,7 +54,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  if rails_env == 'production'
+  if fetch(:rails_env) == 'production'
     invoke :'rvm:use', 'ruby-2.0.0-p643'
   end
 end
@@ -80,7 +80,7 @@ task :deploy do
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
-    if rails_env == 'production'
+    if fetch(:rails_env) == 'production'
       invoke :'whenever:update'
     end
 
@@ -89,7 +89,7 @@ task :deploy do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
-      if rails_env == 'production'
+      if fetch(:rails_env) == 'production'
         invoke :'rvm:use', 'ruby-2.0.0-p643'
         invoke :'whenever:update'
         invoke :rake, 'sitemap:refresh:no_ping'
