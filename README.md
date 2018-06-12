@@ -4,7 +4,7 @@ Ticketfinders
 Getting Started
 ---------------
 
-Make sure you have Ruby version 2.0.0 installed.
+Make sure you have Ruby version 2.0.0 or newer installed.
 Recommend to use [RVM](https://rvm.io/).
 
 You will need [ImageMagick](https://www.imagemagick.org/) installed.
