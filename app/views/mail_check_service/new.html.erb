@@ -1,0 +1,36 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Email check service</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <% if @success %>
+    <p>Email was sucessfully send to <%= @email_to %>!</p>
+    <p>
+      Response:
+      <br>
+      status_code: <%== @mail_response.status_code %>
+      <br>
+      body: <%= @mail_response.body %>
+      <%#<br>
+      parsed_body: <%#= @mail_response.parsed_body %>
+      <br>
+      headers: <%= @mail_response.headers %>
+    </p>
+  <% end %>
+  <%= form_tag '/users/check-email-sending-servicepage', method: 'post' do %>
+    <div class="input-wrap">
+      <%= label_tag :email %>
+      <div class="input-wrap__in">
+        <%= email_field_tag :email %>
+      </div>
+    </div>
+    <div class="submit-wrap">
+      <%= submit_tag "Send" %>
+    </div>
+  <% end %>
+</div>
