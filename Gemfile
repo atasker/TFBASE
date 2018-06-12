@@ -31,7 +31,8 @@ gem 'kaminari', '~> 1.0.1'
 gem 'sitemap_generator'
 
 # SendGrid integration
-gem 'sendgrid-actionmailer'
+# gem 'sendgrid-actionmailer'
+gem 'sendgrid-ruby', '~> 5.2'
 
 # Authentication
 gem 'devise', '~> 4.4'
