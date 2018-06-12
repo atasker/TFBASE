@@ -194,6 +194,8 @@ class OrdersController < BaseFrontendController
     if allowed && order
       pay_logger.info "Order ##{order.id} was sucessfully created." +
         (order.user ? " User: (#{order.user.id}) #{order.user.email}" : '')
+      message = OrdersMailer.order_created_message_to_user(order)
+      message.deliver if message
     else
       pay_logger.error "Order wasn't created."
     end

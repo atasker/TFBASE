@@ -1,0 +1,13 @@
+Your order on Ticketfinders
+
+Order #<%= @order.id %> was successfully created.
+
+Tickets in the order:
+<% @order.items.each do |item| %>
+* <%= item.ticket_name %> x <%= item.quantity %> = <%= currency_symbol(item) %><%= "%g" % (item.price * item.quantity) %>
+<% end %>
+
+Total: <%= currency_symbol(@order) %><%= "%g" % @order.sum %>
+Shipping: <%= currency_symbol(@order) %><%= "%g" % (@order.items.size * 15.0) %>
+
+You can always find information about all your orders in your profile on the site.
