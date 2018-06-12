@@ -68,7 +68,7 @@ Rails.application.configure do
   config.action_mailer.sendgrid_actionmailer_settings = {
     api_key: ENV['SENDGRID_API_KEY']
   }
-  config.action_mailer.default_url_options = { host: "www.ticket-finders.com" }
+  config.action_mailer.default_url_options = { host: "ticketfinders.dev.codenohito.ru" }
   config.action_mailer.default :charset => "utf-8"
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
