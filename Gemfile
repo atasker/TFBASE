@@ -30,6 +30,9 @@ gem 'kaminari', '~> 1.0.1'
 # Sitemap
 gem 'sitemap_generator'
 
+# SendGrid integration
+gem 'sendgrid-actionmailer'
+
 # Authentication
 gem 'devise', '~> 4.4'
 
