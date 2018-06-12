@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV.fetch('GMAIL_USER', 'info@ticket-finders.com')
+  default from: ENV.fetch('MAIL_FROM', 'info@ticket-finders.com')
   layout 'mailer'
 end

@@ -18,8 +18,11 @@ class MessageMailer < ApplicationMailer
   private
 
   def recipients
-    # ["john@ticket-finders.com", "info@ticket-finders.com"]
-    ['mstrdymio@gmail.com']
+    if Rails.env == 'production'
+      ["john@ticket-finders.com", "info@ticket-finders.com"]
+    else
+      [ ENV['DEVELOPER_EMAIL'] ]
+    end
   end
 
 end
