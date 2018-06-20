@@ -3,6 +3,7 @@
     <div class="page-title__inner">
       <%= render 'shared/breadcrumbs' %>
       <h1><%= resource_name.to_s.humanize %></h1>
+      <p class="page-title__subtitle">Welcome <%= current_user.email %></p>
     </div>
   </div>
 </div>

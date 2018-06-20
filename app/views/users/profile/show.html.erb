@@ -3,14 +3,69 @@
     <div class="page-title__inner">
       <%= render 'shared/breadcrumbs' %>
       <h1>Profile</h1>
+      <p class="page-title__subtitle">Welcome <%= current_user.email %></p>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
-  <p>Your email: <%= current_user.email %></p>
-  <p><%= link_to 'Show previous orders', user_orders_path %></p>
-  <p><%= link_to 'Edit email and/or change password', edit_user_registration_path %></p>
-  <p><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></p>
+  <div class="panel-container">
+    <div class="panel">
+      <div class="panel-heading">Account Settings</div>
+      <div class="panel-body panel-body-cenroid">
+        <%= link_to 'Edit', edit_user_registration_path, :class => 'buttn' %>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading">Email Preferences</div>
+      <div class="panel-body panel-body-cenroid">
+        <%= link_to 'Edit', edit_user_registration_path, :class => 'buttn' %>
+      </div>
+    </div>
+  </div>
+
+  <hr class="nice-hr" />
+
+  <h3 class="nice-h3">Orders</h3>
+
+  <% if @orders.any? %>
+    <div class="order-cards">
+      <% @orders.each do |order| %>
+        <div class="order-card">
+          <div class="order-card-items">
+            <% order.items.each do |item| %>
+              <div class="order-card-item">
+                <div class="order-card-item-title"><%= item.event_name %></div>
+                <%= item.category %>
+              </div>
+            <% end %>
+          </div>
+          <div class="order-card-summary">
+            <div class="order-card-summary-line">
+              <div>Order Number:</div>
+              <div><%= "%07d" % order.id %></div>
+            </div>
+            <div class="order-card-summary-line">
+              <div>Total Cost:</div>
+              <div><%= currency_symbol(order) %><%= order.sum %></div>
+            </div>
+            <div class="order-card-summary-line">
+              <div>Order Date:</div>
+              <div><%= l order.created_at, format: "%d/%m/%y" %></div>
+            </div>
+          </div>
+          <%= link_to "View details", order_path(order.guid), :class => "buttn order-card-btn" %>
+        </div>
+      <% end %>
+    </div>
+    <% if @have_more_orders %>
+      <p><%= link_to 'More orders ...', user_orders_path %></p>
+    <% end %>
+  <% else %>
+    <p>You have no orders yet.</p>
+  <% end %>
+
+  <%# <p><= link_to 'Sign out', destroy_user_session_path, method: :delete ></p> %>
   <%# <p>Unhappy? <= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete ></p> %>
 </div>

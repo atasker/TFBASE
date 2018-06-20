@@ -1,0 +1,108 @@
+/*
+ This file contains styles of new design, made by John on June 2018.
+ */
+
+$primary-color: #1c5cb8;
+$primary-alternate-color: #2168d0;
+$secondary-color: #fff204;
+$grey-color: #e8e8e8;
+
+/*
+  Base elements
+ */
+hr.nice-hr {
+  margin: 1px 0 24px;
+  border: 0;
+  border-top: 1px solid $grey-color;
+}
+
+h3.nice-h3 {
+  margin: 0 0 13px;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+/*
+  Component button
+ */
+.buttn {
+  display: inline-block;
+  padding: 8px 24px;
+  background: $primary-color;
+  text-decoration: none;
+  color: #fff;
+  line-height: 20px;
+  &:hover {
+    background-color: $primary-alternate-color;
+    text-decoration: none;
+  }
+}
+
+/*
+  Component panel
+ */
+.panel {
+  display: inline-block;
+  margin: 0 31px 30px 0;
+  min-width: 213px;
+  .panel-heading {
+    padding: 8px 6px 12px;
+    background: $primary-color;
+    text-align: center;
+    font-size: 22px;
+    line-height: 41px;
+    color: #fff;
+  }
+  .panel-body {
+    border-right: 1px solid $grey-color;
+    border-bottom: 1px solid $grey-color;
+    border-left: 1px solid $grey-color;
+    padding: 41px 0 38px;
+    text-align: center;
+  }
+}
+
+/*
+  Component order cards
+ */
+.order-cards {}
+.order-card {
+  display: inline-block;
+  margin: 14px 28px 14px 0;
+  border: 1px solid $grey-color;
+  min-width: 242px;
+  .order-card-items {
+    padding: 15px 13px 0;
+    text-align: center;
+  }
+  .order-card-item {
+    font-size: 14px;
+    .order-card-item-title {
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+  }
+  .order-card-summary {
+    margin-top: 60px;
+    border-bottom: 1px solid $grey-color;
+    padding: 0 13px 25px;
+  }
+  .order-card-summary-line {
+    display: flex;
+    justify-content: space-between;
+  }
+  .order-card-btn {
+    display: block;
+    text-align: center;
+  }
+}
+
+/*
+  Supertest !!! :)
+ */
+.supertest {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.6;
+}

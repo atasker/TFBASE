@@ -13,6 +13,7 @@
  * do not require_tree .
  *= require libs.min
  *= require style
+ *= require style2
  *= require cart
  *= require_self
  */
