@@ -9,17 +9,17 @@
 </div>
 
 <div class="container-fluid">
-  <div class="panel-container">
-    <div class="panel">
-      <div class="panel-heading">Account Settings</div>
-      <div class="panel-body panel-body-cenroid">
+  <div class="card-panel-container">
+    <div class="card-panel">
+      <div class="card-panel-heading">Account Settings</div>
+      <div class="card-panel-body">
         <%= link_to 'Edit', edit_user_registration_path, :class => 'buttn' %>
       </div>
     </div>
 
-    <div class="panel">
-      <div class="panel-heading">Email Preferences</div>
-      <div class="panel-body panel-body-cenroid">
+    <div class="card-panel">
+      <div class="card-panel-heading">Email Preferences</div>
+      <div class="card-panel-body">
         <%= link_to 'Edit', edit_user_registration_path, :class => 'buttn' %>
       </div>
     </div>
@@ -41,7 +41,4 @@
   <% else %>
     <p>You have no orders yet.</p>
   <% end %>
-
-  <%# <p><= link_to 'Sign out', destroy_user_session_path, method: :delete ></p> %>
-  <%# <p>Unhappy? <= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete ></p> %>
 </div>

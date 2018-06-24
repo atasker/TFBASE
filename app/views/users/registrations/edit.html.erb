@@ -9,41 +9,61 @@
 </div>
 
 <div class="container-fluid">
-  <div class="col-md-6">
-    <% flash.each do |key, value| %>
-      <p><b><%= value %></b></p>
-    <% end %>
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-header-title">Account Details</div>
+      <div>
+        <%= link_to 'Account Home', user_profile_path, class: 'buttn buttn-smaller' %>
+        &nbsp;
+        <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'buttn buttn-smaller' %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <% flash.each do |key, value| %>
+        <p><b><%= value %></b></p>
+      <% end %>
 
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= f.error_notification %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <% if resource.errors.any? %>
+          <ul>
+            <% resource.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
 
-      <div class="input-wrap">
-        <%= f.input :email, required: true, autofocus: true %>
-
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :email %></div>
+          <div class="form-line-input"><%= f.text_field :email, required: true, autofocus: true %></div>
+        </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
         <% end %>
-      </div>
-      <div class="input-wrap">
-        <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-      </div>
-      <div class="input-wrap">
-        <%= f.input :password_confirmation, required: false %>
-      </div>
-      <div class="input-wrap">
-        <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
-      </div>
 
-      <div class="submit-wrap">
-        <%= f.button :submit, "Update" %>
-      </div>
-    <% end %>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :password %></div>
+          <div class="form-line-input"><%= f.password_field :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %></div>
+        </div>
 
-    <br />
-    <%#<h3>Cancel my account</h3>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :password_confirmation %></div>
+          <div class="form-line-input"><%= f.password_field :password_confirmation, required: false %></div>
+        </div>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :current_password %></div>
+          <div class="form-line-input"><%= f.password_field :current_password, hint: "we need your current password to confirm your changes", required: true %></div>
+        </div>
 
-    <p>Unhappy? <= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete ></p> %>
+        <div class="submit-line">
+          <%= f.submit "Save changes", class: 'buttn' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-    <%= link_to "Back", :back %>
+  <div class="panel del-account-panel">
+    <h3 class="nice-h3">Permanently Delete Account</h3>
+    <p>Please be aware that all your user information will be permanently deleted and no longer retriable</p>
+    <p><%= link_to "Delete", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'buttn' %></p>
   </div>
 </div>

@@ -11,13 +11,13 @@
 </div>
 <div class="container-fluid">
 
-  <div class="order-details">
-    <div class="order-details-header">
-      <div class="order-details-title">Order Details</div>
+  <div class="panel order-details">
+    <div class="panel-header order-details-header">
+      <div class="panel-title">Order Details</div>
       <div class="order-details-number">Order Number: <%= "%07d" % @order.id %></div>
     </div>
 
-    <div class="order-detail-body">
+    <div class="panel-body order-detail-body">
       <% @order.items.each do |item| %>
         <div class="order-detail-item">
           <%= item.event_name %>

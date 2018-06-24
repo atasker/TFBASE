@@ -36,6 +36,80 @@ h3.nice-h3 {
     background-color: $primary-alternate-color;
     text-decoration: none;
   }
+
+  &.buttn-smaller {
+    padding: 3px 17px 2px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+
+/*
+  Component: Panel
+ */
+ .panel {
+   margin: 34px 0;
+   border: 1px solid $grey-color;
+   padding: 14px;
+
+   .panel-header {
+     display: flex;
+     justify-content: space-between;
+     margin-bottom: 40px;
+     border-bottom: 1px solid $grey-color;
+     padding: 1px 20px 15px;
+     line-height: 30px;
+   }
+   .panel-header-title { font-size: 28px; }
+
+   // .panel-body { }
+
+   @media (max-width: 499px) {
+     .panel-header { display: block; }
+   }
+ }
+
+/*
+  Component: Form
+ */
+.form-line {
+  display: flex;
+  line-height: 24px;
+  font-size: 18px;
+  & + .form-line { margin-top: 11px; }
+
+  .form-line-label {
+    flex-grow: 0;
+    padding-left: 30px;
+    width: 220px;
+  }
+
+  .form-line-input {
+    flex-grow: 1;
+    padding-right: 30px;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    border: 0;
+    border-bottom: 1px solid $grey-color;
+  }
+}
+.submit-line {
+  margin-top: 40px;
+  text-align: right;
+
+  input[type="submit"] {
+    display: inline-block;
+    padding: 8px 24px;
+    background: $primary-color;
+    text-decoration: none;
+    color: #fff;
+    line-height: 20px;
+    &:hover {
+      background-color: $primary-alternate-color;
+      text-decoration: none;
+    }
+  }
 }
 
 /*
@@ -84,13 +158,13 @@ h3.nice-h3 {
 }
 
 /*
-  Component panel
+  Component: Card-panel
  */
-.panel {
+.card-panel {
   display: inline-block;
   margin: 0 31px 30px 0;
   min-width: 213px;
-  .panel-heading {
+  .card-panel-heading {
     padding: 8px 6px 12px;
     background: $primary-color;
     text-align: center;
@@ -98,7 +172,7 @@ h3.nice-h3 {
     line-height: 41px;
     color: #fff;
   }
-  .panel-body {
+  .card-panel-body {
     border-right: 1px solid $grey-color;
     border-bottom: 1px solid $grey-color;
     border-left: 1px solid $grey-color;
@@ -152,22 +226,9 @@ h3.nice-h3 {
 }
 
 /*
-  Component: order details
+  Special component: order details panel
  */
 .order-details {
-  margin: 34px 0;
-  border: 1px solid $grey-color;
-  padding: 14px;
-
-  .order-details-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-    border-bottom: 1px solid $grey-color;
-    padding: 1px 20px 15px;
-    line-height: 30px;
-  }
-  .order-details-title { font-size: 28px; }
   .order-details-number { font-size: 22px; }
 
   .order-detail-body {
@@ -181,9 +242,18 @@ h3.nice-h3 {
     line-height: 38px;
     font-size: 22px;
   }
+}
 
+/*
+  Special component: account delete panel
+ */
+.del-account-panel {
+  margin-left: 40px;
+  margin-right: 40px;
+  text-align: center;
   @media (max-width: 499px) {
-    .order-details-header { display: block; }
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 
