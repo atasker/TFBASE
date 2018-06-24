@@ -3,31 +3,74 @@
     <div class="page-title__inner">
       <%= render 'shared/breadcrumbs' %>
       <h1>Order #<%= @order.id %></h1>
+      <% if user_signed_in? %>
+        <p class="page-title__subtitle">Welcome <%= current_user.email %></p>
+      <% end %>
     </div>
   </div>
 </div>
 <div class="container-fluid">
-  <div class="cart-items-table">
-    <div class="cart-items-table-tbody">
+
+  <div class="order-details">
+    <div class="order-details-header">
+      <div class="order-details-title">Order Details</div>
+      <div class="order-details-number">Order Number: <%= "%07d" % @order.id %></div>
+    </div>
+
+    <div class="order-detail-body">
       <% @order.items.each do |item| %>
-        <div class="cart-items-table-tr">
-          <div class="cart-items-table-td">
-            <%= link_to_if item.ticket_id.present?, item.ticket_name, ticket_path(item.ticket_id) %>
+        <div class="order-detail-item">
+          <%= item.event_name %>
+          <br>
+          Category: <%= item.category %>
+          <br>
+          Quantity: <%= item.quantity %>
+          <% event = item.event_id ? Event.find_by_id(item.event_id) : nil %>
+          <% if event %>
             <br>
-            <%= currency_symbol(item) %>&nbsp;<%= "%g" % item.price %>
-            x
-            <%= item.quantity %>
-            =
-            <%= currency_symbol(item) %>&nbsp;<%= "%g" % (item.price * item.quantity) %>
-          </div>
+            Location: <%= event.venue.name %>
+            <br>
+            Date: <%= event.tbc? ? 'TBC' : l(event.start_time, format: "%e/%m/%Y") %>
+            <br>
+            Cost: <%= currency_symbol(item) %><%= "%g" % item.price %>
+          <% end %>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="cart-summary cart-summary--left-yet">
-      <%= @order.sum %>
+  <div class="columner two-columner">
+    <div class="column">
+      <div class="column-title">Order Summary</div>
+      Order Number: <%= "%07d" % @order.id %>
+      <br>
+      Order Date: <%= l @order.created_at, format: "%-d/%-m/%Y %H:%M" %>
+      <br>
+      Total Items: <%= @order.items.size %>
+      <br>
+      Delivery: <%= currency_symbol(@order) %><%= "%g" % (15.0 * @order.items.size) %>
+      <br>
+      Total Cost: <%= currency_symbol(@order) %><%= "%g" % (@order.sum + 15.0 * @order.items.size) %>
+    </div>
+    <div class="column">
+      <div class="column-title">Address</div>
+      <%= "#{@order.first_name} #{@order.last_name}" %>
+      <br>
+      <%= @order.address_name %>
+      <br>
+      <%= @order.address_city %>
+      <br>
+      <%= @order.address_country %>
     </div>
   </div>
+
+  <div class="buttons-line">
+    <a href="#popup-send" class="buttn popup-inline" data-effect="mfp-zoom-in"<%= user_signed_in? ? ' style="float:right"'.html_safe : '' %>>Contact Us</a>
+    <% if user_signed_in? %>
+      <%= link_to 'Account Home', user_profile_path, class: 'buttn' %>
+      &nbsp;
+      <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'buttn' %>
+    <% end %>
+  </div>
+
 </div>

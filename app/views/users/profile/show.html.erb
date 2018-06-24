@@ -32,31 +32,7 @@
   <% if @orders.any? %>
     <div class="order-cards">
       <% @orders.each do |order| %>
-        <div class="order-card">
-          <div class="order-card-items">
-            <% order.items.each do |item| %>
-              <div class="order-card-item">
-                <div class="order-card-item-title"><%= item.event_name %></div>
-                <%= item.category %>
-              </div>
-            <% end %>
-          </div>
-          <div class="order-card-summary">
-            <div class="order-card-summary-line">
-              <div>Order Number:</div>
-              <div><%= "%07d" % order.id %></div>
-            </div>
-            <div class="order-card-summary-line">
-              <div>Total Cost:</div>
-              <div><%= currency_symbol(order) %><%= order.sum %></div>
-            </div>
-            <div class="order-card-summary-line">
-              <div>Order Date:</div>
-              <div><%= l order.created_at, format: "%d/%m/%y" %></div>
-            </div>
-          </div>
-          <%= link_to "View details", order_path(order.guid), :class => "buttn order-card-btn" %>
-        </div>
+        <%= render partial: 'orders/order_card', locals: { order: order } %>
       <% end %>
     </div>
     <% if @have_more_orders %>

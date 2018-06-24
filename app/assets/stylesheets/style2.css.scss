@@ -39,6 +39,51 @@ h3.nice-h3 {
 }
 
 /*
+  Component: columner
+ */
+.columner {
+  margin: 34px 0;
+  border: 1px solid $grey-color;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+
+  .column {
+    line-height: 34px;
+    & + .column {
+      border-left: 1px solid $grey-color;
+      padding-left: 40px;
+    }
+  }
+
+  .column-title {
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  &.two-columner {
+    .column {
+      width: 50%;
+      & + .column { width: 49%; }
+    }
+  }
+
+  @media (max-width: 499px) {
+    display: block;
+    .column {
+      width: 100%;
+      & + .column {
+        margin-top: 40px;
+        border-left: 0;
+        padding-left: 0;
+      }
+    }
+    &.two-columner .column { width: 100%; & + .column { width: 100%; } }
+  }
+}
+
+/*
   Component panel
  */
 .panel {
@@ -107,7 +152,46 @@ h3.nice-h3 {
 }
 
 /*
+  Component: order details
+ */
+.order-details {
+  margin: 34px 0;
+  border: 1px solid $grey-color;
+  padding: 14px;
+
+  .order-details-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 1px solid $grey-color;
+    padding: 1px 20px 15px;
+    line-height: 30px;
+  }
+  .order-details-title { font-size: 28px; }
+  .order-details-number { font-size: 22px; }
+
+  .order-detail-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .order-detail-item {
+    margin: 21px;
+    text-align: center;
+    line-height: 38px;
+    font-size: 22px;
+  }
+
+  @media (max-width: 499px) {
+    .order-details-header { display: block; }
+  }
+}
+
+/*
   Supertest !!! :)
+  <% content_for(:after_layout) do %>
+    <img src="/content/test/Account_Home_Page.png" style="top: 113px; left: 0px;" class="supertest" />
+  <% end %>
  */
 .supertest {
   position: absolute;

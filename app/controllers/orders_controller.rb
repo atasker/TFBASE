@@ -2,7 +2,7 @@ class OrdersController < BaseFrontendController
   protect_from_forgery :except => [:apply_by_cart_id_after_paypal_payment]
 
   def show
-    add_breadcrumb 'Order', ''
+    add_breadcrumb 'Order Details', ''
 
     @order = Order.find_by_guid! params[:guid]
 

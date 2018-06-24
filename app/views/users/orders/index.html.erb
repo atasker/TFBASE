@@ -10,14 +10,12 @@
 
 <div class="container-fluid">
   <% if @orders.any? %>
-    <% @orders.each do |order| %>
-      <p>
-        <%= link_to "Order ##{order.id}", order_path(order.guid) %>
-        <br>
-        At: <%= order.created_at.localtime %>
-      </p>
-    <% end %>
+    <div class="order-cards">
+      <% @orders.each do |order| %>
+        <%= render partial: 'orders/order_card', locals: { order: order } %>
+      <% end %>
+    </div>
   <% else %>
-    <p>Have no orders to show.</p>
+    <p>You have no orders yet.</p>
   <% end %>
 </div>
