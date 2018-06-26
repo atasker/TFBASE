@@ -8,24 +8,34 @@
 </div>
 
 <div class="container-fluid">
-  <div class="col-md-6">
-    <% flash.each do |key, value| %>
-      <p><b><%= value %></b></p>
-    <% end %>
+  <div class="panel">
+    <div class="panel-body">
+      <% flash.each do |key, value| %>
+        <p><b><%= value %></b></p>
+      <% end %>
 
-    <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-      <%= f.error_notification %>
-      <%= f.full_error :confirmation_token %>
+      <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+        <% if resource.errors.any? %>
+          <ul>
+            <% resource.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
 
-      <div class="input-wrap">
-        <%= f.input :email, required: true, autofocus: true %>
-      </div>
+        <%= f.full_error :confirmation_token %>
 
-      <div class="submit-wrap">
-        <%= f.button :submit, "Resend confirmation instructions" %>
-      </div>
-    <% end %>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :email, 'Email:*' %></div>
+          <div class="form-line-input"><%= f.email_field :email, required: true, autofocus: true %></div>
+        </div>
 
-    <%= render "users/shared/links" %>
+        <div class="submit-line">
+          <%= f.submit "Resend confirmation instructions", class: 'buttn' %>
+        </div>
+      <% end %>
+    </div>
   </div>
+
+  <%= render "users/shared/links" %>
 </div>

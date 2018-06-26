@@ -8,27 +8,40 @@
 </div>
 
 <div class="container-fluid">
-  <div class="col-md-6">
-    <% flash.each do |key, value| %>
-      <p><b><%= value %></b></p>
-    <% end %>
+  <div class="panel">
+    <div class="panel-body">
+      <% flash.each do |key, value| %>
+        <p><b><%= value %></b></p>
+      <% end %>
 
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="input-wrap">
-        <%= f.input :email, required: false, autofocus: true %>
-      </div>
-      <div class="input-wrap">
-        <%= f.input :password, required: false %>
-      </div>
-      <div class="input-wrap">
-        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-      </div>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :email, 'Email Address:' %></div>
+          <div class="form-line-input"><%= f.email_field :email, required: false, autofocus: true %></div>
+        </div>
 
-      <div class="submit-wrap">
-        <%= f.button :submit, "Log in" %>
-      </div>
-    <% end %>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :password, 'Password:' %></div>
+          <div class="form-line-input"><%= f.password_field :password, required: false %></div>
+        </div>
 
-    <%= render "users/shared/links" %>
+        <% if devise_mapping.rememberable? %>
+          <div class="form-line">
+            <div class="form-line-label"></div>
+            <div class="form-line-input">
+              <%= f.check_box :remember_me %>
+              &nbsp;
+              <%= f.label :remember_me, 'Remember me' %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="submit-line">
+          <%= f.submit "Log in", class: 'buttn' %>
+        </div>
+      <% end %>
+    </div>
   </div>
+
+  <%= render "users/shared/links" %>
 </div>

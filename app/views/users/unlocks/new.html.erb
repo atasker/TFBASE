@@ -1,16 +1,41 @@
-<h2>Resend unlock instructions</h2>
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Resend unlock instructions</h1>
+    </div>
+  </div>
+</div>
 
-<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.full_error :unlock_token %>
+<div class="container-fluid">
+  <div class="panel">
+    <div class="panel-body">
+      <% flash.each do |key, value| %>
+        <p><b><%= value %></b></p>
+      <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+      <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+        <% if resource.errors.any? %>
+          <ul>
+            <% resource.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <%= f.full_error :unlock_token %>
+
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :email, 'Email:*' %></div>
+          <div class="form-line-input"><%= f.email_field :email, required: true, autofocus: true %></div>
+        </div>
+
+        <div class="submit-line">
+          <%= f.submit "Resend unlock instructions", class: 'buttn' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Resend unlock instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
+</div>
