@@ -1,5 +1,9 @@
 <div class="popup-send__msg">Name and email must be completed</div>
 <% enquiry = Enquiry.new(ticket: ticket) %>
+<% if user_signed_in? %>
+  <% enquiry.email = current_user.email %>
+  <% enquiry.name = current_user.name %>
+<% end %>
 <div class="popup-send__form">
   <%= form_for enquiry, url: create_enquiry_path(format: 'json'), remote: true, html: { :class => 'new_message remote-form-in-popup', 'data-obj-ident' => 'enquiry' } do |f| %>
     <%= f.hidden_field :ticket_id %>
