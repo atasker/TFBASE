@@ -286,11 +286,12 @@ h3.nice-h3 {
 /*
   Supertest !!! :)
   <% content_for(:after_layout) do %>
-    <img src="/content/test/Account_Home_Page.png" style="top: 113px; left: 0px;" class="supertest" />
+    <img src="/content/test/Account_Home_Page.png" style="top: 113px; left: 0px; display: block" class="supertest" />
   <% end %>
  */
 .supertest {
   position: absolute;
+  display: none;
   top: 0;
   left: 0;
   opacity: 0.6;

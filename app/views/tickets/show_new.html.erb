@@ -24,7 +24,7 @@
           <br>
           Time:
           <% if @event.tbc? %>
-            <span>TBC</span>
+            TBC
           <% else %>
             <%= l(@event.start_time, format: "%A/ %-d %B %Y /%H:%M").html_safe %>
           <% end %>

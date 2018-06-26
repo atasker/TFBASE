@@ -1,43 +1,81 @@
+<% content_for(:after_layout) do %>
+    <img src="/content/test/Cart Page.png" style="top: 128px; left: 125px; display: none" class="supertest" />
+  <% end %>
+
 <div class="page-title">
   <div class="container-fluid">
     <div class="page-title__inner">
       <%= render 'shared/breadcrumbs' %>
-      <h1>Cart</h1>
+      <h1>Shopping Cart</h1>
     </div>
   </div>
 </div>
 <div class="container-fluid">
   <% if @items_by_currencies.any? %>
     <% @items_by_currencies.each_key do |currency| %>
-      <div class="cart-items-table">
-        <div class="cart-items-table-tbody">
-          <% @items_by_currencies[currency].each do |item| %>
+      <div class="panel">
+        <div class="cart-items-table">
+          <div class="cart-items-table-thead">
             <div class="cart-items-table-tr">
-              <div class="cart-items-table-td">
-                <%= link_to item.ticket.full_name, ticket_path(item.ticket_id) %>
-              </div>
-              <div class="cart-items-table-td">
-                <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.price %>
-              </div>
-              <div class="cart-items-table-td">
-                <%= link_to '-', sub_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn' %>&nbsp;<%= item.quantity %>&nbsp;<%= link_to '+', add_to_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', disabled: (item.ticket.quantity ? item.quantity >= item.ticket.quantity : nil) %>
-              </div>
-              <div class="cart-items-table-td">
-                <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % (item.ticket.price * item.quantity) %>
-              </div>
-              <div class="cart-items-table-td">
-                <%= link_to 'X', remove_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', title: "Remove item" %>
-              </div>
+              <div class="cart-items-table-td">Items</div>
+              <div class="cart-items-table-td">Ticket Price</div>
+              <div class="cart-items-table-td">Quantity</div>
+              <div class="cart-items-table-td">Subtotal</div>
             </div>
-          <% end %>
+          </div>
+          <div class="cart-items-table-tbody">
+            <% @items_by_currencies[currency].each do |item| %>
+              <div class="cart-items-table-tr">
+                <div class="cart-items-table-td">
+                  <%= link_to ticket_path(item.ticket_id) do %>
+                    <% if item.ticket.event %>
+                      <%= item.ticket.event.name %> Ticket
+                      <% if item.ticket.event.competition %>
+                        &mdash; <%= item.ticket.event.competition.name %>
+                      <% end %>
+                    <% else %>
+                      Ticket
+                    <% end %>
+                  <% end %>
+                  <br><br>
+                  Category: <%= item.ticket.category %>
+                  <% if item.ticket.event %>
+                    <br>
+                    Time:
+                    <% if item.ticket.event.tbc? %>
+                      TBC
+                    <% else %>
+                      <%= l(item.ticket.event.start_time, format: "%A/ %-d %B %Y /%H:%M").html_safe %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="cart-items-table-td">
+                  <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.price %>
+                </div>
+                <div class="cart-items-table-td">
+                  <%= link_to '-', sub_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn' %>&nbsp;&nbsp;<%= item.quantity %>&nbsp;&nbsp;<%= link_to '+', add_to_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', disabled: (item.ticket.quantity ? item.quantity >= item.ticket.quantity : nil) %>
+                </div>
+                <div class="cart-items-table-td">
+                  <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % (item.ticket.price * item.quantity) %>
+                </div>
+                <%# <div class="cart-items-table-td"> %>
+                  <%#= link_to 'X', remove_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', title: "Remove item" %>
+                <%# </div> %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="cart-summary">
+          <% sum = @items_by_currencies[currency].inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity } %>
+          <% cnt = @items_by_currencies[currency].size %>
+          Cart Subtotal: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % sum %></span><br>
+          Delivery: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % (15.0 * cnt) %></span><br>
+          Total: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % (15.0 * cnt + sum) %></span>
         </div>
       </div>
-
-      <div class="container-fluid">
-        <div class="cart-summary">
-          <%= currency_symbol(currency) %>&nbsp;<%= "%g" % (@items_by_currencies[currency].inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity }) %>
-        </div>
-
+      <div class="cart-actions-line">
+        <%= link_to "Continue Shopping", categories_path, :class => 'cart-action-back' %>
         <% if Rails.env == 'development' %>
           <%= render partial: 'dev_pay_button', locals: { cart: @cart, currency: currency, cart_items: @items_by_currencies[currency] } %>
         <% else %>
