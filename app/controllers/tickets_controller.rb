@@ -12,6 +12,8 @@ class TicketsController < BaseFrontendController
     @player = Player.find(params[:player]) if params[:player]
 
     add_common_breadcrumbs! @category, @competition, @player, @event, @ticket
+
+    render 'show_new'
   end
 
 end

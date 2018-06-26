@@ -272,6 +272,18 @@ h3.nice-h3 {
 }
 
 /*
+  Special component: ticket-info
+ */
+.panel-ticket-info {
+  display: flex;
+  justify-content: space-between;
+
+  & > div { padding: 0 20px; }
+  // .ticket-info-event {}
+  .ticket-info-numbers { border-left: 1px solid $grey-color; text-align: center; }
+}
+
+/*
   Supertest !!! :)
   <% content_for(:after_layout) do %>
     <img src="/content/test/Account_Home_Page.png" style="top: 113px; left: 0px;" class="supertest" />

@@ -1,0 +1,64 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner" style="<%= @category && @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Buy Now</h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-header-title">Event Info</div>
+    </div>
+    <div class="panel-body panel-ticket-info">
+      <div class="ticket-info-event">
+        <% if @event %>
+          <%= @event.name %> Ticket
+          <% if @competition %>
+            <br>
+            <%= @competition.name %>
+          <% end %>
+          <br>
+          Category: <%= @ticket.category %>
+          <br>
+          Time:
+          <% if @event.tbc? %>
+            <span>TBC</span>
+          <% else %>
+            <%= l(@event.start_time, format: "%A/ %-d %B %Y /%H:%M").html_safe %>
+          <% end %>
+          <br>
+          Location: <%= "#{@event.venue.city}, #{@event.venue.country}" %>
+          <br>
+          Venue: <%= @event.venue.name %>
+        <% end %>
+      </div>
+      <div class="ticket-info-numbers">
+        Ticket Price: <%= currency_symbol(@ticket) %><span id="ticket-price"><%= @ticket.price %></span>
+        <br>
+        Quantity:
+        <select id="ticket-quantity-select">
+          <% if @ticket.pairs_only == true %>
+            <% (2..@ticket.quantity).step(2).to_a.each do |option| %>
+              <option value="<%= option %>"><%= option.to_i %></option>
+            <% end %>
+          <% else %>
+            <% (1..@ticket.quantity).to_a.each do |option| %>
+              <option value="<%= option %>"><%= option.to_i %></option>
+            <% end %>
+          <% end %>
+        </select>
+        <br>
+        Total:
+        <%= currency_symbol(@ticket) %><span id="ticket-total"><%= @ticket.pairs_only == false ? @ticket.price : @ticket.price * 2 %></span>
+        <br><br>
+        <%= form_tag add_to_cart_path, method: 'get' do %>
+          <input type="hidden" name="ticket" value="<%= @ticket.id %>">
+          <input type="hidden" name="quantity" id="hidden-quantity" value="<%= @ticket.pairs_only ? 2 : 1 %>">
+          <input type="submit" class="btn" value="Add to cart" style="padding: 4px 12px">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
