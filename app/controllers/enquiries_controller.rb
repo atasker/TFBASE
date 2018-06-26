@@ -4,6 +4,7 @@ class EnquiriesController < BaseFrontendController
 
     if successfully_saved = @enquiry.save
       MessageMailer.send_ticket_enquiry(@enquiry).deliver
+      MessageMailer.send_ticket_enquiry_to_client(@enquiry).deliver
     end
 
     respond_to do |format|

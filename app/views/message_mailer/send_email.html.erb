@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <h2>Ticketfinders</h2>
-    <h3><%= @message.name %> said..</h3>
-    <p>
-      <%= @message.body %>
-    </p>
-    <p>
-      Return address: <%= @message.email %>
-    </p>
-  </body>
-</html>
+<div style="text-align: center;"><strong><span style="font-size:18px;">Hello, Boss</span></strong></div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;"><%= @message.name %> said..</span></span></div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;"><%= @message.body %></span></span></div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;">Return address: <%= @message.email %></span></span></div>
