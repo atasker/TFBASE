@@ -22,18 +22,18 @@ module SendGridActionMailer
       # m.date      = mail[:date].to_s if mail[:date]
       # m.subject   = mail.subject
 
-      content = Content.new(type: 'text/plain', value: 'Error')
+      content = SendGrid::Content.new(type: 'text/plain', value: 'Error')
 
       case mail.mime_type
       when 'text/plain'
-        content = Content.new(type: 'text/plain', value: mail.body.decoded)
+        content = SendGrid::Content.new(type: 'text/plain', value: mail.body.decoded)
       when 'text/html'
-        content = Content.new(type: 'text/html', value: mail.body.decoded)
+        content = SendGrid::Content.new(type: 'text/html', value: mail.body.decoded)
       when 'multipart/alternative', 'multipart/mixed', 'multipart/related'
         if mail.html_part
-          content = Content.new(type: 'text/html', value: mail.html_part.decoded)
+          content = SendGrid::Content.new(type: 'text/html', value: mail.html_part.decoded)
         elsif mail.text_part
-          content = Content.new(type: 'text/plain', value: mail.text_part.decoded)
+          content = SendGrid::Content.new(type: 'text/plain', value: mail.text_part.decoded)
         end
 
         # mail.attachments.each do |a|
