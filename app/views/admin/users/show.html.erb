@@ -3,6 +3,19 @@
     <strong>Email:</strong>
     <%= @user.email %>
   </p>
+  <p>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
+  <p>
+    <strong>Phone:</strong>
+    <%= @user.phone %>
+  </p>
+
+  <p>
+    <strong>Agreed to email notifications:</strong>
+    <%= @user.agree_email? ? 'Yes' : 'No' %>
+  </p>
 
   <p>
     <strong>Sign in count:</strong> <%= @user.sign_in_count %>

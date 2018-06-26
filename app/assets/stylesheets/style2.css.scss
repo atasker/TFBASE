@@ -62,7 +62,7 @@ h3.nice-h3 {
    }
    .panel-header-title { font-size: 28px; }
 
-   // .panel-body { }
+   .panel-body { margin-top: 20px; }
 
    @media (max-width: 499px) {
      .panel-header { display: block; }
@@ -76,12 +76,14 @@ h3.nice-h3 {
   display: flex;
   line-height: 24px;
   font-size: 18px;
-  & + .form-line { margin-top: 11px; }
+  & + .form-line { margin-top: 22px; }
 
   .form-line-label {
     flex-grow: 0;
     padding-left: 30px;
     width: 220px;
+
+    label.required abbr { display: none; }
   }
 
   .form-line-input {

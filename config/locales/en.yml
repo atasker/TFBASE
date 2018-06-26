@@ -31,3 +31,5 @@ en:
     attributes:
       ticket:
         enquire: "Enquire?"
+      user:
+        agree_email: "Email notifications agreement"

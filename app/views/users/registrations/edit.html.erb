@@ -3,7 +3,7 @@
     <div class="page-title__inner">
       <%= render 'shared/breadcrumbs' %>
       <h1><%= resource_name.to_s.humanize %></h1>
-      <p class="page-title__subtitle">Welcome <%= current_user.email %></p>
+      <p class="page-title__subtitle">Welcome <%= current_user.display_name %></p>
     </div>
   </div>
 </div>
@@ -33,25 +33,38 @@
         <% end %>
 
         <div class="form-line">
-          <div class="form-line-label"><%= f.label :email %></div>
-          <div class="form-line-input"><%= f.text_field :email, required: true, autofocus: true %></div>
+          <div class="form-line-label"><%= f.label :name, 'Name:*' %></div>
+          <div class="form-line-input"><%= f.text_field :name, required: true %></div>
         </div>
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-        <% end %>
 
         <div class="form-line">
-          <div class="form-line-label"><%= f.label :password %></div>
+          <div class="form-line-label"><%= f.label :email, 'Email Address:*' %></div>
+          <div class="form-line-input">
+            <%= f.text_field :email, required: true %>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :current_password, 'Current Password:*' %></div>
+          <div class="form-line-input"><%= f.password_field :current_password, hint: "we need your current password to confirm your changes", required: true %></div>
+        </div>
+
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :phone, 'Mobile Number:' %></div>
+          <div class="form-line-input"><%= f.text_field :phone, required: false %></div>
+        </div>
+
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :password, 'New Password:' %></div>
           <div class="form-line-input"><%= f.password_field :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %></div>
         </div>
 
         <div class="form-line">
-          <div class="form-line-label"><%= f.label :password_confirmation %></div>
+          <div class="form-line-label"><%= f.label :password_confirmation, 'Confirm Password:' %></div>
           <div class="form-line-input"><%= f.password_field :password_confirmation, required: false %></div>
-        </div>
-        <div class="form-line">
-          <div class="form-line-label"><%= f.label :current_password %></div>
-          <div class="form-line-input"><%= f.password_field :current_password, hint: "we need your current password to confirm your changes", required: true %></div>
         </div>
 
         <div class="submit-line">

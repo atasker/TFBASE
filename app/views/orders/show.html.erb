@@ -4,7 +4,7 @@
       <%= render 'shared/breadcrumbs' %>
       <h1>Order #<%= @order.id %></h1>
       <% if user_signed_in? %>
-        <p class="page-title__subtitle">Welcome <%= current_user.email %></p>
+        <p class="page-title__subtitle">Welcome <%= current_user.display_name %></p>
       <% end %>
     </div>
   </div>

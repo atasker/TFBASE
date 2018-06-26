@@ -8,29 +8,68 @@
 </div>
 
 <div class="container-fluid">
-  <div class="col-md-6">
-    <% flash.each do |key, value| %>
-      <p><b><%= value %></b></p>
-    <% end %>
+  <div class="panel">
+    <div class="panel-body">
+      <% flash.each do |key, value| %>
+        <p><b><%= value %></b></p>
+      <% end %>
 
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= f.error_notification %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <% if resource.errors.any? %>
+          <ul>
+            <% resource.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
 
-      <div class="input-wrap">
-        <%= f.input :email, required: true, autofocus: true %>
-      </div>
-      <div class="input-wrap">
-        <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-      </div>
-      <div class="input-wrap">
-        <%= f.input :password_confirmation, required: true %>
-      </div>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :email, 'Email:*' %></div>
+          <div class="form-line-input"><%= f.email_field :email, required: true, autofocus: true %></div>
+        </div>
 
-      <div class="submit-wrap">
-        <%= f.button :submit, "Sign up" %>
-      </div>
-    <% end %>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :name, 'Name:*' %></div>
+          <div class="form-line-input"><%= f.text_field :name, required: true %></div>
+        </div>
 
-    <%= render "users/shared/links" %>
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :phone, 'Mobile Number:' %></div>
+          <div class="form-line-input"><%= f.text_field :phone, required: false %></div>
+        </div>
+
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :password, 'Password:*' %></div>
+          <div class="form-line-input"><%= f.password_field :password, autocomplete: "off", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), required: true %></div>
+        </div>
+
+        <div class="form-line">
+          <div class="form-line-label"><%= f.label :password_confirmation, 'Confirm password:*' %></div>
+          <div class="form-line-input"><%= f.password_field :password_confirmation, required: true %></div>
+        </div>
+
+        <div class="form-line">
+          <div class="form-line-label"></div>
+          <div class="form-line-input">
+            <%= f.check_box :agree_email %>
+            &nbsp;
+            <%= f.label :agree_email, 'You agree to receive occasional updates to your email' %>
+          </div>
+        </div>
+
+        <div class="form-line">
+          <div class="form-line-label"></div>
+          <div class="form-line-input">
+            By creating an account, you agree to the <a href="/static/terms" target="_blank">Terms & Conditions</a>.
+          </div>
+        </div>
+
+        <div class="submit-line">
+          <%= f.submit "Sign up", class: 'buttn' %>
+        </div>
+      <% end %>
+    </div>
   </div>
+
+  <%= render "users/shared/links" %>
 </div>

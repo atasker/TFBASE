@@ -8,6 +8,12 @@ class Category < ActiveRecord::Base
   has_many :competitions, dependent: :destroy
   has_many :home_slides, inverse_of: :category, dependent: :destroy
 
+  has_and_belongs_to_many :users_to_notify_by_email,
+    class_name: 'User',
+    join_table: 'users_categories_email_notifications',
+    foreign_key: "category_id",
+    association_foreign_key: "user_id"
+
   validates :description, presence: true,
                           length: { maximum: 50 }
 
