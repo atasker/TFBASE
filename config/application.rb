@@ -17,6 +17,7 @@ require "sprockets/railtie"
 Bundler.require(*Rails.groups)
 
 require File.expand_path('../../lib/seo.rb', __FILE__)
+require File.expand_path('../../lib/send_grid_action_mailer.rb', __FILE__)
 
 ENV.update YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
 
