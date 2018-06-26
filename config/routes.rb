@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   get 'users/profile', to: 'users/profile#show', as: :user_profile
   get 'users/orders', to: 'users/orders#index', as: :user_orders
+  get 'users/email-settings', to: 'users/profile#email_settings', as: :user_email_settings
+  post 'users/email-settings', to: 'users/profile#email_settings_update'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',

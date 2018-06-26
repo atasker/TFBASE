@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
     association_foreign_key: "category_id"
 
   validates :name, presence: true
-  validates :agree_email,
-    inclusion: {
-      in: ['1', 'true', true],
-      message: 'must be accepted or you can\'t finish sign up process' },
-    on: :create
+  # validates :agree_email,
+  #   inclusion: {
+  #     in: ['1', 'true', true],
+  #     message: 'must be accepted or you can\'t finish sign up process' },
+  #   on: :create
 
   def display_name
     name.present? ? name : email

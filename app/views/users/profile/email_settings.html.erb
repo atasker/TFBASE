@@ -1,0 +1,81 @@
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="page-title__inner">
+      <%= render 'shared/breadcrumbs' %>
+      <h1>Email Preferences</h1>
+      <p class="page-title__subtitle">Welcome <%= current_user.display_name %></p>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-header-title">Email Preferences</div>
+      <div>
+        <%= link_to 'Account Home', user_profile_path, class: 'buttn buttn-smaller' %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <% flash.each do |key, value| %>
+        <p><b><%= value %></b></p>
+      <% end %>
+
+      <%= form_for(@user, url: user_email_settings_path, method: :post) do |f| %>
+        <% if @user.errors.any? %>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <div class="form-line">
+          <div class="form-line-both">
+            <label>
+              <%= f.radio_button :agree_email, true %>
+              &nbsp;
+              Yes, I would like to recieve updates and the latest Exclusive offers, news and promotions from Ticketfinders Internation LLC
+            </label>
+            <br>
+            <label>
+              <%= f.radio_button :agree_email, false %>
+              &nbsp;
+              No, please do not send me marketing emails
+            </label>
+          </div>
+        </div>
+
+        <div class="form-line">
+          <div class="form-line-both">
+            In order to only send you the information you would like to recieve, please choose the event you would like to recieve emails for:
+          </div>
+        </div>
+
+        <div class="columner three-columner">
+          <% incolumn = (@categories.size / 3.0).ceil %>
+          <% start_at = 0 %>
+          <% end_at = 0 %>
+          <% while(start_at < @categories.size) %>
+            <% end_at = start_at + incolumn - 1 %>
+            <div class="column">
+              <% @categories[start_at..end_at].each do |category| %>
+                <label>
+                  <input type="checkbox" name="user[emailing_categories][]" value="<%= category.id %>" <%= @emailing_category_ids.include?(category.id) ? 'checked="checked"' : '' %>>
+                  &nbsp;
+                  <%= category.description %>
+                </label>
+                <br>
+              <% end %>
+            </div>
+            <% start_at += incolumn %>
+          <% end %>
+        </div>
+
+        <div class="submit-line">
+          <%= f.submit "Save changes", class: 'buttn' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

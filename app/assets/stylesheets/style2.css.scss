@@ -91,6 +91,12 @@ h3.nice-h3 {
     padding-right: 30px;
   }
 
+  .form-line-both {
+    flex-grow: 1;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
   input[type="text"], input[type="email"], input[type="password"] {
     border: 0;
     border-bottom: 1px solid $grey-color;
@@ -144,6 +150,11 @@ h3.nice-h3 {
       & + .column { width: 49%; }
     }
   }
+  &.three-columner {
+    .column {
+      width: 33%;
+    }
+  }
 
   @media (max-width: 499px) {
     display: block;
@@ -156,6 +167,7 @@ h3.nice-h3 {
       }
     }
     &.two-columner .column { width: 100%; & + .column { width: 100%; } }
+    &.three-columner .column { width: 100%; }
   }
 }
 
