@@ -1,25 +1,15 @@
-<h2>Your order on <a href="<%= root_url %>">Ticketfinders</a></h2>
-<p>
-  <%= link_to "Order ##{@order.id}", order_url(@order.guid) %>
-  was successfully created.
-</p>
-<p>Tickets in the order:</p>
-<ul>
-  <% @order.items.each do |item| %>
-  <li>
-    <%= link_to_if item.ticket_id.present?, item.ticket_name, ticket_url(item.ticket_id) %>
-    x
-    <%= item.quantity %>
-    =
-    <%= currency_symbol(item) %><%= "%g" % (item.price * item.quantity) %>
-  </li>
-  <% end %>
-</ul>
-<p>Total: <%= currency_symbol(@order) %><%= "%g" % @order.gross %></p>
-<p>Shipping: <%= currency_symbol(@order) %><%= "%g" % (@order.delivery_cost) %> </p>
-<p><br></p>
-<p>
-  You can always find information about all your orders in
-  <%= link_to 'your profile', user_profile_url %>
-  on the site.
-</p>
+<div style="text-align: center;"><strong><span style="font-size:18px;">Hello, <%= @user.display_name %></span></strong></div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;">Your order #<%= @order.id %> was successfully created.</span></span></div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;">Tickets in the order:</span></span></div>
+<% @order.items.each do |item| %>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;">* <%= item.ticket_name %> x <%= item.quantity %> = <%= currency_symbol(item) %><%= "%g" % (item.cost) %></span></span></div>
+<% end %>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;">Shipping: <%= currency_symbol(@order) %><%= "%g" % @order.delivery_cost %></span></span></div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;">Total: <%= currency_symbol(@order) %><%= "%g" % @order.gross %></span></span></div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;"><span style="font-family:verdana,geneva,sans-serif;"><span style="color:#696969;">You can always find information about all your orders in <%= link_to 'your profile', user_profile_url %> on the site.</span></span></div>
