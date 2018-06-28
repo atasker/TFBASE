@@ -8,15 +8,16 @@
 </div>
 
 <div class="container-fluid">
-  <div class="panel">
-    <div class="panel-body">
-      <% flash.each do |key, value| %>
-        <p><b><%= value %></b></p>
-      <% end %>
+  <% flash.each do |key, value| %>
+    <p><b><%= value %></b></p>
+  <% end %>
 
+  <div class="log-in-grid log-in-wrapper">
+    <div class="log-in-grid-auth-side">
+      <h4 class="log-in-title">Customer login</h4>
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-line">
-          <div class="form-line-label"><%= f.label :email, 'Email Address:' %></div>
+          <div class="form-line-label"><%= f.label :email, 'Email&nbsp;Address:'.html_safe %></div>
           <div class="form-line-input"><%= f.email_field :email, required: false, autofocus: true %></div>
         </div>
 
@@ -36,12 +37,21 @@
           </div>
         <% end %>
 
+        <div class="text-line">
+          <%= link_to "Forgotten your password?", new_password_path(resource_name) %>
+        </div>
+
         <div class="submit-line">
-          <%= f.submit "Log in", class: 'buttn' %>
+          <%= f.submit "Sign in", class: 'buttn' %>
         </div>
       <% end %>
     </div>
+    <div class="log-in-grid-reg-side">
+      <h4 class="log-in-title">New to&nbsp;Ticketfinders?</h4>
+      <p>Sign up for a&nbsp;Ticketfinders account to&nbsp;complete your order</p>
+      <%= link_to 'Continue', new_registration_path(resource_name), :class => 'buttn' %>
+    </div>
   </div>
 
-  <%= render "users/shared/links" %>
+  <%#= render "users/shared/links" %>
 </div>
