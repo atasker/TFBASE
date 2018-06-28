@@ -17,10 +17,12 @@ class Users::ProfileController < BaseFrontendController
     prepare_email_settings_data
 
     ep_params = email_preferences_params
+
     eml_categ_ids = ep_params.delete(:emailing_categories)
+    not_eml_categ_ids = Category.where.not(id: eml_categ_ids).pluck(:id)
 
     if @user.update(ep_params)
-      @user.categories_for_email_notification_ids = eml_categ_ids
+      @user.categories_not_for_email_notification_ids = not_eml_categ_ids
       flash[:notice] = "Email preferences successfully updated"
       redirect_to action: :show
     else
@@ -35,7 +37,9 @@ class Users::ProfileController < BaseFrontendController
     add_breadcrumb 'Email Preferences', ''
 
     @user = current_user
-    @emailing_category_ids = @user.categories_for_email_notifications.pluck('id')
+
+    cat_ids_not_notify = @user.categories_not_for_email_notifications.pluck('id')
+    @emailing_category_ids = Category.where.not(id: cat_ids_not_notify).pluck(:id)
   end
 
   def email_preferences_params

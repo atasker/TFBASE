@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_one :cart, dependent: :destroy
   has_many :orders, dependent: :nullify
 
-  has_and_belongs_to_many :categories_for_email_notifications,
+  has_and_belongs_to_many :categories_not_for_email_notifications,
     class_name: 'Category',
     join_table: 'users_categories_email_notifications',
     foreign_key: "user_id",
