@@ -53,9 +53,6 @@
       Total Cost: <%= currency_symbol(@order) %><%= "%g" % (@order.gross) %>
     </div>
     <div class="column">
-      &nbsp;
-    </div>
-    <div class="column">
       <div class="column-title">Address</div>
       <%= "#{@order.first_name} #{@order.last_name}" %>
       <br>
@@ -64,6 +61,9 @@
       <%= @order.address_city %>
       <br>
       <%= @order.address_country %>
+    </div>
+    <div class="column">
+      &nbsp;
     </div>
   </div>
 
