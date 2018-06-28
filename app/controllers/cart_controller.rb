@@ -89,12 +89,16 @@ class CartController < BaseFrontendController
   end
 
   def create_new_cart!
-    if user_signed_in?
-      @cart = Cart.create user: current_user
-    else
-      @cart = Cart.create
-      session[:cart] = @cart.id
-    end
+    @cart = Cart.create user: current_user
+
+    ### In the first version visitors could have a cart connected by session
+    ### TAG: CART_FOR_ANYONE (you can find all the code for this feature by this tag)
+    # if user_signed_in?
+    #   @cart = Cart.create user: current_user
+    # else
+    #   @cart = Cart.create
+    #   session[:cart] = @cart.id
+    # end
   end
 
   def cart_representor
