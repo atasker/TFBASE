@@ -75,7 +75,7 @@
         </div>
       </div>
       <div class="cart-actions-line">
-        <%= link_to "Continue Shopping", categories_path, :class => 'cart-action-back' %>
+        <%= link_to "Continue Shopping", root_path, :class => 'cart-action-back' %>
         <% if Rails.env == 'development' %>
           <%= render partial: 'dev_pay_button', locals: { cart: @cart, currency: currency, cart_items: @items_by_currencies[currency] } %>
         <% else %>
