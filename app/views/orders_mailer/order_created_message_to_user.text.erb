@@ -7,7 +7,7 @@ Tickets in the order:
 * <%= item.ticket_name %> x <%= item.quantity %> = <%= currency_symbol(item) %><%= "%g" % (item.price * item.quantity) %>
 <% end %>
 
-Total: <%= currency_symbol(@order) %><%= "%g" % @order.sum %>
-Shipping: <%= currency_symbol(@order) %><%= "%g" % (@order.items.size * 15.0) %>
+Shipping: <%= currency_symbol(@order) %><%= "%g" % (@order.delivery_cost) %>
+Total: <%= currency_symbol(@order) %><%= "%g" % @order.gross %>
 
 You can always find information about all your orders in your profile on the site.

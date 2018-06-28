@@ -15,8 +15,8 @@
   </li>
   <% end %>
 </ul>
-<p>Total: <%= currency_symbol(@order) %><%= "%g" % @order.sum %></p>
-<p>Shipping: <%= currency_symbol(@order) %><%= "%g" % (@order.items.size * 15.0) %> </p>
+<p>Total: <%= currency_symbol(@order) %><%= "%g" % @order.gross %></p>
+<p>Shipping: <%= currency_symbol(@order) %><%= "%g" % (@order.delivery_cost) %> </p>
 <p><br></p>
 <p>
   You can always find information about all your orders in

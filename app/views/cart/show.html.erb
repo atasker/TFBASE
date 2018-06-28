@@ -70,8 +70,8 @@
           <% sum = @items_by_currencies[currency].inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity } %>
           <% cnt = @items_by_currencies[currency].size %>
           Cart Subtotal: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % sum %></span><br>
-          Delivery: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % (15.0 * cnt) %></span><br>
-          Total: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % (15.0 * cnt + sum) %></span>
+          Delivery: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % (cnt * OrderItem::SHIPPING_COST) %></span><br>
+          Total: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % (cnt * OrderItem::SHIPPING_COST + sum) %></span>
         </div>
       </div>
       <div class="cart-actions-line">

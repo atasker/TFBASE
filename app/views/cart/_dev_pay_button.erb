@@ -1,4 +1,4 @@
-<% shipping = 15.0 %>
+<% shipping = OrderItem::SHIPPING_COST %>
 <% gross = cart_items.inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity + shipping } %>
 
 <%# Special form which emulates Paypal notification directly to method to apply it. %>

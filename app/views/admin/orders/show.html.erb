@@ -17,6 +17,10 @@
     <%= "%g" % @order.shipping %>
   </p>
   <p>
+    <strong>Gross:</strong>
+    <%= "%g" % @order.gross %>
+  </p>
+  <p>
     <strong>Created at:</strong> <%= @order.created_at.localtime %>
   </p>
 

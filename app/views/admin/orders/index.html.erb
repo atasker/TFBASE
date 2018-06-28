@@ -20,7 +20,7 @@
         <td><%= "#{order.first_name} #{order.last_name}" %></td>
         <td><%= order.email %></td>
         <td><%= currency_name(order.currency) %></td>
-        <td><%= "%g" % order.sum %></td>
+        <td><%= "%g" % order.gross %></td>
         <td><%= order.created_at.localtime %></td>
         <td><%= link_to 'Show', admin_order_path(order) %></td>
         <%#<td><= link_to 'Edit', edit_admin_user_path(user.id) ></td>%>

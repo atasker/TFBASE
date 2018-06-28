@@ -32,25 +32,28 @@
             <br>
             Date: <%= event.tbc? ? 'TBC' : l(event.start_time, format: "%e/%m/%Y") %>
             <br>
-            Cost: <%= currency_symbol(item) %><%= "%g" % item.price %>
+            Cost: <%= currency_symbol(item) %><%= "%g" % item.cost %>
           <% end %>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="columner two-columner">
+  <div class="columner three-columner">
     <div class="column">
       <div class="column-title">Order Summary</div>
       Order Number: <%= "%07d" % @order.id %>
       <br>
       Order Date: <%= l @order.created_at, format: "%-d/%-m/%Y %H:%M" %>
       <br>
-      Total Items: <%= @order.items.size %>
+      Total Items: <%= @order.items.sum(:quantity) %>
       <br>
-      Delivery: <%= currency_symbol(@order) %><%= "%g" % (15.0 * @order.items.size) %>
+      Delivery: <%= currency_symbol(@order) %><%= "%g" % (@order.delivery_cost) %>
       <br>
-      Total Cost: <%= currency_symbol(@order) %><%= "%g" % (@order.sum + 15.0 * @order.items.size) %>
+      Total Cost: <%= currency_symbol(@order) %><%= "%g" % (@order.gross) %>
+    </div>
+    <div class="column">
+      &nbsp;
     </div>
     <div class="column">
       <div class="column-title">Address</div>
