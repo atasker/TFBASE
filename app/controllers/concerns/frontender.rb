@@ -2,7 +2,7 @@ module Frontender
   extend ActiveSupport::Concern
 
   included do
-    before_filter :determine_cart, :collect_categories, :add_home_breadcrumb
+    before_filter :collect_categories, :add_home_breadcrumb, :determine_cart
     helper_method :page_meta, :add_breadcrumb, :breadcrumbs
   end
 
@@ -30,10 +30,6 @@ module Frontender
 
   private
 
-  def determine_cart
-    @cart = user_signed_in? ? current_user.cart : nil;
-  end
-
   def collect_categories
     @categories = Category.order('description ASC')
   end
@@ -42,58 +38,57 @@ module Frontender
     add_breadcrumb 'Home', root_path
   end
 
-  ### In the first version visitors could have a cart connected by session
-  ### TAG: CART_FOR_ANYONE (you can find all the code for this feature by this tag)
-  #
-  # def determine_cart
-  #   if user_signed_in?
-  #     @cart = current_user.cart
-  #   else
-  #     @cart = session[:cart] ? Cart.find_by_id(session[:cart]) : nil
-  #   end
-  #
-  #   # Add items of a cart in session to user's cart.
-  #   # It heplful when visitor fill a cart and then signed in (up) as user.
-  #   if user_signed_in? && session[:cart]
-  #     session_cart = Cart.find_by_id session[:cart]
-  #     if session_cart && session_cart.user.nil?
-  #       if @cart
-  #         merge_carts(session_cart, @cart)
-  #       else
-  #         session_cart.user = current_user
-  #         session_cart.save
-  #         @cart = session_cart
-  #       end
-  #     end
-  #     session[:cart] = nil
-  #   end
-  # end
-  #
+  def determine_cart
+    if user_signed_in?
+      @cart = current_user.cart
+    else
+      @cart = session[:cart].present? ? Cart.find_by_id(session[:cart]) : nil
+    end
+
+    # Add items of a cart in session to user's cart.
+    # It heplful when visitor fill a cart and then signed in (up) as user.
+    if user_signed_in? && session[:cart].present?
+      session_cart = Cart.find_by_id session[:cart]
+      if session_cart && session_cart.user.nil?
+        if @cart
+          merge_carts(session_cart, @cart)
+        else
+          session_cart.user = current_user
+          session_cart.save
+          @cart = session_cart
+        end
+      end
+      session[:cart] = nil
+    end
+
+  end
+
   # Merge one cart to another one and destroy it after.
   # Move cart items with tickets which only in source cart and upgrade quantity
   # of target cart items of matching tickets.
   # @param from_cart [Cart] Source cart, which items should be added to target cart
   # @param to_cart   [Cart] Target cart to add items from source cart
-  # def merge_carts(from_cart, to_cart)
-  #   cart_item_ids_to_move = []
-  #
-  #   from_cart.items.each do |from_cart_item|
-  #     cart_item = to_cart.items.where(ticket_id: from_cart_item.ticket_id).take
-  #     if cart_item
-  #       # when we have cart item with the same ticket just use the beggest quantity
-  #       cart_item.quantity = [cart_item.quantity, from_cart_item.quantity].max
-  #       cart_item.save
-  #     else
-  #       # when session cart has new for user's cart ticket, mark it to move in cart later
-  #       cart_item_ids_to_move << from_cart_item.id
-  #     end
-  #   end
-  #
-  #   CartItem.where(id: cart_item_ids_to_move).each do |cart_item|
-  #     cart_item.cart = to_cart
-  #     cart_item.save
-  #   end if cart_item_ids_to_move.any?
-  #
-  #   from_cart.destroy
-  # end
+  def merge_carts(from_cart, to_cart)
+    cart_item_ids_to_move = []
+
+    from_cart.items.each do |from_cart_item|
+      cart_item = to_cart.items.where(ticket_id: from_cart_item.ticket_id).take
+      if cart_item
+        # when we have cart item with the same ticket just use the beggest quantity
+        cart_item.quantity = [cart_item.quantity, from_cart_item.quantity].max
+        cart_item.save
+      else
+        # when session cart has new for user's cart ticket, mark it to move in cart later
+        cart_item_ids_to_move << from_cart_item.id
+      end
+    end
+
+    CartItem.where(id: cart_item_ids_to_move).each do |cart_item|
+      cart_item.cart = to_cart
+      cart_item.save
+    end if cart_item_ids_to_move.any?
+
+    # if just from_cart.destroy all moved items will be destroyed too so
+    Cart.where(id: from_cart.id).destroy_all
+  end
 end

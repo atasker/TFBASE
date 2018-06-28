@@ -76,10 +76,14 @@
       </div>
       <div class="cart-actions-line">
         <%= link_to "Continue Shopping", root_path, :class => 'cart-action-back' %>
-        <% if Rails.env == 'development' %>
-          <%= render partial: 'dev_pay_button', locals: { cart: @cart, currency: currency, cart_items: @items_by_currencies[currency] } %>
+        <% if user_signed_in? %>
+          <% if Rails.env == 'development' %>
+            <%= render partial: 'dev_pay_button', locals: { cart: @cart, currency: currency, cart_items: @items_by_currencies[currency] } %>
+          <% else %>
+            <%= render partial: 'paypal_button', locals: { cart: @cart, currency: currency, cart_items: @items_by_currencies[currency] } %>
+          <% end %>
         <% else %>
-          <%= render partial: 'paypal_button', locals: { cart: @cart, currency: currency, cart_items: @items_by_currencies[currency] } %>
+          <%= link_to 'Checkout securely now', new_user_session_path, :class => 'like-a-submit' %>
         <% end %>
       </div>
     <% end %>
