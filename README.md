@@ -102,6 +102,9 @@ deploy. You need to run this command as root user:
 
     service unicorn restart
 
+Unicorn config you can find at: `/etc/unicorn.conf`, `/etc/default/unicorn`
+and `/etc/init.d/unicorn`.
+
 
 Previous notes (please do not use now)
 --------------------------------------
