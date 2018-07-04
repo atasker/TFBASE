@@ -68,13 +68,6 @@ Rails.application.configure do
   config.action_mailer.sendgrid_actionmailer_settings = {
     api_key: ENV['SENDGRID_API_KEY']
   }
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address:              'smtp.yandex.ru',
-  #   user_name:            ENV["GMAIL_USER"],
-  #   password:             ENV["GMAIL_PASSWORD"],
-  #   authentication:       'plain'
-  # }
   config.action_mailer.default_url_options = { host: "ticketfinders.dev.codenohito.ru" }
   config.action_mailer.default :charset => "utf-8"
 
