@@ -21,6 +21,7 @@
               <div class="cart-items-table-td">Ticket Price</div>
               <div class="cart-items-table-td">Quantity</div>
               <div class="cart-items-table-td">Subtotal</div>
+              <div class="cart-items-table-td"></div>
             </div>
           </div>
           <div class="cart-items-table-tbody">
@@ -58,9 +59,9 @@
                 <div class="cart-items-table-td">
                   <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % (item.ticket.price * item.quantity) %>
                 </div>
-                <%# <div class="cart-items-table-td"> %>
-                  <%#= link_to 'X', remove_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', title: "Remove item" %>
-                <%# </div> %>
+                <div class="cart-items-table-td">
+                  <%= link_to 'X', remove_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', title: "Remove item" %>
+                </div>
               </div>
             <% end %>
           </div>
