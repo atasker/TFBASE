@@ -10,6 +10,7 @@ module SendGridActionMailer
     end
 
     def deliver!(mail)
+      # Rails.logger.info 'Started sending mail with SendGrid'
       attachment_temp_dirs = []
       from = mail[:from].addrs.first
 
@@ -59,8 +60,18 @@ module SendGridActionMailer
         # end
       end
 
-      sg_mail = SendGrid::Mail.new(from, mail.subject, mail[:to].addresses, content)
-      mail_response = @sg.client.mail._('send').post(request_body: sg_mail.to_json)
+      from_eml = SendGrid:Email.new(email: from)
+      mail[:to].addresses.each do |email_to|
+        to_eml = SendGrid:Email.new(email: email_to)
+        sg_mail = SendGrid::Mail.new(from_eml, mail.subject, to_eml, content)
+        mail_response = @sg.client.mail._('send').post(request_body: sg_mail.to_json)
+
+        # Rails.logger.info 'SendGrid mail sent'
+        # Rails.logger.debug mail_response.status_code
+        # Rails.logger.debug mail_response.headers
+        # Rails.logger.debug mail_response.body
+        # Rails.logger.info '--- --- --- -- -- -- -- - ---- --- --- --'
+      end
     # ensure
     #   # Close and delete the attachment tempfiles after the e-mail has been
     #   # sent.
