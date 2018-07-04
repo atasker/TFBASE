@@ -55,7 +55,7 @@ task :environment do
 
   # For those using RVM, use this to load an RVM version@gemset.
   if fetch(:rails_env) == 'production'
-    invoke :'rvm:use', 'ruby-2.0.0-p643'
+    invoke :'rvm:use', 'ruby-2.2.1'
   end
 end
 
@@ -90,7 +90,7 @@ task :deploy do
         command %{touch tmp/restart.txt}
       end
       if fetch(:rails_env) == 'production'
-        invoke :'rvm:use', 'ruby-2.0.0-p643'
+        invoke :'rvm:use', 'ruby-2.2.1'
         invoke :'whenever:update'
         invoke :rake, 'sitemap:refresh:no_ping'
       end
