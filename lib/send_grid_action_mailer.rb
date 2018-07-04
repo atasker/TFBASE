@@ -60,7 +60,7 @@ module SendGridActionMailer
         # end
       end
 
-      from_eml = SendGrid::Email.new(email: from)
+      from_eml = SendGrid::Email.new(email: from.address, name: from.display_name)
       mail[:to].addresses.each do |email_to|
         to_eml = SendGrid::Email.new(email: email_to)
         sg_mail = SendGrid::Mail.new(from_eml, mail.subject, to_eml, content)
