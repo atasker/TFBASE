@@ -2,7 +2,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/whenever'
 # require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
-require 'mina/rvm'    # for rvm support. (https://rvm.io)
+# require 'mina/rvm'    # for rvm support. (https://rvm.io)
 require "yaml"
 
 # Load environment variables from the application config
@@ -43,7 +43,7 @@ task :production do
   set :branch, ENV.fetch('PRODUCTION_DEPLOY_BRANCH', 'master')
   set :user, ENV['PRODUCTION_DEPLOY_USER']
   set :whenever_name, 'ticketfinders_production'
-  set :rvm_use_path, '/usr/local/rvm/scripts/rvm'
+  # set :rvm_use_path, '/usr/local/rvm/scripts/rvm'
 end
 
 # This task is the environment that is loaded for all remote run commands, such as
@@ -54,9 +54,9 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  if fetch(:rails_env) == 'production'
-    invoke :'rvm:use', 'ruby-2.2.1'
-  end
+  # if fetch(:rails_env) == 'production'
+  #   invoke :'rvm:use', 'ruby-2.2.1'
+  # end
 end
 
 # Put any custom commands you need to run at setup
@@ -90,7 +90,7 @@ task :deploy do
         command %{touch tmp/restart.txt}
       end
       if fetch(:rails_env) == 'production'
-        invoke :'rvm:use', 'ruby-2.2.1'
+        # invoke :'rvm:use', 'ruby-2.2.1'
         invoke :'whenever:update'
         invoke :rake, 'sitemap:refresh:no_ping'
       end
