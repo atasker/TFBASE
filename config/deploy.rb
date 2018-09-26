@@ -38,7 +38,7 @@ set :shared_dirs, fetch(:shared_dirs, []).push('public/uploads',
                                                'public/content')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml',
                                                  'config/application.yml',
-                                                 '/config/master.key')
+                                                 'config/master.key')
 
 # Production environment deploy: 'mina production deploy'
 task :production do
