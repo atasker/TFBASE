@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   include FriendlySlugable
 
   acts_as_seo_carrier

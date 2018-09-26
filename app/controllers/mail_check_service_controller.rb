@@ -1,7 +1,7 @@
 class MailCheckServiceController < BaseFrontendController
   include SendGrid
 
-  before_filter :uhfrkvbzslzbvlyrtbselr, except: [:hospitality_concierge]
+  before_action :uhfrkvbzslzbvlyrtbselr, except: [:hospitality_concierge]
 
   def new
     # render new.html.erb

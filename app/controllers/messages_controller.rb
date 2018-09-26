@@ -1,5 +1,5 @@
 class MessagesController < BaseFrontendController
-  before_filter :add_message_breadcrumb, except: [:hospitality_concierge]
+  before_action :add_message_breadcrumb, except: [:hospitality_concierge]
 
   def new
     @message = Message.new

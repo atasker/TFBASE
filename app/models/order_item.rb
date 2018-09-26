@@ -1,4 +1,4 @@
-class OrderItem < ActiveRecord::Base
+class OrderItem < ApplicationRecord
   belongs_to :order
 
   SHIPPING_COST = 15.0

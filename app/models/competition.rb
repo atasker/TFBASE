@@ -1,4 +1,4 @@
-class Competition < ActiveRecord::Base
+class Competition < ApplicationRecord
   include FriendlySlugable
 
   acts_as_seo_carrier

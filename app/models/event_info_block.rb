@@ -1,4 +1,4 @@
-class EventInfoBlock < ActiveRecord::Base
+class EventInfoBlock < ApplicationRecord
   belongs_to :event, inverse_of: :info_blocks
 
   validates :event, :title, presence: true

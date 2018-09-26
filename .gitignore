@@ -9,23 +9,32 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+/tmp/*
 !/log/.keep
-/tmp
-.env
-restart_server.sh
+!/tmp/.keep
+
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+
+/node_modules
+/yarn-error.log
+
+/public/assets
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
 
 # Ignore local database config
 /config/database.yml
 
 # Ignore local application configuration
+.env
 /config/application.yml
 
-# Ignore rmv files
-.ruby-version
+# Ignore rmv gemset file
 .ruby-gemset
-
-# Ignore system files
-.DS_Store
 
 # Ignore in public
 /public/assets
@@ -34,3 +43,6 @@ restart_server.sh
 /public/uploads/*
 /public/system/*
 /public/sitemap*
+
+# Ignore system files
+.DS_Store

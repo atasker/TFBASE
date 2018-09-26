@@ -1,4 +1,4 @@
-class Player < ActiveRecord::Base
+class Player < ApplicationRecord
   include FriendlySlugable
 
   acts_as_seo_carrier

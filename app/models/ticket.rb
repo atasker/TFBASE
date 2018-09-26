@@ -1,4 +1,4 @@
-class Ticket < ActiveRecord::Base
+class Ticket < ApplicationRecord
 
   CURRENCIES = %w(USD EUR GBP)
 
@@ -10,8 +10,8 @@ class Ticket < ActiveRecord::Base
   validates :price,
             :quantity,
             :currency,
-            presence: true, unless: 'enquire?'
-  validates :currency, inclusion: { in: CURRENCIES }, unless: 'enquire?'
+            presence: true, unless: Proc.new { |a| a.enquire? }
+  validates :currency, inclusion: { in: CURRENCIES }, unless: Proc.new { |a| a.enquire? }
 
   scope :buyable, -> { where.not(enquire: true) }
 

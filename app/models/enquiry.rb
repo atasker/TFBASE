@@ -1,4 +1,4 @@
-class Enquiry < ActiveRecord::Base
+class Enquiry < ApplicationRecord
   include Humanizer
 
   belongs_to :ticket, inverse_of: :enquiries

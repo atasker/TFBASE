@@ -1,4 +1,4 @@
-class Cart < ActiveRecord::Base
-  belongs_to :user
+class Cart < ApplicationRecord
+  belongs_to :user, optional: true
   has_many :items, class_name: 'CartItem', dependent: :destroy
 end

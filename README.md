@@ -4,7 +4,7 @@ Ticketfinders
 Getting Started
 ---------------
 
-Make sure you have Ruby version 2.0.0 or newer installed.
+Make sure you have installed Ruby version, described in .ruby-version file.
 Recommend to use [RVM](https://rvm.io/).
 
 You will need [ImageMagick](https://www.imagemagick.org/) installed.
@@ -47,9 +47,9 @@ There is an example:
 When done, run:
 
     $ bin/bundle install --without production
-    $ bin/rake db:create db:migrate
+    $ bin/rails db:create db:migrate
 
-Install demo data using command `bin/rake db:seed` if you need.
+Install demo data using command `bin/rails db:seed` if you need.
 
 Application ready for start. You can launch webserver with
 command `bin/rails server` and see home page
@@ -97,13 +97,7 @@ prepare server:
 
 Run deploy with command `mina deploy` (or `mina production deploy`).
 
-Unfortunately for a production server you need to do some manual work to finish
-deploy. You need to run this command as root user:
-
-    service unicorn restart
-
-Unicorn config you can find at: `/etc/unicorn.conf`, `/etc/default/unicorn`
-and `/etc/init.d/unicorn`.
+If you have problems on server, chech Nginx is running. If not, run restart_nginx.sh script in root user home dir.
 
 
 Previous notes (please do not use now)

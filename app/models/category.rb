@@ -1,4 +1,4 @@
-class Category < ActiveRecord::Base
+class Category < ApplicationRecord
   include FriendlySlugable
 
   acts_as_seo_carrier

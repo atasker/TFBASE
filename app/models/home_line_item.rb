@@ -1,6 +1,6 @@
-class HomeLineItem < ActiveRecord::Base
-  belongs_to :competition, inverse_of: :home_line_items
-  belongs_to :player, inverse_of: :home_line_items
+class HomeLineItem < ApplicationRecord
+  belongs_to :competition, inverse_of: :home_line_items, optional: true
+  belongs_to :player, inverse_of: :home_line_items, optional: true
 
   mount_uploader :avatar, AvatarUploader
 
@@ -9,9 +9,9 @@ class HomeLineItem < ActiveRecord::Base
   KIND_PLAYER = 2
 
   validates :kind, inclusion: { in: [KIND_MANUAL, KIND_COMPETITION, KIND_PLAYER] }
-  validates :title, :url, :avatar, presence: true, if: "kind == HomeLineItem::KIND_MANUAL"
-  validates :competition, presence: true, if: "kind == HomeLineItem::KIND_COMPETITION"
-  validates :player, presence: true, if: "kind == HomeLineItem::KIND_PLAYER"
+  validates :title, :url, :avatar, presence: true, if: Proc.new { |a| a.kind == HomeLineItem::KIND_MANUAL }
+  validates :competition, presence: true, if: Proc.new { |a| a.kind == HomeLineItem::KIND_COMPETITION }
+  validates :player, presence: true, if: Proc.new { |a| a.kind == HomeLineItem::KIND_PLAYER }
 
   before_save :clean_unused_fields
 

@@ -1,5 +1,5 @@
 class CartController < BaseFrontendController
-  before_filter :get_ticket, only: [:add, :sub, :remove]
+  before_action :get_ticket, only: [:add, :sub, :remove]
 
   def show
     add_breadcrumb 'Cart', ''

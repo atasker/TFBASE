@@ -114,7 +114,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '6e47fafe9c8589844fc2808c6df275a75c1b1f74129b542452b07cb892a164b9c95a781495cccba31efe30f377332d6454a9cbf4721fd321fdb3b572c87b39a0'
+  # config.pepper = 'a30bdb6e0135ddce46d940fbeff480faa3eeb3657ca4a632504e63fb88709c8a90cef9f2c272abcbfcfba4f2e3581bccc236c48d7234783340e06cb4e33882da'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -280,4 +280,11 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  # ==> Turbolinks configuration
+  # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
+  #
+  # ActiveSupport.on_load(:devise_failure_app) do
+  #   include Turbolinks::Controller
+  # end
 end

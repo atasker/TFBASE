@@ -2,7 +2,7 @@ module Frontender
   extend ActiveSupport::Concern
 
   included do
-    before_filter :collect_categories, :add_home_breadcrumb, :determine_cart
+    before_action :collect_categories, :add_home_breadcrumb, :determine_cart
     helper_method :page_meta, :add_breadcrumb, :breadcrumbs
   end
 

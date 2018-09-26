@@ -1,6 +1,6 @@
-class HomeSlide < ActiveRecord::Base
-  belongs_to :event, inverse_of: :home_slides
-  belongs_to :category, inverse_of: :home_slides
+class HomeSlide < ApplicationRecord
+  belongs_to :event, inverse_of: :home_slides, optional: true
+  belongs_to :category, inverse_of: :home_slides, optional: true
 
   mount_uploader :huge_image, HugeHomeSlideImageUploader
   mount_uploader :avatar, AvatarUploader
@@ -14,12 +14,12 @@ class HomeSlide < ActiveRecord::Base
 
   validates :kind, presence: true
 
-  validates :huge_image, presence: true, if: "kind == HomeSlide::KIND_TOP_SLIDE"
-  validates :avatar, presence: true, if: "kind == HomeSlide::KIND_FEATURED_EVENT"
-  validates :big_image, presence: true, if: "kind == HomeSlide::KIND_TOP_EVENT"
-  validates :tile_image, presence: true, if: "kind == HomeSlide::KIND_POPULAR_EVENT"
+  validates :huge_image, presence: true, if: Proc.new { |a| a.kind == HomeSlide::KIND_TOP_SLIDE }
+  validates :avatar, presence: true,     if: Proc.new { |a| a.kind == HomeSlide::KIND_FEATURED_EVENT }
+  validates :big_image, presence: true,  if: Proc.new { |a| a.kind == HomeSlide::KIND_TOP_EVENT }
+  validates :tile_image, presence: true, if: Proc.new { |a| a.kind == HomeSlide::KIND_POPULAR_EVENT }
 
-  validates :event, presence: true, if: "!manual_input?"
+  validates :event, presence: true, if: Proc.new { |a| !a.manual_input? }
 
   validates :title, :url, presence: true, if: :manual_input?
 
