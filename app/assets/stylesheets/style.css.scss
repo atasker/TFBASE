@@ -3450,6 +3450,9 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     padding-right: 0; } }
 
 @media screen and (max-width: 600px) {
+  .page-header,
+  .page-header.fixed {
+    padding-bottom: 5px; }
   .page-footer__nav {
     float: none; }
   .page-footer__link {
@@ -3460,17 +3463,17 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
   .top-logo {
     position: static;
     display: block;
-    clear: both;
-    margin-left: 0;
-    width: 100%;
-    background-position: center bottom;
+    margin-left: 50px;
+    margin-right: 60px;
+    width: auto;
+    background-position: center center;
     height: 55px; }
   .page-header.fixed .top-logo {
-    background-position: center bottom; }
+    background-position: center center; }
   .fixed-top.layout {
-    padding-top: 118px; }
+    padding-top: 65px; }
   .main-top {
-    margin-top: -118px; }
+    margin-top: -65px; }
   .copyright {
     float: none;
     text-align: center; }
