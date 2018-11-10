@@ -5,7 +5,7 @@
 </div>
 <div class="main-top">
   <div class="main-top__info">
-    <h1>International  Ticket Agency</h1>
+    <!-- <h1>International  Ticket Agency</h1> --><div class="main-top__title-placer"></div>
     <div class="main-top__form">
       <%= form_tag events_path, method: :get do  %>
         <%= text_field_tag :query, params[:query], :placeholder => "Search for an artist, team or city", id: 'main-top-form-query' %>
