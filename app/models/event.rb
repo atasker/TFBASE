@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   belongs_to :category
 
   # used to be has_one, changed to enable search query on competitions, change back if anything breaks
-  belongs_to :competition
+  belongs_to :competition, optional: true
   has_and_belongs_to_many :players
 
   has_many :tickets, dependent: :destroy
