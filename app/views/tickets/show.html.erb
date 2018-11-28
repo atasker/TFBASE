@@ -30,9 +30,12 @@
   <% if @ticket.text.present? %><%= simple_format(@ticket.text) %><% end %>
   <p>Category: <%= @ticket.category %></p>
   <p>Ticket Price: <%= currency_symbol(@ticket) %><span id="ticket-price"><%= @ticket.price %></span></p>
+  <% if @ticket.have_fee? %>
+    <p>Management fee: <%= currency_symbol(@ticket) %><span id="ticket-fee"><%= @ticket.amount_of_fee %></span></p>
+  <% end %>
   <p>
     Quantity:
-    <select id="ticket-quantity-select">
+    <select id="ticket-quantity-select" data-price="<%= @ticket.full_price %>">
       <% if @ticket.pairs_only == true %>
         <% (2..@ticket.quantity).step(2).to_a.each do |option| %>
           <option value="<%= option %>"><%= option.to_i %></option>
@@ -47,7 +50,7 @@
 
   <p>
     <strong>Total:</strong>
-    <%= currency_symbol(@ticket) %><span id="ticket-total"><%= @ticket.pairs_only == false ? @ticket.price : @ticket.price * 2 %></span>
+    <%= currency_symbol(@ticket) %><span id="ticket-total"><%= @ticket.pairs_only == false ? @ticket.full_price : @ticket.full_price * 2 %></span>
   </p>
 
   <%#= render 'direct_paypal_buy_button' %>

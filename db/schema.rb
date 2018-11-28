@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_26_164706) do
+ActiveRecord::Schema.define(version: 2018_11_28_101054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(version: 2018_06_26_164706) do
     t.string "currency"
     t.boolean "pairs_only", default: false, null: false
     t.boolean "enquire"
+    t.float "fee_percent"
     t.index ["event_id"], name: "index_tickets_on_event_id"
   end
 

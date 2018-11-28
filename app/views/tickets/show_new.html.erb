@@ -36,9 +36,13 @@
       </div>
       <div class="ticket-info-numbers">
         Ticket Price: <%= currency_symbol(@ticket) %><span id="ticket-price"><%= @ticket.price %></span>
+        <% if @ticket.have_fee? %>
+          <br>
+          Management fee: <%= currency_symbol(@ticket) %><span id="ticket-fee"><%= @ticket.amount_of_fee %></span>
+        <% end %>
         <br>
         Quantity:
-        <select id="ticket-quantity-select">
+        <select id="ticket-quantity-select" data-price="<%= @ticket.full_price %>">
           <% if @ticket.pairs_only == true %>
             <% (2..@ticket.quantity).step(2).to_a.each do |option| %>
               <option value="<%= option %>"><%= option.to_i %></option>
@@ -51,7 +55,7 @@
         </select>
         <br>
         Total:
-        <%= currency_symbol(@ticket) %><span id="ticket-total"><%= @ticket.pairs_only == false ? @ticket.price : @ticket.price * 2 %></span>
+        <%= currency_symbol(@ticket) %><span id="ticket-total"><%= @ticket.pairs_only == false ? @ticket.full_price : @ticket.full_price * 2 %></span>
         <br><br>
         <%= form_tag add_to_cart_path, method: 'get' do %>
           <input type="hidden" name="ticket" value="<%= @ticket.id %>">

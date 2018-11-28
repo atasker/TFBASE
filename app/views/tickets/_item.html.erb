@@ -5,7 +5,7 @@
   </div>
   <div class="buy__item-in">
     <% unless ticket.enquire? %>
-    <div class="buy__item-price"><%= currency_symbol(ticket) %> <%= "%g" % ticket.price %></div>
+    <div class="buy__item-price"><%= currency_symbol(ticket) %> <%= "%g" % ticket.full_price %></div>
     <% end %>
   </div>
   <div class="buy__item-in">

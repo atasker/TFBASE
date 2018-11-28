@@ -52,12 +52,16 @@
                 </div>
                 <div class="cart-items-table-td">
                   <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.price %>
+                  <% if item.ticket.have_fee? %>
+                    <br>
+                    fee: <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.amount_of_fee %>
+                  <% end %>
                 </div>
                 <div class="cart-items-table-td">
                   <%= link_to '-', sub_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn' %>&nbsp;&nbsp;<%= item.quantity %>&nbsp;&nbsp;<%= link_to '+', add_to_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', disabled: (item.ticket.quantity ? item.quantity >= item.ticket.quantity : nil) %>
                 </div>
                 <div class="cart-items-table-td">
-                  <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % (item.ticket.price * item.quantity) %>
+                  <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % (item.ticket.full_price * item.quantity) %>
                 </div>
                 <div class="cart-items-table-td">
                   <%= link_to 'X', remove_from_cart_path(ticket: item.ticket.id), :class => 'cart-item-btn', title: "Remove item" %>
@@ -68,7 +72,7 @@
         </div>
 
         <div class="cart-summary">
-          <% sum = @items_by_currencies[currency].inject(0.0) { |sum, item| sum + item.ticket.price * item.quantity } %>
+          <% sum = @items_by_currencies[currency].inject(0.0) { |sum, item| sum + item.ticket.full_price * item.quantity } %>
           <% cnt = @items_by_currencies[currency].size %>
           Cart Subtotal: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % sum %></span><br>
           Delivery: <span class="cart-summary-value"><%= currency_symbol(currency) %>&nbsp;<%= "%g" % (cnt * OrderItem::SHIPPING_COST) %></span><br>

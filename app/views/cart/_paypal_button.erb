@@ -8,7 +8,7 @@
   <input type="hidden" name="currency_code" value="<%= currency %>">
   <input type="hidden" name="return" value="<%= root_url %>">
   <% cart_items.each_with_index do |item, indx| %>
-    <input type="hidden" name="amount_<%= indx + 1 %>" value="<%= item.ticket.price %>">
+    <input type="hidden" name="amount_<%= indx + 1 %>" value="<%= item.ticket.full_price %>">
     <input type="hidden" name="shipping_<%= indx + 1 %>" value="<%= OrderItem::SHIPPING_COST %>">
     <input type="hidden" name="item_name_<%= indx + 1 %>" value="Ticket <%= item.ticket.full_name %>">
     <input type="hidden" name="item_number_<%= indx + 1 %>" value="<%= item.ticket.id %>">

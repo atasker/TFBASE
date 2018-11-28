@@ -23,7 +23,7 @@ class OrderItem < ApplicationRecord
   end
 
   def fill_by_ticket(ticket)
-    self.price = ticket.price
+    self.price = ticket.full_price
     self.currency = ticket.currency
     self.ticket_id = ticket.id
     self.event_id = ticket.event.id

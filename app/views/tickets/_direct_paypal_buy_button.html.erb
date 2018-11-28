@@ -3,7 +3,7 @@
   <input type="hidden" name="upload" value="1">
   <input type="hidden" name="business" value="info@ticket-finders.com">
   <input type="hidden" name="return" value="https://www.ticket-finders.com/">
-  <input type="hidden" name="amount_1" value="<%= @ticket.price %>">
+  <input type="hidden" name="amount_1" value="<%= @ticket.full_price %>">
   <input type="hidden" name="shipping_1" value="15.00">
   <input type="hidden" name="item_name_1" value="<%= @event ? @event.name : 'Ticket' %>">
   <input type="hidden" name="item_number_1" value="<%= @ticket.id %>">

@@ -76,7 +76,7 @@ class Admin::EventsController < AdminController
       :no_title_postfix, :seo_title, :seo_descr, :seo_keywords,
       player_ids: [],
       tickets_attributes: [
-        :id, :price, :category, :quantity, :currency,
+        :id, :price, :fee_percent, :category, :quantity, :currency,
         :enquire, :text, :pairs_only, :_destroy],
       info_blocks_attributes: [
         :id, :title, :text, :prior, :_destroy])

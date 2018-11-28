@@ -130,7 +130,7 @@ class OrdersController < BaseFrontendController
           break
         end
 
-        gross = found_ticket.price * quantity + OrderItem::SHIPPING_COST
+        gross = found_ticket.full_price * quantity + OrderItem::SHIPPING_COST
         if gross != params["mc_gross_#{items_counter}"].to_f
           allowed = false
           pay_logger.error "Forbidden: Ticket gross not match with mc_gross: #{gross} " +
@@ -201,7 +201,7 @@ class OrdersController < BaseFrontendController
     end
     pay_logger.close
 
-    render nothing: true, status: :ok
+    head :ok
 
     # Parameters example:
     # {

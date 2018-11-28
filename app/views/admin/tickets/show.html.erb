@@ -16,6 +16,16 @@
     </p>
 
     <p>
+      <strong>Management fee:</strong>
+      <%= @ticket.have_fee? ? "#{@ticket.fee_percent}% (#{@ticket.amount_of_fee})" : 0 %>
+    </p>
+
+    <p>
+      <strong>Full price:</strong>
+      <%= @ticket.full_price %>
+    </p>
+
+    <p>
       <strong>Quantity:</strong>
       <%= @ticket.quantity %>
     </p>

@@ -89,6 +89,7 @@ function initEventFieldsActions() {
 function toggleVisibilityOfTicketField() {
   var enquireOn = $("#ticket_enquire").prop('checked');
   $("#ticket_price").closest("p").toggle(!enquireOn);
+  $("#ticket_fee_percent").closest("p").toggle(!enquireOn);
   $("#ticket_quantity").closest("p").toggle(!enquireOn);
   $("#ticket_pairs_only").closest("p").toggle(!enquireOn);
   $("#ticket_currency").closest("p").toggle(!enquireOn);
@@ -96,6 +97,7 @@ function toggleVisibilityOfTicketField() {
 function toggleVisibilityOfTicketCells(ticketRow) {
   var enquireOn = ticketRow.find(".event-ticket-cell-enquire > input[type='checkbox']").prop('checked');
   ticketRow.find(".event-ticket-cell-price > input").toggle(!enquireOn);
+  ticketRow.find(".event-ticket-cell-fee-percent > input").toggle(!enquireOn);
   ticketRow.find(".event-ticket-cell-quantity > input").toggle(!enquireOn);
   ticketRow.find(".event-ticket-cell-pairs-only > input[type='checkbox']").toggle(!enquireOn);
   ticketRow.find(".event-ticket-cell-currency > select").toggle(!enquireOn);

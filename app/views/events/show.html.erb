@@ -72,7 +72,9 @@
       <li class="tab-head-cont">
         <a href="#">Seating Chart</a>
         <div class="tab-main">
-          <%= image_tag @event.venue.avatar.venue.url, alt: @event.venue.name %>
+          <% if @event.venue.avatar.present? %>
+            <%= image_tag @event.venue.avatar.venue.url, alt: @event.venue.name %>
+          <% end %>
         </div>
       </li>
       <% @event.info_blocks.ordered.each do |info_block| %>
@@ -119,7 +121,9 @@
 
   <div id="popup-chart" class="popup mfp-with-anim mfp-hide">
     <h2><%= @event.venue.name %> Seating Chart</h2>
-    <%= image_tag @event.venue.avatar.venue.url, alt: @event.venue.name %>
+    <% if @event.venue.avatar.present? %>
+      <%= image_tag @event.venue.avatar.venue.url, alt: @event.venue.name %>
+    <% end %>
   </div>
 <% end %>
 

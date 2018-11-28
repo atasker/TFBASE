@@ -12,6 +12,7 @@ class Ticket < ApplicationRecord
             :currency,
             presence: true, unless: Proc.new { |a| a.enquire? }
   validates :currency, inclusion: { in: CURRENCIES }, unless: Proc.new { |a| a.enquire? }
+  validates :fee_percent, numericality: true, allow_blank: true
 
   scope :buyable, -> { where.not(enquire: true) }
 
@@ -21,5 +22,18 @@ class Ticket < ApplicationRecord
     else
       'New ticket'
     end
+  end
+
+  def have_fee?
+    fee_percent && fee_percent != 0
+  end
+
+  def amount_of_fee
+    curfee = fee_percent || 0
+    price * (curfee / 100)
+  end
+
+  def full_price
+    price + amount_of_fee
   end
 end

@@ -30,6 +30,7 @@ en:
     #     other: "Tickets" # all
     attributes:
       ticket:
+        fee_percent: "Management fee"
         enquire: "Enquire?"
       user:
         agree_email: "Email notifications agreement"
