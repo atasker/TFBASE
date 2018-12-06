@@ -24,9 +24,11 @@
     <%= @venue.address %>
   </p>
 
-  <p>
-    <%= image_tag(@venue.avatar.venue_thumb.url) %>
-  </p>
+  <% if @venue.avatar.present? %>
+    <p>
+      <%= image_tag(@venue.avatar.venue_thumb.url) %>
+    </p>
+  <% end %>
 
   <%= link_to 'Edit/Add Events for this Venue', edit_admin_venue_path(@venue) %> |
   <%= link_to 'Back', admin_venues_path %>

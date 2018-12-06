@@ -14,9 +14,11 @@
     <%= Category.find(@player.category_id).description %>
   </p>
 
-  <p>
-    <%= image_tag(@player.avatar.grid_small.url) %>
-  </p>
+  <% if @player.avatar.present? %>
+    <p>
+      <%= image_tag(@player.avatar.grid_small.url) %>
+    </p>
+  <% end %>
 
   <p style="word-wrap: break-word;">
     <strong>Text:</strong>
