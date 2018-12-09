@@ -147,6 +147,44 @@ function initTicketFormFieldsAvailability() {
 
 // - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
 
+function makeEffectOfCheckedSelector() {
+  var jqDestroyButton = $("#event-table-destroy-all-button");
+  var jqCheckedSelectors = $(".event-table-selector:checked");
+
+  var needToDisable = !jqCheckedSelectors.length;
+  if (needToDisable) {
+    jqDestroyButton.attr('disabled', 'disabled');
+  } else {
+    jqDestroyButton.removeAttr('disabled');
+  }
+
+  var baseHref = jqDestroyButton.attr('href').split('?')[0];
+  var eventIds = [];
+  jqCheckedSelectors.each(function() {
+    eventIds.push($(this).data('event-id'));
+  });
+  if (eventIds.length) {
+    jqDestroyButton.attr('href', baseHref + '?ids=' + eventIds.join(','));
+  } else {
+    jqDestroyButton.attr('href', baseHref);
+  }
+}
+function makeDisabilityBlock(evnt) {
+  if ($(this).attr('disabled')) {
+    event.preventDefault();
+    return false;
+  }
+  return true;
+}
+function initEventsDestroyManyFeature() {
+  $(".event-table-selector").off('change', makeEffectOfCheckedSelector);
+  $(".event-table-selector").on('change', makeEffectOfCheckedSelector);
+  $("#event-table-destroy-all-button").off('click', makeDisabilityBlock);
+  $("#event-table-destroy-all-button").on('click', makeDisabilityBlock);
+}
+
+// - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
+
 $(document).on('ready turbolinks:load', function() {
 
   $('.chzn-select').chosen();
@@ -156,6 +194,8 @@ $(document).on('ready turbolinks:load', function() {
   initTicketFieldsVisibility();
 
   initTicketFormFieldsAvailability();
+
+  initEventsDestroyManyFeature();
 
   if ($(".form-switcher").length) {
     $(".form-switcher input").change(function(evnt) {

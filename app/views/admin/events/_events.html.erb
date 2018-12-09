@@ -2,6 +2,7 @@
 <br />
 <table class="pure-table pure-table-striped pure-table-horizontal just-added">
   <thead class="event_listings">
+    <th></th>
     <th>ID</th>
     <th>Name</th>
     <th>Start time</th>
@@ -11,5 +12,5 @@
     <th></th>
     <th></th>
   </thead>
-  <%= render @events %>
+  <%= render @events, with_selectors: true %>
 </table>

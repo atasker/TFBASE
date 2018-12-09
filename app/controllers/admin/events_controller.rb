@@ -66,6 +66,15 @@ class Admin::EventsController < AdminController
     redirect_to admin_events_path
   end
 
+  def destroy_many
+    event_ids = params[:ids].split(',').compact
+    logger.info('event_ids')
+    logger.debug(event_ids)
+    Event.where(id: event_ids.compact).destroy_all
+    flash[:notice] = "Selected events successfully deleted"
+    redirect_to admin_events_path
+  end
+
   private
 
   def event_params

@@ -1,4 +1,8 @@
+<% with_selectors = with_selectors || false %>
 <tr>
+  <% if with_selectors %>
+    <td><input type="checkbox" class="event-table-selector" data-event-id="<%= event.id %>" /></td>
+  <% end %>
   <td><%= event.id %></td>
   <td><%= event.name %></td>
   <td><%= event.tbc? ? 'TBC' : event.start_time.strftime("%a, %d-%b-%Y at %I:%M%p") %></td>

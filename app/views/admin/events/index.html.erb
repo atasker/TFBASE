@@ -22,6 +22,15 @@
   <% end %>
     <%= link_to 'View Past Events', admin_events_path(search: "archive") %>
 
+  <div class="event-table-destroy-all-block">
+    <%= link_to 'Delete selected', destroy_many_admin_events_path,
+          method: :delete,
+          :class => 'pure-button',
+          id: 'event-table-destroy-all-button',
+          disabled: true,
+          data: { confirm: 'Are you sure you want to delete all the selected events?'} %>
+  </div>
+
   <%= render 'events', events: @events %>
   <%= paginate @events %>
 </div>

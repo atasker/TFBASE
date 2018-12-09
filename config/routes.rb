@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     root 'welcome#index'
     resources :categories
     resources :competitions
-    resources :events
+    resources :events do
+      delete 'destroy-many', to: 'events#destroy_many', on: :collection
+    end
     resources :players
     resources :tickets
     resources :venues
