@@ -36,9 +36,12 @@
       </div>
       <div class="ticket-info-numbers">
         Ticket Price: <%= currency_symbol(@ticket) %><span id="ticket-price"><%= @ticket.price %></span>
+        <br>
+        Management fee:
         <% if @ticket.have_fee? %>
-          <br>
-          Management fee: <%= currency_symbol(@ticket) %><span id="ticket-fee"><%= @ticket.amount_of_fee %></span>
+          <%= currency_symbol(@ticket) %><span id="ticket-fee"><%= @ticket.amount_of_fee %></span>
+        <% else %>
+          <%= @ticket.fee_not_provided_message %>
         <% end %>
         <br>
         Quantity:

@@ -1,6 +1,7 @@
 class Ticket < ApplicationRecord
 
   CURRENCIES = %w(USD EUR GBP)
+  DEF_NO_FEE_MESSAGE = 'Not Provided'
 
   belongs_to :event
   has_many :enquiries, inverse_of: :ticket, dependent: :destroy
@@ -31,6 +32,10 @@ class Ticket < ApplicationRecord
   def amount_of_fee
     curfee = fee_percent || 0
     price * (curfee / 100)
+  end
+
+  def fee_not_provided_message
+    no_fee_message.present? ? no_fee_message : DEF_NO_FEE_MESSAGE
   end
 
   def full_price

@@ -30,9 +30,14 @@
   <% if @ticket.text.present? %><%= simple_format(@ticket.text) %><% end %>
   <p>Category: <%= @ticket.category %></p>
   <p>Ticket Price: <%= currency_symbol(@ticket) %><span id="ticket-price"><%= @ticket.price %></span></p>
-  <% if @ticket.have_fee? %>
-    <p>Management fee: <%= currency_symbol(@ticket) %><span id="ticket-fee"><%= @ticket.amount_of_fee %></span></p>
-  <% end %>
+  <p>
+    Management fee:
+    <% if @ticket.have_fee? %>
+      <%= currency_symbol(@ticket) %><span id="ticket-fee"><%= @ticket.amount_of_fee %></span>
+    <% else %>
+      <%= @ticket.fee_not_provided_message %>
+    <% end %>
+  </p>
   <p>
     Quantity:
     <select id="ticket-quantity-select" data-price="<%= @ticket.full_price %>">

@@ -85,6 +85,7 @@ function initEventFieldsActions() {
   }
 }
 
+// - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
 
 function toggleVisibilityOfTicketField() {
   var enquireOn = $("#ticket_enquire").prop('checked');
@@ -128,6 +129,24 @@ function initTicketFieldsVisibility() {
   $("tbody.ticket_items").on('cocoon:after-insert', initCocoonAddedTicketOfEvent);
 }
 
+// - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
+
+function setCorrectTicketFormFieldsAvailability() {
+  var currFee = $("#ticket_fee_percent").val();
+  var haveFee = currFee && parseFloat(currFee) > 0;
+  $("#ticket_no_fee_message").prop('disabled', haveFee);
+  $("#ticket_no_fee_message_label").toggleClass('disabled-label', haveFee);
+}
+
+function initTicketFormFieldsAvailability() {
+  if ($("form.edit_ticket, form.new_ticket").length) {
+    $("#ticket_fee_percent").change(setCorrectTicketFormFieldsAvailability);
+    setCorrectTicketFormFieldsAvailability();
+  }
+}
+
+// - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
+
 $(document).on('ready turbolinks:load', function() {
 
   $('.chzn-select').chosen();
@@ -135,6 +154,8 @@ $(document).on('ready turbolinks:load', function() {
   initEventFieldsActions();
 
   initTicketFieldsVisibility();
+
+  initTicketFormFieldsAvailability();
 
   if ($(".form-switcher").length) {
     $(".form-switcher input").change(function(evnt) {

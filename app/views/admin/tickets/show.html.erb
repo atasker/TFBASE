@@ -17,7 +17,11 @@
 
     <p>
       <strong>Management fee:</strong>
-      <%= @ticket.have_fee? ? "#{@ticket.fee_percent}% (#{@ticket.amount_of_fee})" : 0 %>
+      <% if @ticket.have_fee? %>
+        <%= "#{@ticket.fee_percent}% (#{@ticket.amount_of_fee})" %>
+      <% else %>
+        <%= @ticket.fee_not_provided_message %>
+      <% end %>
     </p>
 
     <p>

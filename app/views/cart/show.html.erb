@@ -52,9 +52,12 @@
                 </div>
                 <div class="cart-items-table-td">
                   <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.price %>
+                  <br>
+                  fee:
                   <% if item.ticket.have_fee? %>
-                    <br>
-                    fee: <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.amount_of_fee %>
+                    <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.amount_of_fee %>
+                  <% else %>
+                    <%= item.ticket.fee_not_provided_message %>
                   <% end %>
                 </div>
                 <div class="cart-items-table-td">

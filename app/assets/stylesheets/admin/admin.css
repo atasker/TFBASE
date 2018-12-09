@@ -79,3 +79,5 @@ body {
   background: #2d9ee4;
   color: #fff;
 }
+
+label.disabled-label { color: #929292; }

@@ -50,7 +50,7 @@ class Admin::TicketsController < AdminController
 
   def ticket_params
     params.require(:ticket).permit(
-      :price, :fee_percent, :category, :quantity,
+      :price, :fee_percent, :no_fee_message, :category, :quantity,
       :event_id, :enquire, :text, :currency, :pairs_only)
   end
 
