@@ -12,6 +12,8 @@
  *
  * do not require_tree .
  *= require libs.min
+ *= require owl.carousel
+ *= require owl.theme.default
  *= require style
  *= require style2
  *= require cart

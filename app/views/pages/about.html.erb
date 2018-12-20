@@ -8,48 +8,60 @@
 </div>
 
 <div class="container-fluid">
-  <% if @current_page %><%= raw @current_page.body %><% end %>
-  <h4>Testimonials</h4>
-  <ul class="bxslider">
-    <li>
-      <blockquote>
-        <p>“Thank you for your help, and for great service. We had a great evening:) Keep up the good work!”</p>
-        <footer>Kai U. (Oslo, Norway)</footer>
-      </blockquote>
-    </li>
-    <li>
-      <blockquote>
-        <p>“Everything went well with your tickets. I'll definitely recommend your site to others for those hard to get European  events. Regards, Carlos”</p>
-        <footer>Carlos G. (USA)</footer>
-      </blockquote>
-    </li>
-    <li>
-      <blockquote>
-        <p>“I just wanted to tell you how pleased I was with your services.  The seats for both events were top notch, as promised, and I can't thank you enough.  Wimbledon especially was magnificent, really the highlight of the entire trip for me.”</p>
-        <footer>Kevin B. (San Antonio, TX, USA)</footer>
-      </blockquote>
-    </li>
-    <li>
-      <blockquote>
-        <p>“I have used Ticketfinders consistently over the years for tickets.<br>
-        The team at Ticketfinders always find the best seats at the best prices and they deliver always on time to the best location to ensure a great experience, they have never let me down, there is no match when it comes to Ticketfinders against other agencies, Ticketfinders always come out on top, hence I will continue to use their services and highly recommend them”</p>
-        <footer>Simon C (Monaco, Monte-Carlo)</footer>
-      </blockquote>
-    </li>
-  </ul>
+  <div class="about-us-words">
+    <div class="about-us-word">
+      <div class="about-us-word__icon-circ"><%= image_tag 'about/persons_icon.png' %></div>
+      <div class="about-us-word__title">Who</div>
+      <p class="about-us-word__text">Small boutique secondary ticket&nbsp;agency, celebrating over 20&nbsp;years on&nbsp;the&nbsp;web.</p>
+    </div>
+    <div class="about-us-word">
+      <div class="about-us-word__icon-circ"><%= image_tag 'about/ticket_icon.png' %></div>
+      <div class="about-us-word__title">What</div>
+      <p class="about-us-word__text">Specialists in sourcing tickets for&nbsp;hard to&nbsp;get and sold&nbsp;out events.</p>
+    </div>
+    <div class="about-us-word">
+      <div class="about-us-word__icon-circ"><%= image_tag 'about/achievement_icon.png' %></div>
+      <div class="about-us-word__title">How</div>
+      <p class="about-us-word__text">Almost 50 years of&nbsp;unrivalled experience and&nbsp;network.</p>
+    </div>
+    <div class="about-us-word">
+      <div class="about-us-word__icon-circ"><%= image_tag 'about/service_icon.png' %></div>
+      <div class="about-us-word__title">Why</div>
+      <p class="about-us-word__text">Personal service, contactable 24hr&nbsp;a&nbsp;day 7&nbsp;days&nbsp;a&nbsp;week with a&nbsp;commitment to&nbsp;provide the&nbsp;best service and&nbsp;experience.</p>
+    </div>
+  </div>
+
+  <%# if @current_page % >< % = raw @current_page.body % >< % end %>
 </div>
 
-<% content_for :right_before_body_ends do %>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.js"></script>
-  <script>
-  $(document).ready(function(){
-    $('.bxslider').bxSlider({
-      controls: false,
-      auto: true,
-      pager: false,
-      reload: true,
-      pause: 8000
-    });
-  });
-  </script>
-<% end %>
+<h4 class="about-us-subtitle">Testimonials</h4>
+
+<div class="container-fluid">
+  <div class="owl-carousel owl-theme">
+    <div>
+      <blockquote class="testimonka">
+        <p>Thank you for your help, and for great service. We had a great evening:) Keep up the good work!</p>
+        <footer>Kai U. (Oslo, Norway)</footer>
+      </blockquote>
+    </div>
+    <div>
+      <blockquote class="testimonka">
+        <p>I just wanted to tell you how pleased I was with your services.  The seats for both events were top notch, as promised, and I can't thank you enough.  Wimbledon especially was magnificent, really the highlight of the entire trip for me.</p>
+        <footer>Kevin B. (San Antonio, TX, USA)</footer>
+      </blockquote>
+    </div>
+    <div>
+      <blockquote class="testimonka">
+        <p>Everything went well with your tickets. I'll definitely recommend your site to others for those hard to get European  events. Regards, Carlos</p>
+        <footer>Carlos G. (USA)</footer>
+      </blockquote>
+    </div>
+    <div>
+      <blockquote class="testimonka">
+        <p>I have used Ticketfinders consistently over the years for tickets.<br>
+        The team at Ticketfinders always find the best seats at the best prices and they deliver always on time to the best location to ensure a great experience, they have never let me down, there is no match when it comes to Ticketfinders against other agencies, Ticketfinders always come out on top, hence I will continue to use their services and highly recommend them</p>
+        <footer>Simon C (Monaco, Monte-Carlo)</footer>
+      </blockquote>
+    </div>
+  </div>
+</div>
