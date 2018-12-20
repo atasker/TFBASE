@@ -7,7 +7,7 @@
   <td><%= ticket.category %></td>
   <td><%= ticket.enquire? ? '' : currency_name(ticket.currency) %></td>
   <td><%= ticket.enquire? ? '' : ticket.price %></td>
-  <td><%= ticket.enquire? ? '' : (ticket.have_fee? ? "#{ticket.fee_percent}%" : '') %></td>
+  <td><%= ticket.enquire? ? '' : (ticket.have_fee? ? "#{ticket.fee_percent}%" : 0) %></td>
   <td><%= ticket.enquire? ? '' : ticket.quantity %></td>
   <td><%= ticket.enquire? ? 'Y' : '' %></td>
   <td><%= link_to 'Show', admin_ticket_path(ticket) %></td>

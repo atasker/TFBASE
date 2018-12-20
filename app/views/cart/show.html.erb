@@ -57,7 +57,7 @@
                   <% if item.ticket.have_fee? %>
                     <%= currency_symbol(item.ticket) %>&nbsp;<%= "%g" % item.ticket.amount_of_fee %>
                   <% else %>
-                    <%= item.ticket.fee_not_provided_message %>
+                    0
                   <% end %>
                 </div>
                 <div class="cart-items-table-td">

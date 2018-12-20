@@ -33,9 +33,9 @@
   <p>
     Management fee:
     <% if @ticket.have_fee? %>
-      <%= currency_symbol(@ticket) %><span id="ticket-fee"><%= @ticket.amount_of_fee %></span>
+      <%= currency_symbol(@ticket) %>&nbsp;<span id="ticket-fee"><%= @ticket.amount_of_fee %></span>
     <% else %>
-      <%= @ticket.fee_not_provided_message %>
+      0
     <% end %>
   </p>
   <p>
@@ -67,4 +67,6 @@
       <input type="submit" class="btn" style="padding: 10px 50px;font-size: 22px;font-weight: 100;" value="Add to cart">
     </div>
   <% end %>
+
+  <p class="ticket-face-value">Face value: <%= @ticket.face_value_message %></p>
 </div>

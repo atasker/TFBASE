@@ -20,8 +20,13 @@
       <% if @ticket.have_fee? %>
         <%= "#{@ticket.fee_percent}% (#{@ticket.amount_of_fee})" %>
       <% else %>
-        <%= @ticket.fee_not_provided_message %>
+        0
       <% end %>
+    </p>
+
+    <p>
+      <strong>Face value:</strong>
+      <%= @ticket.face_value_message %>
     </p>
 
     <p>

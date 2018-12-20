@@ -131,22 +131,6 @@ function initTicketFieldsVisibility() {
 
 // - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
 
-function setCorrectTicketFormFieldsAvailability() {
-  var currFee = $("#ticket_fee_percent").val();
-  var haveFee = currFee && parseFloat(currFee) > 0;
-  $("#ticket_no_fee_message").prop('disabled', haveFee);
-  $("#ticket_no_fee_message_label").toggleClass('disabled-label', haveFee);
-}
-
-function initTicketFormFieldsAvailability() {
-  if ($("form.edit_ticket, form.new_ticket").length) {
-    $("#ticket_fee_percent").change(setCorrectTicketFormFieldsAvailability);
-    setCorrectTicketFormFieldsAvailability();
-  }
-}
-
-// - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
-
 function makeEffectOfCheckedSelector() {
   var jqDestroyButton = $("#event-table-destroy-all-button");
   var jqCheckedSelectors = $(".event-table-selector:checked");

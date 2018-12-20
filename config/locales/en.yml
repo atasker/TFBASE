@@ -31,7 +31,6 @@ en:
     attributes:
       ticket:
         fee_percent: "Management fee"
-        no_fee_message: "Fee not provided message"
         enquire: "Enquire?"
       user:
         agree_email: "Email notifications agreement"

@@ -284,6 +284,17 @@ h3.nice-h3 {
 }
 
 /*
+  Special component: ticket-face-value
+ */
+.ticket-face-value {
+  margin: -26px 0 0;
+  padding: 0 18px;
+  text-align: right;
+  color: #b6b6b6;
+  font-size: 16px;
+}
+
+/*
   Special collection: log in page
  */
 .log-in-grid {

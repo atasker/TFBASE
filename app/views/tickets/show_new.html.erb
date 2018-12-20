@@ -39,10 +39,11 @@
         <br>
         Management fee:
         <% if @ticket.have_fee? %>
-          <%= currency_symbol(@ticket) %><span id="ticket-fee"><%= @ticket.amount_of_fee %></span>
+          <%= currency_symbol(@ticket) %>&nbsp;<span id="ticket-fee"><%= @ticket.amount_of_fee %></span>
         <% else %>
-          <%= @ticket.fee_not_provided_message %>
+          0
         <% end %>
+
         <br>
         Quantity:
         <select id="ticket-quantity-select" data-price="<%= @ticket.full_price %>">
@@ -68,4 +69,5 @@
       </div>
     </div>
   </div>
+  <p class="ticket-face-value">Face value: <%= @ticket.face_value_message %></p>
 </div>
