@@ -1,6 +1,8 @@
 class BaseFrontendController < ApplicationController
   include Frontender
 
+  rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
+
   protected
 
   def determine_page(checked_path = nil)
@@ -60,5 +62,12 @@ class BaseFrontendController < ApplicationController
       add_breadcrumb event.name, event_path(event, player: (player ? player.id : nil))
     end
     add_breadcrumb 'Ticket', ticket_path(ticket) if ticket
+  end
+
+  private
+
+  def resource_not_found
+    @page_meta = OpenStruct.new(title: 'Ooops... to late! (404)')
+    render 'errors/404', status: :not_found
   end
 end
