@@ -177,8 +177,6 @@ $(document).on('ready turbolinks:load', function() {
 
   initTicketFieldsVisibility();
 
-  initTicketFormFieldsAvailability();
-
   initEventsDestroyManyFeature();
 
   if ($(".form-switcher").length) {
