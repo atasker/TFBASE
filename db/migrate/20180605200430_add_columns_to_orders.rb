@@ -1,4 +1,4 @@
-class AddColumnsToOrders < ActiveRecord::Migration
+class AddColumnsToOrders < ActiveRecord::Migration[5.2]
   def change
     add_reference :orders, :user, index: true, foreign_key: true
     add_column :orders, :guid, :string, null: false

@@ -1,4 +1,4 @@
-class CreateHomeSlides < ActiveRecord::Migration
+class CreateHomeSlides < ActiveRecord::Migration[5.2]
   def change
     create_table :home_slides do |t|
       t.integer :kind, null: false, default: 0

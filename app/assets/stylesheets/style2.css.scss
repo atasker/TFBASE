@@ -527,3 +527,16 @@ h3.nice-h3 {
   border-radius: 30px; }
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
   background: #000; }
+
+#tab{
+  .tabs{
+    .tab-item{
+      float: left;
+      margin-right: 20px;
+      cursor: pointer;
+      &.tab-active{
+        border-bottom: solid 2px gray;
+      }
+    }
+  }
+}

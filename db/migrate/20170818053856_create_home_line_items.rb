@@ -1,4 +1,4 @@
-class CreateHomeLineItems < ActiveRecord::Migration
+class CreateHomeLineItems < ActiveRecord::Migration[5.2]
   def change
     create_table :home_line_items do |t|
       t.integer :kind, null: false, default: 0

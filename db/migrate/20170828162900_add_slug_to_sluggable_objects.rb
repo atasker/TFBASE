@@ -1,4 +1,4 @@
-class AddSlugToSluggableObjects < ActiveRecord::Migration
+class AddSlugToSluggableObjects < ActiveRecord::Migration[5.2]
   def change
     add_column :categories, :slug, :string
     add_column :competitions, :slug, :string

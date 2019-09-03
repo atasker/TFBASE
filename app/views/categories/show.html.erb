@@ -1,37 +1,57 @@
-<div class="page-title">
-  <div class="container-fluid">
-    <div class="page-title__inner" style="<%= @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
-      <%= render 'shared/breadcrumbs' %>
-      <h1><%= @category.description %></h1>
-      <% if @category.text.present? %>
-        <%= render partial: 'shared/page_title_info_text_with_shrink', locals: { text: @category.text } %>
-      <% end %>
+<div id="tab">
+  <div class="page-title">
+    <div class="container-fluid">
+      <div class="page-title__inner" style="<%= @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
+        <%= render 'shared/breadcrumbs' %>
+        <h1><%= @category.description %></h1>
+      </div>
+      <div class="tabs">
+        <div id="button1" class="tab-item">Events</div>
+        <div id="button2" class="tab-item">About</div>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="container-fluid">
-  <% if @competitions.count > 0 %>
-    <div class="tickets">
-      <%= render 'shared/sub_search_and_filter', locations: @competitions_venues.pluck(:name, :id), count: @competitions.count %>
-      <div class="tickets__list row">
-        <% @competitions.each do |competition| %>
-          <%= render partial: 'competitions/tile', locals: { competition: competition } %>
+  <div class="container-fluid">
+    <div class="tab-contents">
+      <div id="content1" class="tab-content">
+        <% if @competitions.count > 0 %>
+          <div class="tickets">
+            <%= render 'shared/sub_search_and_filter', locations: @competitions_venues.pluck(:name, :id), count: @competitions.count %>
+            <div class="tickets__list row">
+              <% @competitions.each do |competition| %>
+                <%= render partial: 'competitions/tile', locals: { competition: competition } %>
+              <% end %>
+            </div>
+          </div>
+        <% elsif @players.count > 0 %>
+          <div class="tickets">
+            <%= render 'shared/sub_search_and_filter', locations: @players_venues.pluck(:name, :id), count: @players.count %>
+            <div class="tickets__list row">
+              <% @players.each do |player| %>
+                <%= render partial: 'players/tile', locals: { player: player } %>
+              <% end %>
+            </div>
+          </div>
+        <% elsif @event_count_before_filtration > 0 %>
+          <%= render partial: 'events/list_with_calendar', locals: { events: @events } %>
+        <% else %>
+          <%= render 'shared/nothing_found_message' %>
         <% end %>
       </div>
-    </div>
-  <% elsif @players.count > 0 %>
-    <div class="tickets">
-      <%= render 'shared/sub_search_and_filter', locations: @players_venues.pluck(:name, :id), count: @players.count %>
-      <div class="tickets__list row">
-        <% @players.each do |player| %>
-          <%= render partial: 'players/tile', locals: { player: player } %>
-        <% end %>
+      <div id="content2" class="tab-content">
+        <div class="considered__wrapper">
+          <div class="considered__calendar">
+            <div class="considered__calendar-wrap">
+              <div class="datepicker" data-base-url="<%= url_for(params.permit!.to_h.merge(dt: nil)) %>" data-start-date="<%= @start_date ? @start_date.strftime('%Y-%m-%d') : '' %>"></div>
+            </div>
+          </div>
+          <div class="considered considered--ticket">
+            <% if @category.info_blocks.any? %>
+              <%= render @category.info_blocks %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
-  <% elsif @event_count_before_filtration > 0 %>
-    <%= render partial: 'events/list_with_calendar', locals: { events: @events } %>
-  <% else %>
-    <%= render 'shared/nothing_found_message' %>
-  <% end %>
+  </div>
 </div>

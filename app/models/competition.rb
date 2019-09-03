@@ -7,6 +7,8 @@ class Competition < ApplicationRecord
   has_many :events, dependent: :destroy
 
   has_many :home_line_items, inverse_of: :competition, dependent: :destroy
+  has_many :info_blocks, as: :info_blockable, dependent: :destroy, inverse_of: :info_blockable
+  accepts_nested_attributes_for :info_blocks, reject_if: :all_blank, allow_destroy: true
 
   mount_uploader :avatar, AvatarUploader
 

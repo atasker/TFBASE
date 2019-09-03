@@ -21,6 +21,7 @@
 //= require hos_n_con_form
 //= require sub_filter
 //= require tickets
+//= require jquery.tab.min
 // do not require_tree .
 
 $(document).ready(function(){
@@ -44,5 +45,13 @@ $(document).ready(function(){
     },
     navContainerClass: 'owl-spec-nav',
     navClass: ['owl-spec-prev','owl-spec-next']
+  });
+
+  $('#tab').tab({
+    triggers: ['#button1', '#button2'],
+    contents: ['#content1', '#content2'],
+    defaultIndex: 0,
+    activeClass: 'tab-active',
+    keyName: 'tab'
   });
 });

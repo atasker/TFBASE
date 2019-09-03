@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  text: MyText
+  prior: 1
+  info_blockable: one
+  info_blockable_type: Info blockable
+
+two:
+  title: MyString
+  text: MyText
+  prior: 1
+  info_blockable: two
+  info_blockable_type: Info blockable
