@@ -534,8 +534,14 @@ h3.nice-h3 {
       float: left;
       margin-right: 20px;
       cursor: pointer;
+      font-size: 22px;
+      color: #83b9d0;
+      &:hover{
+        color: #0c7aa6;
+      }
       &.tab-active{
         border-bottom: solid 2px gray;
+        color: #0c7aa6;
       }
     }
   }
