@@ -51,7 +51,8 @@ class Admin::PlayersController < AdminController
   def player_params
     params.require(:player).permit(
       :name, :slug, :category_id, :text, :avatar,
-      :no_title_postfix, :seo_title, :seo_descr, :seo_keywords)
+      :no_title_postfix, :seo_title, :seo_descr, :seo_keywords,
+      info_blocks_attributes: [:id, :title, :text, :prior, :_destroy])
   end
 
 end

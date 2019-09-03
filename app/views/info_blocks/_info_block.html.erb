@@ -1,0 +1,15 @@
+<h2><%= info_block.title %></h2>
+<% if info_block.text.present? %>
+  <% if info_block.text.length > 250 %>
+    <h3 class="page-title__info info-preview">
+      <%= truncate(info_block.text, length: 250) %>
+      <%= link_to 'Read more', '#read-more', class: "read-more" %>
+    </h3>
+    <h3 class="page-title__info info-full">
+      <%= info_block.text %>
+      <%= link_to 'Hide', '#read-less', class: "read-less" %>
+    </h3>
+  <% else %>
+    <h3 class="page-title__info"><%= info_block.text %></h3>
+  <% end %>
+<% end %>

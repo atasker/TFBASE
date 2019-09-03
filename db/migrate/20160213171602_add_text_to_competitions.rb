@@ -1,4 +1,4 @@
-class AddTextToCompetitions < ActiveRecord::Migration
+class AddTextToCompetitions < ActiveRecord::Migration[5.2]
   def change
     add_column :competitions, :text, :text
   end

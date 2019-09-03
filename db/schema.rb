@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_172222) do
+ActiveRecord::Schema.define(version: 2019_09_02_183342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cart_items", id: :serial, force: :cascade do |t|
-    t.integer "cart_id", null: false
-    t.integer "ticket_id", null: false
+  create_table "cart_items", force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "ticket_id", null: false
     t.integer "quantity", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -25,14 +25,14 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["ticket_id"], name: "index_cart_items_on_ticket_id"
   end
 
-  create_table "carts", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "categories", id: :serial, force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,11 +43,11 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
-  create_table "competitions", id: :serial, force: :cascade do |t|
+  create_table "competitions", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
+    t.bigint "category_id"
     t.text "text"
     t.string "avatar"
     t.string "slug"
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["slug"], name: "index_competitions_on_slug", unique: true
   end
 
-  create_table "enquiries", id: :serial, force: :cascade do |t|
-    t.integer "ticket_id", null: false
+  create_table "enquiries", force: :cascade do |t|
+    t.bigint "ticket_id", null: false
     t.string "name"
     t.string "email"
     t.text "body"
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["ticket_id"], name: "index_enquiries_on_ticket_id"
   end
 
-  create_table "event_info_blocks", id: :serial, force: :cascade do |t|
-    t.integer "event_id"
+  create_table "event_info_blocks", force: :cascade do |t|
+    t.bigint "event_id"
     t.string "title"
     t.text "text"
     t.integer "prior"
@@ -76,14 +76,14 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["event_id"], name: "index_event_info_blocks_on_event_id"
   end
 
-  create_table "events", id: :serial, force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.string "name"
     t.datetime "start_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "venue_id"
-    t.integer "category_id"
-    t.integer "competition_id"
+    t.bigint "venue_id"
+    t.bigint "category_id"
+    t.bigint "competition_id"
     t.boolean "sports", default: false, null: false
     t.boolean "priority", default: false, null: false
     t.string "slug"
@@ -95,16 +95,16 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
   end
 
   create_table "events_players", id: false, force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.integer "player_id", null: false
+    t.bigint "event_id", null: false
+    t.bigint "player_id", null: false
     t.index ["event_id", "player_id"], name: "index_events_players_on_event_id_and_player_id"
     t.index ["player_id", "event_id"], name: "index_events_players_on_player_id_and_event_id"
   end
 
-  create_table "home_line_items", id: :serial, force: :cascade do |t|
+  create_table "home_line_items", force: :cascade do |t|
     t.integer "kind", default: 0, null: false
-    t.integer "competition_id"
-    t.integer "player_id"
+    t.bigint "competition_id"
+    t.bigint "player_id"
     t.string "title"
     t.string "url"
     t.string "avatar"
@@ -113,30 +113,43 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.datetime "updated_at", null: false
     t.index ["competition_id"], name: "index_home_line_items_on_competition_id"
     t.index ["player_id"], name: "index_home_line_items_on_player_id"
+    t.index ["prior"], name: "index_home_line_items_on_prior"
   end
 
-  create_table "home_slides", id: :serial, force: :cascade do |t|
+  create_table "home_slides", force: :cascade do |t|
     t.integer "kind", default: 0, null: false
     t.string "huge_image"
     t.string "big_image"
     t.string "tile_image"
     t.boolean "manual_input"
-    t.integer "event_id"
+    t.bigint "event_id"
     t.string "title"
     t.string "url"
     t.string "avatar"
     t.string "place"
     t.date "start_date"
     t.date "end_date"
-    t.integer "category_id"
+    t.bigint "category_id"
     t.integer "prior", default: 9, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_home_slides_on_category_id"
     t.index ["event_id"], name: "index_home_slides_on_event_id"
     t.index ["kind"], name: "index_home_slides_on_kind"
   end
 
-  create_table "messages", id: :serial, force: :cascade do |t|
+  create_table "info_blocks", force: :cascade do |t|
+    t.string "title"
+    t.text "text"
+    t.integer "prior"
+    t.string "info_blockable_type"
+    t.bigint "info_blockable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["info_blockable_type", "info_blockable_id"], name: "index_info_blocks_on_info_blockable_type_and_info_blockable_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.text "body"
@@ -144,8 +157,8 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "order_items", id: :serial, force: :cascade do |t|
-    t.integer "order_id", null: false
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id", null: false
     t.float "price"
     t.string "currency"
     t.integer "quantity"
@@ -155,14 +168,14 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
-  create_table "orders", id: :serial, force: :cascade do |t|
+  create_table "orders", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "guid", null: false
     t.string "currency"
     t.float "shipping"
@@ -180,7 +193,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "pages", id: :serial, force: :cascade do |t|
+  create_table "pages", force: :cascade do |t|
     t.string "title"
     t.string "path", null: false
     t.text "body"
@@ -190,11 +203,11 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["path"], name: "index_pages_on_path", unique: true
   end
 
-  create_table "players", id: :serial, force: :cascade do |t|
+  create_table "players", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
+    t.bigint "category_id"
     t.text "text"
     t.string "avatar"
     t.string "slug"
@@ -203,13 +216,13 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["slug"], name: "index_players_on_slug", unique: true
   end
 
-  create_table "tickets", id: :serial, force: :cascade do |t|
+  create_table "tickets", force: :cascade do |t|
     t.float "price"
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity"
-    t.integer "event_id"
+    t.bigint "event_id"
     t.text "text"
     t.string "currency"
     t.boolean "pairs_only", default: false, null: false
@@ -219,7 +232,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["event_id"], name: "index_tickets_on_event_id"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -240,14 +253,14 @@ ActiveRecord::Schema.define(version: 2018_12_20_172222) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "users_categories_email_notifications", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "category_id"
+  create_table "users_categories_email_notifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "category_id"
     t.index ["category_id"], name: "index_users_categories_email_notifications_on_category_id"
     t.index ["user_id"], name: "index_users_categories_email_notifications_on_user_id"
   end
 
-  create_table "venues", id: :serial, force: :cascade do |t|
+  create_table "venues", force: :cascade do |t|
     t.string "name"
     t.integer "capacity"
     t.string "city"

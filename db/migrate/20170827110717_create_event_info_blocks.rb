@@ -1,4 +1,4 @@
-class CreateEventInfoBlocks < ActiveRecord::Migration
+class CreateEventInfoBlocks < ActiveRecord::Migration[5.2]
   def change
     create_table :event_info_blocks do |t|
       t.references :event, index: true, foreign_key: true

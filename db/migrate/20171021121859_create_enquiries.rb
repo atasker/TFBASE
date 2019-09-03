@@ -1,4 +1,4 @@
-class CreateEnquiries < ActiveRecord::Migration
+class CreateEnquiries < ActiveRecord::Migration[5.2]
   def change
     create_table :enquiries do |t|
       t.references :ticket, index: true, foreign_key: true, null: false

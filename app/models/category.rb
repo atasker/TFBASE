@@ -7,6 +7,8 @@ class Category < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :competitions, dependent: :destroy
   has_many :home_slides, inverse_of: :category, dependent: :destroy
+  has_many :info_blocks, as: :info_blockable, dependent: :destroy, inverse_of: :info_blockable
+  accepts_nested_attributes_for :info_blocks, reject_if: :all_blank, allow_destroy: true
 
   has_and_belongs_to_many :users_to_not_notify_by_email,
     class_name: 'User',

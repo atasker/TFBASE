@@ -1,4 +1,4 @@
-class CreateJoinTableEventTeamsArtist < ActiveRecord::Migration
+class CreateJoinTableEventTeamsArtist < ActiveRecord::Migration[5.2]
   def change
     create_join_table :events, :teams_artists do |t|
       t.index [:event_id, :teams_artist_id]

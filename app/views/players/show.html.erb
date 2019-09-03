@@ -1,18 +1,39 @@
-<div class="page-title">
-  <div class="container-fluid">
-    <div class="page-title__inner" style="<%= @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
-      <%= render 'shared/breadcrumbs' %>
-      <h1><%= @player.name %><% if @competition %> | <%= @competition.name %><% end %></h1>
-      <% if @player.text.present? %>
-        <%= render partial: 'shared/page_title_info_text_with_shrink', locals: { text: @player.text } %>
-      <% end %>
+<div id="tab">
+  <div class="page-title">
+    <div class="container-fluid">
+      <div class="page-title__inner" style="<%= @category.sports? ? "background:url('#{asset_path("title-bg.png")}')" : '' %>">
+        <%= render 'shared/breadcrumbs' %>
+        <h1><%= @player.name %><% if @competition %> | <%= @competition.name %><% end %></h1>
+      </div>
+      <div class="tabs">
+        <div id="button1" class="tab-item">Events</div>
+        <div id="button2" class="tab-item">About</div>
+      </div>
     </div>
   </div>
-</div>
-<div class="container-fluid">
-  <% if @event_count_before_filtration > 0 %>
-    <%= render partial: 'events/list_with_calendar', locals: { events: @events, player: @player.id } %>
-  <% else %>
-    <%= render 'shared/nothing_found_message' %>
-  <% end %>
+  <div class="container-fluid">
+    <div class="tab-contents">
+      <div id="content1" class="tab-content">
+        <% if @event_count_before_filtration > 0 %>
+          <%= render partial: 'events/list_with_calendar', locals: { events: @events, player: @player.id } %>
+        <% else %>
+          <%= render 'shared/nothing_found_message' %>
+        <% end %>
+      </div>
+      <div id="content2" class="tab-content">
+        <div class="considered__wrapper">
+          <div class="considered__calendar">
+            <div class="considered__calendar-wrap">
+              <div class="datepicker" data-base-url="<%= url_for(params.permit!.to_h.merge(dt: nil)) %>" data-start-date="<%= @start_date ? @start_date.strftime('%Y-%m-%d') : '' %>"></div>
+            </div>
+          </div>
+          <div class="considered considered--ticket">
+            <% if @player.info_blocks.any? %>
+              <%= render @player.info_blocks %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -236,7 +236,7 @@ $(document).ready(function() {
 
 
 	//CALENDAR
-	var eventDatepicker = $("#datepicker");
+	var eventDatepicker = $(".datepicker");
 	if (eventDatepicker.length > 0) {
 		var startDateStr = eventDatepicker.data("start-date");
 		if (startDateStr.length < 1) { startDateStr = null; }
