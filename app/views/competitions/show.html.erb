@@ -34,6 +34,9 @@
           <div class="considered__calendar">
             <div class="considered__calendar-wrap">
               <div class="datepicker" data-base-url="<%= url_for(params.permit!.to_h.merge(dt: nil)) %>" data-start-date="<%= @start_date ? @start_date.strftime('%Y-%m-%d') : '' %>"></div>
+              <div class="datepicker-text-box">
+                Dates & times are correct at time of publishing but are subject to change, please check local sources for latest updates
+              </div>
             </div>
           </div>
           <div class="considered considered--ticket">
