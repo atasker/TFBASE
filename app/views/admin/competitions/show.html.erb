@@ -20,10 +20,9 @@
     </p>
   <% end %>
 
-  <p style="word-wrap: break-word;">
-    <strong>Text:</strong>
-    <%= @competition.text %>
-  </p>
+  <% if @competition.info_blocks.any? %>
+    <%= render partial: '/admin/shared/info_blocks', locals: {info_blocks: @competition.info_blocks} %>
+  <% end %>
 
   <%= render partial: 'admin/shared/seo_data_info', locals: { carrier: @competition, name: 'Competition' } %>
 

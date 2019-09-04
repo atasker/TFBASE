@@ -6,10 +6,9 @@
     <strong>ID:</strong> <%= @category.id %>
   </p>
 
-  <p style="word-wrap: break-word;">
-    <strong>Text:</strong>
-    <%= @category.text %>
-  </p>
+  <% if @category.info_blocks.any? %>
+    <%= render partial: '/admin/shared/info_blocks', locals: {info_blocks: @category.info_blocks} %>
+  <% end %>
 
   <%= render partial: 'admin/shared/seo_data_info', locals: { carrier: @category, name: 'Category' } %>
 
