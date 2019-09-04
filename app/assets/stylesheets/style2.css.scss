@@ -532,9 +532,9 @@ h3.nice-h3 {
   .tabs{
     .tab-item{
       float: left;
-      margin-right: 20px;
+      margin-right: 30px;
       cursor: pointer;
-      font-size: 22px;
+      font-size: 30px;
       color: #83b9d0;
       &:hover{
         color: #0c7aa6;
@@ -542,6 +542,18 @@ h3.nice-h3 {
       &.tab-active{
         border-bottom: solid 2px gray;
         color: #0c7aa6;
+      }
+    }
+  }
+  .tab-contents{
+    .tab-content{
+      .considered{
+        .info-block-title{
+          font-size: 46px;
+        }
+        .info-block-text{
+          font-weight: 300;
+        }
       }
     }
   }
