@@ -13,6 +13,10 @@ class Player < ApplicationRecord
   validates :name, presence: true,
                    length: { maximum: 50 }
   validates :category_id, presence: true
+  include PgSearch
+  pg_search_scope :search_starts_with,
+                  against: :name,
+                  using: {tsearch: { prefix: true }}
 
   def title; name end
 

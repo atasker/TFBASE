@@ -21,6 +21,11 @@ class Category < ApplicationRecord
 
   validates :sports, inclusion: { in: [true, false] }
 
+  include PgSearch
+  pg_search_scope :search_starts_with,
+                  against: :description,
+                  using: {tsearch: { prefix: true }}
+
   def title; description end
 
   private

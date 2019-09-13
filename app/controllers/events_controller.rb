@@ -51,7 +51,10 @@ class EventsController < BaseFrontendController
   end
 
   def autocomplete_list
-    @events = Event.text_search(params[:term])
-    render json: @events.map(&:name).uniq
+    results = Category.search_starts_with(params[:term]).map(&:description)
+    results.concat(Competition.search_starts_with(params[:term]).map(&:name))
+    results.concat(Player.search_starts_with(params[:term]).map(&:name))
+
+    render json: results
   end
 end
