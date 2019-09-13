@@ -50,4 +50,8 @@ class EventsController < BaseFrontendController
     add_common_breadcrumbs! @category, @competition, @player, @event
   end
 
+  def autocomplete_list
+    @events = Event.text_search(params[:term])
+    render json: @events.map(&:name).uniq
+  end
 end
