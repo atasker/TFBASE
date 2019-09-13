@@ -55,6 +55,6 @@ class EventsController < BaseFrontendController
     results.concat(Competition.search_starts_with(params[:term]).map(&:name))
     results.concat(Player.search_starts_with(params[:term]).map(&:name))
 
-    render json: results
+    render json: results.uniq
   end
 end
