@@ -17,6 +17,11 @@ class Competition < ApplicationRecord
 
   validates :category_id, presence: true
 
+  include PgSearch
+  pg_search_scope :search_starts_with,
+                  against: :name,
+                  using: {tsearch: { prefix: true }}
+
   def title; name end
 
   def seo_image; avatar.grid_large.url end
