@@ -54,4 +54,8 @@ $(document).ready(function(){
     activeClass: 'tab-active',
     keyName: 'tab'
   });
+
+  $('#main-top-form-query').autocomplete({
+    source: '/events/autocomplete_list',
+  });
 });

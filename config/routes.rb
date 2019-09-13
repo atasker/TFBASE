@@ -65,7 +65,11 @@ Rails.application.routes.draw do
   get '/competitions/:compet/:id', to: 'players#show', as: :competition_player
   resources :categories, only: [:show, :index]
   resources :competitions, only: [:show, :index]
-  resources :events, only: [:show, :index]
+  resources :events, only: [:show, :index] do
+    collection do
+      get :autocomplete_list, as: :autocomplete_list
+    end
+  end
   resources :players, only: [:show]
   resources :tickets, only: [:show]
 
