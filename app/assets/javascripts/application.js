@@ -57,5 +57,6 @@ $(document).ready(function(){
 
   $('#main-top-form-query').autocomplete({
     source: '/events/autocomplete_list',
+    appendTo: '#main-top-search-form'
   });
 });

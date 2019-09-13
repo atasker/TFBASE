@@ -565,3 +565,13 @@ h3.nice-h3 {
   text-align: justify;
   padding: 0 12px;
 }
+
+#main-top-search-form{
+  ul.ui-autocomplete{
+    li.ui-menu-item{
+      div.ui-menu-item-wrapper{
+        text-align: left;
+      }
+    }
+  }
+}
