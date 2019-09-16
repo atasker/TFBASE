@@ -40,7 +40,8 @@ class Event < ApplicationRecord
     associated_against: {
       venue: [:name, :city],
       category: :description,
-      competition: :name
+      competition: :name,
+      players: :name
     }
 
   scope :actual, -> { where('(events.start_time >= ? OR events.start_time IS NULL)', DateTime.now) }
