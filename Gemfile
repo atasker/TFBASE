@@ -27,9 +27,11 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
+gem 'bootstrap'
 
 gem 'simple_form'
 gem 'cocoon'
+gem 'summernote-rails', '~> 0.8.12.0'
 
 # Image uploading purposes
 gem 'carrierwave'

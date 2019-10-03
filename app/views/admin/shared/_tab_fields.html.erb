@@ -1,0 +1,9 @@
+<li class="nested-fields">
+  <fieldset class="pure-group">
+    <div class="form-group col-md-8">
+      <%= f.text_field :name, placeholder: 'Tab Name', class: 'pure-input-1' %>
+      <%= f.text_area :content, 'data-provider': :summernote, rows: 4, placeholder: 'Text', class: 'pure-input-1' %>
+      <%= link_to_remove_association "- remove this tab", f %>
+    </div>
+  </fieldset>
+</li>

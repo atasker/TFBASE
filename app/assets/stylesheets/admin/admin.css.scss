@@ -6,7 +6,8 @@
  *= require chosen
  *= require_self
  */
-
+ @import "bootstrap";
+ @import "summernote-bs4";
 body {
   font-family: 'Lato', sans-serif;
 }
@@ -85,9 +86,18 @@ label.disabled-label { color: #929292; }
 .event-table-destroy-all-block {
   margin: 20px 0 -20px;
 }
-ul#info-blocks{
+ul#info-blocks, ul#info-tabs{
   padding-left: 0px;
   li{
     list-style: none;
+  }
+}
+.admin-wrapper{
+  .col-md-6, .col-sm-1{
+    .l-box{
+      height: 100%;
+    }
+    padding: 0;
+    min-height: 250px;
   }
 }

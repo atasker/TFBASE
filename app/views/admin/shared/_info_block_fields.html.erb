@@ -1,7 +1,9 @@
 <li class="nested-fields">
   <fieldset class="pure-group">
-    <%= f.text_field :title, placeholder: 'Title', class: 'pure-input-1-2' %>
-    <%= f.text_area :text, rows: 4, placeholder: 'Text', class: 'pure-input-1-2' %>
-    <%= link_to_remove_association "- remove this information block", f %>
+    <div class="form-group col-md-8">
+      <%= f.text_field :title, placeholder: 'Title', class: 'pure-input-1' %>
+      <%= f.text_area :text, 'data-provider': :summernote, rows: 4, placeholder: 'Text', class: 'pure-input-1' %>
+      <%= link_to_remove_association "- remove this information block", f %>
+    </div>
   </fieldset>
 </li>

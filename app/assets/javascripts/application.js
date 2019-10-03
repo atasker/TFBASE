@@ -48,8 +48,8 @@ $(document).ready(function(){
   });
 
   $('#tab').tab({
-    triggers: ['#button1', '#button2'],
-    contents: ['#content1', '#content2'],
+    triggers: ['#button1', '#button2', '#button3', '#button4', '#button5'],
+    contents: ['#content1', '#content2', '#content3', '#content4', '#content5'],
     defaultIndex: 0,
     activeClass: 'tab-active',
     keyName: 'tab'
