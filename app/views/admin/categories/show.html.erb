@@ -10,6 +10,10 @@
     <%= render partial: '/admin/shared/info_blocks', locals: {info_blocks: @category.info_blocks} %>
   <% end %>
 
+  <% if @category.tabs.any? %>
+    <%= render partial: '/admin/shared/tabs', locals: {tabs: @category.tabs} %>
+  <% end %>
+
   <%= render partial: 'admin/shared/seo_data_info', locals: { carrier: @category, name: 'Category' } %>
 
   <%= link_to 'Edit', edit_admin_category_path(@category.id) %> |

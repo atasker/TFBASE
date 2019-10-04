@@ -15,6 +15,9 @@
 //= require turbolinks
 //= require cocoon
 //= require chosen.jquery
+//= require popper
+//= require bootstrap
+//= require summernote/summernote-bs4.min
 // do not require_tree .
 
 function toggleEventStartTimeDisability() {
@@ -167,6 +170,24 @@ function initEventsDestroyManyFeature() {
   $("#event-table-destroy-all-button").on('click', makeDisabilityBlock);
 }
 
+function integratingSummernte(){
+  $('[data-provider="summernote"]').each(function(){
+    $(this).summernote({
+      height: 300,
+      fontSizes: ['10', '11', '12', '14', '18', '20', '22', '24', '26', '28', '30', '34', '36', '48'],
+      toolbar: [
+        ['fontname', ['fontname']],
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['picture', 'myvideo', 'link', 'table', 'hr']],
+        ['misc', ['fullscreen', 'undo', 'redo']]
+      ]
+    });
+  });
+}
 // - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - =
 
 $(document).on('ready turbolinks:load', function() {
@@ -178,6 +199,8 @@ $(document).on('ready turbolinks:load', function() {
   initTicketFieldsVisibility();
 
   initEventsDestroyManyFeature();
+
+  integratingSummernte();
 
   if ($(".form-switcher").length) {
     $(".form-switcher input").change(function(evnt) {
@@ -192,4 +215,11 @@ $(document).on('ready turbolinks:load', function() {
     $("#" + $(".form-switcher input:checked").data('panel-id') + " .hidden-chzn-select").chosen();
   }
 
+  $('#info-blocks').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
+    integratingSummernte();
+  });
+
+  $('#info-tabs').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
+    integratingSummernte();
+  });
 });

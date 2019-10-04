@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_02_183342) do
+ActiveRecord::Schema.define(version: 2019_10_03_161900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,17 @@ ActiveRecord::Schema.define(version: 2019_09_02_183342) do
     t.text "seodata"
     t.index ["category_id"], name: "index_players_on_category_id"
     t.index ["slug"], name: "index_players_on_slug", unique: true
+  end
+
+  create_table "tabs", force: :cascade do |t|
+    t.string "name"
+    t.text "content"
+    t.integer "prior"
+    t.string "tabable_type"
+    t.bigint "tabable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tabable_type", "tabable_id"], name: "index_tabs_on_tabable_type_and_tabable_id"
   end
 
   create_table "tickets", force: :cascade do |t|

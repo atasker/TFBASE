@@ -1,0 +1,10 @@
+<h3>Tabs</h3>
+<% tabs.each do |tab| %>
+<p style="word-wrap: break-word;">
+  <strong>Name:</strong>
+  <%= tab.name %>
+  <br/>
+  <strong>Content:</strong>
+  <%= raw tab.content %>
+</p>
+<% end %>

@@ -37,6 +37,18 @@
     </div>
   </p>
 
+  <p>
+    <h3>Tabs</h3>
+    <ul id="info-tabs">
+      <%= f.simple_fields_for :tabs do |tab| %>
+        <%= render '/admin/shared/tab_fields', f: tab %>
+      <% end %>
+    </ul>
+    <div class="links">
+      <%= link_to_add_association '+ Add new tab', f, :tabs, partial: '/admin/shared/tab_fields', data: { "association-insertion-node" => "#info-tabs", "association-insertion-method" => "append"} %>
+    </div>
+  </p>
+
   <div class="pure-control-group">
     <%= f.label :sports, 'Is this category a sport?' %>
     <%= f.check_box :sports %>

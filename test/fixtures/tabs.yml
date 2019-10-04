@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  content: MyText
+  tabable: one
+  tabable_type: Tabable
+
+two:
+  name: MyString
+  content: MyText
+  tabable: two
+  tabable_type: Tabable
