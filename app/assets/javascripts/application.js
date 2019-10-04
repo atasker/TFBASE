@@ -48,8 +48,8 @@ $(document).ready(function(){
   });
 
   $('#tab').tab({
-    triggers: ['#button1', '#button2', '#button3', '#button4', '#button5'],
-    contents: ['#content1', '#content2', '#content3', '#content4', '#content5'],
+    triggers: ['#button1', '#button2', '#button3', '#button4', '#button5', '#button6', '#button7', '#button8'],
+    contents: ['#content1', '#content2', '#content3', '#content4', '#content5', '#content6', '#content7', '#content8'],
     defaultIndex: 0,
     activeClass: 'tab-active',
     keyName: 'tab'
