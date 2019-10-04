@@ -7,9 +7,8 @@
       </div>
       <div class="tabs">
         <div id="button1" class="tab-item">Events</div>
-        <div id="button2" class="tab-item">About</div>
         <% @category.tabs.each_with_index do |tab, ind| %>
-          <div id="button<%= ind + 3 %>" class="tab-item"><%= tab.name %></div>
+          <div id="button<%= ind + 2 %>" class="tab-item"><%= tab.name %></div>
         <% end %>
       </div>
     </div>
@@ -41,25 +40,8 @@
           <%= render 'shared/nothing_found_message' %>
         <% end %>
       </div>
-      <div id="content2" class="tab-content">
-        <div class="considered__wrapper">
-          <div class="considered__calendar">
-            <div class="considered__calendar-wrap">
-              <div class="datepicker" data-base-url="<%= url_for(params.permit!.to_h.merge(dt: nil)) %>" data-start-date="<%= @start_date ? @start_date.strftime('%Y-%m-%d') : '' %>"></div>
-              <div class="datepicker-text-box">
-                Dates & times are correct at time of publishing but are subject to change, please check local sources for latest updates
-              </div>
-            </div>
-          </div>
-          <div class="considered considered--ticket">
-            <% if @category.info_blocks.any? %>
-              <%= render @category.info_blocks %>
-            <% end %>
-          </div>
-        </div>
-      </div>
       <% @category.tabs.each_with_index do |tab, ind| %>
-        <div id="content<%= ind + 3 %>" class="tab-content">
+        <div id="content<%= ind + 2 %>" class="tab-content">
           <div class="considered__wrapper">
             <div class="considered__calendar">
               <div class="considered__calendar-wrap">
@@ -75,7 +57,6 @@
           </div>
         </div>
       <% end %>
-
     </div>
   </div>
 </div>
