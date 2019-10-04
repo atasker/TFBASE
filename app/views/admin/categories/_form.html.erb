@@ -26,18 +26,6 @@
   </div>
 
   <p>
-    <h3>Information blocks</h3>
-    <ul id="info-blocks">
-      <%= f.simple_fields_for :info_blocks do |info_block| %>
-        <%= render '/admin/shared/info_block_fields', f: info_block %>
-      <% end %>
-    </ul>
-    <div class="links">
-      <%= link_to_add_association '+ Add new information block', f, :info_blocks, partial: '/admin/shared/info_block_fields', data: { "association-insertion-node" => "#info-blocks", "association-insertion-method" => "append"} %>
-    </div>
-  </p>
-
-  <p>
     <h3>Tabs</h3>
     <ul id="info-tabs">
       <%= f.simple_fields_for :tabs do |tab| %>
