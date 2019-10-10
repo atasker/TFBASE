@@ -2406,6 +2406,7 @@ a.breadcrumbs__item:after {
         margin-left: 114px;
         line-height: 80px; }
         .considered__title a {
+          text-decoration: none !important;
           display: inline-block;
           vertical-align: middle;
           font-size: 22px;
