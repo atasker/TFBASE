@@ -21,19 +21,17 @@ body {
 .top-menu {
   font-size: 1.7em;
   background-color: #2D9EE4;
-}
-
-.top-menu-link {
-  color: #fff;
-}
-
-.top-menu-heading {
-  text-transform: capitalize;
-  color: #fff;
-}
-
-.top-menu-link:hover {
-  color: #2D9EE4;
+  .top-menu-link {
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      color: #2D9EE4;
+    }
+  }
+  .top-menu-heading {
+    text-transform: capitalize;
+    color: #fff;
+  }
 }
 
 .l-box {
@@ -99,5 +97,17 @@ ul#info-blocks, ul#info-tabs{
     }
     padding: 0;
     min-height: 250px;
+  }
+}
+
+.pure-table{
+  tbody{
+    td{
+      a{
+        color: #007bff;
+        text-decoration: none;
+        background-color: transparent;
+      }
+    }
   }
 }
