@@ -2447,9 +2447,14 @@ a.breadcrumbs__item:after {
   .container-fluid{
     .page-footer__nav{
       .page-footer__link {
+        color: #0d7aa6;
+        text-decoration: none;
         display: inline-block;
         vertical-align: middle;
         margin-right: 28px;
+        &:hover{
+          text-decoration: underline;
+        }
       }
       .page-footer__link:last-child {
         margin-right: 0;
