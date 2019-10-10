@@ -2443,12 +2443,20 @@ a.breadcrumbs__item:after {
 .copyright {
   float: right; }
 
-.page-footer__link {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 28px; }
-  .page-footer__link:last-child {
-    margin-right: 0; }
+.page-footer{
+  .container-fluid{
+    .page-footer__nav{
+      .page-footer__link {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 28px;
+      }
+      .page-footer__link:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
 
 .socials {
   overflow: hidden;
