@@ -107,6 +107,12 @@ ul#info-blocks, ul#info-tabs{
         color: #007bff;
         text-decoration: none;
         background-color: transparent;
+        &:hover{
+          text-decoration: underline;
+        }
+        &:visited{
+          color: #9dcbfb;
+        }
       }
     }
   }
