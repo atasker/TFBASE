@@ -3431,9 +3431,15 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
   .label-wrap {
     font-size: 18px;
     white-space: normal; }
-  .considered__info {
-    clear: both;
-    display: none; }
+  .considered__info{
+    .considered__info-inner{
+      text-align: right;
+      .considered__info-item{
+        clear: both;
+        display: none !important;
+      }
+    }
+  }
   .considered__left {
     float: none;
     width: 100%; }

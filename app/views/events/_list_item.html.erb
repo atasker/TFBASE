@@ -17,7 +17,7 @@
       <div class="considered__info-item"><%= "#{event.venue.city}, #{event.venue.country}" %></div>
       <div class="considered__info-item"><%= event.venue.name %></div>
       <div class="considered__info-item considered__info-item-time"><%= event.tbc? ? 'TBC' : l(event.start_time, format: "%H:%M") %></div>
-      <div class="considered__info-item "><%= link_to 'Show', event_path(event, player: player), class: 'btn' %></div>
+      <div class="considered__info-item-btn "><%= link_to 'Show', event_path(event, player: player), class: 'btn' %></div>
     </div>
   </div>
 </div>
