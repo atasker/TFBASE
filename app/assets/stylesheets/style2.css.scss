@@ -575,3 +575,16 @@ h3.nice-h3 {
     }
   }
 }
+
+
+
+@media screen and (max-width: 400px) {
+  #tab{
+    .tabs{
+      .tab-item{
+        font-size: 20px;
+        margin-right: 15px;
+      }
+    }
+  }
+}

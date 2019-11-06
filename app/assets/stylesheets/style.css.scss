@@ -3731,3 +3731,37 @@ _::-webkit-:host:not(:root:root), .main-popular-events__slider .slick-track {
     left: 0;
     padding: 25px 0;
     white-space: normal; } }
+
+@media screen and (max-width: 400px) {
+  .breadcrumbs{
+    padding-right: 25px;
+  }
+  .page-title {
+    .page-title__inner {
+        padding-bottom: 10px;
+    }
+  }
+  .page-title h1, .page-title .page-title__info {
+    font-size: 26px;
+  }
+  .tab-contents, .page-content{
+    .considered{
+      .considered__left {
+        float: left;
+        width: 70%;
+        .considered__date{
+          margin-right: 0px;
+        }
+        .considered__title{
+          margin-left: 100px;
+          .considered__title_text{
+            font-size: 18px;
+          }
+        }
+      }
+      .considered__info{
+        width: 90px;
+      }
+    }
+  }
+}
