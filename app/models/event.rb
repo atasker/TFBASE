@@ -35,7 +35,7 @@ class Event < ApplicationRecord
   after_create :check_slug_generation
 
   include PgSearch
-  pg_search_scope :search, :against => :name,
+  pg_search_scope :search, :against => :name, ignoring: :accents,
     using: {tsearch: {dictionary: "english"}},
     associated_against: {
       venue: [:name, :city],
