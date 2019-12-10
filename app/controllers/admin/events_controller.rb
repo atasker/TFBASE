@@ -28,7 +28,11 @@ class Admin::EventsController < AdminController
 
 
   def edit
-    @event = Event.find(params[:id])
+    @event = if params[:selected_events].present?
+      Event.find params[:selected_events].first
+    else
+      Event.find(params[:id])
+    end
   end
 
   def create
@@ -49,9 +53,33 @@ class Admin::EventsController < AdminController
   end
 
   def update
-    @event = Event.find(params[:id])
-
-    if @event.update(event_params)
+    updated = true
+    selected_events_id = params[:selected_events].split(',') if params[:selected_events].present?
+    if selected_events_id.present?
+      @event = Event.find(params[:selected_events].first)
+      events = Event.find selected_events_id
+      update_all_event_params[:info_blocks_attributes].each do |event_params|
+        title = event_params.last[:title]
+        text = event_params.last[:text]
+        destroy = event_params.last[:_destroy]
+        events.each do |ee|
+          info_block = ee.info_blocks.where(title: title).first
+          if info_block.present?
+            if destroy
+              info_block.destroy
+            else
+              info_block.update(title: title, text: text)
+            end
+          else
+            ee.info_blocks.create(title: title, text: text)
+          end
+        end
+      end
+    else
+      @event = Event.find(params[:id])
+      updated = false unless @event.update(event_params)
+    end
+    if updated
       flash[:notice] = "Event successfully updated"
       redirect_to admin_event_path(@event.id)
     else
@@ -91,4 +119,7 @@ class Admin::EventsController < AdminController
         :id, :title, :text, :prior, :_destroy])
   end
 
+  def update_all_event_params
+    params.require(:event).permit(info_blocks_attributes: [:id, :title, :text, :prior, :_destroy])
+  end
 end

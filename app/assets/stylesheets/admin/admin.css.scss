@@ -117,3 +117,8 @@ ul#info-blocks, ul#info-tabs{
     }
   }
 }
+
+input[class=disabled], select[class=disabled]{
+  pointer-events: none;
+  background-color: lightgray;
+}

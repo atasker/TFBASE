@@ -1,5 +1,5 @@
 <%= simple_form_for [:admin, @event], url: (@event.new_record? ? nil : admin_event_path(@event.id)) do |f| %>
-
+  <%= hidden_field_tag :selected_events, params[:selected_events].join(',') if params[:selected_events].present? %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -16,81 +16,81 @@
 
   <p>
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: adding_disabled_class(params[:selected_events].present?) %>
   </p>
 
   <p>
     <%= f.label :slug %><br>
-    <%= events_path() %>/ <%= f.text_field :slug %><br>
+    <%= events_path() %>/ <%= f.text_field :slug, class: adding_disabled_class(params[:selected_events].present?) %><br>
     <small>* leave blank to autobuild slug based on name</small>
   </p>
 
   <p>
     <%= f.label :start_time %><br>
-    <%= f.datetime_select :start_time %>
+    <%= f.datetime_select :start_time, {}, {class: adding_disabled_class(params[:selected_events].present?)} %>
     or
-    <%= f.check_box :tbc %> <%= f.label :tbc, "TBC" %><br>
+    <%= f.check_box :tbc,  class: adding_disabled_class(params[:selected_events].present?)%> <%= f.label :tbc, "TBC" %><br>
   </p>
+  <% unless params[:selected_events].present? %>
+    <p>
+      <%= f.label :venue_id %><br>
+      <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
+    </p>
 
-  <p>
-    <%= f.label :venue_id %><br>
-    <%= f.collection_select(:venue_id, Venue.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
-  </p>
+    <p>
+      <%= f.label :category_id %><br>
+      <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, { prompt: true }, { :class => 'chzn-select' }) %>
+    </p>
 
-  <p>
-    <%= f.label :category_id %><br>
-    <%= f.collection_select(:category_id, Category.order('description ASC'), :id, :description, { prompt: true }, { :class => 'chzn-select' }) %>
-  </p>
+    <p>
+      <%= f.label :competition_id %><br>
+      <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
+    </p>
 
-  <p>
-    <%= f.label :competition_id %><br>
-    <%= f.collection_select(:competition_id, Competition.order('name ASC'), :id, :name, { prompt: true }, { :class => 'chzn-select' }) %>
-  </p>
+    <p>
+      <%= f.label :sports, 'Is this event a sport?' %>
+      <%= f.check_box :sports %>
+    </p>
 
-  <p>
-    <%= f.label :sports, 'Is this event a sport?' %>
-    <%= f.check_box :sports %>
-  </p>
+    <p>
+      <%= f.label :priority, 'Do you want to prioritize this event?' %>
+      <%= f.check_box :priority %>
+    </p>
 
-  <p>
-    <%= f.label :priority, 'Do you want to prioritize this event?' %>
-    <%= f.check_box :priority %>
-  </p>
+    <!-- habtm addition -->
 
-  <!-- habtm addition -->
+    <p>
+      <%= f.label :players %>
+      <%= f.association :players, :multiple => true, label: false, input_html: { :class => 'chzn-select' } %>
+    </p>
 
-  <p>
-    <%= f.label :players %>
-    <%= f.association :players, :multiple => true, label: false, input_html: { :class => 'chzn-select' } %>
-  </p>
+    <%= render partial: 'admin/shared/seo_data_fields', locals: { f: f, name: 'event' } %>
 
-  <%= render partial: 'admin/shared/seo_data_fields', locals: { f: f, name: 'event' } %>
-
-  <h3>Tickets</h3>
-  <div id="tickets">
-    <table class="pure-table pure-table-striped pure-table-horizontal">
-      <thead>
-        <th>Category</th>
-        <th>Enquire?</th>
-        <th>Price</th>
-        <th>Fee</th>
-        <th>Quantity</th>
-        <th>Pairs Only</th>
-        <th>Currency</th>
-        <th>Text</th>
-        <th>Remove Ticket</th>
-      </thead>
-      <tbody class="ticket_items">
-        <%= f.simple_fields_for :tickets do |ticket| %>
-          <%= render 'ticket_fields', f: ticket %>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="links">
-      <%= link_to_add_association '+ Add new ticket', f, :tickets, data: {"association-insertion-node" => "tbody.ticket_items", "association-insertion-method" => "append"} %>
+    <h3>Tickets</h3>
+    <div id="tickets">
+      <table class="pure-table pure-table-striped pure-table-horizontal">
+        <thead>
+          <th>Category</th>
+          <th>Enquire?</th>
+          <th>Price</th>
+          <th>Fee</th>
+          <th>Quantity</th>
+          <th>Pairs Only</th>
+          <th>Currency</th>
+          <th>Text</th>
+          <th>Remove Ticket</th>
+        </thead>
+        <tbody class="ticket_items">
+          <%= f.simple_fields_for :tickets do |ticket| %>
+            <%= render 'ticket_fields', f: ticket %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="links">
+        <%= link_to_add_association '+ Add new ticket', f, :tickets, data: {"association-insertion-node" => "tbody.ticket_items", "association-insertion-method" => "append"} %>
+      </div>
     </div>
-  </div>
-
+  <% end %>
   <h3>Information blocks</h3>
   <ul id="info-blocks">
     <%= f.simple_fields_for :info_blocks do |info_block| %>

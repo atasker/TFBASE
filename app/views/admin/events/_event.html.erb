@@ -1,7 +1,9 @@
 <% with_selectors = with_selectors || false %>
 <tr>
   <% if with_selectors %>
-    <td><input type="checkbox" class="event-table-selector" data-event-id="<%= event.id %>" /></td>
+    <td>
+      <%= check_box_tag(:event_id, event.id, false, {name: "selected_events[]", id: "event_#{event.id}", data: {event_id: event.id}}) %>
+    </td>
   <% end %>
   <td><%= event.id %></td>
   <td><%= event.name %></td>
