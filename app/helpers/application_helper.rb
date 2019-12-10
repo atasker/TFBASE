@@ -115,4 +115,8 @@ module ApplicationHelper
     return currency
   end
 
+  def adding_disabled_class( disabled = true )
+    'disabled' if disabled
+  end
+
 end
