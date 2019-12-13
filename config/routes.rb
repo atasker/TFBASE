@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  Blogo::Routes.mount_to(self, at: '/blog')
+  
   namespace :admin do
     root 'welcome#index'
     resources :categories
