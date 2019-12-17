@@ -28,6 +28,10 @@
 
   <%= link_to 'Edit', edit_admin_player_path(@player.id) %> |
   <%= link_to 'Back', admin_players_path %>
-
-  <%= render 'admin/events/events', events: @events %>
+  <% if @events.any? %>
+    <%= form_tag edit_admin_event_path(@events.first.id), method: :get do %>
+      <%= render 'admin/events/events', events: @events %>
+      <%= submit_tag 'update selected events' %>
+    <% end %>
+  <% end %>
 </div>
