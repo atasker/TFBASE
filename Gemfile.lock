@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/webmaster219/blogo
-  revision: 4f4715faacef3f9b81c924466f9f513dc7f3ddb3
+  revision: 933478286e22f30850a75f5bbb62b61f85cc67f1
   specs:
-    blogo (0.1.3)
+    blogo (0.1.4)
       bcrypt (~> 3.1)
       coffee-rails
       jquery-rails
@@ -294,7 +294,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blogo!
+  blogo (>= 0.1.4)!
   bootsnap (>= 1.1.0)
   bootstrap
   byebug
