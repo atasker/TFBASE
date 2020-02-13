@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  default_url_options :host => "https://www.ticket-finders.com"
   Blogo::Routes.mount_to(self, at: '/blog')
-  
+
   namespace :admin do
     root 'welcome#index'
     resources :categories

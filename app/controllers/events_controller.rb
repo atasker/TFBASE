@@ -1,5 +1,4 @@
 class EventsController < BaseFrontendController
-
   def index
     @events = Event.text_search(params[:query])
     @events, @event_count_before_filtration = apply_day_filter_to_events @events
@@ -46,6 +45,8 @@ class EventsController < BaseFrontendController
     end
 
     @page_meta = @event
+
+    @json_data = @event.json_structured_data(@event.seo_image)
 
     add_common_breadcrumbs! @category, @competition, @player, @event
   end

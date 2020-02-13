@@ -31,6 +31,14 @@ class PlayersController < BaseFrontendController
 
     @page_meta = @player
 
+    if @events.any?
+      @structured_data = []
+      json_data = @events.map{|evt| evt.json_structured_data(@player.seo_image)}
+      json_data.each do |dt|
+        @structured_data << JSON.parse(dt.to_json_as_root)
+      end
+    end
+
     add_common_breadcrumbs! @category, @competition, @player
   end
 
