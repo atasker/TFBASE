@@ -73,7 +73,7 @@ class Event < ApplicationRecord
       image:            image.to_s,
       offers:           Offer.new(
                           priceCurrency: 'USD',
-                          price: tickets.any? ? tickets.first.price : 0,
+                          price: tickets.any? ? tickets.first.price.to_f : 0,
                           availability: '',
                           url: event_url(self),
                           category: category.description
