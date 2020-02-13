@@ -1,6 +1,8 @@
 class CompetitionsController < BaseFrontendController
 
   def show
+    @events = []
+    @structured_data = []
     @competition, needs_redirect = find_by_slug_with_fallback Competition, params[:id]
     if needs_redirect
       redirect_to competition_path(@competition.slug), status: :moved_permanently
@@ -28,7 +30,6 @@ class CompetitionsController < BaseFrontendController
 
     @page_meta = @competition
 
-    @structured_data = []
     if @events.any?
       json_data = @events.map{|evt| evt.json_structured_data}
       json_data.each do |dt|
