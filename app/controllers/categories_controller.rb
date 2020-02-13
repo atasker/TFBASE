@@ -9,6 +9,8 @@ class CategoriesController < BaseFrontendController
   end
 
   def show
+    @events = []
+    @structured_data = []
     @category, needs_redirect = find_by_slug_with_fallback Category, params[:id]
     if needs_redirect
       redirect_to category_path(@category.slug), status: :moved_permanently
@@ -38,7 +40,6 @@ class CategoriesController < BaseFrontendController
 
     @page_meta = @category
 
-    @structured_data = []    
     if @events.any?
       json_data = @events.map{|evt| evt.json_structured_data}
       json_data.each do |dt|
