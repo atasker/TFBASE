@@ -1,5 +1,5 @@
 class CategoriesController < BaseFrontendController
-
+  include SchemaDotOrg
   def index
     # @categories already initialized at collect_categories method of BaseFrontendController
 
@@ -37,6 +37,15 @@ class CategoriesController < BaseFrontendController
     end
 
     @page_meta = @category
+
+    @structured_data = []    
+    if @events.any?
+      json_data = @events.map{|evt| evt.json_structured_data}
+      json_data.each do |dt|
+        @structured_data << JSON.parse(dt.to_json_as_root)
+      end
+    end
+
 
     add_common_breadcrumbs! @category
   end

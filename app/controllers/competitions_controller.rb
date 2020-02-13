@@ -28,6 +28,14 @@ class CompetitionsController < BaseFrontendController
 
     @page_meta = @competition
 
+    @structured_data = []
+    if @events.any?
+      json_data = @events.map{|evt| evt.json_structured_data}
+      json_data.each do |dt|
+        @structured_data << JSON.parse(dt.to_json_as_root)
+      end
+    end
+
     add_common_breadcrumbs! @category, @competition
   end
 

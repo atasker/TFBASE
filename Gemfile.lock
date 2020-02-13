@@ -9,6 +9,12 @@ GIT
       rails (~> 5.2)
       sass-rails (>= 5)
 
+PATH
+  remote: /Users/webmaster/workspace/gem_projects/schema-dot-org
+  specs:
+    schema_dot_org (1.6.0)
+      validated_object (~> 2.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -275,6 +281,8 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    validated_object (2.0.2)
+      activemodel (>= 3.2.21)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -320,6 +328,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.1)
   sass-rails (~> 5.0)
+  schema_dot_org!
   selenium-webdriver
   sendgrid-ruby
   simple_form

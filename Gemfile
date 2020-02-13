@@ -66,7 +66,7 @@ gem 'devise'
 
 # Whenever is a Ruby gem that provides a clear syntax for writing and deploying cron jobs.
 gem 'whenever'
-
+gem 'schema_dot_org', git: 'https://github.com/webdev0219/schema-dot-org.git'
 # Use Mina for deployment
 gem 'mina', group: :development
 gem 'mina-whenever', group: :development
@@ -76,7 +76,7 @@ gem 'mina-whenever', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'blogo', '>=0.1.4', git: 'https://github.com/webmaster219/blogo'
+gem 'blogo', '>=0.1.4', git: 'https://github.com/webdev0219/blogo'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

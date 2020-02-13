@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   include FriendlySlugable
+  include SchemaDotOrg
+  include Rails.application.routes.url_helpers
 
   acts_as_seo_carrier
 
@@ -58,6 +60,26 @@ class Event < ApplicationRecord
     else
       scoped
     end
+  end
+
+  def json_structured_data(image = competition.seo_image)
+    SportsEvent.new(
+      name:             name,
+      start_date:       start_time.to_date,
+      end_date:         nil,
+      url:              event_url(self),
+      description:      'test event',
+      location:         Place.new(address: venue.address),
+      image:            image.to_s,
+      offers:           Offer.new(
+                          priceCurrency: 'USD',
+                          price: tickets.any? ? tickets.first.price : 0,
+                          availability: '',
+                          url: event_url(self),
+                          category: category.description
+                        ),
+      performer:        nil
+    )
   end
 
   private
