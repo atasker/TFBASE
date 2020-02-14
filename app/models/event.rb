@@ -70,7 +70,7 @@ class Event < ApplicationRecord
       url:              event_url(self),
       description:      nil,
       location:         Place.new(address: venue.address),
-      image:            "#{base_url}#{image.to_s}",
+      image:            "https://www.ticket-finders.com#{image.to_s}",
       offers:           Offer.new(
                           priceCurrency: 'USD',
                           price: tickets.any? ? tickets.first.price.to_f : 0,
