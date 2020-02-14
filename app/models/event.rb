@@ -68,9 +68,9 @@ class Event < ApplicationRecord
       start_date:       start_time.to_date,
       end_date:         nil,
       url:              event_url(self),
-      description:      'test event',
+      description:      nil,
       location:         Place.new(address: venue.address),
-      image:            image.to_s,
+      image:            "#{base_url}#{image.to_s}",
       offers:           Offer.new(
                           priceCurrency: 'USD',
                           price: tickets.any? ? tickets.first.price.to_f : 0,
