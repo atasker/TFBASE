@@ -66,19 +66,20 @@ class Event < ApplicationRecord
     SportsEvent.new(
       name:             name,
       start_date:       start_time.to_date,
-      end_date:         nil,
+      end_date:         start_time.to_date + 1.day,
       url:              event_url(self),
-      description:      nil,
-      location:         Place.new(address: venue.address),
+      description:      name,
+      location:         Place.new(address: venue.address, name: venue.name),
       image:            "https://www.ticket-finders.com#{image.to_s}",
       offers:           Offer.new(
                           priceCurrency: 'USD',
                           price: tickets.any? ? tickets.first.price.to_f : 0,
-                          availability: '',
+                          availability: 'http://schema.org/InStock',
                           url: event_url(self),
+                          validFrom: updated_at.to_date - 3.day,
                           category: category.description
                         ),
-      performer:        nil
+      performer:        venue.name
     )
   end
 
