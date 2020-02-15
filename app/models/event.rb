@@ -76,7 +76,7 @@ class Event < ApplicationRecord
                           price: tickets.any? ? tickets.first.price.to_f : 0,
                           availability: 'http://schema.org/InStock',
                           url: event_url(self),
-                          validFrom: updated_at.to_date - 3.day,
+                          valid_from: updated_at.to_date - 3.day,
                           category: category.description
                         ),
       performer:        venue.name
