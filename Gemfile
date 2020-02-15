@@ -66,6 +66,7 @@ gem 'devise'
 
 # Whenever is a Ruby gem that provides a clear syntax for writing and deploying cron jobs.
 gem 'whenever'
+# gem 'schema_dot_org', path: '/Users/webmaster/workspace/gem_projects/schema-dot-org'
 gem 'schema_dot_org', git: 'https://github.com/webdev0219/schema-dot-org.git'
 # Use Mina for deployment
 gem 'mina', group: :development
