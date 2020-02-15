@@ -11,9 +11,9 @@ GIT
 
 GIT
   remote: https://github.com/webdev0219/schema-dot-org.git
-  revision: d540efdb7733b78f63dc10207ef42cd5c1e2e817
+  revision: 2333816546d0f13c0ba0a8e646f6b99bcb886907
   specs:
-    schema_dot_org (1.6.2)
+    schema_dot_org (1.6.3)
       validated_object (~> 2.0.2)
 
 GEM
